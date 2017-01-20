@@ -1,4 +1,10 @@
 <?php
+
+if(isset($_POST['edit_realm'])) 
+{
+	updateRealm();
+}
+
 if(isset($_GET['id'])) 
 {
 	$rlm = $DB->selectRow("SELECT * FROM `realmlist` WHERE `id`='".$_GET['id']."'");
@@ -33,12 +39,6 @@ if(isset($_GET['id']))
 	
 	<form method="POST" action="?p=admin&sub=realms&id=<?php echo $_GET['id']; ?>" name="adminform" class="form label-inline">
 	<input type="hidden" name="edit_realm">
-		<?php
-			if(isset($_POST['edit_realm'])) 
-			{
-				updateRealm();
-			}
-		?>
 		<table>
 			<thead>
 				<tr>
