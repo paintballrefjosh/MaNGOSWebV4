@@ -1,0 +1,359 @@
+/* -------------------------------------------------------------
+1. DEFAULT STYLES
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+
+
+html, body, div, span, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, code, sup,
+del, dfn, em, img, q, dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td 
+{
+font-weight: inherit;
+font-style: inherit;
+font-size: 100%;
+font-family: inherit;
+padding: 0;
+margin: 0;
+border: 0;
+vertical-align: baseline
+}
+
+
+body
+{
+	font: 12px/1.7em arial, sans-serif;
+	padding: 0;
+	margin: auto auto;
+	width: 500px;
+}
+
+h1,h2,h3,h4,h5,h6
+{ 
+	color: #111; 
+	margin-bottom: .75em; 
+}
+
+h1	{ font-size: 24px; line-height: 1em; }
+h2 	{ font-size: 20px; font-weight: normal; color: #222; margin-bottom: 1em }
+h3 	{ font-size: 16px; color: #333; line-height: 1; margin-bottom: .75em }
+h4 	{ font-size: 14px; color: #666; line-height: 1.25; margin-bottom: 1.25em }
+h5 	{ font-size: 12px; font-weight: bold; margin-bottom: 1.5em }
+h6 	{ font-size: 11px; font-weight: bold }
+
+p     { margin: 0 0 1.5em }
+p.last { margin-bottom: 0 }
+img { border: none; }
+
+
+a				{ color: #358; text-decoration: underline }
+a:visited		{ color: #667 }
+a:focus, a:hover  { color: #933 }
+
+a:active, a:focus { outline: none !important; noFocusLine: expression(this.onFocus=this.blur()) }
+
+
+/* --- Tables --- */
+table 
+{ 
+	width: 100%; 
+	font-size: 11px; 
+	border: 0; 
+}
+table thead th
+{	 	
+	font-weight: bold;
+	text-align: left;
+	background: #FFF;
+	border-bottom: 1px solid #E5E2E2;
+}		
+
+table tbody tr td { background: #FFF; }
+table thead th, table tbody tr td { padding: 10px; }
+
+/* --- Buttons --- */
+button 
+{ 
+	position: relative;
+	border: 0; 
+	padding: 0;
+	cursor: pointer;
+	overflow: visible; /* removes extra side padding in IE */
+}
+
+button::-moz-focus-inner 
+{
+	border: none;  /* overrides extra padding in Firefox */
+}
+
+button span 
+{ 
+	position: relative;
+	display: block; 
+	white-space: nowrap;	
+}
+
+@media screen and (-webkit-min-device-pixel-ratio:0) 
+{
+	/* Safari and Google Chrome only - fix margins */
+	button span 
+	{
+		margin-top: -1px;
+	}
+}
+
+/* OPTIONAL BUTTON STYLES for applying custom look and feel: */	
+
+button, button span
+{
+	 background: transparent url(../images/button_sprite.png) no-repeat;
+}	
+
+button, button .btn-pri 
+{ 
+	padding: 0 15px 0 0; 
+	margin-right:5px; 
+	text-align: center; 
+	background-position: right -50px !important; 
+}
+	
+button span, button .btn-pri span 
+{
+	font-family: arial, sans-serif;
+	padding: 0 0 0 15px; 
+	height:30px; 
+	font-size:13px;
+	line-height: 28px; 
+	font-weight: bold;
+	font-style: italic;
+	background-position: left top; 
+	color:#FFF; 
+}
+button.btn-sec { background-position: right -150px !important; }
+button.btn-sec span { background-position: left -100px !important; }
+
+
+/* -------------------------------------------------------------
+2. PAGE
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+#page
+ {
+	background-color: #FFF;
+	width: 500px; 
+	margin: 0 auto; 
+	border: 1px solid #CCC; 
+	-moz-border-radius: 6px;
+	border-radius: 6px;
+	-webkit-border-radius: 6px; 
+	margin-top: 10px; 
+	margin-bottom: 10px; 
+}
+
+
+/* -------------------------------------------------------------
+3. HEADER
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+#header
+{
+	width: 100%;
+	height: 120px;
+	position: relative;
+}
+	
+
+
+/* -------------------------------------------------------------
+5. BODY
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */	
+#body 
+{ 
+	width: 960px; 
+	margin: 2em auto; 
+	position: relative; 
+}
+#body h1#pageTitle
+{
+	font-size: 28px;
+	font-style: normal;
+	font-weight: bold;
+	color: #222;	
+	border-bottom: 1px dotted #CCC;
+	padding-bottom: .5em;
+	margin-bottom: .75em;
+	position: relative;
+}
+
+/* -------------------------------------------------------------
+8. FOOTER
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+#footer
+{
+	width: 440px;
+	font-size: 11px;
+ 	clear: both;
+	margin: 0 auto;
+	margin-bottom: 2.5em;
+	border-top: 1px dotted #333;
+	padding-top: 1.25em;
+}
+	
+
+/* -------------------------------------------------------------
+9. Content Boxes
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+.content
+{
+	background: #FFF;
+	width: 100%;	
+	border: 1px solid #CCC;
+	margin-bottom: 1.5em;
+	position: relative;
+	-moz-border-radius: 6px;
+	-webkit-border-radius: 6px;
+}
+
+.content-header
+{
+	background: url(../images/portlet-header-black.png) repeat-x top center;
+	color: #fff;
+	padding: 10px 15px;		
+	-moz-border-radius-topright: 6px;
+	-moz-border-radius-topleft: 6px;
+	-webkit-border-top-right-radius: 6px;
+	-webkit-border-top-left-radius: 6px;
+	position: relative;
+	overflow: hidden;
+}
+	
+#sidebar .content-header 
+{ 	
+	background-image: url(../images/portlet-header-black.png) repeat-x top center; 
+	color: #FFF; 
+}
+	
+.content-header h4
+{
+	font-size: 13px;			
+	font-style: normal;
+	font-weight: bold;
+	color: #FFF;
+	padding: 0;
+	margin: 0;
+}
+		
+.main-content
+{ 	
+	padding: 15px; 
+	position: relative; 
+}	
+	
+
+/* -------------------------------------------------------------
+10. FORM
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+
+.form { padding: 5px; margin: 10px; }
+.form .field_help { margin-left: 145px; font-size: 90%; color: #777; }
+.form label, 
+.form span.label { margin-right: 10px; padding-right: 10px; width: 125px; display: block; float: left;  font-weight: bold; text-align: right; position: relative; }
+.form label em, 
+.form span.label em { position: absolute; right: 0; font-size: 120%; font-style: normal; color: #C00; }
+.form input:focus,
+.form input.error:focus, 
+.form textarea:focus {	background-color: #FFC; border-color: #FC6; }
+.form div.controlset label, 
+.form div.controlset input { display: inline; float: none; }
+.form .controlset div { margin-left: 145px; }
+.form .controlset label {font-size: 11px; font-weight: normal !important; }
+.form .buttonrow { margin-left: 145px; }
+.form .buttonrow-right { float: right; }
+.form .buttonrow-border { border-top: 1px solid #E5E2E2; padding-top: 8px; }
+.form .controlset input { border: none !important; }
+.form .cancel { font-size: 11px; color: #C00; padding-left: 10px; }
+.form .field { margin-bottom: 1.5em; }
+.form .field input
+{
+	padding: 4px;
+	border: 1px solid #999;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+}
+.form .tiny { width: 25px; }
+.form .xsmall { width: 50px; }
+.form .small { width: 100px; }
+.form .medium { width: 200px; }
+.form .large { width: 300px; }
+.form .xlarge { width: 400px; }
+
+/* Label top styles */
+.label-top .field label { width: 100%; display: block; text-align: left; }
+.label-top .field span.label { width: 100%; display: block; float: left; text-align: left; position: relative; }
+.label-top .field .field_help { margin-left: 0; font-size: 11px; }
+.label-top .controlset div { margin-left: 0; }
+.label-top .buttonrow { margin-left: 0; }
+
+
+
+/* -------------------------------------------------------------
+12. Output Messages
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+
+.info, .success, .warning, .error, .validation {
+	width: 80%;
+    border: 1px solid;
+    margin: 10px 0px;
+	margin-left: auto;
+	margin-right: auto;
+    padding:15px 10px 15px 50px;
+    background-repeat: no-repeat;
+    background-position: 10px center;
+}
+.info {
+    color: #00529B;
+    background-color: #BDE5F8;
+    background-image: url('../images/icons/info.png');
+}
+.success {
+    color: #4F8A10;
+    background-color: #DFF2BF;
+    background-image:url('../images/icons/success.png');
+}
+.warning {
+    color: #9F6000;
+    background-color: #FEEFB3;
+    background-image: url('../images/icons/warning.png');
+}
+.validation {
+    color: #D63301;
+    background-color: #FFCCBA;
+    background-image: url('../images/icons/validation.png');
+}
+
+.error {
+    color: #D8000C;
+    background-color: #FFBABA;
+    background-image: url('../images/icons/error.png');
+}
+
+
+
+/* -------------------------------------------------------------
+13. MISC
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+/* new clearfix */
+.clearfix:after {
+	visibility: hidden;
+	display: block;
+	font-size: 0;
+	content: " ";
+	clear: both;
+	height: 0;
+	}
+* html .clearfix             { zoom: 1; } /* IE6 */
+*:first-child+html .clearfix { zoom: 1; } /* IE7 */
+	
+.clear { clear: both; }	
+
+.hide { display: none; }
+.menu-item { width: 130px; float: left; text-align: center; }
