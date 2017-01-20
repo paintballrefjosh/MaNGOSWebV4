@@ -1,0 +1,18 @@
+table { font-size: 12px; }
+#contentPadding { margin-left: 50px; _margin-left: 51px; margin-right: 56px; _margin-right: 57px; }
+#ieTableMargin { margin-right: 0px; }
+#contentContainer {margin-top: 10px;}
+div div div#blizzlogo-bot { position: relative; display: block; text-align: center; top: 0px; left: auto; background: none; z-index: 500; }
+div.top-nav-container { _z-index: 0; }
+div.top-nav { position: absolute; right: 0px; top: 3px; z-index: 0; }
+#main-bottom { _height: 92px; }
+#ironFrame { margin-top: -2px; }
+#copyright { display: block; position: relative; margin-top:20px; }
+#copyright span.esrb { display: none; }
+#copyright span.rating { display: none; }
+#copyright span.esrb-caution { display: none; }
+#copyright span.nvidia { display: none; }
+#copyright span.textlinks { display: table;}
+@media all and (min-width: 0px) { 
+#ironFrame { margin-top: -7px; }
+}

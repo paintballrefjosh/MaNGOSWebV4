@@ -1,0 +1,52 @@
+.forum_category {
+    font-family: "Trebuchet MS", Verdana, sans-serif;
+    font-size: 0.8em;
+}
+.forum_category thead tr td {
+    padding: 3px;
+    border-top: 1px solid #000;
+    border-bottom: 2px solid #000;
+}
+.forum_category a {
+    color: #000;
+    border-bottom: 1px dotted #000;
+    text-decoration: none;
+}
+.forum_category a:hover {
+    color: #FFAC04;
+    border-bottom: 1px solid #FFAC04;
+    text-decoration: none;
+}
+.forum_category .title {
+    font-weight: bold;
+    color: #cc3333;
+    font-size:1.2em;
+}
+.forum_category .desc {
+    display: block;
+    color: #1E4378;
+    font-size:0.9em;
+}
+.forum_category .col1 {
+    width: 30px;
+    padding: 2px;
+    text-align: center;
+}
+.forum_category .col3,.forum_category .col4 {
+    font-weight: bold;
+    width: 60px;
+    padding: 2px;
+    text-align: center;
+}
+.forum_category .col3,.forum_category .col4 {
+    color: #1E4378;
+    font-weight: bold;
+    width: 70px;
+    padding: 2px;
+    padding-right: 8px;
+    text-align: center;
+}
+.forum_category .col3 span,.forum_category .col4 span {
+    display: block;
+    font-size: 1.4em;
+}

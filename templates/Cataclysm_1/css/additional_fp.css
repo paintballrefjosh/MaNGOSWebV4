@@ -1,0 +1,20 @@
+div.fpdrop {positon:relative; left:57px; }
+#right-bg { background: url('../images/page_rightbg.png') no-repeat; position: absolute; top: -103px; right: -1120px; height: 621px; width: 296px; z-index: -20; }
+#droppf {position: absolute; right: -24px; top: 39px; z-index:99; width: 145px;}
+#dropps {position: absolute; right: 124px; top: 39px; z-index:99; width: 145px;}
+#droppt {position: absolute; right: 272px; top: 39px; z-index:99; width: 145px;}
+#droppfo {position: absolute; right: 420px; top: 39px; z-index:99; width: 145px;}
+#loginbox {position:absolute; z-index:99; left: 561px; top: 3px; width:430px; height:34px;text-align:right;color: #FFAC04; font-size: 12px; font-weight: bold; }
+#main { width:827px; background: url('../images/frontpage_bg_rpt.jpg') repeat-y; }
+#main-top { height: 46px; width: 100%; background: none; position: relative; top:1px; }
+#main-top div { height: 46px; width:10px; background: none; }
+#main-top div div { height: 433px; width:813px; background: url('../images/frontpage_top_bg.jpg') no-repeat; margin-left: 14px; z-index: -30;}
+#main-top div div div { height: 46px; background: none; }
+#main-content-wrapper {width:20px; background: none; height: auto; z-index:5;}
+#main-content { height: auto; background: none; }
+#cnt { width: 715px; min-height:1028px; _height:1028px;}
+#marginal { width: 226px; margin-left: -1px; }
+#main-bottom { height: 75px;  width: auto; background: none; text-align:center; }
+#main-bottom div { height: 75px; background: none; }
+#main-bottom div div { height: 75px; background: none; }
+#copyright { display: block; position: relative; top: 228px; left: auto; color: #8e8e8e; }

@@ -1,0 +1,73 @@
+#postshell21 { background: #313131; }
+#resultscontainer {float:left; width: 100%;}
+.resultbox { display: block;}
+
+#postshell11, #postshell21 { width: 90%; border-top: 1px solid #000; border-bottom: 1px solid #000;margin: 0 auto;}
+#posttable11 td, #posttable21 td { padding: 5px; vertical-align: top; }
+
+#postshell21 { background: #313131; }
+#posttable21 { background: url('../../../images/notice/post-til.gif') repeat-x bottom; }
+td.id21 { background: url('') no-repeat center top; }
+td.idbliz21 { background: url('') no-repeat center top; }
+td.message21 { background: url('') no-repeat top left; }
+.postdisplay div.postingcontainer21 { background: #313131 url('../../../images/notice/post-tim.gif') repeat-x top; }
+
+#messagepanel div.message-body { background: #464646; border: 1px solid #000; padding: 15px; text-align: left; min-width: 370px; }
+.postdisplay {  display: block; background: #1b1b1b; border: 1px solid #000; padding: 2px; }
+.postdisplay div.border { display: block; background: #313131; border: 1px solid #000; padding: 2px; }
+.postdisplay div.innercontainer { display: block; background: #313131 url('') no-repeat top left; border: 1px solid #000;  }
+.postdisplay div.secondcontainer { display: table; background: url('') no-repeat top right; padding: 10px; width: 100%;  }
+.postdisplay div.insert { display: table; width: 100%; padding: 0; margin: 0;  }
+td.displaybox { padding: 20px 5px 0 0; background: url('') no-repeat bottom right; }
+.search-overflow { position:absolute; z-index:999999; top:0px; right:10px; width:300px; height:3000px; display:none; background-color:red; }
+
+#postbody11, #postbody21 { padding: 0; height: 130px; margin: 0;  width: 90%; }
+.postdisplay div.postingcontainer11, .postdisplay div.postingcontainer21 { display: block; border: 1px solid #000;}
+
+body { font: 12px Arial, Helvetica, sans-serif; margin: 0px; padding: 0; background: #000 url('') repeat-x 50% 0; }
+span { color: #ccc; }
+span.grey { color: #a0a1a3; }
+span.lite { color: #f0e7be; }
+small { color: #d7Cea4; font-size: 11px; }
+small.gold { color: #c4c4c4; }
+b { font-weight: bold; }
+b.white { color: white; }
+span.red { color: red; }  
+span.blue { color: #00c0ff; }
+span.blue b { color: white; }
+span.mvp { color:#5df644; }
+h1, h2, h3, h4, h5 { font-family: Arial, Helvetica, sans-serif; font-weight: bold; margin:0; padding:0; }
+h1 { text-align: left; font-size: 12px; margin: 0; padding: 0; color: #ccc; }
+h2 { font-size: 18px; color: white; font-weight: normal; }
+h1.races { color: #ff9900; padding: 10px; font: normal 18px Georgia, 'Times New Roman', Times, serif; }
+img.cap { margin: 0 5px 3px 0; }
+p.warning { margin-left: 5px; padding-top: 5px; }
+ul.thread { margin-left: 22px; }
+.clear { clear: both; height: 15px; }
+.filter { text-decoration: none; font-size: 11px; }
+.button { text-decoration: none; }
+small.white { color: #fff; font-size: 8pt; }
+span.white { color: #fff; font-size: 12px; }
+span.highlight { color:#000; background-color: #ffd214; font-weight: bold; font-style: italic;  }
+small { color: #fff; font-size: 8pt; }
+small.smallBold { color: #fff; font-size: 8pt; font-weight: bold; }
+
+form { margin: 0; padding: 0; }
+input, textarea { background: #0d1a2d; border: 1px solid #7f7f7f; color: #ffac04; }
+input { background: #0d1a2d url('../../../images/notice/forum-me.gif') repeat-x; }
+select { background: #0d1a2d; color: #ffac04; font-size: 11px; }
+/*input.button { background: transparent; border-style: none; }*/
+select.gray { background-color: #040d1a; color: #ffac04; }
+select.forum-dropdown { display:inline; width: 185px; margin-left: 10px; }
+input.post-subject-field, textarea.post-message-text, textarea.options-signature-text { font: 12px Arial, Helvetica, sans-serif; color: white; }
+input.post-subject-field, input.login-account-field, input.login-password-field, input.options-email-field, input.options-talent-field { background: #0d1a2d url('../../../images/notice/forum-me.gif') repeat-x; padding: 2px 0 2px 4px; }
+textarea.post-message-text, textarea.options-signature-text { background: #0d1a2d url('') repeat-x 0 0; }
+input.quick-search-field { width: 138px; margin-right: 2px; padding: 1px 0 1px 4px; }
+input.post-subject-field { width: 245px; margin: 58px 0 0 44px; }
+textarea.post-message-text { width: 584px; margin: 19px 0 0 19px; height: 238px;  padding: 10px; }
+input.login-account-field, input.login-password-field  { width: 170px; margin: 28px 0 0 35px; }
+input.login-password-field { margin: 31px 0 0 35px; }
+input.options-email-field { width: 170px; margin: 14px 0 0 62px; }
+input.options-talent-field { width: 290px; margin: 14px 0 0 32px; }
+select.options-timezone { width: 314px; margin: 15px 0 0 35px; background: #0d1a2d; }
+textarea.options-signature-text { width: 584px; margin: 19px 0 0 19px; height: 90px; padding: 10px; }

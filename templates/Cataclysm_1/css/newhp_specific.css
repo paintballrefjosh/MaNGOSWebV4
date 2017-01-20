@@ -1,0 +1,21 @@
+#cnt { width: 735px; height: auto; }
+#cnt-wrapper { padding-right:10px; padding-left:10px; padding-top:10px; } 
+#cntmain { width: 96%; padding-left: 17px;}
+#cnt-top { height: 13px; }
+#cnt-top div { height: 13px; }
+#cnt-top div div { height: 13px; }
+#cnt-bot { height: 7px; font-size: 1px; } 
+#cnt-bot div { height: 7px; }
+#cnt-bot div div { height: 7px; }   
+#main-bottom { height: 92px; margin-bottom: -16px; width: auto;}
+#main-bottom { margin-bottom: -17px; }
+#main-bottom div { height: 75px; background: url('../images/border-bot-left.gif') no-repeat top left; }
+#main-bottom div div { height: 75px; background: url('../images/border-bot-right.gif') no-repeat top right; }
+div div div#blizzlogo-bot { position: relative; display: block; text-align: center; top: 0px; left: auto; background: none; z-index: 500; }
+#ironframe { display: block; height: 20px; background: black url('../images/ironframe-bg.jpg') repeat-x top; position: relative; border: 0; width:100%; margin-bottom: 80px; z-index: 0; }
+#ironframe { margin-top: 0px; margin-bottom: 60px; }
+#copyright { display: block; position: relative; top: 248px; left: auto; color: #8e8e8e; }
+#copyright span.textlinks { display: table; position: relative; text-align: center; padding-left: 10px; top: 15px; left: auto; z-index: 400; }
+#copyright a, #copyright a:link, #copyright a:active { font-size: 11px; color: #ffb019; font-weight: bold; }
+#copyright a:visited { font-size: 11px; color: #d29e3b; font-weight: bold; }
+#copyright a:hover { color: white; text-decoration: none; font-weight: bold;}

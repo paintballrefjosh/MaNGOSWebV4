@@ -1,0 +1,94 @@
+/* phatlootboxes */
+.news { width: 27px; height: 27px; top: -4px; left: 7px; background: url("../images/visual-generalnews.gif") no-repeat 0 0; }
+.comm { width: 33px; height: 29px; top: -4px; left: 4px; background: url("../images/visual-community.gif") no-repeat 0 0; }
+.phatlootbox-top h2 { height: 15px; position: relative; left: 38px; top: 6px; background: url("../images/header-generalnews.gif") no-repeat 0 0; }
+.phatlootbox-top2 h2 { height: 15px; position: relative; left: 38px; top: 6px; }
+h2.community { background: url("../images/header-comm.gif") no-repeat 0 0; }
+
+/* === Main Nav Link icons (Main css in newhp.css) === */
+div.leftmenu-section { height: 31px; }
+.leftmenu-sectionheader em { display: none; }
+.leftmenu-section a { position: relative; }
+.leftmenu-gameguide-on { background: url("") no-repeat 1px 0; height: 30px; display: block; }
+.leftmenu-gameguide-off { background: url("") no-repeat 1px 0; height: 30px; display: block; }
+.menugameguide-icon-on, .menugameguide-icon-off,
+.menunews-icon-on, .menunews-icon-off, 
+.menuinteractive-icon-on, .menuinteractive-icon-off,
+.menucommunity-icon-on, .menucommunity-icon-off,
+.menuaccount-icon-on, .menuaccount-icon-off,
+.menusupport-icon-on, .menusupport-icon-off,
+.menuforums-icon-on, .menuforums-icon-off,
+.menumedia-icon-on, .menumedia-icon-off { height: 21px; width: 24px; position: absolute; left: 5px; top: 3px; background-repeat: no-repeat; }
+.menunews-icon-on { background: url("../images/mainnav/icon-news-on.gif"); }
+.menunews-icon-off { background: url("../images/mainnav/icon-news-off.gif"); }
+.menugameguide-icon-on { background: url("../images/mainnav/icon-gameguide-on.gif"); }
+.menugameguide-icon-off { background: url("../images/mainnav/icon-gameguide-off.gif"); }
+.menuinteractive-icon-on { width: 25px; background: url("../images/mainnav/icon-interactive-on.gif"); }
+.menuinteractive-icon-off { width: 25px; background: url("../images/mainnav/icon-interactive-off.gif"); }
+.menuforums-icon-on { background: url("../images/mainnav/icon-forums-on.gif"); }
+.menuforums-icon-off { background: url("../images/mainnav/icon-forums-off.gif"); }
+.menucommunity-icon-on { background: url("../images/mainnav/icon-community-on.gif"); }
+.menucommunity-icon-off { background: url("../images/mainnav/icon-community-off.gif"); }
+.menuaccount-icon-on { background: url("../images/mainnav/icon-account-on.gif"); }
+.menuaccount-icon-off { background: url("../images/mainnav/icon-account-off.gif"); }
+.menusupport-icon-on { width: 25px; background: url("../images/mainnav/icon-support-on.gif"); }
+.menusupport-icon-off { width: 25px; background: url("../images/mainnav/icon-support-off.gif"); }
+.menumedia-icon-on { background: url("../images/mainnav/icon-media-on.gif"); }
+.menumedia-icon-off { background: url("../images/mainnav/icon-media-off.gif"); }
+.menugameguide-header-off, .menugameguide-header-on,
+.menunews-header-on, .menunews-header-off,
+.menuinteractive-header-on, .menuinteractive-header-off,
+.menucommunity-header-on, .menucommunity-header-off,
+.menuforums-header-on, .menuforums-header-off,
+.menuaccount-header-on, .menuaccount-header-off,
+.menusupport-header-on, .menusupport-header-off,
+.menumedia-header-on, .menumedia-header-off { height: 25px; display: block; position: absolute; left: 30px; top: 1px; width: 105px; /*makes the clickable area*/ background-position: 0 5px; background-repeat: no-repeat; }
+.menunews-header-on { background-image: url("../images/mainnav/header-news-on.gif"); }
+.menunews-header-off { background-image: url("../images/mainnav/header-news-off.gif"); }
+.menugameguide-header-on { background-image: url("../images/mainnav/header-gameguide-on.gif"); }
+.menugameguide-header-off { background-image: url("../images/mainnav/header-gameguide-off.gif"); }
+.menuinteractive-header-on { background-image: url("../images/mainnav/header-workshop-on.gif"); }
+.menuinteractive-header-off { background-image: url("../images/mainnav/header-workshop-off.gif"); }
+.menucommunity-header-on { background-image: url("../images/mainnav/header-community-on.gif"); }
+.menucommunity-header-off { background-image: url("../images/mainnav/header-community-off.gif"); }
+.menuforums-header-on { background-image: url("../images/mainnav/header-forums-on.gif"); }
+.menuforums-header-off { background-image: url("../images/mainnav/header-forums-off.gif"); }
+.menuaccount-header-on { background-image: url("../images/mainnav/header-account-on.gif"); }
+.menuaccount-header-off { background-image: url("../images/mainnav/header-account-off.gif"); }
+.menusupport-header-on { background-image: url("../images/mainnav/header-support-on.gif"); }
+.menusupport-header-off { background-image: url("../images/mainnav/header-support-off.gif"); }
+.menumedia-header-on { background-image: url("../images/mainnav/header-media-on.gif"); }
+.menumedia-header-off { background-image: url("../images/mainnav/header-media-off.gif"); }
+/* === End Left Nav Section (Main Nav Links) === */
+
+/* === Smallteasers === */
+.smallteaser h3, .twocol-smallteaser h3 { background-position:  40px 3px;  background-repeat: no-repeat; height: 20px; }
+.services-needhelp, .services-jobs { top: -4px; left: 0; width: 36px; height: 35px; }
+.twocol-smallteaser .services-needhelp { background: url("../images/visual-smallteaser-needhelp.gif") no-repeat 0 0; }
+.twocol-smallteaser .services-jobs { background: url("../images/visual-smallteaser-jobs.gif") no-repeat 0 0; }
+.community-contests, .community-fanarts, .community-wallpapers { top: -5px; left: -2px; }
+.community-contests { width: 36px; height: 36px; background: url("../images/visual-smallteaser-contests.gif") no-repeat 0 0; }
+.community-fanarts { width: 36px; height: 36px; background: url("../images/visual-smallteaser-fanarts.gif") no-repeat 0 0; }
+.community-wallpapers { top: -12px; width: 36px; height: 43px; background: url("../images/visual-smallteaser-wallp.gif") no-repeat 0 0; }
+.smallteaser h3.contests { background-image: url("../images/header-contest.gif"); }
+.smallteaser h3.wallpapers { background-image: url("../images/header-wallpapers.gif"); }
+.smallteaser h3.fanarts { background-image: url("../images/header-fanarts.gif"); }
+.twocol-smallteaser h3.needhelp { background-image: url("../images/header-needhelp.gif"); }
+.twocol-smallteaser h3.jobs { background-image: url("../images/header-jobs.gif"); }
+    
+/*  === Subheaders === */
+.parchment-subheader h4 { background-position:  78px 3px; background-repeat: no-repeat; height: 20px; }
+#marginal h4.begin-journey { background-image: url("../images/header-journey.gif"); }
+#marginal h4.newbie-faq { background-image: url("../images/subheader-newbiefaq.jpg"); }
+#marginal h4.discover { height: 16px; background-image: url("../images/header-discoverwow.gif"); background-repeat: no-repeat;   position: relative; left: 27px; top: 6px; }
+.container-misc h4 { position: relative; left: 18px; top: 14px; }
+.container-misc h4.misc1 { height: 14px; background: url("../images/header-miscnews1.jpg") no-repeat 0 0; }
+.container-misc h4.misc2 { height: 14px; background: url("../images/header-miscnews1.jpg") no-repeat 0 0; }
+.container-misc h4.misc3 { height: 14px; background: url("../images/header-miscnews1.jpg") no-repeat 0 0; }
+.container-misc h4.misc4 { height: 14px; background: url("../images/header-miscnews1.jpg") no-repeat 0 0; }
+.container-misc { font-size: 12px; }
+.arrow-readmore { position: absolute; top: 0; right: 0; background: url("../images/pixel.gif") no-repeat 0 0; z-index: 20020; /*in case we have operlapping avatars, i.e. need help, jobs*/ }
+.arrow-readmore a {  height: 25px; width: 28px; display: block; }
+.button-readmore { position: absolute; bottom: 8px; right: 6px; background: url("../images/button-readmore.gif") no-repeat 0 0; }
+.twocol-smallteaser .button-readmore { right: 8px; bottom: 7px; }
+.button-readmore a { height: 15px; width: 75px; display: block; }

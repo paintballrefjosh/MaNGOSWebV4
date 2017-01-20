@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<template>
+	<name>Cataclysm1</name>							<!-- Template Name -->
+	<author>Wilson212 / Deathwatch</author>			<!-- Template Author -->
+	<authorEmail>steven@keyswow.com</authorEmail>	<!-- Author Email -->
+	<authorUrl>http://www.keyswow.com</authorUrl>	<!-- Author URL -->
+	<copyright>All Images and Logos are Copyright 2010 Blizzard Entertainment</copyright>
+	<license>GNU/GPL</license>						<!-- Template license type -->
+	<version>1.0.0</version>						<!-- Template version -->
+	<masterTemplate>blizzlike</masterTemplate>		<!-- Optional, If using a master template, name here. Else, leave empty for no Master Template -->
+	<bodyHeader>body_header.php</bodyHeader> 		<!-- Name of the body header file -->
+	<bodyFooter>body_footer.php</bodyFooter>		<!-- Name of the body footer file -->
+	<bodyFunctions>body_functions.php</bodyFunctions>	<!-- Template functions file, optional. 0 = None -->
+</template>

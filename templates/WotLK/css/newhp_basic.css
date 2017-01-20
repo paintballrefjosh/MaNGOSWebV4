@@ -1,0 +1,100 @@
+
+.left { float: left; }
+.redbutton-container {display: block;height:25px; }
+.leftnopadd { float: left; margin:0px; padding:0px; }
+.nopadd { margin:0px; padding:0px; }
+.right { float: right; }
+img { border: none 0; }
+img.block { display: block; }
+.hide { width: .1em; height: 1em; overflow: hidden; position: absolute; display: none; }
+h1, h2, h3, h4, h5, h6 { padding: 0; margin: 0; background-repeat: no-repeat; text-decoration: none; }
+h4 span, h3 span, .arrow-readmore span, .button-readmore a span, a em { display: none; }
+object { padding: 0; margin: 0; }
+span.grey { font-family: arial,helvetica,sans-serif; color: #a0a1a3; font-size: 9pt; }
+span.lite { font-family: arial,helvetica,sans-serif; color: #f0e7be; font-size: 9pt; }
+small   { font-family: arial,helvetica,sans-serif; color: #d7cea4; font-size: 8pt; }
+small.gold{ font-family: arial,helvetica,sans-serif; color: #c4c4c4; font-size: 8pt; }
+b.white   { color: #ffffff; font-weight: bold; }
+span.red  { color: red; }
+span.blue   { font-family: arial,helvetica,sans-serif; color:#00c0ff; font-size: 10pt; }
+span.mvp    { font-family: arial,helvetica,sans-serif; color:#a7bfd8; font-size: 10pt; }  
+
+/* links - specificity: "lvhaf"! */
+a { text-decoration: underline; }
+a:link { background-color: transparent; color: #1e4378; }
+a:visited { background-color: transparent; color: #1e4378; }
+a:hover { color: #c60000; }
+a:active, a:focus { background-color: transparent; color: #600; text-decoration: underline; }
+a.bright { color: #e0b800; font-size: 10px; }
+a.bright:visited { color: #e0b800; }
+a.bright:hover { color: #fff; }
+
+a.menufiller { color: #d0a803; font-weight:bold; text-decoration: none; font-family:arial,comic sans ms,technical; font-size: 11px; position: relative; left: -3px; background-image:url('../images/bullet-trans-bg.gif');        width:129px; height:15px; _height:18px; padding-left:10px; display:block; }
+a.menufiller:link { color: #d0a803; font-weight:bold; text-decoration: none; font-family:arial,comic sans ms,technical; font-size: 11px; }
+a.menufiller:visited { color: #d0a803; font-weight:bold; text-decoration: none; font-family:arial,comic sans ms,technical; font-size: 11px; }
+a.menufiller:active { color: white; font-weight:bold; text-decoration: none; font-family:arial,comic sans ms,technical; font-size: 11px; }
+a.menufiller:hover { color: white; font-weight:bold; text-decoration: none; font-family:arial,comic sans ms,technical; font-size: 11px; background-color: #0B2237; opacity:.75; filter: alpha(opacity=75); }
+
+a.menufillertop { font-weight:bold; color:#d0a803; text-decoration: none; font-family:arial,comic sans ms,technical; font-size: 11px; position: relative; left: -3px; width:129px; height:15px; _height:18px; padding-left:3px; display:block; }
+a.menufillertop:link { color: #d0a803; font-weight:bold; text-decoration: none; font-family:arial,comic sans ms,technical; font-size: 11px; }
+a.menufillertop:visited { color: #d0a803; font-weight:bold; text-decoration: none; font-family:arial,comic sans ms,technical; font-size: 11px; }
+a.menufillertop:active { color: #d0a803; font-weight:bold; text-decoration: none; font-family:arial,comic sans ms,technical; font-size: 11px; }
+a.menufillertop:hover { color: #d0a803; font-weight:bold; text-decoration: none; font-family:arial,comic sans ms,technical; font-size: 11px; }
+
+a.menufiller2 { text-decoration: none; font-family:arial,comic sans ms,technical; font-size: 11px; position: relative; left: -3px; background-image:url('../images/bullet-trans-bg.gif');        width:129px; height:15px; _height:18px; padding-left:10px; display:block; }
+a.menufiller2:link { color: #d0a803; text-decoration: none; font-family:arial,comic sans ms,technical; font-size: 11px; }
+a.menufiller2:visited { color: #d0a803; text-decoration: none; font-family:arial,comic sans ms,technical; font-size: 11px; }
+a.menufiller2:active { color: white; text-decoration: none; font-family:arial,comic sans ms,technical; font-size: 11px; }
+a.menufiller2:hover { color: white; text-decoration: none; font-family:arial,comic sans ms,technical; font-size: 11px; background-color: #A9A9A9; opacity:.90; filter: alpha(opacity=90); }
+
+a.menuLink, a.menuLink:link, a.menuLink:visited { color: #F4C400; text-decoration: none; font-family:arial,comic sans ms,technical; font-size: 12px; width:120px; display:block;}
+a.menuLink:hover { color: #FFFFFF; text-decoration: none; font-family:arial,comic sans ms,technical; font-size: 12px; width:120px; display:block;}
+a.menulink, a.menulink:link, a.menulink:visited { color: #f4c400; font-weight:bold; text-decoration: none; font-family:arial,comic sans ms,technical; font-size: 11px; width:120px; display:block;}
+
+a.submenulink, a.submenulink:link, a.submenulink:visited { color: white; font-weight:normal; text-decoration: none; font-family:arial,comic sans ms,technical; font-size: 11px; width:100px; display:block;}
+
+
+hr { display: none; height: 1px; border: 0; padding: 0; margin: 0; clear: both; }
+ul.none, ul.link-list, ul.mainnav { list-style-type: none; padding: 0; margin: 0;}
+ul.none li,ul.link-list li,ul.mainnav li { padding: 0; margin: 0; }
+select { font-size: 10px; }
+optgroup { font-style: normal; }
+
+/*\ tooltips \*/
+/*_________________________________________________________________________*/
+
+#contents { visibility: hidden; position: absolute; z-index: 9999999; width: 5px; background: url('../images/blue-bg.png'); }
+#dynamictooltip { visibility: hidden; position: absolute; z-index: 999999; }
+#tooltiptext { visibility: hidden; color: #fff; font-family: verdana, arial, sans-serif; font-size:8pt; font-weight:normal; padding: 4px; white-space:nowrap; }
+.trans_div { /* this is an ie filter command. other browsers will ignore it */
+/* it goes into the trans_div class */ }
+/* square bracketed class styles are usable non-ie type browsers */
+/* this is a seperate css entry, not part of the original trans_div class */
+.trans_div[class] { background-image:url(../images/blue-bg.png); }
+.minitext {font-size: 12px; font-style: italic;}
+
+.email { top: 105px; left: 430px; width: 265px; }
+.timezones { top: 165px; left: 430px; width: 265px; }
+.talents { top: 225px; left: 430px; width: 265px; }
+.signatures { top: 430px; left: 140px; width: 418px; }
+
+.tooltips { position: relative; z-index: 100099900; }
+.tt-header{ position: relative; z-index: 100099999; }
+.tt-header em { position: absolute; top: 0; left: -7px; height: 25px; width: 95px; background: url('../images/tooltip-alert.png') no-repeat 0 0; }
+.tt-header em span { display: none; }
+.tt-header em img { margin: 0 0 0 20px; }
+.tooltips-container { position: absolute; }
+.tooltips-container table { padding: 0; border: 0; border-collapse: collapse; }
+.tooltips-container td { padding: 0; }
+td.tt1 { width: 12px; height: 11px; background: url('../images/tooltip-top-left.png') no-repeat; }
+td.tt2 { height: 11px; background: url('../images/tooltip-top.png') repeat-x 0 0; }
+td.tt3 { width: 12px; height: 11px; background: url('../images/tooltip-top-right.png') no-repeat; }
+td.tt4 { width: 12px; background: url('../images/tooltip-left.png') repeat-y; }
+td.tt5 { background: url('../images/tooltip-back.png') repeat; }
+td.tt6 { width: 12px; background: url('../images/tooltip-right.png') repeat-y; }
+td.tt7 { width: 12px; height: 11px; background: url('../images/tooltip-bot-left.png') no-repeat; }
+td.tt8 { height: 11px; background: url('../images/tooltip-bot.png') repeat-x 0 0; }
+td.tt9 { width: 12px; height: 11px; background: url('../images/tooltip-bot-right.png') no-repeat; }
+.tt-content { display: block; padding: 2px; color: #878787; font: 11px/12px "trebuchet ms", verdana, sans-serif; }
+.tt-content strong { color: white; }
+.tt-content a, .tt-content a:active, .tt-content a:visited { font-weight: normal; }
