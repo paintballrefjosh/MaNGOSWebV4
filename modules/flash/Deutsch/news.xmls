@@ -1,0 +1,9 @@
+<?xml version="1.0" standalone="yes" ?>
+<movie>		   
+	<featured>
+		<item title="mangoswebenhanced.swf" link="http://code.google.com/p/mwenhanced/" />
+		<item title="pcc_large.swf" link="https://www.wow-europe.com/character/character-customization-intro.html" />
+		<item title="online_store_large.swf" link="http://eu.blizzard.com/store" />
+	</featured>
+	<strings next="&gt;" back="&lt;" waittime="450">
+</movie>		
