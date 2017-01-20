@@ -74,10 +74,10 @@ class Paypal
 //	************************************************************	
 // For the IPN. use to check if payment is valid, and the status
 
-	function checkPayment($_POST)
+	function checkPayment($POST)
 	{
 		$req = 'cmd=_notify-validate';
-		foreach($_POST as $key => $value) 
+		foreach($POST as $key => $value) 
 		{
 			$value = urlencode(stripslashes($value));
 			$req .= "&$key=$value";
@@ -122,7 +122,7 @@ class Paypal
 				{
 					$err = array();
 					$err[] = '--- Start Transaction ---';
-					foreach($_POST as $var)
+					foreach($POST as $var)
 					{
 						$err[] = $var;
 					}
