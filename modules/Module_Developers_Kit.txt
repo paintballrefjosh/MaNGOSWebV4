@@ -1,0 +1,2 @@
+To get an example of how modules are built for MangosWeb v3
+check the forums at http://keyswow.com/forums for the Module Developers Kit
