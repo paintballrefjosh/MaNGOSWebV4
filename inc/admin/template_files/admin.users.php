@@ -250,7 +250,7 @@ if(isset($_GET['id']))
 								else
 								{
 									echo "<option value='4'>Super Admin</option>
-										  <option value='3' selected='selected'>Admin</option>
+										  <option value='3'>Admin</option>
 										  <option value='2' selected='selected'>Member</option>
 									"; 
 								}
