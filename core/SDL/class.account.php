@@ -497,7 +497,7 @@ class Account
 
     function isAvailableUsername($username)
 	{
-        $res = $this->DB->count("SELECT COUNT(*) FROM `account` WHERE `username`='".$username."'");
+        $res = $this->DB->num_rows("SELECT COUNT(*) FROM `account` WHERE `username`='".$username."'");
         if($res['COUNT(*)'] == 0) 
 		{
 			return TRUE; // username is available
@@ -514,7 +514,7 @@ class Account
 
     function isAvailableEmail($email)
 	{
-        $res = $this->DB->count("SELECT COUNT(*) FROM `account` WHERE `email`='".$email."'");
+        $res = $this->DB->num_rows("SELECT COUNT(*) FROM `account` WHERE `email`='".$email."'");
         if($res['COUNT(*)'] == 0) 
 		{
 			return TRUE; // email is available
@@ -583,7 +583,7 @@ class Account
 	function isBannedAccount($account_id)
 	{
 		global $DB;
-		$check = $DB->count("SELECT COUNT(*) FROM `account_banned` WHERE `id`='".$account_id."' AND `active`=1");
+		$check = $DB->num_rows("SELECT COUNT(*) FROM `account_banned` WHERE `id`='".$account_id."' AND `active`=1");
 		if ($check['COUNT(*)'] > 0)
 		{
 			return TRUE; // Account is banned
@@ -601,7 +601,7 @@ class Account
 	function isBannedIp()
 	{
 		global $DB;
-		$check = $DB->count("SELECT COUNT(*) FROM `ip_banned` WHERE `ip`='".$_SERVER['REMOTE_ADDR']."'");
+		$check = $DB->num_rows("SELECT COUNT(*) FROM `ip_banned` WHERE `ip`='".$_SERVER['REMOTE_ADDR']."'");
 		if ($check['COUNT(*)'] > 0)
 		{
 			return TRUE; // IP is banned
@@ -932,7 +932,7 @@ class Account
     {
         global $user;
 
-        $result = $this->DB->count("SELECT COUNT(*) FROM `mw_online` WHERE `user_id`='".$this->user['id']."'");
+        $result = $this->DB->num_rows("SELECT COUNT(*) FROM `mw_online` WHERE `user_id`='".$this->user['id']."'");
         if($result['COUNT(*)'] > 0)
         {
             $this->DB->query("UPDATE `mw_online` SET 
@@ -967,7 +967,7 @@ class Account
     {
         global $user;
 
-        $result = $this->DB->count("SELECT  COUNT(*) FROM `mw_online` WHERE `user_id`='0' AND `user_ip`='".$this->user['ip']."'");
+        $result = $this->DB->num_rows("SELECT  COUNT(*) FROM `mw_online` WHERE `user_id`='0' AND `user_ip`='".$this->user['ip']."'");
         if($result['COUNT(*)'] > 0)
         {
             $this->DB->query("UPDATE `mw_online` SET 

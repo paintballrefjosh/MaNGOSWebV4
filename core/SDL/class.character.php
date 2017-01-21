@@ -256,15 +256,15 @@ class Character
 		global $CDB;
 		if($faction == 0)
 		{
-			$count = $CDB->count("SELECT COUNT(*) FROM `characters` WHERE `online`='1'");
+			$count = $CDB->num_rows("SELECT COUNT(*) FROM `characters` WHERE `online`='1'");
 		}
 		elseif($faction == 1)
 		{
-			$count = $CDB->count("SELECT COUNT(*) FROM `characters` WHERE `online`='1' AND (`race` = 1 OR `race` = 3 OR `race` = 4 OR `race` = 7 OR `race` = 11)");
+			$count = $CDB->num_rows("SELECT COUNT(*) FROM `characters` WHERE `online`='1' AND (`race` = 1 OR `race` = 3 OR `race` = 4 OR `race` = 7 OR `race` = 11)");
 		}
 		elseif($faction == 2)
 		{
-			$count = $CDB->count("SELECT COUNT(*) FROM `characters` WHERE `online`='1' AND (`race` = 2 OR `race` = 5 OR `race` = 6 OR `race` = 8 OR `race` = 10)");
+			$count = $CDB->num_rows("SELECT COUNT(*) FROM `characters` WHERE `online`='1' AND (`race` = 2 OR `race` = 5 OR `race` = 6 OR `race` = 8 OR `race` = 10)");
 		}
 		return $count['COUNT(*)'];
 	}
@@ -421,7 +421,7 @@ class Character
     {
 		global $CDB;
 		$guid = $CDB->real_escape_string($guid);
-        $row = $CDB->count("SELECT COUNT(*) AS `count` FROM `characters` WHERE `guid` = '$guid' AND `online` = '1'");
+        $row = $CDB->num_rows("SELECT COUNT(*) AS `count` FROM `characters` WHERE `guid` = '$guid' AND `online` = '1'");
         if($row['count'] > 0) 
 		{
 			return TRUE;
@@ -673,12 +673,12 @@ class Character
 				$mount2 = 35713;
 				break;
         }
-        $pop = $CDB->count("SELECT COUNT(*) FROM character_spell WHERE guid='$guid' AND spell=33388");
+        $pop = $CDB->num_rows("SELECT COUNT(*) FROM character_spell WHERE guid='$guid' AND spell=33388");
         if ($pop > 0) 
 		{
            $CDB->query("INSERT INTO character_spell (guid,spell) VALUES ('$guid','$mount1')");
         }
-        $pep = $CDB->count("SELECT COUNT(*) FROM character_spell WHERE guid='$guid' AND (spell=33391 or spell=34090 or spell=34091)");
+        $pep = $CDB->num_rows("SELECT COUNT(*) FROM character_spell WHERE guid='$guid' AND (spell=33391 or spell=34090 or spell=34091)");
         if ($pep > 0) 
 		{
            $CDB->query("INSERT INTO character_spell (guid,spell) VALUES ('$guid','$mount1')");
