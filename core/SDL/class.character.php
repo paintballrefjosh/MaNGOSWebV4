@@ -306,6 +306,73 @@ class Character
 	function getFactionTopKills($faction, $count)
 	{
 		global $CDB;
+
+		if($CDB->selectRow("SHOW TABLES LIKE 'character_honor_cp'") > 0) // old version
+		{
+			if($faction == 1)
+			{			
+				$row = $CDB->select("SELECT 
+					characters.race, 
+					characters.class, 
+					characters.gender, 
+					characters.level, 
+					characters.name, 
+					COUNT(*) qty 
+				FROM 
+					character_honor_cp 
+				INNER JOIN 
+					characters 
+				ON 
+					character_honor_cp.guid = characters.guid 
+				WHERE 
+					characters.race=1 OR 
+					characters.race=3 OR 
+					characters.race=4 OR 
+					characters.race=7 OR 
+					characters.race=11
+				GROUP BY 
+					character_honor_cp.guid
+				ORDER BY 
+					qty DESC 
+				LIMIT 50;");			
+			}
+			else # Horde
+			{			
+				$row = $CDB->select("SELECT 
+					characters.race, 
+					characters.class, 
+					characters.gender, 
+					characters.level, 
+					characters.name, 
+					COUNT(*) qty 
+				FROM 
+					character_honor_cp 
+				INNER JOIN 
+					characters 
+				ON 
+					character_honor_cp.guid = characters.guid 
+				WHERE 
+					characters.race=2 OR 
+					characters.race=5 OR 
+					characters.race=6 OR 
+					characters.race=8 OR 
+					characters.race=10
+				GROUP BY 
+					character_honor_cp.guid
+				ORDER BY 
+					qty DESC 
+				LIMIT 50;");			
+			}
+			
+			if($row == FALSE)
+			{
+				return FALSE;
+			}
+			else
+			{
+				return $row;
+			}
+		}
 		
 		// Alliance
 		if($faction == 1)
