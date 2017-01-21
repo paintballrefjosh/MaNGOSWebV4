@@ -27,7 +27,7 @@ if(isset($_GET['id']))
 		{
 			$profile = $Account->getProfile($_GET['id']);
 			$lastvisit = date("Y-m-d, g:i a", $profile['last_visit']);
-			$seebanned = $DB->count("SELECT COUNT(*) FROM account_banned WHERE id='".$_GET['id']."' AND `active`=1");
+			$seebanned = $DB->num_rows("SELECT id FROM account_banned WHERE id='".$_GET['id']."' AND `active`=1");
 			if($seebanned > 0) 
 			{
 				$bann = 1;

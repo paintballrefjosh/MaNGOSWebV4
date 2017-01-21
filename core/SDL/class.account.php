@@ -810,8 +810,8 @@ class Account
 
 	function setEmail($id, $newemail)
 	{
-		$id = mysql_real_escape_string($id);
-        $newemail = mysql_real_escape_string($newemail);
+		$id = $this->DB->real_escape_string($id);
+        $newemail = $this->DB->real_escape_string($newemail);
 		$this->DB->query("UPDATE `account` SET `email`='".$newemail."' WHERE `id`='$id' LIMIT 1");
 		return TRUE;
 	}
@@ -822,8 +822,8 @@ class Account
 
 	function setExpansion($id, $nexp)
     {
-        $id = mysql_real_escape_string($id);
-        $nexp = mysql_real_escape_string($nexp);
+        $id = $this->DB->real_escape_string($id);
+        $nexp = $this->DB->real_escape_string($nexp);
         $this->DB->query("UPDATE `account` SET `expansion`='$nexp' WHERE `id`=$id");
         return TRUE;
     }
@@ -833,8 +833,8 @@ class Account
 
 	function setPassword($id, $newpass)
     {
-        $id = mysql_real_escape_string($id);
-        $newpass = mysql_real_escape_string($newpass);
+        $id = $this->DB->real_escape_string($id);
+        $newpass = $this->DB->real_escape_string($newpass);
         $username = $this->DB->selectCell("SELECT `username` FROM `account` WHERE `id`='$id' LIMIT 1");
 		if($username != FALSE)
 		{
