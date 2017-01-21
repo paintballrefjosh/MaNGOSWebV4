@@ -1,4 +1,13 @@
 <?php
+/****************************************************************************/
+/*  						< MangosWeb v4 >  								*/
+/*              Copyright (C) <2017> <Mistvale.com>   		                */
+/*					  < http://www.mistvale.com >							*/
+/*																			*/
+/*			Original MangosWeb Enhanced (C) 2010-2011 KeysWow				*/
+/*			Original MangosWeb (C) 2007, Sasha, Nafe, TGM, Peec				*/
+/****************************************************************************/
+
 // If a 'id' is in the URL, then access that package
 if(isset($_GET['id']))
 {

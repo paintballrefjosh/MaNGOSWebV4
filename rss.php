@@ -1,4 +1,13 @@
 <?php
+/****************************************************************************/
+/*  						< MangosWeb v4 >  								*/
+/*              Copyright (C) <2017> <Mistvale.com>   		                */
+/*					  < http://www.mistvale.com >							*/
+/*																			*/
+/*			Original MangosWeb Enhanced (C) 2010-2011 KeysWow				*/
+/*			Original MangosWeb (C) 2007, Sasha, Nafe, TGM, Peec				*/
+/****************************************************************************/
+
 // Use our own DATE format constant because the PHP one seems to be bugged in some PHP versions
 define('DATE_RFC822_FIXED', 'D, d M Y H:i:s O');
 

@@ -1,10 +1,12 @@
 <?php
-/*********************************************
-*  MangosWeb Enhanced Auto Generated Config  *
-**********************************************
-* Generated from the MangosWeb Config Class  *
-* Use the Admin Panel to set Config Values   *
-**********************************************/
+/****************************************************************************/
+/*  						< MangosWeb v4 >  								*/
+/*              Copyright (C) <2017> <Mistvale.com>   		                */
+/*					  < http://www.mistvale.com >							*/
+/*																			*/
+/*			Original MangosWeb Enhanced (C) 2010-2011 KeysWow				*/
+/*			Original MangosWeb (C) 2007, Sasha, Nafe, TGM, Peec				*/
+/****************************************************************************/
 
 $site_title = 'MangosWeb v4';
 $site_email = 'your@email.com';

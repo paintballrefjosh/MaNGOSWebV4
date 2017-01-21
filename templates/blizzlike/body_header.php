@@ -1,17 +1,17 @@
+<?php
+/****************************************************************************/
+/*  						< MangosWeb v4 >  								*/
+/*              Copyright (C) <2017> <Mistvale.com>   		                */
+/*					  < http://www.mistvale.com >							*/
+/*																			*/
+/*			Original MangosWeb Enhanced (C) 2010-2011 KeysWow				*/
+/*			Original MangosWeb (C) 2007, Sasha, Nafe, TGM, Peec				*/
+/****************************************************************************/
+
+?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-<!--
-/*************************************************************************/
-/* You may copy, spread the givenned project, 
-/* in accordance with GNU GPL, however any change 
-/* the code as a whole or a part of the code given project, 
-/* advisable produce with co-ordinations of the author of the project
-/*
-/* (c) Sasha aka LordSc. lordsc@yandex.ru, updated by TGM and Peec
-/* MangosWeb Enhanced By Wilson212. http://code.google.com/p/mwenhanced
-/*************************************************************************/
--->
 <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
 <link rel="shortcut icon" href="<?php echo $Template['path']; ?>/images/favicon.ico"/>
 <script src="http://static.wowhead.com/widgets/power.js"></script>

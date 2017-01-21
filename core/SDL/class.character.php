@@ -1,13 +1,11 @@
 <?php
 /****************************************************************************/
-/*  					< MangosWeb Enhanced SDL > 							*/
-/*              Copyright (C) <2009 - 2011>  <Wilson212>                    */
-/*						  < http://keyswow.com >							*/
+/*  						< MangosWeb v4 >  								*/
+/*              Copyright (C) <2017> <Mistvale.com>   		                */
+/*					  < http://www.mistvale.com >							*/
 /*																			*/
-/****************************************************************************/
-/*																			*/
-/*  Character Class for MangosWeb v3. Some functions used from TrinMangSDK 	*/
-/*				   http://code.google.com/p/trinmangsdk/					*/
+/*			Original MangosWeb Enhanced (C) 2010-2011 KeysWow				*/
+/*			Original MangosWeb (C) 2007, Sasha, Nafe, TGM, Peec				*/
 /****************************************************************************/
 
 class Character

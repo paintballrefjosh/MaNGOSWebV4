@@ -1,14 +1,23 @@
 <?php
-	// Block out all users who arent admins
-	if($user['account_level'] == 5) 
-	{
-		echo "You Are Banned";
-		die();
-	}
-	if($user['account_level'] <= 2) 
-	{
-		redirect('index.php',1);
-	}
+/****************************************************************************/
+/*  						< MangosWeb v4 >  								*/
+/*              Copyright (C) <2017> <Mistvale.com>   		                */
+/*					  < http://www.mistvale.com >							*/
+/*																			*/
+/*			Original MangosWeb Enhanced (C) 2010-2011 KeysWow				*/
+/*			Original MangosWeb (C) 2007, Sasha, Nafe, TGM, Peec				*/
+/****************************************************************************/
+
+// Block out all users who arent admins
+if($user['account_level'] == 5) 
+{
+	echo "You Are Banned";
+	die();
+}
+if($user['account_level'] <= 2) 
+{
+	redirect('index.php',1);
+}
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">

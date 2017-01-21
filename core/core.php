@@ -1,22 +1,17 @@
 <?php
 /****************************************************************************/
-/*  					< MangosWeb Enhanced v3 >  							*/
-/*              Copyright (C) <2009 - 2011>  <Wilson212>                    */
-/*						  < http://keyswow.com >							*/
+/*  						< MangosWeb v4 >  								*/
+/*              Copyright (C) <2017> <Mistvale.com>   		                */
+/*					  < http://www.mistvale.com >							*/
 /*																			*/
+/*			Original MangosWeb Enhanced (C) 2010-2011 KeysWow				*/
 /*			Original MangosWeb (C) 2007, Sasha, Nafe, TGM, Peec				*/
 /****************************************************************************/
-/*																			*/
-/* 	DO NOT change the copyright in this file. Modification to the copyright	*/
-/*	will result in a break in agreement terms. Also, any modification to 	*/
-/*	this Copyright, or version info. will result in loss of all support by 	*/
-/*	KeysWoW																	*/
-/***************************************************************************/
 
 class Core
 {
-	var $version = '3.0.4';
-	var $version_date = '2011-01-01, 12:05 pm';
+	var $version = '4.0.0';
+	var $version_date = '2017-01-20, 22:50';
 	var $exp_dbversion = '1.0a';
 
 	function __construct()
@@ -31,8 +26,7 @@ class Core
 	{
 		global $Config;
 		$this->Cache_Refresh_Time = (int)$Config->get('cache_expire_time');
-		$this->copyright = 'Powered by MangosWeb Enhanced version ' . $this->version . ' &copy; 2009-2011, <a href="http://keyswow.com">KeysWow Dev Team</a>.
-			All Rights Reserved.';
+		$this->copyright = 'Powered by MangosWeb version ' . $this->version . ' &copy; 2017, <a href="http://www.mistvale.com">Mistvale Dev Team</a>. All Rights Reserved.';
 	
 		// Fill in the config with the proper directory info if the directory info is wrong
 		define('SITE_DIR', dirname( $_SERVER['PHP_SELF'] ).'/');

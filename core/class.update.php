@@ -1,15 +1,11 @@
 <?php
 /****************************************************************************/
-/*  					< MangosWeb Enhanced v3 >  							*/
-/*              Copyright (C) <2009 - 2011>  <Wilson212>                    */
-/*						  < http://keyswow.com >							*/
+/*  						< MangosWeb v4 >  								*/
+/*              Copyright (C) <2017> <Mistvale.com>   		                */
+/*					  < http://www.mistvale.com >							*/
 /*																			*/
+/*			Original MangosWeb Enhanced (C) 2010-2011 KeysWow				*/
 /*			Original MangosWeb (C) 2007, Sasha, Nafe, TGM, Peec				*/
-/****************************************************************************/
-/*																			*/
-/*  Update class for MangosWeb Enhanced. You the user are NOT allowed to	*/ 
-/*	copy any of this code, and/or use it for any purpose other than to 		*/
-/*	update MangosWeb Enhanced.        										*/
 /****************************************************************************/
 
 class Update
