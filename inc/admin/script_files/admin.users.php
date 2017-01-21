@@ -42,7 +42,7 @@ else
 	
 // Get all users
 $getusers = $DB->select("SELECT * FROM account $filter ORDER BY `username` ASC LIMIT $limitvalue, $limit;");
-$totalrows = $DB->count("SELECT COUNT(*) FROM `account` $filter");
+$totalrows = $DB->num_rows("SELECT id FROM `account` $filter");
 
 //===== Start of functions =====/
 

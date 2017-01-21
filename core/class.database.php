@@ -203,5 +203,11 @@ class Database
 	{
 		return mysqli_get_server_info($this->mysql);
 	}
+	
+	function num_rows($query)
+	{
+		$sql = mysqli_query($this->mysql, $query) or die("Couldnt Run Query: ".$query."<br />Error: ".mysqli_error($this->mysql)."");
+		return mysqli_num_rows($sql);
+	}
 }
 ?>
