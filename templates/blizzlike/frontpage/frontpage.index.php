@@ -70,6 +70,7 @@
 											<h1>
 												<a href="javascript:dummyFunction();"><?php echo $topic['title'];?></a>
 											</h1>
+											<span class="user">Posted by: <b><?php echo ucwords(strtolower($posted_by['username']));?></b>|</span>&nbsp;<span class="posted-date">
 												<?php echo date('d-m-Y',$topic['post_time']);?>
 											</span>
 										</li>
