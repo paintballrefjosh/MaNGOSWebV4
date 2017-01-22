@@ -48,6 +48,9 @@
 				{
 					$hl='alt';
 				}
+				
+				$posted_by = $DB->selectRow("SELECT username FROM account WHERE id = '".$topic['posted_by']."'");
+
 		?>                                                              
 				<script type="text/javascript">
 					var postId<?php echo $postnum; ?>="<?php echo $topic['id'];?>";
@@ -67,7 +70,7 @@
 											<h1>
 												<a href="javascript:dummyFunction();"><?php echo $topic['title'];?></a>
 											</h1>
-											<span class="user">Posted by: <b><?php echo $topic['posted_by'];?></b>|</span>&nbsp;<span class="posted-date">
+											<span class="user">Posted by: <b><?php echo ucwords(strtolower($posted_by['username']));?></b>|</span>&nbsp;<span class="posted-date">
 												<?php echo date('d-m-Y',$topic['post_time']);?>
 											</span>
 										</li>

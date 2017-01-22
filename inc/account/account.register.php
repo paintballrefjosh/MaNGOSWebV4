@@ -153,7 +153,7 @@ function Register()
 			// @$Enter is the main input arrays into the SDL
 			$Enter = $Account->register(
 				array(
-					'username' => $_POST['r_login'],
+					'username' => strtoupper($_POST['r_login']),
 					'sha_pass_hash' => $Account->sha_password($_POST['r_login'],$_POST['r_pass']),
 					'sha_pass_hash2' => $Account->sha_password($_POST['r_login'],$_POST['r_cpass']),
 					'email' => $_POST['r_email'],

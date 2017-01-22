@@ -19,7 +19,7 @@
 			{ 
 				if(isset($_POST['subject'])) 
 				{
-					addNews($_POST['subject'],$_POST['message'],$user['username']);
+					addNews($_POST['subject'],$_POST['message'],$user['id']);
 				}
 	?>
 		<div class="content-header">
@@ -63,7 +63,6 @@
 	{ 
 		if(isset($_GET['id'])) 
 		{
-			$content = $DB->selectRow("SELECT * FROM `mw_news` WHERE `id`='".$_GET['id']."'");
 			if(isset($_POST['delete'])) 
 			{
 				delNews($_POST['id']);
@@ -72,6 +71,9 @@
 			{
 				editNews($_POST['id'],$_POST['editmessage']);
 			}
+		
+			$content = $DB->selectRow("SELECT * FROM `mw_news` WHERE `id`='".$_GET['id']."'");
+
 ?>
 		<div class="content-header">
 			<h4><a href="?p=admin">Main Menu</a> / <a href="?p=admin&sub=news">News</a> / Edit News</h4>
