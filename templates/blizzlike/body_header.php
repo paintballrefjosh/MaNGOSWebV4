@@ -34,7 +34,7 @@
 <script src="<?php echo $Template['path']; ?>/js/detection.js" type="text/javascript"></script>
 <script src="<?php echo $Template['path']; ?>/js/functions.js" type="text/javascript"></script>
 <script type="text/javascript" src="<?php echo $Template['script_path']; ?>/js/global.js"></script>
-<script type="text/javascript" src="<?php echo $Template['script_path']; ?>/js/compressed/prototype.js"></script>
+<script type="text/javascript" src="<?php echo $Template['script_path']; ?>/js/compressed/controls.js"></script>
 <script type="text/javascript" src="<?php echo $Template['script_path']; ?>/js/compressed/behaviour.js"></script>
 <script type="text/javascript" src="<?php echo $Template['script_path']; ?>/js/core.js"></script>
 <script type="text/javascript"><!--
@@ -44,6 +44,7 @@
         location.href=list.options[list.selectedIndex].value
     }
 --></script>
+<script src='https://www.google.com/recaptcha/api.js'></script>
 </head>
 <body>
   <!-- Top Navbar Start -->

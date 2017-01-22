@@ -126,25 +126,13 @@ else
 				</select><br /><br />
 
 			<?php
-				if ((int)$Config->get('reg_act_imgvar') == 1)
-				{        
-					// Initialize random image:
-					$captcha = new Captcha;
-					$captcha->load_ttf();
-					$captcha->make_captcha();
-					$captcha->delold();
-					$filename = $captcha->filename;
-					$privkey = $captcha->privkey;
-					$DB->query("INSERT INTO `mw_acc_creation_captcha`(`filename`, `key`) VALUES('$filename','$privkey')");
+			if ((int)$Config->get('reg_use_recaptcha') == 1)
+			{        
 			?>
-					<img src="<?php echo $filename; ?>" alt=""/><br />
-					<input type="hidden" name="filename_image" value="<?php echo $filename; ?>"/>
-					<b>Type letters above (6 characters)</b>
-					<br />
-					<input type="text" name="image_key"/><br />
+				<div class="g-recaptcha" data-sitekey="<?php echo $Config->get('reg_recaptcha_public_key');?>"></div>
 			<?php 	
-				} ?>
-	
+			}
+			?>
 				<br />
 				<center>
 					<input type='image' class="button" src='<?php echo $Template['path']; ?>/images/buttons/createaccount-button2.gif' />

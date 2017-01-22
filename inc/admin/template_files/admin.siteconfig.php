@@ -213,9 +213,9 @@
 			
 			<div class="field">
 				<label for="Site reg_invite">Registration captcha: </label>
-				<select id="type" class="small" name="cfg__reg_act_imgvar">
+				<select id="type" class="small" name="cfg__reg_use_recaptcha">
 					<?php 
-						if($Config->get('reg_act_imgvar') == 1)
+						if($Config->get('reg_use_recaptcha') == 1)
 						{ $e_ariv = 'selected="selected"'; $e_ariv2 = ''; }else{ $e_ariv2 = 'selected="selected"'; $e_ariv = ''; }
 					?>
 					<option value="1" <?php echo $e_ariv; ?>>Enabled</option>
