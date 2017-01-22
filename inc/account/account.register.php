@@ -88,23 +88,14 @@ function Register()
 
 		// Ext 1 - Image verification
 		// We need to see if its enabled, and if the user put in the right code
-		if($Config->get('reg_act_imgvar') == 1)
+		if($Config->get('reg_use_recpatcha') == 1)
 		{
-			$image_key =& $_POST['image_key'];
-			$filename = $DB->real_escape_string($_POST['filename_image']);
-			$correctkey = $DB->selectCell("SELECT `key` FROM `mw_acc_creation_captcha` WHERE `filename` ='".$filename."'");
+			$response=json_decode(file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=".$Config->get('reg_recaptcha_private_key')."&response=".$_POST['g-recaptcha-response']."&remoteip=".$_SERVER['REMOTE_ADDR']), true);
 			
-			// Check for key match
-			if(strtolower($correctkey) != strtolower($image_key) || $image_key == '')
+			if($response['success'] != true)
 			{
 				$notreturn = TRUE;
 				$err_array[] = $lang['image_var_incorrect'];
-			}
-			else # keys match
-			{
-				// Delete the key from the DB, and delete the image from the cache folder
-				$DB->query("DELETE FROM `mw_acc_creation_captcha` WHERE filename='".$filename."'");
-				@unlink($filename);
 			}
 		}
 
