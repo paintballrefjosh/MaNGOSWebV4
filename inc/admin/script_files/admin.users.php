@@ -65,7 +65,7 @@ function changePass()
 	{
 		if($Account->setPassword($_GET['id'], $newpass) == TRUE)
 		{
-			output_message('success','<b>Password set successfully! Please wait while your redirected...</b>
+			output_message('success','<b>Password set successfully! Please wait while you are redirected...</b>
 			<meta http-equiv=refresh content="3;url=?p=admin&sub=users&id='.$_GET['id'].'">');
 		}
 		else
@@ -136,7 +136,7 @@ function editUser()
 			`total_donations`='".$_POST['total_donations']."'
 		  WHERE `account_id`='".$_GET['id']."'
 		");
-		output_message('success','User Updated Successfully! Please wait while your redirected...
+		output_message('success','User Updated Successfully! Please wait while you are redirected...
 			<meta http-equiv=refresh content="3;url=?p=admin&sub=users&id='.$_GET['id'].'">');
 	}
 }
@@ -148,7 +148,7 @@ function unBan($unbanid)
 	if($Account->unbanAccount($unbanid) == TRUE)
 	{
 		output_message('success','Success. Account #'.$unbanid.' Successfully Un-Banned!
-			Please wait while your redirected... <meta http-equiv=refresh content="3;url=?p=admin&sub=users&id='.$_GET['id'].'"');
+			Please wait while you are redirected... <meta http-equiv=refresh content="3;url=?p=admin&sub=users&id='.$_GET['id'].'"');
 	}	
 }
 
@@ -163,14 +163,14 @@ function deleteUser($did)
 }
 
 // Ban user
-function banUser($bannid, $banreason) 
+function banUser($bannid, $banreason, $banduration, $banip) 
 {
 	global $DB, $user, $Account;
 	if(!$banreason) 
 	{
 		$banreason = "Not Specified";
 	}
-	if($Account->banAccount($bannid, $banreason, $user['username']) == TRUE)
+	if($Account->banAccount($bannid, $banreason, $banduration, $user['username'], $banip) == TRUE)
 	{
 		output_message('success','Success. Account #'.$bannid.' Successfully banned. Reason: '.$banreason.'');
 	}
@@ -182,37 +182,53 @@ function showBanForm($banid)
 {
 	global $DB;
 	$unme = $DB->selectCell("SELECT username FROM account WHERE id='".$banid."'");
-	echo "
-		<div class=\"content\">	
-			<div class=\"content-header\">
-				<h4><a href=\"?p=admin\">Main Menu</a> / <a href=\"?p=admin&sub=users\">Manage Users</a> / ".$unme." / Ban</h4>
+	?>
+		<div class="content">	
+			<div class="content-header">
+				<h4><a href="?p=admin">Main Menu</a> / <a href="?p=admin&sub=users">Manage Users</a> / <a href="?p=admin&sub=users&id=<?= $_GET['id'];?>"><?= $unme;?></a> / Ban</h4>
 			</div> <!-- .content-header -->				
-			<div class=\"main-content\">
-	";
-	if(isset($_POST['ban_user'])) 
+		<div class=\"main-content\">
+	<?php
+	if(isset($_POST['ban_reason'])) 
 	{
-		banUser($_POST['ban_user'],$_POST['ban_reason']);
+		banUser($_GET['id'], $_POST['ban_reason'], $_POST['ban_duration'], isset($_POST['ban_ip']));
 	}
-	echo "
-		<form method=\"POST\" action=\"?p=admin&sub=users&id=".$banid."&action=ban\" name=\"adminform\" class=\"form label-inline\">
-			<input type='hidden' name='ban_user'  value='".$banid."' />
+	?>
+		<form method="POST" name="adminform" class="form label-inline">
 			<table>
 				<thead>
-					<th><center><b>Ban Account #".$banid." (".$unme.")</b></center></th>
+					<th><center><b>Ban Account #<?= $banid;?> (<?= $unme;?>)</b></center></th>
 				</thead>
 			</table>
 			<br />
 			<div class='field'>
-				<label for='Username'>Ban Reason: </label>
-				<input id='Username' name='ban_reason' size='20' type='text' class='large' />
+				<label for='ban_reason'>Ban Reason: </label>
+				<input id='ban_reason' name='ban_reason' size='20' type='text' class='large' />
 			</div>
-			
-			<div class=\"buttonrow-border\">								
+			<div class='field'>
+				<label for='ban_duration'>Ban Duration: </label>
+				<select id='ban_duration' name='ban_duration' class='large'>
+					<option value="0" selected="selected">Indefinite</option>
+					<option value="3600">1 hour</option>
+					<option value="14400">4 hours</option>
+					<option value="28800">8 hours</option>
+					<option value="86400">1 day</option>
+					<option value="172800">2 days</option>
+					<option value="259200">3 days</option>
+					<option value="345600">4 days</option>
+					<option value="640800">7 days</option>
+				</select>
+			</div>
+			<div class='field'>
+				<label for='ban_ip'>Ban IP Address: </label>
+				<input id='ban_ip' name='ban_ip' type='checkbox' value='1' />
+			</div>
+			<div class="buttonrow-border">								
 				<center><button><span>Ban User</span></button></center>			
 			</div>
 
 		</form>
 	</div>
-	";
+	<?php
 }
 ?>

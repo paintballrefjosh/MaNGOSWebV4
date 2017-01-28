@@ -1,6 +1,7 @@
 <br>
 <?php 
 builddiv_start(0, $lang['account']);
+$isbanned =  $DB->num_rows("SELECT id FROM account_banned WHERE id='".$user['id']."' AND active='1'");
 ?>
 <table width = "550" align='center'>
 	<tr>
@@ -17,7 +18,16 @@ builddiv_start(0, $lang['account']);
 								<table border='0' cellspacing='0' cellpadding='4' width='540'>
 								<tr>
 									<td align='right' valign = "top" width='25%'><b>Account Status:</b></td>
-									<td align='left' valign = "top" width='25%'><font color='green'><b>Active</b></font></td>
+									<td align='left' valign = "top" width='25%'><b>
+								<?php 
+									if($user['locked'])
+										echo "<font color=\"orange\">Not Activated</font>";
+									elseif($isbanned > 0)
+										echo "<font color=\"red\">Banned</font>";
+									else
+										echo "<font color=\"green\">Active</font>";
+								?>
+									</b></td>
 									<td align='right' valign = "top" width='25%'><b>Vote Count:<b></td>
 									<td align='left' valign = "top" width='25%'><?php echo $user['total_votes']; ?></td>
 								</tr>

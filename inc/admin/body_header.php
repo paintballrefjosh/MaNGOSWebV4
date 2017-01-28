@@ -9,11 +9,6 @@
 /****************************************************************************/
 
 // Block out all users who arent admins
-if($user['account_level'] == 5) 
-{
-	echo "You Are Banned";
-	die();
-}
 if($user['account_level'] <= 2) 
 {
 	redirect('index.php',1);

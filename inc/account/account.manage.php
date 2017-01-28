@@ -42,7 +42,11 @@ $secret_questions = $Account->getSecretQuestions();
 
 function changeEmail()
 {
-	global $lang, $user, $Account, $DB;
+	global $lang, $user, $Account, $DB, $Config;
+
+	if(!$Config->get('allow_user_emailchange'))
+		return TRUE;
+	
 	$newemail = trim($_POST['email']);
 	
 	// First we check if the email is valid
@@ -86,7 +90,7 @@ function changePass()
 	{
 		if($Account->setPassword($user['id'], $newpass) == TRUE)
 		{
-			output_message('success', $lang['change_pass_success']);
+			output_message('success', $lang['change_pass_success'].'</b><meta http-equiv=refresh content="4;url=?p=account&sub=manage">');
 		}
 		else
 		{

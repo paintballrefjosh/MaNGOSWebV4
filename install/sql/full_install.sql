@@ -1,20 +1,5 @@
 SET FOREIGN_KEY_CHECKS=0;
 -- ----------------------------
--- Table structure for `mw_acc_creation_captcha`
--- ----------------------------
-DROP TABLE IF EXISTS `mw_acc_creation_captcha`;
-CREATE TABLE `mw_acc_creation_captcha` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `filename` varchar(200) NOT NULL DEFAULT '',
-  `key` varchar(200) NOT NULL DEFAULT '',
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
--- ----------------------------
--- Records of mw_acc_creation_captcha
--- ----------------------------
-
--- ----------------------------
 -- Table structure for `mw_account_extend`
 -- ----------------------------
 DROP TABLE IF EXISTS `mw_account_extend`;
