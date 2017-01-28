@@ -102,83 +102,58 @@ else
 								<tr>
 									<td>
 										<table border='0' cellspacing='0' cellpadding='4'>
-										<tr>
-											<td align='right' valign = "top" width='40%'>
-												<font face="arial,helvetica" size=-1><span><b><?php echo $lang['username'];?><br /></b></span></font>
-											</td>
-											<td align='left'>
-												<table border='0' cellspacing='0' cellpadding='0'>
-												<tr>
-													<td>
-														<input type='text' size='30' disabled="disabled" style="background-color:#FFFFFF" value='&nbsp;&nbsp;<?php echo $profile['username'];?>' readonly>
-													</td>
-													<td valign = "top"></td>
-												</tr>
-												</table>
-											</td>
-										</tr>
-										
-									<?php
-										if((int)$Config->get('allow_user_emailchange')) 
-										{ ?>
 											<tr>
-												<td align='right' valign = "top">
-													<font face="arial,helvetica" size='-1'><span><b><?php echo $lang['email'];?></b></span></font>
-												</td>
-												<td align='left'><table border='0' cellspacing='0' cellpadding='0'>
-													<tr>
-														<td>
-															<input type='text' name='email' size='30' value='<?php echo $profile['email'];?>'>
-														</td>
-														<td valign="top"></td>
-													</tr>
-												</table>
-												</td>
-											</tr>
-										<?php 
-										}
-										else
-										{ ?>
-											<tr>
-												<td align='right' valign="top"><font face="arial,helvetica" size='-1'>
-													<span><b><?php echo $lang['email'];?></b></span></font>
-												</td>
-												<td align='left'><table border='0' cellspacing='0' cellpadding='0'>
-													<tr>
-														<td>
-															<input type="text" size="30" value="&nbsp;&nbsp;<?php echo $profile['email'];?>" readonly>
-															<span></span>
-														</td>
-														<td valign = "top"></td>
-													</tr>
-													</table>
-												</td>
-											</tr>
-									<?php 
-										} ?>
-										
-										<?php 
-										if((int)$Config->get('allow_user_passchange')) 
-										{ ?>
-											<tr>
-												<td align='right' valign = "top">
-													<font face="arial,helvetica" size='-1'><span><b><?php echo $lang['newpass']; ?></b></span></font>
+												<td align='right' valign = "top" width="40%">
+													<font face="arial,helvetica" size='-1'><span><b><?php echo $lang['username'];?></b></span></font>
 												</td>
 												<td align='left'>
 													<table border='0' cellspacing='0' cellpadding='0'>
 														<tr>
 															<td>
-																<input type="password" size="30" name="new_pass">
+																<input type="text" name="username" size="30" disabled="disabled" value="<?= $profile['username'];?>">
 															</td>
-															<td valign = "top"></td>
+															<td valign="top"></td>
 														</tr>
 													</table>
 												</td>
 											</tr>
-									<?php
-										}
-									?>	
-									
+											<tr>
+												<td align='right' valign = "top">
+													<font face="arial,helvetica" size='-1'><span><b><?php echo $lang['email'];?></b></span></font>
+												</td>
+												<td align='left'>
+													<table border='0' cellspacing='0' cellpadding='0'>
+														<tr>
+															<td>
+																<input type='text' name='email' size='30' value='<?php echo $profile['email'];?>' <?php if(!(int)$Config->get('allow_user_emailchange')) echo 'disabled="disabled"';?>>
+															</td>
+															<td valign="top"></td>
+														</tr>
+													</table>
+												</td>
+											</tr>
+								<?php 
+									if((int)$Config->get('allow_user_passchange')) 
+									{
+								?>
+										<tr>
+											<td align='right' valign = "top">
+												<font face="arial,helvetica" size='-1'><span><b><?php echo $lang['newpass']; ?></b></span></font>
+											</td>
+											<td align='left'>
+												<table border='0' cellspacing='0' cellpadding='0'>
+													<tr>
+														<td>
+															<input type="password" size="30" name="new_pass">
+														</td>
+														<td valign = "top"></td>
+													</tr>
+												</table>
+											</td>
+										</tr>
+								<?php
+									}
+								?>
 										<!-- EXPANSION -->
 										<tr>
 											<td align='right' valign = "top">
@@ -214,7 +189,6 @@ else
 										<br />
 										<!-- END "change your info" TABLE -->
 										<div align="center">
-											<input type="image" src="<?php echo $Template['path']; ?>/images/buttons/button-cancel.gif" size="16" class="button" style="font-size:12px;" value="<?php echo $lang['reset'];?>">
 											<input type="image" src="<?php echo $Template['path']; ?>/images/buttons/button-update.gif" class="button" style="font-size:12px;" value="<?php echo $lang['change'];?>">
 										</div>
 									</td>
@@ -223,7 +197,10 @@ else
 						</tr>
 					</table>
 					</form>
-					
+			<?php	
+				if((int)$Config->get('reg_secret_questions'))
+				{
+			?>
 					<br />
 					<br />
 					<?php write_subheader($lang['Other_Info']); ?>
@@ -240,12 +217,7 @@ else
 										// We must check to see if they are set. If so then we need to
 										// show a success message. Secret questions are NOT meant to be changed
 										// If they arent set, then show the form to set them
-										if($profile['secret_q1'] != '' || $profile['secret_q1'] != 'Disabled')
-										{
-											output_message('success', $lang['secretq_set']);
-											echo "<br />";
-										}
-										else
+										if($profile['secret_q1'] == '' || $profile['secret_q1'] == 'Disabled')
 										{
 											echo '<center><span style="color: red">'.$lang['secretq_not_set'].'</span></center><br />';
 										?>
@@ -319,29 +291,27 @@ else
 													<table border='0' cellspacing='0' cellpadding='0'>
 														<tr>
 															<td>
-																<input type="submit" value="Change Secret questions" class="button">
-											</form>
-															</td>
-															<td valign = "top">
-															<form method="post" action="?p=account&sub=manage&action=resetsecretq" style="{MARGIN-LEFT: 0pt; MARGIN-RIGHT: 0pt; MARGIN-TOP: 0pt; MARGIN-BOTTOM: 0pt;}">
-															<input type="hidden" name="reset_secretq" value="reset_secretq">
-															<input type="submit" value="Reset Secret questions" name="reset_secretq">
-															</form>
+																<input type="image" src="<?php echo $Template['path']; ?>/images/buttons/button-update.gif" class="button" style="font-size:12px;" value="<?php echo $lang['change'];?>">
 															</td>
 														</tr>
 													</table>
 												</td>
 											</tr>		
+											</form>
 										<!--Secret QUESTION END-->
 									<?php
-										} ?>
+										}
+									?>
 										</table>
 									</td>
 								</tr>
 								</table>
 							</td>
 						</tr>
-					</table>					
+					</table>
+			<?php
+				}
+			?>
 				</td>
 			</tr>
 		</table>

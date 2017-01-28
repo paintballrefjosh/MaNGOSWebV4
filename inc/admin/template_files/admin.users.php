@@ -35,16 +35,27 @@ if(isset($_GET['id']))
 		else
 		{
 			$profile = $Account->getProfile($_GET['id']);
-			$lastvisit = date("Y-m-d, g:i a", $profile['last_visit']);
-			$seebanned = $DB->num_rows("SELECT id FROM account_banned WHERE id='".$_GET['id']."' AND `active`=1");
-			if($seebanned > 0) 
+			$lastvisit = date("Y-m-d @ G:i", $profile['last_visit']);
+			$banned = $DB->selectRow("SELECT id, unbandate FROM account_banned WHERE id='".$_GET['id']."' AND `active`=1");
+			$acctstatus = "<font color=green>Active</font>";
+		
+			if($banned['id']) 
 			{
 				$bann = 1;
+				$ban_end = "Indefinite";
+
+				if($banned['unbandate'] > 0)
+					$ban_end = date("Y-m-d @ G:i", $banned['unbandate']);
+				
+				$acctstatus = "<font color=red>Banned</font> (Until: ".$ban_end.")";
 			}
 			else
 			{
 				$bann = 0;
 			}
+
+			if($profile['locked'])
+				$acctstatus = "<font color=orange>Not Activated</font>";
 ?>
 
 	<!-- Viewing an account -->
@@ -86,6 +97,11 @@ if(isset($_GET['id']))
 					</thead>
 					<tbody>
 						<tr>
+							<!-- Account Status -->
+							<td width="25%" align="right">Account Status: </td>
+							<td width="40%" align="left" colspan="3"><?php echo $acctstatus; ?></td>
+						</tr>
+						<tr>
 							<!-- Register Date -->
 							<td width="25%" align="right"><?php echo $lang['reg_date']; ?>: </td>
 							<td width="25%" align="left"><?php echo $profile['joindate']; ?></td>
@@ -117,14 +133,13 @@ if(isset($_GET['id']))
 							<td width="25%" align="right"><?php echo $lang['total_donations']; ?>: </td>
 							<td width="25%" align="left">$<?php echo $profile['total_donations']; ?></td>
 						</tr>
-						
 					</tbody>
 				</table>
 				<table>
 					<tr>
 						<td align="center" style="padding: 5px 5px 5px 5px;">
 						<a href="?p=admin&sub=users&id=<?php echo $_GET['id']; ?>&action=delete" onclick="return confirm('Are you sure? This is Un-reversable!');">
-							<b><font color="red"><?php echo $lang['delete_account']; ?></font></b></a> ||
+							<b><font color="red"><?php echo $lang['delete_account']; ?></font></b></a> |
 						<?php
 							if($bann == 1) 
 							{
@@ -238,11 +253,7 @@ if(isset($_GET['id']))
 						<label for="account_level"><?php echo $lang['account_level']; ?>: </label>
 						<select name="account_level" class='small'>
 							<?php
-								if($profile['account_level'] == 5)
-								{
-									echo "<option value='5' selected='selected'>Banned</option>";
-								}
-								elseif($profile['account_level'] == 4)
+								if($profile['account_level'] == 4)
 								{
 									echo "<option value='4' selected='selected'>Super Admin</option>
 										  <option value='3'>Admin</option>
@@ -305,6 +316,36 @@ if(isset($_GET['id']))
 					</div>
 				</form>
 			
+		<!-- Ban history -->
+				<br />
+				<br />
+				<table>
+					<thead>
+						<th><center><b>Ban History</center></b></th>
+					</thead>
+				</table>
+				<table width="95%">
+				<thead>
+					<tr>
+						<th width="20%"><b><center>Ban Date</center></b></th>
+						<th width="20%"><b><center>Banned By</center></b></th>
+						<th width="60%"><b>Ban Reason</b></th>
+					</tr>
+				</thead>
+			<?php
+				$ban_history = $DB->select("SELECT bandate, bannedby, banreason FROM account_banned WHERE id='".$_GET['id']."'");
+				foreach($ban_history as $row)
+				{
+			?>
+				<tr class="content">
+					<td align="center"><?php echo date("Y-m-d @ G:i", $row['bandate']); ?></td>
+					<td align="center"><?php echo $row['bannedby']; ?></td>
+					<td align="left"><?php echo $row['banreason']; ?></td>
+				</tr>
+			<?php
+				}
+			?>
+			</table>
 			</div> <!-- Main Content -->
 		</div> <!-- Content -->
 
@@ -383,17 +424,26 @@ else
 						<th width="120"><b><center><?php echo $lang['username']; ?></center></b></th>
 						<th width="140"><b><center><?php echo $lang['email']; ?></center></b></th>
 						<th width="120"><b><center><?php echo $lang['reg_date']; ?></center></b></th>
-						<th width="40"><b><center>Active/Ban</center></b></th>
+						<th width="40"><b><center>Status</center></b></th>
 					</tr>
 				</thead>
 				<?php
-				foreach($getusers as $row) { 
+				foreach($getusers as $row)
+				{
+					$isbanned =  $DB->num_rows("SELECT id FROM account_banned WHERE id='".$row['id']."' AND `active`=1");
 				?>
 				<tr class="content">
 					<td align="center"><a href="?p=admin&sub=users&id=<?php echo $row['id']; ?>"><?php echo $row['username']; ?></a></td>
 					<td align="center"><?php echo $row['email']; ?></td>
 					<td align="center"><?php echo $row['joindate']; ?></td>
-					<td align="center"><?php echo $row['locked']; ?></td>
+					<td align="center">
+					<?php 
+						if($row['locked'])
+							echo "<font color=\"orange\">Not Activated</font>";
+						elseif($isbanned > 0)
+							echo "<font color=\"red\">Banned</font>";
+					?>
+					</td>
 				</tr><?php } ?>
 			</table>
 			<div id="pg">

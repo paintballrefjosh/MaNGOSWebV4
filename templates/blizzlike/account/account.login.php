@@ -41,7 +41,7 @@ if($Account->isLoggedIn() == FALSE)
 						<b><?php echo $lang['password'] ?></b> <input type="password" size="26" style="font-size:11px;" name="pass">
 					</div>
 					<div style="background:none;margin:1px;padding:6px 9px 0px 9px;text-align:center;width:70%;">
-						<input type="submit" size="16" class="button" style="font-size:12px;" value="<?php echo $lang['login'] ?>">
+						<input type="image" src="<?php echo $Template['path']; ?>/images/buttons/button-login.gif" class="button" style="font-size:12px;" value="<?php echo $lang['change'];?>">
 					</div>
 				</form>
 			</td>
@@ -51,7 +51,7 @@ if($Account->isLoggedIn() == FALSE)
 }
 else
 {
-    echo "<br /><br /><center><b>Welcome ".$user['username']."</b><br />".$lang['now_logged_in']."</center><br /><br />";
+	output_message('success','<b>Welcome '.$user['username'].'! '.$lang['now_logged_in'].'</b><meta http-equiv=refresh content="4;url=?p=account">');
 }
 ?>
 <?php builddiv_end() ?>
