@@ -670,10 +670,14 @@ class Account
 // POST account id, reason, and banned by.
 // @$banip: 1 = yes, ban the IP as well, 0 = Dont ban IP
 	
-	function banAccount($bannid, $banreason, $bannedby, $banip = 0)
+	function banAccount($bannid, $banreason, $banduration, $bannedby, $banip = 0)
 	{
-		$timez = time();
-		$unban = $timez - 10;
+		$starttime = time();
+		if($banduration > 0)
+			$endtime = $starttime + $banduration;
+		else
+			$endtime = 0;
+		
 		$this->DB->query("INSERT INTO `account_banned`(
 			`id`, 
 			`bandate`, 
@@ -683,8 +687,8 @@ class Account
 			`active`) 
 		   VALUES(
 			'".$bannid."', 
-			'".$timez."', 
-			'". $unban ."',
+			'".$starttime."', 
+			'".$endtime."',
 			'".$bannedby."',
 			'".$banreason."',
 			'1')
@@ -702,14 +706,14 @@ class Account
 				`banreason`) 
 			   VALUES(
 				'". $getip ."', 
-				'". $timez ."', 
-				'". $unban ."',
+				'". $starttime ."', 
+				'". $endtime ."',
 				'". $bannedby ."', 
 				'". $banreason. "')
 			");
 		}
 		
-		$this->DB->query("UPDATE `mw_account_extend` SET `account_level`=5 WHERE account_id='".$bannid."'");
+		//$this->DB->query("UPDATE `mw_account_extend` SET `account_level`=5 WHERE account_id='".$bannid."'");
 		return TRUE;
 	}
 	

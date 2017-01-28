@@ -10,8 +10,8 @@
 
 class Core
 {
-	var $version = '4.0.0';
-	var $version_date = '2017-01-20, 22:50';
+	var $version = '4.0.3';
+	var $version_date = '2017-01-28, 00:15';
 	var $exp_dbversion = '1.0a';
 
 	function __construct()
