@@ -1,6 +1,8 @@
 # Welcome to MaNGOSWebV4
 This is another continuation of the MaNGOSWebV3 which was abandoned in 2011.  All original credit goes to the previous developers.
 
+You can visit a live copy of the latest version used for testing by visiting **www.mistvale.com**.
+
 ##Features
  - Support for Mangos Based Cores (Trinity, Darkice)
  - Full template system allowing any layout, including non-blizzlike templates
