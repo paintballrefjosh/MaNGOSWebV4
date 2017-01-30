@@ -1,9 +1,9 @@
 div.fpdrop {positon:relative; left:57px; }
 #right-bg { background: url('../images/page_rightbg.png') no-repeat; position: absolute; top: -85px; right: -1120px; height: 621px; width: 296px; z-index: -20; }
-#droppf {position: absolute; right: -24px; top: 39px; z-index:99; width: 145px;}
-#dropps {position: absolute; right: 124px; top: 39px; z-index:99; width: 145px;}
-#droppt {position: absolute; right: 272px; top: 39px; z-index:99; width: 145px;}
-#droppfo {position: absolute; right: 420px; top: 39px; z-index:99; width: 145px;}
+#droppf {position: absolute; right: -24px; top: 62px; z-index:99; width: 145px;}
+#dropps {position: absolute; right: 124px; top: 62px; z-index:99; width: 145px;}
+#droppt {position: absolute; right: 272px; top: 62px; z-index:99; width: 145px;}
+#droppfo {position: absolute; right: 420px; top: 62px; z-index:99; width: 145px;}
 #loginbox {position:absolute; z-index:99; left: 561px; top: 3px; width:430px; height:34px;text-align:right;color: #FFAC04; font-size: 12px; font-weight: bold; }
 #main { width:827px; background: url('../images/frontpage_bg_rpt.jpg') repeat-y; }
 #main-top { height: 46px; width: 100%; background: none; position: relative; top:1px; }

@@ -37,9 +37,11 @@ if($write_new_file)
 
 	$write_file = array();
 	$write_file[] = "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>";
-	$write_file[] = "<rss version=\"2.0\">";
+	$write_file[] = "<rss version=\"2.0\" xmlns:atom=\"http://www.w3.org/2005/Atom\">";
 	$write_file[] = "    <channel>";
 	$write_file[] = "        <title>".$Config->get('site_title')." RSS News Feed</title>";
+	$write_file[] = "        <description>".$Config->get('site_title')." RSS News Feed</description>";
+	$write_file[] = "        <atom:link href=\"http://".(str_replace('rss.php','index.php',($_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'])))."\" rel=\"self\" type=\"application/rss+xml\" />";
 	$write_file[] = "        <link>http://".(str_replace('rss.php','index.php',($_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'])))."</link>";
 	$write_file[] = "        <lastBuildDate>".date(DATE_RFC822_FIXED)."</lastBuildDate>";
 	$write_file[] = "        <language>en-us</language>";
@@ -48,6 +50,7 @@ if($write_new_file)
 	{
 
 		$write_file[] = "        <item>";
+		$write_file[] = "            <guid isPermaLink=\"false\">".$_SERVER['HTTP_HOST']."-".$topic['id']."</guid>";
 		$write_file[] = "            <title>".htmlspecialchars($topic['title'])."</title>";
 		$write_file[] = "            <pubDate>".(date(DATE_RFC822_FIXED, $topic['post_time']))."</pubDate>";
 		$write_file[] = "            <description>Posted by ".htmlspecialchars($topic['posted_by']).": \n".htmlspecialchars($topic['message'])."</description>";

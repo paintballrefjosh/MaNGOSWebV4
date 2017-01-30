@@ -34,7 +34,6 @@
 <script src="<?php echo $Template['path']; ?>/js/detection.js" type="text/javascript"></script>
 <script src="<?php echo $Template['path']; ?>/js/functions.js" type="text/javascript"></script>
 <script type="text/javascript" src="<?php echo $Template['script_path']; ?>/js/global.js"></script>
-<script type="text/javascript" src="<?php echo $Template['script_path']; ?>/js/compressed/controls.js"></script>
 <script type="text/javascript" src="<?php echo $Template['script_path']; ?>/js/compressed/behaviour.js"></script>
 <script type="text/javascript" src="<?php echo $Template['script_path']; ?>/js/core.js"></script>
 <script type="text/javascript"><!--
@@ -121,7 +120,7 @@ $languages = explode(",", $Config->get('available_lang'));
 									{
 									?>
 										<?php echo $user['username']." | "; ?>
-										<a href="<?php echo mw_url('account'); ?>"> <?php echo $user['web_points']; ?> <?php echo $lang['web_points'];?></a>
+										<a href="<?php echo mw_url('account'); ?>"> <?php echo $user['web_points']; ?> <?php echo $lang['web_points'];?></a>&nbsp;&nbsp;
 										<input type="image" src="<?php echo $Template['path']; ?>/images/buttons/button-profile.gif" name="action" value="profile"/>
 										<input type="image" src="<?php echo $Template['path']; ?>/images/buttons/button-logout.gif" name="action" value="logout"/>
 								<?php 
@@ -132,7 +131,7 @@ $languages = explode(",", $Config->get('available_lang'));
 										Login: <input name="login" size="14" type="text"/>
 										Password: <input name="pass" size="14" type="password"/>
 										<input type="hidden" name="action" value="login">
-										<input type="image" src="<?php echo $Template['path']; ?>/images/buttons/button-login.gif" value="Login"/>
+										<div style="padding-top: 5px;"><input type="image" src="<?php echo $Template['path']; ?>/images/buttons/button-login.gif" value="Login"/></div>
 								<?php 
 									} 
 								?>
@@ -220,7 +219,7 @@ $languages = explode(",", $Config->get('available_lang'));
                           <div style="clear: both;"></div>
                         </div>
                       </td><td valign="top">
-                        <div id="mainwrapper">
+                        <div id="mainwrapper"><br><br>
 						<div id="main">
                             <div id="main-content-wrapper">
                               <div id="main-content">
