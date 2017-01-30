@@ -63,7 +63,7 @@ function output_message($type, $text, $file='', $line='')
 {
     if($file)$text .= "\n<br>in file: $file";
     if($line)$text .= "\n<br>on line: $line";
-    echo "<div class=\"".$type."\">".$text."</div>";
+    echo "<div class=\"".$type."\"><b>".$text."</b></div>";
 }
 
 //	************************************************************	
@@ -346,7 +346,7 @@ function check_for_symbols($string, $space_check = 0)
 {
     //$space_check=1 means space is not allowed
     $len=strlen($string);
-    $allowed_chars="abcdefghijklmnopqrstuvwxyzæøåABCDEFGHIJKLMNOPQRSTUVWXYZÆØÅ0123456789";
+    $allowed_chars="abcdefghijklmnopqrstuvwxyzï¿½ï¿½ï¿½ABCDEFGHIJKLMNOPQRSTUVWXYZï¿½ï¿½ï¿½0123456789";
     if(!$space_check) 
 	{
         $allowed_chars .= " ";
@@ -376,7 +376,7 @@ function add_pictureletter($text)
 {
 	global $Template;
     $letter = substr($text, 0, 1);
-    $imageletter = strtr(strtolower($letter),"ŠŒšœŸ¥µÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏĞÑÒÓÔÕÖØÙÚÛÜİßàáâãäåæçèéêëìíîïğñòóôõöøùúûüıÿ",
+    $imageletter = strtr(strtolower($letter),"ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½",
                                              "sozsozyyuaaaaaaaceeeeiiiidnoooooouuuuysaaaaaaaceeeeiiiionoooooouuuuyy");
     if (strpos("abcdefghijklmnopqrstuvwxyz", $imageletter) === false)
 	{

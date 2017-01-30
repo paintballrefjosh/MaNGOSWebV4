@@ -251,7 +251,7 @@ class RA
 				// Check for error logging
 				if($this->debug == TRUE)
 				{
-					$this->debugLog[] = 'Got Command: '.$cmd;					
+					$this->debugLog[] = 'Got Command: '.$command;					
 				}
 					
 				fwrite($this->handle, $command."\n");
