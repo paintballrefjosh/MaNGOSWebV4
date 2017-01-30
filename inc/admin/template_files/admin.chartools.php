@@ -207,13 +207,13 @@ else
 						echo "<a href=\"javascript:setcookie('cur_selected_realm', '". $Rlm['id'] ."'); window.location.reload();\">";
 						if($user['cur_selected_realm'] == $Rlm['id'])
 						{
-							echo "<b>".$Rlm['name']."</b>"; 
+							echo "<b><font color=green>".$Rlm['name']."</font></b>"; 
 						}
 						else
 						{
 							echo $Rlm['name'];
 						}
-						echo "</a> |";
+						echo "</a> | ";
 					}
 					?>
 				</td>
