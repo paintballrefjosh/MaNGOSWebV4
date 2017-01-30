@@ -42,6 +42,10 @@ ul.bullet-list li { list-style: none; background: url('../images/bullet.gif') no
 
 
 /* === Drop Down Menu's === */
+#droppf {position: absolute; right: 32px; top: 62px; z-index:99; width: 145px;}
+#dropps {position: absolute; right: 180px; top: 62px; z-index:99; width: 145px;}
+#droppt {position: absolute; right: 328px; top: 62px; z-index:99; width: 145px;}
+#droppfo {position: absolute; right: 476px; top: 62px; z-index:99; width: 145px;}
 /* === END Drop Down Menu's === */
 
 #rightbox { background: url(../images/plainbox/plainbox-bg.jpg) repeat-y 0 0; width: 305px; border-top: 1px solid #49402c; border-bottom: 1px solid #49402c; padding-bottom: 5px; padding-top: 5px; position: relative; z-index: 2; margin-top: 15px; margin-left: 6px;}
