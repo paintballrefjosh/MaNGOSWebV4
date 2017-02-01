@@ -43,7 +43,7 @@ if(isset($_POST['action']))
 	{
 		$login = $_POST['login'];
 		$pass = $Account->sha_password($login, $_POST['pass']);
-		$EMAIL = $DB->selectCell("SELECT `email` FROM `account` WHERE `username` LIKE '".$_POST['login']."' LIMIT 1");
+		$account_id = $DB->selectCell("SELECT `id` FROM `account` WHERE `username` LIKE '".$_POST['login']."' LIMIT 1");
 		
 		// initiate the login array, and send it in
 		$params = array('username' => $login, 'sha_pass_hash' => $pass);
@@ -52,6 +52,12 @@ if(isset($_POST['action']))
 		// If account login was successful
 		if($Login == 1)
 		{	
+			// Make sure account exists in mw_account_extend table, if not then insert one of type "member" aka registered user
+			$mw_account = $DB->selectCell("SELECT account_id FROM mw_account_extend WHERE account_id = '".$account_id."'");
+			if(!$mw_account)
+			{
+				$DB->query("INSERT INTO mw_account_extend (account_id, account_level) VALUES ($account_id, 2)");
+			}
 			// Once finished, redirect to the page we came from
 			redirect($_SERVER['HTTP_REFERER'],1);
 		}
