@@ -355,6 +355,8 @@ CREATE TABLE `mw_voting` (
 -- Records of mw_voting
 -- ----------------------------
 
+INSERT INTO `mw_account_extend` (`account_id`) SELECT account.id FROM account;
+
 -- ----------------------------
 -- Instead of rebuilding this file, we will just alter the tables for utf-8
 -- ----------------------------
@@ -369,18 +371,16 @@ ALTER TABLE `mw_news` DEFAULT CHARACTER SET 'utf8' COLLATE 'utf8_unicode_ci';
 ALTER TABLE `mw_online` DEFAULT CHARACTER SET 'utf8' COLLATE 'utf8_unicode_ci';
 ALTER TABLE `mw_shop_items` DEFAULT CHARACTER SET 'utf8' COLLATE 'utf8_unicode_ci';
 
--- ----------------------------
--- Table structure for `mw_realmlist`
--- ----------------------------
-DROP TABLE IF EXISTS `mw_realmlist`;
-CREATE TABLE `mw_realmlist` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `site_enabled` int(3) NOT NULL default '0',
-  `ra_info` VARCHAR( 355 ) NOT NULL default 'type;port;username;password',
-  `dbinfo` VARCHAR( 355 ) NOT NULL default '127.0.0.1;3306;username;password;DBCharacter;127.0.0.1;3306;username;password;DBWorld' COMMENT 'Database info to THIS row',
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+--
+-- Add dbinfo to realmlist table
+-- Very important that this is in the end, along with ADD ALTERS. Because if
+-- file gets applied again, it gets an error here.
+--
+ALTER TABLE `realmlist`
+ADD `site_enabled` int(3) NOT NULL default '0';
 
--- ----------------------------
--- Records of mw_realmlist
--- ----------------------------
+ALTER TABLE `realmlist`
+ADD `ra_info` VARCHAR( 355 ) NOT NULL default 'type;port;username;password';
+
+ALTER TABLE `realmlist`
+ADD `dbinfo` VARCHAR( 355 ) NOT NULL default '127.0.0.1;3306;username;password;DBCharacter;127.0.0.1;3306;username;password;DBWorld' COMMENT 'Database info to THIS row';
