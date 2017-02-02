@@ -67,7 +67,7 @@ if($Config->get('fp_vote_banner') == 1)
 if ($Config->get('module_fp_ssotd') == 1) 
 {
 	$date_ssotd = $DB->selectCell("SELECT `date` FROM `mw_gallery_ssotd` LIMIT 1");
-	$today_ssotd = date("y.m.d");
+	$today_ssotd = mktime(0, 0, 0, date("m"), date("d"), date("Y"));
 	if ($date_ssotd != $today_ssotd) 
 	{
 		$rand_ssotd = $DB->selectCell("SELECT `img` FROM `mw_gallery` WHERE cat ='screenshot' ORDER BY RAND() LIMIT 1");
