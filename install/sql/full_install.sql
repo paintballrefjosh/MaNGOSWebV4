@@ -164,20 +164,6 @@ INSERT INTO `mw_gallery` VALUES ('1', 'Mangosweb_wall.jpg', 'Test Wallpaper', 'M
 INSERT INTO `mw_gallery` VALUES ('2', 'Mangosweb_scr.jpg', 'Test Screenshot', 'MangosWeb', '1485927282', 'screenshot');
 
 -- ----------------------------
--- Table structure for `mw_gallery_ssotd`
--- ----------------------------
-DROP TABLE IF EXISTS `mw_gallery_ssotd`;
-CREATE TABLE `mw_gallery_ssotd` (
-  `image` varchar(50) NOT NULL,
-  `date` int(11) unsigned NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of mw_gallery_ssotd
--- ----------------------------
-INSERT INTO `mw_gallery_ssotd` VALUES ('Mangosweb_scr.jpg', '1485927282');
-
--- ----------------------------
 -- Table structure for `mw_menu_items`
 -- ----------------------------
 DROP TABLE IF EXISTS `mw_menu_items`;

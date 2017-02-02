@@ -51,7 +51,7 @@
 			staffid : "991234"
 		}
 	});
-	</script>
+</script>
 
 <div class="content">	
 	<div class="content-header">
