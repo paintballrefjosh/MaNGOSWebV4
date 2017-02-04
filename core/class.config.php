@@ -12,7 +12,7 @@ class Config
 {
 	
 	var $data = array();
-	var $configFile = 'config/config.php';	//Default Config File
+	var $configFile = "config/config.php";	//Default Config File
 	var $path_protectedconf = "config/config-protected.php";
 	
 	function __construct()

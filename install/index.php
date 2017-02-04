@@ -200,17 +200,17 @@ function output_message($type, $text)
 						die();
 					}
 					// Check if provided info is correct
-					@mysql_connect($_POST['db_host'].":".$_POST['db_port'], $_POST['db_username'], $_POST['db_password']) 
+					$link = @mysqli_connect($_POST['db_host'], $_POST['db_username'], $_POST['db_password'], $_POST['db_name'], $_POST['db_port']) 
 						or die('<div class="error">Couldn\'t connect to MySQL Database. Please <a href="javascript: history.go(-1)">Go Back</a> and re-enter MySQL Database Information.<br /><br />MySql error log:<br />
-							'.mysql_error().'</div');
-					mysql_select_db($_POST['db_name']) 
+							'.mysqli_connect_error().'</div');
+					mysqli_select_db($link, $_POST['db_name']) 
 						or die('<div class="error">Counld Not select Realm database! Please go back and re-submit realm DB information.</div>');
 					
 					output_message('success', 'Successfully Connected to Realm DB.');
 					
 					// Check if "account" table exsists, so we make (almost) sure mangos is actually installed (which is necesarry for this whole thing to work)
-					@mysql_query("SELECT * FROM `account` LIMIT 1") or die('<div class="error">Error!<br /><br />Account table not found! Cannot Continue with the installation without an Account
-						table!<br /><br />MySql error log:<br />'.mysql_error().'</div>');
+					@mysqli_query($link, "SELECT * FROM `account` LIMIT 1") or die('<div class="error">Error!<br /><br />Account table not found! Cannot Continue with the installation without an Account
+						table!<br /><br />MySql error log:<br />'.mysqli_error().'</div>');
 					
 					// Everthing should be fine, so first insert info into protected config file
 					$conffile = "../config/config-protected.php";
@@ -239,7 +239,7 @@ function output_message($type, $text)
 					}
 								
 					// Preparing for sql injection... (prashing, etc...)
-					$checker = @mysql_query("SELECT * FROM `account_extend` LIMIT 1");
+					$checker = @mysqli_query($link, "SELECT * FROM `account_extend` LIMIT 1");
 					if(!isset($_POST['skip']))
 					{
 						// Dealing with the full install sql file
@@ -285,11 +285,11 @@ function output_message($type, $text)
 						// Sql injection
 						foreach ($queries as $query) 
 						{
-							mysql_query($query);
+							mysqli_query($link, $query);
 						}
 					}
-					$get_name = mysql_query("SELECT `name` FROM `realmlist` WHERE `id`=1 LIMIT 1") or die('<div class="error">'.mysql_error().'</div>');
-					$DB_name = mysql_result($get_name,0);
+					$get_name = mysqli_query($link, "SELECT `name` FROM `realmlist` WHERE `id`=1 LIMIT 1") or die('<div class="error">'.mysqli_error().'</div>');
+					$DB_name = mysqli_fetch_assoc($get_name);
 				?>
 				<!-- STEP 4 -->
 					<form method="POST" action="index.php?step=5" class="form label-inline">
@@ -394,20 +394,20 @@ function output_message($type, $text)
 				}
 				elseif($step == 5)
 				{
-					@mysql_connect($_POST['char_db_host'].":".$_POST['char_db_port'], $_POST['char_db_username'], $_POST['char_db_password']) 
+					$char_link = @mysqli_connect($_POST['char_db_host'], $_POST['char_db_username'], $_POST['char_db_password'], $_POST['char_db_name'], $_POST['char_db_port']) 
 						or die('<div class="error">Couldn\'t connect to the character MySQL Database. Please <a href="javascript: history.go(-1)">Go Back</a> and re-enter MySQL Database Information.</div>');
-					@mysql_select_db($_POST['char_db_name']) or die('<div class="error">Couldn\'t select Characters db, most likely the given name is wrong. Please <a href="javascript: history.go(-1)">Go Back</a> and correct it.</div>');
+					@mysqli_select_db($char_link, $_POST['char_db_name']) or die('<div class="error">Couldn\'t select Characters db, most likely the given name is wrong. Please <a href="javascript: history.go(-1)">Go Back</a> and correct it.</div>');
 					
-					@mysql_connect($_POST['w_db_host'].":".$_POST['w_db_port'], $_POST['w_db_username'], $_POST['w_db_password']) 
+					$world_link = @mysqli_connect($_POST['w_db_host'], $_POST['w_db_username'], $_POST['w_db_password'], $_POST['w_db_name'], $_POST['w_db_port']) 
 						or die('<div class="error">Couldn\'t connect to the world MySQL Database. Please <a href="javascript: history.go(-1)">Go Back</a> and re-enter MySQL Database Information.</div>');
-					@mysql_select_db($_POST['w_db_name']) or die('<div class="error">Couldn\'t select World db, most likely the given name is wrong. Please <a href="javascript: history.go(-1)">Go Back</a> and correct it.</div>');
+					@mysqli_select_db($world_link, $_POST['w_db_name']) or die('<div class="error">Couldn\'t select World db, most likely the given name is wrong. Please <a href="javascript: history.go(-1)">Go Back</a> and correct it.</div>');
 					
-					@mysql_connect($_POST['db_host'].":".$_POST['db_port'], $_POST['db_username'], $_POST['db_password']);
-					@mysql_select_db($_POST['db_name']) or die('Unable to select Realm Database!');
+					$realm_link = @mysqli_connect($_POST['db_host'], $_POST['db_username'], $_POST['db_password'], $_POST['db_name'], $_POST['db_port']);
+					@mysqli_select_db($realm_link, $_POST['db_name']) or die('Unable to select Realm Database!');
 					
 					// Extra sql query with db settings
 					$dbinfo = $_POST['char_db_host'].";".$_POST['char_db_port'].";".$_POST['char_db_username'].";".$_POST['char_db_password'].";".$_POST['char_db_name'].";".$_POST['w_db_host'].";".$_POST['w_db_port'].";".$_POST['w_db_username'].";".$_POST['w_db_password'].";".$_POST['w_db_name'].";";
-					mysql_query("UPDATE `realmlist` SET `dbinfo` = '".$dbinfo."', `site_enabled`=1 WHERE `id` = 1 LIMIT 1") or die('<div class="error">'.mysql_error().'</div>');
+					mysqli_query($realm_link, "UPDATE `realmlist` SET `dbinfo` = '".$dbinfo."', `site_enabled`=1 WHERE `id` = 1 LIMIT 1") or die('<div class="error">'.mysqli_error($realm_link).'</div>');
 					
 					output_message('success', 'Successfully Connected to Character and World DB\'s');
 				?>
@@ -464,26 +464,26 @@ function output_message($type, $text)
 						$pass = strtoupper($pass);
 						return SHA1($user.':'.$pass);
 					}
-					mysql_connect($_POST['db_host'].":".$_POST['db_port'], $_POST['db_username'], $_POST['db_password']);
-					mysql_select_db($_POST['db_name']);
+					$realm_link = mysqli_connect($_POST['db_host'], $_POST['db_username'], $_POST['db_password'], $_POST['db_name'], $_POST['db_port']);
+					mysqli_select_db($realm_link, $_POST['db_name']);
 					
-					$accountid = mysql_query("SELECT `id` FROM `account` WHERE `username` LIKE '".$_POST['account']."'");
-					$checkacc = mysql_num_rows($accountid);
+					$accountid = mysqli_query($realm_link, "SELECT `id` FROM `account` WHERE `username` LIKE '".$_POST['account']."'");
+					$checkacc = mysqli_num_rows($accountid);
 					if ($checkacc == 1) 
 					{
 						// Account exsist
-						$accountid = mysql_fetch_assoc($accountid);
-						mysql_query("UPDATE `mw_account_extend` SET `account_level` = '4' WHERE `account_id` = ".$accountid['id']." LIMIT 1 ;");
+						$accountid = mysqli_fetch_assoc($accountid);
+						mysqli_query($realm_link, "UPDATE `mw_account_extend` SET `account_level` = '4' WHERE `account_id` = ".$accountid['id']." LIMIT 1 ;");
 						$return = 1;
 						}
 					else 
 					{
 						// No such account, creating one, in this case pwd is needed, so checking whether it's provided...
 						$password = sha_password($_POST['account'], $_POST['pass']);
-						mysql_query("INSERT INTO `account` (`username`, `sha_pass_hash`) VALUES ('".$_POST['account']."', '".$password."' );");
-						$accountid = mysql_query("SELECT `id` FROM `account` WHERE `username` LIKE '".$_POST['account']."'");
-						$acct = mysql_fetch_assoc($accountid);
-						mysql_query("INSERT INTO `mw_account_extend` (`account_id`, `account_level`) VALUES ('".$acct['id']."', '4')");
+						mysqli_query($realm_link, "INSERT INTO `account` (`username`, `sha_pass_hash`) VALUES ('".$_POST['account']."', '".$password."' );");
+						$accountid = mysqli_query("SELECT `id` FROM `account` WHERE `username` LIKE '".$_POST['account']."'");
+						$acct = mysqli_fetch_assoc($accountid);
+						mysqli_query($realm_link, "INSERT INTO `mw_account_extend` (`account_id`, `account_level`) VALUES ('".$acct['id']."', '4')");
 						$return = 2;
 					}
 				?>
