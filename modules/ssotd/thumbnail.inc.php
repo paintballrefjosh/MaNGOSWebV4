@@ -164,7 +164,6 @@ class Thumbnail {
 
         if($this->error == true) {
             $this->showErrorImage();
-            break;
         }
     }
 
@@ -458,10 +457,10 @@ class Thumbnail {
 	 * @param int $quality
 	 * @param string $name
 	 */
-	public function show($quality=100,$name = '') {
+	public function show($quality=100,$name = null) {
 	    switch($this->format) {
 	        case 'GIF':
-	            if($name != '') {
+	            if($name != null) {
 	                ImageGif($this->newImage,$name);
 	            }
 	            else {
@@ -470,16 +469,16 @@ class Thumbnail {
 	            }
 	            break;
 	        case 'JPG':
-	            if($name != '') {
-	                ImageJpeg($this->newImage,$name,$quality);
+	            if($name != null) {
+	                ImageIpeg($this->newImage,$name,$quality);
 	            }
 	            else {
 	               header('Content-type: image/jpeg');
-	               ImageJpeg($this->newImage,'',$quality);
+	               ImageJpeg($this->newImage,null,$quality);
 	            }
 	            break;
 	        case 'PNG':
-	            if($name != '') {
+	            if($name != null) {
 	                ImagePng($this->newImage,$name);
 	            }
 	            else {

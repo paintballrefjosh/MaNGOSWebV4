@@ -121,7 +121,7 @@ $CDB = new Database(
 if($CDB->status() != 1)
 {
 	echo "Cannot connect to the Character database. Please make sure you have this realm setup successfully in the Admin Panel. 
-	Delete your cookies to reset realm selection back to default";
+	Delete your cookies to reset realm selection back to default. ";
 	die();
 }
 	
