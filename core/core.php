@@ -11,7 +11,7 @@
 class Core
 {
 	public $version = '4.0.6';
-	public $version_date = '2017-02-0528, 22:16';
+	public $version_date = '2017-02-05, 22:16';
 	public $exp_dbversion = '2.0';
 	private $conf;
 
