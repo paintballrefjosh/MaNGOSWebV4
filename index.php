@@ -33,7 +33,7 @@ $_SERVER['REQUEST_TIME'] = time();
 include('core/class.config.php');
 $Config = new Config;
 include('core/core.php');
-$Core = new Core;
+$Core = new Core($Config);
 
 /***************************************************************
  * Show Site Notice if enabled in config, and user cookie not set
