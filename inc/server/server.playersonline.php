@@ -13,7 +13,18 @@ if(INCLUDED !== TRUE) {
 	echo "Not Included!"; 
 	exit;
 }
-$pathway_info[] = array('title'=>$lang['online_players'],'link'=>'');
+
+// Check to see if the changerealm_to variable is set in the URI.  If so we need to set the selected 
+// realm cookie and reload the page in order to pull the players online from the correct realm
+if(isset($_GET['changerealm_to']))
+{
+	setcookie("cur_selected_realm", $_GET['changerealm_to'], time() + (3600 * 24 * 365));
+	redirect("?p=server&sub=playersonline",1);
+}
+
+// ==================== //
+$pathway_info[] = array('title' => $lang['online_players'], 'link' => '?p=server&sub=playersonline');
+$pathway_info[] = array('title' => $realm['name'], 'link' => '');
 // ==================== //
 
 // Tell the cache not to cache the file because we want live feeds
