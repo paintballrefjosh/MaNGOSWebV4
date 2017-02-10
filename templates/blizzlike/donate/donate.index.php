@@ -77,29 +77,29 @@
 					<table cellspacing="0" cellpadding="0" border="0"  border="1">
 						<tr>
 							<td width = "3">
-								<img src = "<?php echo $Template['path']; ?>/images/donation/plainbox-top-left.gif" width = "3" height = "3" border = "0">
+								<img src = "<?php echo $Template['path']; ?>/images/plainbox/plainbox-top-left.gif" width = "3" height = "3" border = "0">
 							</td>
-							<td background = "<?php echo $Template['path']; ?>/images/donation/plainbox-top.gif"></td>
+							<td background = "<?php echo $Template['path']; ?>/images/plainbox/plainbox-top.gif"></td>
 							<td width = "3">
 								<img src = "<?php echo $Template['path']; ?>/images/plainbox/plainbox-top-right.gif" width = "3" height = "3" border = "0">
 							</td>
 						</tr>
 						<tr>
-							<td background = "<?php echo $Template['path']; ?>/images/donation/plainbox-left.gif"></td>
-							<td style = "background-image: url('<?php echo $Template['path']; ?>/images/parchment/plain/light3.jpg');" NOWRAP>
+							<td background = "<?php echo $Template['path']; ?>/images/plainbox/plainbox-left.gif"></td>
+							<td style = "background-image: url('<?php echo $Template['path']; ?>/images/parchment/plain/light2.jpg');" NOWRAP>
 							<!--PlainBox Top End-->
 							
 							<!--PlainBox Bottom-->
 							</td>
-							<td background = "<?php echo $Template['path']; ?>/images/donation/plainbox-right.gif"></td>
+							<td background = "<?php echo $Template['path']; ?>/images/plainbox/plainbox-right.gif"></td>
 						</tr>
 						<tr>
 							<td>
-								<img src = "<?php echo $Template['path']; ?>/images/donation/plainbox-bot-left.gif" width = "3"height = "3" border = "0">
+								<img src = "<?php echo $Template['path']; ?>/images/plainbox/plainbox-bot-left.gif" width = "3"height = "3" border = "0">
 							</td>
-							<td background = "<?php echo $Template['path']; ?>/images/donation/plainbox-bot.gif"></td>
+							<td background = "<?php echo $Template['path']; ?>/images/plainbox/plainbox-bot.gif"></td>
 							<td>
-								<img src = "<?php echo $Template['path']; ?>/images/donation/plainbox-bot-right.gif" width = "3" height = "3" border = "0">
+								<img src = "<?php echo $Template['path']; ?>/images/plainbox/plainbox-bot-right.gif" width = "3" height = "3" border = "0">
 							</td>
 						</tr>
 					</table>

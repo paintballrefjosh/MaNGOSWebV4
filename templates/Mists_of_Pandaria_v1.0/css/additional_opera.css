@@ -1,0 +1,20 @@
+/*
+Cataclysm Template V1.0 for MangosWeb Enhanced: Deathwatch at: http://ac-web.org
+Originla MangosWeb Enhanced Template by: Wilson212 at: http://code.google.com/p/mwenhanced/
+MangosWeb Enhanced by: Wilson212 at: http://code.google.com/p/mwenhanced/
+*/
+
+#flashcontainer {
+	position: absolute;
+	top: -107px;
+	left: -4px;
+	width: 520px;
+	height: 269px;
+    z-index: 21;
+}
+div.top-nav {
+	right: 8px; 
+}
+div.opera-break {
+	clear: left;
+}

@@ -43,7 +43,7 @@ linkarray.push(link2)
 linkarray.push(link3)
 
 for(i=0; i<linkarray.length; i++)
-{ div = (i<linkarray.length-1) ? "<img src='templates/offlike/images/topnav/topnav_div.gif'/>":""
+{ div = (i<linkarray.length-1) ? "<img src='templates/illidan/images/topnav/topnav_div.gif'/>":""
   outstring += "<a href='"+linkarray[i].href+ "'>"+ linkarray[i].text +"</a>"+div; }
 
 	topnavguts = "";
