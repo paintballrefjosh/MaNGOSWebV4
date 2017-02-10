@@ -8,7 +8,6 @@
 /*			Original MangosWeb (C) 2007, Sasha, Nafe, TGM, Peec				*/
 /****************************************************************************/
 
-//========================//
 if(INCLUDED !== TRUE) {
 	echo "Not Included!"; 
 	exit;
@@ -22,10 +21,10 @@ if(isset($_GET['changerealm_to']))
 	redirect("?p=server&sub=playersonline",1);
 }
 
-// ==================== //
+// build top of page navigation breadcrumbs
+$realm = $DB->selectRow("SELECT * FROM realmlist WHERE `id`='".$user['cur_selected_realm']."' LIMIT 1");
 $pathway_info[] = array('title' => $lang['online_players'], 'link' => '?p=server&sub=playersonline');
 $pathway_info[] = array('title' => $realm['name'], 'link' => '');
-// ==================== //
 
 // Tell the cache not to cache the file because we want live feeds
 define("CACHE_FILE", FALSE);

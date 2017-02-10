@@ -12,13 +12,13 @@ if(INCLUDED!==true) {
 	echo "Not Included!"; exit;
 }
 
+// build top of page navigation breadcrumbs
 $realm = $DB->selectRow("SELECT * FROM realmlist WHERE `id`='".$user['cur_selected_realm']."' LIMIT 1");
 $pathway_info[] = array('title' => 'Server Statistics', 'link' => '?p=server&sub=statistic');
 $pathway_info[] = array('title' => $realm['name'], 'link' => '');
 
 //initialize $num_chars variable
 $num_chars = 0;
-//$realm_param = get_realm_byid($_COOKIE['cur_selected_realm']);;
 $rc = $CDB->select("SELECT race, count(race) AS `num` FROM `characters` GROUP BY race");
 
 foreach($rc as $row)
@@ -35,8 +35,6 @@ for($i = 1; $i <= 11; $i++)
     }
 
     $num_chars += $data[$i];
-
-   // echo "data[$i] = ".$data[$i]." - num_chars = $num_chars<br>";
 }
 
 //Check if 0 entries to avoid PHP warnings if 0 chars in database.

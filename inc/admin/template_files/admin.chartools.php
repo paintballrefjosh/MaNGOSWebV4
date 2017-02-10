@@ -200,11 +200,22 @@ else
 			<center><h2><?php echo $lang['char_list']; ?></h2></center>
 		<table>
 			<tr>
-				<td align='center'> <b><?php echo $lang['realm']; ?>:</b><br />|
+				<td align='center'> <b><?php echo $lang['realm']; ?>:</b><br />
 					<?php
+					$x = 0;
 					foreach($Realms as $Rlm)
 					{
-						echo "<a href=\"javascript:setcookie('cur_selected_realm', '". $Rlm['id'] ."'); window.location.reload();\">";
+						if($x == 1)
+						{
+							$separator = " | ";
+						}
+						else
+						{
+							$separator = "";
+							$x = 1;
+						}
+
+						echo $separator . "<a href=\"javascript:setcookie('cur_selected_realm', '". $Rlm['id'] ."'); window.location.reload();\">";
 						if($user['cur_selected_realm'] == $Rlm['id'])
 						{
 							echo "<b><font color=green>".$Rlm['name']."</font></b>"; 
@@ -213,7 +224,7 @@ else
 						{
 							echo $Rlm['name'];
 						}
-						echo "</a> | ";
+						echo "</a>";
 					}
 					?>
 				</td>

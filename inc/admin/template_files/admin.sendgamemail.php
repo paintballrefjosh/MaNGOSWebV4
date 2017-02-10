@@ -29,12 +29,23 @@
 			<h2><center>Send In Game Mail</center></h2>
 			<table>
 			<tr>
-				<td align='center'> <b><?php echo $lang['realm']; ?>:</b><br />| 
+				<td align='center'><b><?php echo $lang['realm']; ?>:</b><br />
 				<?php
 					$Realms = getRealmlist('0');
+					$x = 0;
 					foreach($Realms as $Rlm)
 					{
-						echo "<a href=\"javascript:setcookie('cur_selected_realm', '". $Rlm['id'] ."'); window.location.reload();\">";
+						if($x == 1)
+						{
+							$separator = " | ";
+						}
+						else
+						{
+							$separator = "";
+							$x = 1;
+						}
+
+						echo $separator . "<a href=\"javascript:setcookie('cur_selected_realm', '". $Rlm['id'] ."'); window.location.reload();\">";
 						if($user['cur_selected_realm'] == $Rlm['id'])
 						{
 							echo "<b><font color=green>".$Rlm['name']."</font></b>"; 
@@ -43,7 +54,7 @@
 						{
 							echo $Rlm['name'];
 						}
-						echo "</a> | ";
+						echo "</a>";
 					}
 				?>
 				</td>

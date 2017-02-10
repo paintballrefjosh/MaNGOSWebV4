@@ -18,7 +18,7 @@ $mainnav_links = array(
 	'1-News', 
 	'2-Account', 
 	'3-GameGuide', 
-	'4-Interactive', 
+	'4-Workshop', 
 	'5-Media', 
 	'6-Forums', 
 	'7-Community',
