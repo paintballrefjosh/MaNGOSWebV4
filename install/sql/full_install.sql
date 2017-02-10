@@ -181,20 +181,21 @@ CREATE TABLE `mw_menu_items` (
 -- ----------------------------
 -- Records of mw_menu_items
 -- ----------------------------
-INSERT INTO `mw_menu_items` VALUES ('1', 'News', './', '1', '1', '0', '1');
-INSERT INTO `mw_menu_items` VALUES ('1', 'RSS', 'rss.php', '2', '1', '0', '2');
-INSERT INTO `mw_menu_items` VALUES ('2', 'Register', '?p=account&sub=register', '1', '1', '1', '3');
-INSERT INTO `mw_menu_items` VALUES ('2', 'Admin Panel', '?p=admin', '1', '3', '0', '4');
-INSERT INTO `mw_menu_items` VALUES ('7', 'Vote', '?p=vote', '1', '2', '0', '5');
-INSERT INTO `mw_menu_items` VALUES ('7', 'Shop', '?p=shop', '3', '2', '0', '6');
-INSERT INTO `mw_menu_items` VALUES ('2', 'Manage Account', '?p=account', '2', '2', '0', '7');
-INSERT INTO `mw_menu_items` VALUES ('4', 'Server Characters', '?p=server&sub=chars', '2', '1', '0', '8');
-INSERT INTO `mw_menu_items` VALUES ('4', 'Players Online', '?p=server&sub=playersonline', '3', '1', '0', '9');
-INSERT INTO `mw_menu_items` VALUES ('8', 'FAQ', '?p=support&sub=faq', '1', '1', '0', '10');
-INSERT INTO `mw_menu_items` VALUES ('7', 'Donate', '?p=donate', '2', '2', '0', '11');
-INSERT INTO `mw_menu_items` VALUES ('4', 'Realm Status', '?p=server&sub=realmstatus', '1', '1', '0', '12');
-INSERT INTO `mw_menu_items` VALUES ('2', 'Account Restore', '?p=account&sub=restore', '2', '1', '1', '13');
-INSERT INTO `mw_menu_items` VALUES ('4', 'Top Kills', '?p=server&sub=topkills', '1', '1', '0', '14');
+INSERT INTO `mw_menu_items` VALUES ('1', 'News', './', '1', '1', '0', NULL);
+INSERT INTO `mw_menu_items` VALUES ('1', 'RSS', 'rss.php', '2', '1', '0', NULL);
+INSERT INTO `mw_menu_items` VALUES ('2', 'Admin Panel', '?p=admin', '1', '3', '0', NULL);
+INSERT INTO `mw_menu_items` VALUES ('2', 'Manage Account', '?p=account', '2', '2', '0', NULL);
+INSERT INTO `mw_menu_items` VALUES ('2', 'Register', '?p=account&sub=register', '3', '1', '1', NULL);
+INSERT INTO `mw_menu_items` VALUES ('2', 'Account Restore', '?p=account&sub=restore', '4', '1', '1', NULL);
+INSERT INTO `mw_menu_items` VALUES ('4', 'Top Kills', '?p=server&sub=topkills', '1', '1', '0', NULL);
+INSERT INTO `mw_menu_items` VALUES ('4', 'Characters', '?p=server&sub=chars', '2', '1', '0', NULL);
+INSERT INTO `mw_menu_items` VALUES ('4', 'Players Online', '?p=server&sub=playersonline', '3', '1', '0', NULL);
+INSERT INTO `mw_menu_items` VALUES ('4', 'Realm Status', '?p=server&sub=realmstatus', '4', '1', '0', NULL);
+INSERT INTO `mw_menu_items` VALUES ('4', 'Server Statistics', '?p=server&sub=statistic', '5', '1', '0', NULL);
+INSERT INTO `mw_menu_items` VALUES ('7', 'Donate', '?p=donate', '1', '2', '0', NULL);
+INSERT INTO `mw_menu_items` VALUES ('7', 'Vote', '?p=vote', '2', '2', '0', NULL);
+INSERT INTO `mw_menu_items` VALUES ('7', 'Shop', '?p=shop', '3', '2', '0', NULL);
+INSERT INTO `mw_menu_items` VALUES ('8', 'FAQ', '?p=support&sub=faq', '1', '1', '0', NULL);
 
 -- ----------------------------
 -- Table structure for `mw_news`

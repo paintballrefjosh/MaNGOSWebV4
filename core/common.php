@@ -346,7 +346,7 @@ function check_for_symbols($string, $space_check = 0)
 {
     //$space_check=1 means space is not allowed
     $len=strlen($string);
-    $allowed_chars="abcdefghijklmnopqrstuvwxyz���ABCDEFGHIJKLMNOPQRSTUVWXYZ���0123456789";
+    $allowed_chars="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
     if(!$space_check) 
 	{
         $allowed_chars .= " ";

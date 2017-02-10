@@ -8,13 +8,16 @@
 /*			Original MangosWeb (C) 2007, Sasha, Nafe, TGM, Peec				*/
 /****************************************************************************/
 
-//========================//
 if(INCLUDED !== TRUE) {
 	echo "Not Included!"; 
 	exit;
 }
-$pathway_info[] = array('title'=>$lang['Characters'],'link'=>'');
-//========================//
+
+// build top of page navigation breadcrumbs
+$realm = $DB->selectRow("SELECT * FROM realmlist WHERE `id`='".$user['cur_selected_realm']."' LIMIT 1");
+$pathway_info[] = array('title' => $lang['Characters'], 'link' => '?p=server&sub=chars');
+$pathway_info[] = array('title' => $realm['name'], 'link' => '');
+
 
 // Tell the cache not to cache the file because theres more then 1 page
 define("CACHE_FILE", FALSE);
@@ -43,7 +46,7 @@ $realm_info_new = get_realm_byid($_COOKIE['cur_selected_realm']);
  
 $cc = 0;
 
-// array´s
+// arrays
 $query1 = array();
 
 //===== Filter ==========//
