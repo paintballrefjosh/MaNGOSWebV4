@@ -1,0 +1,276 @@
+.alert_box {
+  padding: 5px 5px 5px 5px;
+  background: #ffcccc;
+  border: 1px solid #ff0000;
+  margin: 10px;
+  color: #3C452D;
+}
+.notice_box {
+  padding: 5px 5px 5px 5px;
+  background: #ccffcc;
+  border: 1px solid #33cc33;
+  margin: 10px;
+  color: #3C452D;
+}
+.debug_box {
+  padding: 5px 5px 5px 5px;
+  background: #e6e6e6;
+  border: 1px solid #000000;
+  margin: 10px;
+  color: #000000;
+}
+.mainNav div div {
+    font-weight:bold; 
+    text-decoration: none; 
+    font-family:arial,comic sans ms,technical; 
+    font-size: 11px; 
+    position: relative; 
+    left: -3px; 
+    background-image:url('../images/bullet-trans-bg.gif');  
+    width:139px; 
+    height:15px; 
+    padding:0px; 
+    margin:0px; 
+    border:0px; 
+    padding-left:10px;
+}
+.message-format blockquote, .editor blockquote { background: #FFF; margin: 2px; }
+.message-format blockquote span.bhead, .editor blockquote span.bhead { 
+    display: block;
+    background: #CCCCCC;
+    padding: 4px 0.7em;
+    font-weight: bold;
+    color: #FFF; }
+.message-format blockquote div, .editor blockquote div { 
+    color: #000;
+    border-left: 4px solid #CCCCCC; 
+    border-right: 4px solid #CCCCCC; 
+    border-bottom: 4px solid #CCCCCC; 
+    padding: 0.7em; }   
+
+.mybulleted_list {
+    list-style: none; 
+    font-size:16px; 
+    font-weight:bold; 
+    margin: 3px; 
+    padding: 3px; 
+    padding-left: 14px; 
+}
+.mybulleted_list li {
+    display: inline;
+    margin-left: 4px; 
+}
+.mybulleted_list li a {
+    background: url('../images/square.gif') no-repeat 0 4px; 
+    padding-left: 18px; 
+    padding-top: 1px; 
+    padding-bottom: 1px;
+}
+.mybulleted_list li a:hover, .mybulleted_list li.selected a {
+    background: url('../images/square-new.gif') no-repeat 0 4px; 
+}
+
+
+.forum_category {
+    font-family: "Trebuchet MS", Verdana, sans-serif;
+    font-size: 0.8em;
+}
+.forum_category thead tr td {
+    padding: 3px;
+    border-top: 1px solid #000;
+    border-bottom: 2px solid #000;
+}
+.forum_category tfoot tr td {
+    padding: 3px;
+    border-bottom: 1px solid #000;
+    border-top: 2px solid #000;
+}
+.forum_category tr.read td {
+   /* background: #ccffcc;*/
+}
+.forum_category tr.unread td {
+    background: #cc3333;
+}
+.forum_category tr td.n_sender a, .forum_category tr td.n_title a, .forum_category tr td.n_time a  {
+   display: block; 
+}
+.forum_category a {
+    color: #000;
+    border-bottom: 1px dotted #000;
+    text-decoration: none;
+}
+.forum_category a:hover {
+    color: #FFAC04;
+    border-bottom: 1px solid #FFAC04;
+    text-decoration: none;
+}
+.forum_category .title {
+    font-weight: bold;
+    color: #cc3333;
+    font-size:1.2em;
+}
+.forum_category .desc {
+    display: block;
+    color: #1E4378;
+    font-size:0.9em;
+}
+.forum_category .col1 {
+    width: 30px;
+    padding: 2px;
+    text-align: center;
+}
+.forum_category .col3,.forum_category .col4 {
+    font-weight: bold;
+    width: 60px;
+    padding: 2px;
+    text-align: center;
+}
+.forum_category .col3,.forum_category .col4 {
+    color: #1E4378;
+    font-weight: bold;
+    width: 70px;
+    padding: 2px;
+    padding-right: 8px;
+    text-align: center;
+}
+.forum_category .col3 span,.forum_category .col4 span {
+    display: block;
+    font-size: 1.4em;
+}
+
+.link_box a:link,
+.link_box a:visited,
+.link_box a:active {
+    background: #000;
+    border: 1px solid #E0E0E0;
+    padding: 3px 5px;
+    line-height: 2em;
+    color: #AAA; }
+.link_box a:hover { color: #666; }
+#write_form form {
+    font-size: 0.8em;
+    border: 1px solid #000;
+    padding: 5px;
+}
+#write_form form .form_info {
+    background: #EEE;
+    margin: 0 0 1em 0; padding: 5px;
+    border: 1px solid #000;
+}
+#write_form form .warning {
+    background: #FEC7C7;
+    margin: 0 0 1em 0; padding: 5px;
+    border: 1px solid #FF0000;
+    color: #FF0000;
+}
+#write_form form #form_tool {
+    border: 1px solid #000;
+    padding: 4px;
+    background: #151616;
+    height: 38px;
+}
+#write_form form #form_tool a {
+    text-decoration: none;
+}
+#write_form form  #bbcode_tool,
+#write_form form  #text_tool { 
+    margin: 0;
+    padding: 0;
+    float: left;
+}
+#write_form form  #bbcode_tool li,
+#write_form form  #text_tool li  {
+    position: relative;
+    float: left;
+    margin: 0 5px 0 0; 
+    padding: 0; 
+    list-style: none;
+}
+#write_form form  #text_tool ul {
+    display: none;
+    background: #151616;
+    position: absolute; 
+    top: 1em;
+    left: -4px;
+    border: 1px solid #DDD; 
+    padding: 0;
+}
+#write_form form  #text_tool li:hover ul,
+#write_form form  #text_tool li.sfhover ul {
+    display: block;
+    margin-top: 22px;
+    margin-left: 4px;
+}
+#write_form form  #text_tool #text_smile.sfhover ul {
+    overflow:auto;
+    width: 150px;
+    height:18em;
+}
+#write_form form  #text_tool ul li {
+    margin: 0;
+    padding: 2px;
+    clear: left;
+}
+#write_form form  #text_tool ul li a {
+    display: block;
+    width: 120px;
+    margin: 0;
+    padding: 4px;
+    background: none;
+    border: none;
+    line-height: 1em;
+    font-size: 14px;
+    color: #FFB019;
+    font-weight:bold;
+}
+#write_form form  #text_tool ul li a:hover {
+    background: #DDD;
+}
+#write_form form  #text_tool ul li.hugesize a,
+#write_form form  #text_tool ul li.largesize a, 
+#write_form form  #text_tool ul li.mediumsize a {
+    line-height: 1em;
+}
+#write_form form  #text_tool ul li#text_color-red a {
+    color: red;
+}
+#write_form form  #text_tool ul li#text_color-green a {
+    color: green;
+}
+#write_form form  #text_tool ul li#text_color-blue a {
+    color: blue;
+}
+/* Fix IE extra label padding to the right */
+#write_form form label {
+    margin-left: 0;
+    margin-right: 0;
+}
+#write_form form textarea, #preview_block #input_preview {
+    font-family: Verdana, sans-serif;
+    font-size:12px;
+    background:#fff;
+    border: 1px solid #BFBFBF;
+    padding: 1px; 
+    width:99%; 
+    height:250px; 
+    overflow:auto; 
+    margin-top:3px;
+    padding:3px;
+}
+#write_form form textarea {
+    width:100%; 
+    height:258px; 
+}
+input.input_btn_big { 
+    margin-top: 0.5em; 
+    padding: 5px 20px;
+    font-size: 1.2em;
+    font-weight: bold; }
+input.intput_btn_medium { font-size:1em; font-weight: bold; }
+input.intput_btn_small { font-size:0.9em; }
+input.input_checkbox, input.input_radiobox, .inline_input select { display: inline; }
+input.input_radiobox { margin-bottom: -0.1em; }
+input.input_large { font-size: 1.6em; }
+.hugesize { font-size: 2.6em; }
+.largesize { font-size: 2.2em; }
+.mediumsize { font-size: 1.4em; }

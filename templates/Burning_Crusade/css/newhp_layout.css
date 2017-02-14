@@ -1,0 +1,45 @@
+.redbannerbg {background: url('../images/dateheader-bg.gif') repeat-x; height:38px; width:100%;}
+.redbannerleft {background: url('../images/dateheader-left.gif') repeat-x; height:38px; width:31px; float:left;}
+.redbannerright {background: url('../images/dateheader-right.gif') repeat-x; height:38px; width:17px; float:right;}
+.redbannerlabel {padding-top: 8px; vertical-align: middle; float:left; font-family: palatino, georgia, times new roman, serif;	font-size: 13pt; color: #fceac6; filter: glow(color=#000000, strength=8); width: 90%;}
+.redbannerlabel a, .redbannerlabel a:visited {color: #fceac6; filter: glow(color=#000000, strength=8);}
+.redbannerlabel a:hover {color: #fff; filter: glow(color=#000000, strength=8);}
+.contentdiv {padding: 25px 25px 25px 25px;}
+.contentdiv a {font-weight: bold;}
+.contentdiv h2 {font-family: "Times New Roman", Times, serif; color: #640909; margin-left: -15px;}
+.contentitle {width: 420px; background-image: url('../images/tabheader-left.jpg')}
+.contentitle h2 {font-family: "Times New Roman", Times, serif; color: #640909;}
+
+#contentcontainer{font-size: 10pt; font-family: arial,helvetica,sans-serif;}
+*html #contentcontainer{height: 713;}
+#pagecontentcontainer{position: absolute; top:0px; width:100%; text-align:center;}
+#pagecontent{position: relative; padding-left: 214px;  padding-right: 58px; margin-top: 93px; text-align:left; display: block; width:713px; }
+table.collapsed{ display:none; }
+table.expanded{ display:block; }
+#hp { width: auto; margin: -85px auto 0; text-align:left; }
+#contentpadding { margin-left: 17px; margin-right: 19px; margin-top:-12px; }
+#hpwrapper { display: table-row; background: url('../images/menu-bg.jpg') repeat-y 65px 0;*/}
+#navwrapper, #mainwrapper { display: table-cell; }
+#navwrapper { position: relative; z-index: 1; }
+#nav { width: 157px; position:relative; }
+div.top-nav-container { position: relative; height: 60px; display: block; width:955px; }
+div.top-nav { position: absolute; right: 17px; top: 3px; z-index: 3; }
+#main { background: url(../images/light2.jpg) repeat 0 0; }
+*html #main { width:713px; }
+#main-top { height: 46px; width: 100%; background: url('../images/border-top.gif') repeat-x bottom; position: relative; top:1px; }
+#main-top div { height: 46px; background: url('../images/border-top-left.gif') no-repeat top left; }
+#main-top div div { height: 46px; background: url('../images/border-top-right.gif') no-repeat top right; }
+#main-content-wrapper { background: url('../images/border-left.gif') repeat-y 0 0; height: auto; }
+#main-content { height: auto; background: url('../images/border-right.gif') repeat-y top right; }
+#cnt { width: 715px; min-height:1028px; _height:1028px;}
+#marginal { width: 226px; margin-left: -1px; }
+#main-bottom { height: 75px;  width: auto; background: url('../images/border-bot.gif') repeat-x 0 0; text-align:center; }
+#main-bottom div { height: 75px; background: url('../images/border-bot-left.gif') no-repeat top left; }
+#main-bottom div div { height: 75px; background: url('../images/border-bot-right.gif') no-repeat top right; }
+#main-content-wrapper:after, #main-content:after, #main-content div:after, #hp-wrapper:after, table#generalnews p:after, #threecol-teasers:after, .news-entry:after, .community-cnt:after, #leftmenu:after, .flashbutton:after { display: block; clear: both; height: 0; font-size: 1px;  content: " "; }
+#cnt, #marginal { float: left; }
+#container-community, #container-generalnews, #threecol-teasers, #imageswitcher, #container-service { padding-bottom: 12px; }
+#ssotd-container, #gameinfo-bg-container, #gameinfo-newcomers-container, #gameinfo-screenshototd-container, #gameinfo-underdev-container, #container-pvprankings { margin-top: 15px; }
+#quicklinks { margin-top: 2px; }
+#imageswitcher { display: block; position: relative; height: 190px;	width: 470px; }
+#flashcontainer { position: absolute; top: -119px; left: -49px;	width: 500px; height: 340px; }

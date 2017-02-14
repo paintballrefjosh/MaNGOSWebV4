@@ -1,0 +1,199 @@
+
+h1.races { color: #ff9900; padding: 10px; font: normal 18px Georgia, 'Times New Roman', Times, serif; }
+img.cap { margin: 0 5px 3px 0; }
+p.warning { margin-left: 5px; padding-top: 5px; }
+ul.thread { margin-left: 22px; }
+.clear { clear: both; height: 15px; }
+.filter { text-decoration: none; font-size: 11px; }
+.afilter { color: #ffb019; font-weight: bold; text-decoration: none; font-size: 11px; }
+.button { text-decoration: none; }
+small.white	{ color: #fff; font-size: 8pt; }
+span.white { color: #fff; font-size: 12px; }
+span.highlight { color:#000; background-color: #ffd214; font-weight: bold; font-style: italic;  }
+small.smallBold { color: #fff; font-size: 8pt; font-weight: bold; }
+
+
+/*\ Hyperlinks \*/
+/*_________________________________________________________________________*/
+
+.board-clear a:link, .board-clear a:active { color: #ffb019; font-weight: bold; } 
+.board-clear a:visited { color: #d38d01; font-weight: bold; }
+.board-clear a:hover { color: white; }
+a.active:link { color: #ffb019; font-weight: bold; }
+a.active:active	{ color: #ff0000; font-weight: bold; }
+a.active:visited { color: #ffb019; font-weight: bold; }
+a.active:hover { color: #fff; }
+a.visited:link { color: #b1b1b1; font-weight: bold; }
+a.visited:active { color: #ff0000; font-weight: bold; }
+a.visited:visited { color: #b1b1b1; font-weight: bold; }
+a.visited:hover	{ color: #fff; }
+a.index:link, a.index:active, a.index:visited { color: #ccc; text-decoration: none; }
+a.index:hover { color: white; }
+a.current { font-size: 12px; color: white; text-decoration: none;}
+.character-select a, .character-select a:active, .character-select a:visited { font-weight: normal; }
+a.nav:link, a.nav:visited, a.nav:active { font: normal 11px arial,verdana, sans-serif; color: #cba300; }
+a.nav:hover { color: #fff; }	
+a.subMenuLink, a.subMenuLink:link, a.subMenuLink:visited { color: white; font-weight:normal; text-decoration: none; font-family:arial,comic sans ms,technical; font-size: 11px; display:block;}
+a.subMenuLink img {border-style:none;}
+
+/*\ Form Elements \*/
+/*_________________________________________________________________________*/
+
+/*
+input, textarea { background: #0d1a2d; border: 1px solid #7f7f7f; color: #ffac04; }
+input { background: #0d1a2d url('../images/forum-menu-search-tile.gif') repeat-x; }
+*/
+select { background: #0d1a2d; color: #ffac04; font-size: 11px; }
+input.button { background: transparent; border-style: none; }
+select.gray { background-color: #040d1a; color: #ffac04; }
+select.forum-dropdown { display:inline; width: 185px; margin-left: 10px; }
+input.post-subject-field, textarea.post-message-text, textarea.options-signature-text { font: 12px Arial, Helvetica, sans-serif; color: white; }
+input.post-subject-field, input.login-account-field, input.login-password-field, input.options-email-field, input.options-talent-field { background: #0d1a2d url('../images/forum-menu-search-tile.gif') repeat-x; padding: 2px 0 2px 4px; }
+textarea.post-message-text, textarea.options-signature-text { background: #0d1a2d url('../images/post-textarea-bg.gif') repeat-x 0 0; }
+input.quick-search-field { width: 138px; margin-right: 2px; padding: 1px 0 1px 4px; }
+input.post-subject-field { width: 245px; margin: 58px 0 0 44px; }
+textarea.post-message-text { width: 584px; margin: 19px 0 0 19px; height: 238px;  padding: 10px; }
+input.login-account-field, input.login-password-field  { width: 170px; margin: 28px 0 0 35px; }
+input.login-password-field { margin: 31px 0 0 35px; }
+input.options-email-field { width: 170px; margin: 14px 0 0 62px; }
+input.options-talent-field { width: 290px; margin: 14px 0 0 32px; }
+select.options-timezone { width: 314px; margin: 15px 0 0 35px; background: #0d1a2d; }
+textarea.options-signature-text { width: 584px; margin: 19px 0 0 19px; height: 90px; padding: 10px; }
+
+
+/*\ Header Styles \*/
+/*_________________________________________________________________________*/
+
+#header, .logo-container, .logo-right, .gryph-container, .gryph-z, #main-nav { display: block; }
+#header { width: auto; min-width: 775px; height: 92px; background: url('../images/top-tile.gif') repeat-x top center; }
+.logo-container, .logo-right { width: 732px; height: 92px; }
+.logo-container { margin: 0 auto; background: url('../images/decor-left-bc.gif') no-repeat left top; }
+.logo-right { position: relative; background: url('../images/decor-right-bc.gif') no-repeat right top; z-index: 20; }
+h1.wow-logo { position: absolute; top: 1px; left: 235px; margin: 0; padding: 0; width: 262px; height: 122px; background: url('../images/wowlogo-bc.gif') no-repeat; }
+.gryph-container { position: relative; width: 100%; min-width: 775px; z-index: 4020; }
+.gryph-z { position: relative; z-index: 5020; }
+span.left-gryphon, span.right-gryphon { position: absolute; top: -92px; width: 85px; height: 92px; }
+span.left-gryphon { left: 0px; background: url('../images/gryphon-left.gif') no-repeat; }
+span.right-gryphon { right: 0px; background: url('../images/gryphon-right.gif') no-repeat; }
+#main-nav { position: relative; width: 100%; height: 48px; min-width: 775px; background: none; margin-top: -1px; margin-bottom: 11px; }
+#main-nav div.left { position: relative; width: 100%; height: 65px; min-width: 775px; background: url('../images/subnav/navbar-left.gif') no-repeat 0 0; }
+#main-nav div.left div.right { position: relative; width: 100%; height: 65px; min-width: 775px; background: url('../images/subnav/navbar-right.gif') no-repeat right; }				
+#main-nav div.left div.right div.nav { width: 100%; text-align: center; margin: 0 auto; padding: 16px 0 0 0; }			
+#main-nav div.left div.right div.nav div.minwidth { width: 775px; min-width: 775px; text-align: center; margin: 0 auto; }
+#main-nav div.left div.right div.nav div.minwidth-search { width: 900px; min-width: 900px; text-align: center; margin: 0 auto; }
+#style-switcher { position: relative; width: 100%; min-width: 775px; z-index: 2020; }
+.switcher-container { position: absolute; top: -50px; right: 70px; }
+.language-switcher-container { position: absolute; top: -50px; right: 180px; }
+.language-selector {padding:0 0 0 15px;}
+h1.theme-title { height: 25px; width: 111px; margin: 0; padding: 0; }
+h1.language-title { height: 25px; width: 111px; margin: 0; padding: 0;}
+#style-switcher ul { display: block; list-style: none; margin: 0; padding: 0 0 0 20px; height: 25px; width: 108px; }
+li.alliance { display: block; float: left; background: url('../images/toggle-alliance0.gif') no-repeat; height: 25px; width: 32px; }
+li.horde { display: block; float: left; background: url('../images/toggle-horde0.gif') no-repeat; height: 25px; width: 31px; }
+li.bc { display: block; float: left; background: url('../images/toggle-bc0.gif') no-repeat 0 -1px; height: 25px; width: 28px; }
+/*li.xmas { display: block; float: left; background: url('../images/toggle-xmas1.gif') no-repeat 0 -1px; height: 25px; width: 28px; }*/
+.bg-theme { background: url('../images/bc-bg.jpg') no-repeat 100% 0 !important; height: 170px; }
+#postbackground { width: 100%; display: table; background: url('../images/forum-bc-tile-left.jpg') repeat-y 0 0; clear: left; }
+#postbackground .right { background: url('../images/forum-bc-tile-right.jpg') repeat-y 100% 0; padding: 5px; }
+
+
+/*\ Navigation \*/
+/*_________________________________________________________________________*/
+
+.subnav-container { text-align: center; background: url('../images/back2.png'); }
+.top-shadow { background: url('../images/subnav/bg-shadow-tile-top.png'); height: 8px; width: 100%; margin-top: -1px;margin-bottom: -8px; }
+.drop-shadow { background: url('../images/subnav/bg-shadow-tile.png'); height: 8px; width: 100%; margin-bottom: -7px;}
+.navigation { position: absolute; top:91px;	z-index:2; }
+.button	{ color:#FFFFFF; font-size:9px;	letter-spacing:-1px; }		
+
+/*\ Gold Border Container \*/
+/*_________________________________________________________________________*/
+
+.gborder, .gborder ul li div.a, .gborder ul li div.a ul li div.b, .gborder ul li div.a ul li div.b ul li div.c, .gborder ul, .gborder ul li div.a ul, .gborder ul li div.a ul li div.b ul { width: 100%; margin: 0px; padding: 0; position: relative; }
+.gborder ul, .gborder ul li div.a ul, .gborder ul li div.a ul li div.b ul, .gborder ul li div.a ul li div.b ul li div.c ul { list-style: none; }
+.gborder { background: url('../images/back.png') repeat 0 0; }
+.gborder ul { background: url('../images/border-left.gif') repeat-y left; }
+.gborder ul li.bg { background: url('../images/border-right.gif') repeat-y right; }
+.gborder ul li div.a { background: url('../images/border-top.gif') repeat-x top; }
+.gborder ul li div.a ul { background: url('../images/border-bot.gif') repeat-x bottom; }
+.gborder ul li div.a ul li.bg { background: url('../images/border-top-left.gif') no-repeat top left; }
+.gborder ul li div.a ul li div.b { background: url('../images/border-top-right.gif') no-repeat top right; }
+.gborder ul li div.a ul li div.b ul { background: url('../images/border-bot-left.gif') no-repeat bottom left; }
+.gborder ul li div.a ul li div.b ul li.bg { background: url('../images/border-bot-right.gif') no-repeat bottom right; }
+.gborder ul li div.a ul li div.b ul li div.c { padding: 20px 0 45px 0; text-align: left; }
+.gborder ul li div.a ul li div.b ul li div.c ul { margin: 0; background: none; }
+.gborder ul li div.a ul li div.b ul li div.c ul li { padding: 9px 0 0 15px; background: url('../images/square.gif') no-repeat 0 8px; }
+  
+  
+/*\ Forum Lists \*/
+/*_________________________________________________________________________*/
+
+.message-format ul { list-style: disc; }
+.message-format ul li { list-style: disc; display: list-item; }
+.message-format li { list-style: disc; margin: 0; padding: 0; display: list-item; }
+#forumlistcontainer { width: 98%; }
+#forumlistcontainer .left { float: left; width: 50%; }
+#forumlistcontainer .right { float: right; width: 49%; }
+#forumlistcontainer ol { list-style: none; margin: 0; padding: 0; text-align: left; clear: both; }
+#forumlistcontainer ol li.a { display: block; padding: 5px 10px 10px 10px; height: 60px; background: none;  }
+#forumlistcontainer ol li.a img { margin: 0 5px 13px 0; }
+#forumlistcontainer ol li.b { display: block; padding: 5px 10px 0 10px; background: none; }
+#forumlistcontainer ol li.c, #forumlistcontainer ol li.c2 { float: left; padding: 10px 0; margin: 0; height: 40px; }
+#forumlistcontainer ol li.c { width: 25px; text-align: center; }
+#forumlistcontainer ol li.c2 { width: 490px; }
+#forumlistcontainer ol li.classes { background: url('../images/forumbullets/bullet.gif') no-repeat 0 10px; }
+div.display-margin { width: 90%; padding: 5px 40px 5px 30px; }
+.avatar-nav { width: 500px; height: 27px; position: relative; display: block; margin-top: 20px; }
+.avatar-nav span { font-size: 11px; }
+.avatar-nav ol { list-style: none; margin: 0; padding: 0; }
+.avatar-nav ol li { position: absolute; top: 0px; width: 104px; height: 21px; background: url('../images/tab-nf.gif') no-repeat top right; padding: 5px 0 0 0; text-align: center; }
+.avatar-nav ol li.selected { background: url('../images/tab-f.gif') no-repeat top right; z-index: 90; height: 28px; }
+.avatar-nav ol li.selected a, #avatar-nav ol li.selected a:active, #avatar-nav ol li.selected a:visited { color: white; } 
+.avatar-nav ol li.tab-one { right: -10px; }
+.avatar-nav ol li.tab-two { right: 90px; }
+.avatar-nav ol li.tab-three { right: 190px; }
+.avatar-nav span.grey { color: #666666; }
+.avatar-nav a, #avatar-nav a:visited, #avatar-nav a:active { text-decoration: none; }
+.avatar-nav a:hover { color: white; text-decoration: none; }
+.list-avatars { width: 500px; border: 1px solid #424242; display: table; background: black; padding: 7px; }
+.list-avatars h1 { color: #FF9900; padding: 10px; font-size: 18px; font-family: Georgia, 'Times New Roman', Times, serif; font-weight: normal; }
+.list-avatars ol { margin: 0; padding: 0; list-style: none; clear: both; }
+.list-avatars ol li { float: left; display: block; width: 80px; height: 81px; background: url('../images/framebg2.gif') no-repeat; text-align: center; padding-top: 8px; margin: 20px 20px; }
+.list-avatars p { margin: 5px 0 0 0; font-size: 11px; }
+#classforumlist { position: relative; clear: both; margin-left: 30px; background: transparent; }
+#classforumlist table { width: 90%; margin: 10px 0 10px 0; background: transparent; }
+#classforumlist td { padding: 4px; background: transparent; }
+#fcontainer { background: none; padding: 5px 20px 5px 20px; }
+#fcontainer ol { background: none; }
+#fcontainer ol li { background: none; }
+ol.rlist { list-style: disc; color: #ccc; }
+
+/*\ Error Handling \*/
+/*_________________________________________________________________________*/
+
+#topic-notice { position: relative; display: block; clear: both; width: 2px; height: 1px; background: red; font-size: 1px; }
+.topic-notice-container { position: absolute; top: -40px; left: -50px; width: 38px; height: 26px; background: url('../images/icons/topic-limit-bg.gif') no-repeat; }
+.topic-notice-container h3 { margin: 6px 7px 0 0px; padding: 0; color: white; font-weight: bold; font-size: 11px; }
+.topic-tooltip { position: absolute; top: -40px; left: -50px; width: 38px; height: 26px; }
+.error-message { position: absolute; display: block; z-index: 200; display: block; }
+#error-container { display: block; white-space: nowrap; width: 100%; }
+#error-container div.arrow { display: block; position: absolute; height: 13px; width: 13px; top: 2px; left: -10px; background: url('../images/icons/arrow-left.gif') no-repeat top left; }
+#error-container div.red-container { display: block; background: red; padding: 0px 20px 0px 5px; border: 1px solid black; }
+#error-container span { font-weight: bold; color: white; font-size: 11px; background: url('../images/icons/error-tiny2.gif') no-repeat 0 0; padding-left: 15px; }
+.error-mini[class] { position: relative; width: inherit;  }
+.error-mini { position: relative; width: inherit; width: 1px; z-index: 999; }
+.c h2 { margin-top: 15px; font-family: Georgia, "Times New Roman", Times, serif; }
+.c { line-height: 140%; }
+span.emph { font-weight: bold; color: #00c0ff; border-bottom: 1px dotted white; }
+p.inset { display: block; width: 87%; padding: 20px; margin: 0 auto; text-align: center; }
+.redirect b { display: none; }
+
+
+/*\ Footer Styles \*/
+/*_________________________________________________________________________*/
+
+#ftrText { margin: 20px auto; text-align: center; min-width: 775px; width: 100%; clear: both; }
+#ftrText .width, #footerShell, #footerShell .logo { text-align: center; margin: 0 auto; }
+#ftrText .width { width: 775px; }
+#footerShell { width: 100%; height: 46px; background: url('../images/bottom-bg.gif') repeat-x; }					
+#footerShell .logo { min-width: 775px; width: 775px; }
