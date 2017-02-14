@@ -1,0 +1,83 @@
+#wow-logo { top:-3px; left:-24px; }
+
+/*newhp_specific*/
+#main-bottom { margin-bottom: -17px; z-index: 10; }
+#ironframe { margin-top: -17px; }
+#copyright span.esrb { left: -125px !important; }
+#copyright span.rating { left: -255px !important; }
+#copyright span.esrb-caution { right: 100px !important; }
+#copyright span.nvidia { right: -5px !important; }
+#copyright span.textlinks { padding-left: 0px; }
+
+.ietablemargin { padding-right: 15px; }
+
+/*newhp_layout*/
+#contentpadding { margin-left: 15px; margin-right: 20px; }
+div.top-nav-container { z-index: 10; }
+div.top-nav { right: 12px; }
+#imageswitcher { height: 202px; }
+#flashcontainer { top: -105px; z-index: 9999;}
+#pagecontent{ width: 985px; }
+#flashcontainer { position: absolute; top: -119px; left: -49px;	width: 500px; height: 340px; }
+
+/*newhp*/
+.phatlootbox-bottom div { padding: 1px 5px 0 0; }
+img.left { margin: 0 0 0 -3px; }
+#container-pvpRankings div.realmselect { height: 21px; padding: 0; }
+div#elf-ear { right: -18px; }
+ul.bullet-list li { padding-left: 2px; }
+div.community-watch { width: 430px; }
+.ietablemargin { padding-right: 15px; }
+/*.menuentry-rightborder { right: 0px; }*/
+
+#leftMenuContainer{ position: absolute; left: 4px; }
+
+/*theme-bg*/
+#left-bg { position: absolute; top: -62px; left: -285px; height: 1026px; width: 478px; }
+#right-bg { position: absolute; top: 25px; left: 933px; height: 551px; width: 323px; }
+/*theme-bg*/
+
+#navwrapper, #mainwrapper { float: left; }
+#hpwrapper {  }
+#ironframe { top: 17px; }
+#main, #nav { float: left; }
+#nav { z-index: 500; }
+#main { width: auto; z-index: 200; }
+table#generalnews p, #threecol-teasers, #hp-wrapper, #main-content-wrapper, #main-content, .plainbox-cnt, .community-cnt, #container-service, .gameinfo-entry, ul.mainnav li a, #hpwrapper { height: 1%;  }
+.parchment hr { margin: 0; }
+select#support { bottom: 9px; }
+.plainbox-bot { font-size: 1px; }
+.underdev-wrapper { padding: 0; margin: 0; font-size: 1px; bottom: -1px; left: 0; }
+.underdev-links a { position: relative; }
+.underdev-top { margin-top: 0; }
+.underdev-bottom { font-size: 1px; margin-bottom: 0; }
+.button-readmore { bottom: 7px; }
+.blizz-logo  { bottom: 20px; }
+/*ul.mainnav li a { background: none; }*/
+ul.mainnav li a:hover { color: #fff; background-color: #344961; }
+ul.mainnav { }
+ul.mainnav ul { padding: 0;  margin-top: -1px; }
+ul.mainnav ul.menulist1 li { float: left; height: 1%; }
+.container-misc { height: 1%; }
+
+/*png stuff*/
+#community-spotlight .plainBox-cnt-bot p, #community-forumwatch .plainBox-cnt-bot p { height: 1%; font-size: 1px; }
+.underdev { left: -11px; }
+.underdev-links { background: none; }
+.underdev-top { background: none; font-size: 1px; }
+.underdev-bottom { background: none; font-size: 1px; }
+.marginal-infobox { width: 213px; }
+.marginal-infobox-bottom { width: 213px; }
+#container-quicklinks ul { height: 1%; }
+#container-quicklinks ul li { width: 100%; float: left; }
+#container-quicklinks ul li a { display: inline-block; /*fixes bug with not clickable link backgrounds*/ padding-bottom: 8px; }
+span#button-contestWinners { bottom: -1px; } 
+
+
+/* news module */
+/*_______________________________________________________________*/
+
+.news-collapse .news-border-right, .news-collapsealt .news-border-right { right: 8px; }
+
+/*etc*/
+.rightbox { background: url(../images/plainbox/plainbox-bg.jpg) repeat-y 0 0; width: 305px; border-top: 1px solid #49402c; border-bottom: 1px solid #49402c; padding-bottom: 5px; padding-top: 5px; position: relative; z-index: 2; margin-top: 15px; margin-left: 8px;}

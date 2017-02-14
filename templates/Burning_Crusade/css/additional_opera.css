@@ -1,0 +1,14 @@
+#flashcontainer {
+	position: absolute;
+	top: -107px;
+	left: -4px;
+	width: 520px;
+	height: 269px;
+    z-index: 21;
+}
+div.top-nav {
+	right: 8px; 
+}
+div.opera-break {
+	clear: left;
+}
