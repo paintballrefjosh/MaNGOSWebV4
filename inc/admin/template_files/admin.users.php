@@ -358,7 +358,8 @@ if(isset($_GET['id']))
 	}
 }
 else
-{ ?>
+{
+?>
 <!-- Start #main -->
 <div id="main">			
 	<div class="content">	
@@ -369,43 +370,8 @@ else
 		<center><h2><?php echo $lang['user_list']; ?></h2></center>
 		<table>
 			<tr>
-				<td colspan="4" align="center">
-					<b><?php echo $lang['sort_by_letter']; ?>:</b>&nbsp;&nbsp;
-					<small>
-					<a href="?p=admin&sub=users">All</a> | 
-					<a href="?p=admin&sub=users&sortby=1">#</a> 
-					<a href="?p=admin&sub=users&sortby=a">A</a> 
-					<a href="?p=admin&sub=users&sortby=b">B</a> 
-					<a href="?p=admin&sub=users&sortby=c">C</a> 
-					<a href="?p=admin&sub=users&sortby=d">D</a> 
-					<a href="?p=admin&sub=users&sortby=e">E</a> 
-					<a href="?p=admin&sub=users&sortby=f">F</a> 
-					<a href="?p=admin&sub=users&sortby=g">G</a> 
-					<a href="?p=admin&sub=users&sortby=h">H</a> 
-					<a href="?p=admin&sub=users&sortby=i">I</a> 
-					<a href="?p=admin&sub=users&sortby=j">J</a> 
-					<a href="?p=admin&sub=users&sortby=k">K</a> 
-					<a href="?p=admin&sub=users&sortby=l">L</a> 
-					<a href="?p=admin&sub=users&sortby=m">M</a> 
-					<a href="?p=admin&sub=users&sortby=n">N</a> 
-					<a href="?p=admin&sub=users&sortby=o">O</a> 
-					<a href="?p=admin&sub=users&sortby=p">P</a> 
-					<a href="?p=admin&sub=users&sortby=q">Q</a> 
-					<a href="?p=admin&sub=users&sortby=r">R</a> 
-					<a href="?p=admin&sub=users&sortby=s">S</a> 
-					<a href="?p=admin&sub=users&sortby=t">T</a> 
-					<a href="?p=admin&sub=users&sortby=u">U</a> 
-					<a href="?p=admin&sub=users&sortby=v">V</a> 
-					<a href="?p=admin&sub=users&sortby=w">W</a> 
-					<a href="?p=admin&sub=users&sortby=x">X</a> 
-					<a href="?p=admin&sub=users&sortby=y">Y</a> 
-					<a href="?p=admin&sub=users&sortby=z">Z</a>              
-					</small>           
-				</td>
-			</tr>
-			<tr>
 				<td>
-					<form method="POST" action="?p=admin&sub=users" name="adminform" class="form label-inline">
+					<form method="POST" action="?p=admin&amp;sub=users" name="adminform" class="form label-inline">
 					<input type='hidden' name='action' value='sort'>
 						<div class="field">
 							<center>
@@ -417,14 +383,14 @@ else
 				</td>
 			</tr>
 		</table>
-		<form method="POST" action="?p=admin&sub=users" name="adminform" class="form label-inline">
+		<form method="POST" action="?p=admin&amp;sub=users" name="adminform" class="form label-inline">
 			<table width="95%">
 				<thead>
 					<tr>
-						<th width="120"><b><center><?php echo $lang['username']; ?></center></b></th>
-						<th width="140"><b><center><?php echo $lang['email']; ?></center></b></th>
-						<th width="120"><b><center><?php echo $lang['reg_date']; ?></center></b></th>
-						<th width="40"><b><center>Status</center></b></th>
+						<th width="120"><a href="?p=admin&amp;sub=users&amp;sortby=username&amp;sortdir=<?= $sortdir;?>" class="sort-by"><?php echo $lang['username']; ?></a></th>
+						<th width="140"><a href="?p=admin&amp;sub=users&amp;sortby=email&amp;sortdir=<?= $sortdir;?>" class="sort-by"><?php echo $lang['email']; ?></a></th>
+						<th width="120"><a href="?p=admin&amp;sub=users&amp;sortby=joindate&amp;sortdir=<?= $sortdir;?>" class="sort-by"><?php echo $lang['reg_date']; ?></a></th>
+						<th width="40"><a href="?p=admin&amp;sub=users&amp;sortby=locked&amp;sortdir=<?= $sortdir;?>" class="sort-by">Status</a></th>
 					</tr>
 				</thead>
 				<?php
@@ -433,10 +399,10 @@ else
 					$isbanned =  $DB->num_rows("SELECT id FROM account_banned WHERE id='".$row['id']."' AND `active`=1");
 				?>
 				<tr class="content">
-					<td align="center"><a href="?p=admin&sub=users&id=<?php echo $row['id']; ?>"><?php echo $row['username']; ?></a></td>
-					<td align="center"><?php echo $row['email']; ?></td>
-					<td align="center"><?php echo $row['joindate']; ?></td>
-					<td align="center">
+					<td><a href="?p=admin&amp;sub=users&amp;id=<?php echo $row['id']; ?>"><?php echo $row['username']; ?></a></td>
+					<td><?php echo $row['email']; ?></td>
+					<td><?php echo $row['joindate']; ?></td>
+					<td>
 					<?php 
 						if($row['locked'])
 							echo "<font color=\"orange\">Not Activated</font>";

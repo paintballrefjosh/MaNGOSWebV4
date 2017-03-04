@@ -229,41 +229,6 @@ else
 					?>
 				</td>
 			<tr>
-				<td colspan="4" align="center">
-					<b><?php echo $lang['sort_by_letter']; ?>:</b>&nbsp;&nbsp;
-					<small>
-					<a href="?p=admin&sub=chartools">All</a> | 
-					<a href="?p=admin&sub=chartools&sort=1">#</a> 
-					<a href="?p=admin&sub=chartools&sort=a">A</a> 
-					<a href="?p=admin&sub=chartools&sort=b">B</a> 
-					<a href="?p=admin&sub=chartools&sort=c">C</a> 
-					<a href="?p=admin&sub=chartools&sort=d">D</a> 
-					<a href="?p=admin&sub=chartools&sort=e">E</a> 
-					<a href="?p=admin&sub=chartools&sort=f">F</a> 
-					<a href="?p=admin&sub=chartools&sort=g">G</a> 
-					<a href="?p=admin&sub=chartools&sort=h">H</a> 
-					<a href="?p=admin&sub=chartools&sort=i">I</a> 
-					<a href="?p=admin&sub=chartools&sort=j">J</a> 
-					<a href="?p=admin&sub=chartools&sort=k">K</a> 
-					<a href="?p=admin&sub=chartools&sort=l">L</a> 
-					<a href="?p=admin&sub=chartools&sort=m">M</a> 
-					<a href="?p=admin&sub=chartools&sort=n">N</a> 
-					<a href="?p=admin&sub=chartools&sort=o">O</a> 
-					<a href="?p=admin&sub=chartools&sort=p">P</a> 
-					<a href="?p=admin&sub=chartools&sort=q">Q</a> 
-					<a href="?p=admin&sub=chartools&sort=r">R</a> 
-					<a href="?p=admin&sub=chartools&sort=s">S</a> 
-					<a href="?p=admin&sub=chartools&sort=t">T</a> 
-					<a href="?p=admin&sub=chartools&sort=u">U</a> 
-					<a href="?p=admin&sub=chartools&sort=v">V</a> 
-					<a href="?p=admin&sub=chartools&sort=w">W</a> 
-					<a href="?p=admin&sub=chartools&sort=x">X</a> 
-					<a href="?p=admin&sub=chartools&sort=y">Y</a> 
-					<a href="?p=admin&sub=chartools&sort=z">Z</a>              
-					</small>           
-				</td>
-			</tr>
-			<tr>
 				<td>
 					<form method="POST" action="?p=admin&sub=chartools" name="adminform" class="form label-inline">
 					<input type='hidden' name='action' value='sort'>
@@ -281,11 +246,11 @@ else
 			<table width="95%">
 				<thead>
 					<tr>
-						<th width="30%"><b><center><?php echo $lang['name']; ?></center></b></th>
-						<th width="10%"><b><center><?php echo $lang['level']; ?></center></b></th>
-						<th width="20%"><b><center><?php echo $lang['race']; ?></center></b></th>
-						<th width="20%"><b><center><?php echo $lang['class']; ?></center></b></th>
-						<th width="20%"><b><center><?php echo $lang['location']; ?></center></b></th>
+						<th width="30%"><a href="?p=admin&amp;sub=chartools&amp;sortby=name&amp;sortdir=<?= $sortdir;?>" class="sort-by"><?php echo $lang['name']; ?></a></th>
+						<th width="10%"><a href="?p=admin&amp;sub=chartools&amp;sortby=level&amp;sortdir=<?= $sortdir;?>" class="sort-by"><?php echo $lang['level']; ?></a></th>
+						<th width="20%"><a href="?p=admin&amp;sub=chartools&amp;sortby=race&amp;sortdir=<?= $sortdir;?>" class="sort-by"><?php echo $lang['race']; ?></a></th>
+						<th width="20%"><a href="?p=admin&amp;sub=chartools&amp;sortby=class&amp;sortdir=<?= $sortdir;?>" class="sort-by"><?php echo $lang['class']; ?></a></th>
+						<th width="20%"><a href="?p=admin&amp;sub=chartools&amp;sortby=zone&amp;sortdir=<?= $sortdir;?>" class="sort-by"><?php echo $lang['location']; ?></a></th>
 					</tr>
 				</thead>
 			<?php
@@ -293,11 +258,11 @@ else
 				{ 
 			?>
 					<tr class="content">
-						<td align="center"><a href="?p=admin&sub=chartools&id=<?php echo $row['guid']; ?>"><?php echo $row['name']; ?></a></td>
-						<td align="center"><?php echo $row['level']; ?></td>
-						<td align="center"><?php echo $Character->charInfo['race'][$row['race']]; ?></td>
-						<td align="center"><?php echo $Character->charInfo['class'][$row['class']]; ?></td>
-						<td align="center"><?php echo $Zone->getZoneName($row['zone']); ?></td>
+						<td><a href="?p=admin&sub=chartools&id=<?php echo $row['guid']; ?>"><?php echo $row['name']; ?></a></td>
+						<td><?php echo $row['level']; ?></td>
+						<td><?php echo $Character->charInfo['race'][$row['race']]; ?></td>
+						<td><?php echo $Character->charInfo['class'][$row['class']]; ?></td>
+						<td><?php echo $Zone->getZoneName($row['zone']); ?></td>
 					</tr>
 			<?php 
 				}

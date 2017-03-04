@@ -598,3 +598,36 @@ button.btn-sec span { background-position: left -100px !important; }
 
 .hide { display: none; }
 .menu-item { width: 130px; float: left; text-align: center; }
+
+
+
+
+th a.sort-by {
+	display: block;
+	width: 100%;
+	padding-left: 18px;
+	position: relative;
+	font-weight: bold;
+	color: black;
+	font-size: 12px;
+}
+
+a.sort-by:before,
+a.sort-by:after {
+	border: 4px solid transparent;
+	content: "";
+	display: block;
+	height: 0;
+	left: 2px;
+	top: 50%;
+	position: absolute;
+	width: 0;
+}
+a.sort-by:before {
+	border-bottom-color: #666;
+	margin-top: -9px;
+}
+a.sort-by:after {
+	border-top-color: #666;
+	margin-top: 1px;
+}

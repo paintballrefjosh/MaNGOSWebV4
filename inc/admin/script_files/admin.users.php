@@ -14,14 +14,7 @@ if(INCLUDED!==true) {
 }
 //=======================//
 
-// For the search bar
-if(isset($_POST['action']))
-{
-	if($_POST['action'] == 'sort')
-	{
-		redirect('?p=admin&sub=users&sortby='.$_POST['sortby'],1);
-	}
-}
+
 
 //====== Pagination Code ======/
 $limit = 50; // Sets how many results shown per page	
@@ -36,22 +29,36 @@ else
 $limitvalue = $page * $limit - ($limit);	// Ex: (2 * 25) - 25 = 25 <- data starts at 25
 
 //===== Filter ==========// 
-if($_GET['sortby'] && preg_match("/[a-z]/", $_GET['sortby']))
+if(!isset($_GET['sortdir']))
 {
-	$filter = "WHERE `username` LIKE '" . $_GET['sortby'] . "%'";
-}
-elseif($_GET['sortby'] == 1)
-{
-	$filter = "WHERE `username` REGEXP '^[^A-Za-z]'";
+	$sortdir = "asc";
 }
 else
 {
-	$filter = '';
+	$sortdir = $_GET['sortdir'];
 }
-	
+
+if(isset($_GET['sortby']))
+{
+	$orderby = "ORDER BY ".$_GET['sortby']." ".$_GET['sortdir'];
+}
+else
+{
+	$orderby = "ORDER BY username ASC";
+}
+
+if($sortdir == "asc")
+{
+	$sortdir = "desc";
+}
+else
+{
+	$sortdir = "asc";
+}
+
 // Get all users
-$getusers = $DB->select("SELECT * FROM account $filter ORDER BY `username` ASC LIMIT $limitvalue, $limit;");
-$totalrows = $DB->num_rows("SELECT id FROM `account` $filter");
+$getusers = $DB->select("SELECT * FROM account $orderby LIMIT $limitvalue, $limit;");
+$totalrows = $DB->num_rows("SELECT id FROM `account` $orderby");
 
 //===== Start of functions =====/
 

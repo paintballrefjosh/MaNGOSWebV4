@@ -46,21 +46,35 @@ else
 $limitvalue = $page * $limit - ($limit);	// Ex: (2 * 25) - 25 = 25 <- data starts at 25
 
 //===== Filter ==========// 
-if($_GET['sort'] && preg_match("/[a-z]/", $_GET['sort']))
+if(!isset($_GET['sortdir']))
 {
-	$filter = "WHERE `name` LIKE '" . $_GET['sort'] . "%'";
-}
-elseif($_GET['sort'] == 1)
-{
-	$filter = "WHERE `name` REGEXP '^[^A-Za-z]'";
+	$sortdir = "asc";
 }
 else
 {
-	$filter = '';
+	$sortdir = $_GET['sortdir'];
+}
+
+if(isset($_GET['sortby']))
+{
+	$filter = "ORDER BY ".$_GET['sortby']." ".$_GET['sortdir'];
+}
+else
+{
+	$filter = "ORDER BY name ASC";
+}
+
+if($sortdir == "asc")
+{
+	$sortdir = "desc";
+}
+else
+{
+	$sortdir = "asc";
 }
 
 // Get all characters
-$characters = $CDB->select("SELECT * FROM `characters` $filter ORDER BY `name` ASC LIMIT $limitvalue, $limit;");
+$characters = $CDB->select("SELECT * FROM `characters` $filter LIMIT $limitvalue, $limit;");
 $totalrows = $CDB->count("SELECT COUNT(*) FROM `characters` $filter");
 $totalrows = $totalrows['COUNT(*)'];
 
