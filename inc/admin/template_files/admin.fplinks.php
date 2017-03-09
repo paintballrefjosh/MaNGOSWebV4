@@ -33,7 +33,7 @@ if(isset($_GET['linkid']))
 					}
 				}
 			?>
-			<form method="POST" action="?p=admin&sub=fplinks&linkid=<?php echo $_GET['linkid']; ?>" class="form label-inline">
+			<form method="POST" class="form label-inline">
 			<input type="hidden" name="action" value="edit">
 			<?php
 				$edit_info = $DB->selectRow("SELECT * FROM `mw_menu_items` WHERE `id`='".$_GET['linkid']."'");
