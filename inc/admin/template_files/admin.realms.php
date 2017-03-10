@@ -46,7 +46,7 @@ if(isset($_GET['id']))
 	</div> <!-- .content-header -->	
 	<div class="main-content">
 	
-	<form method="POST" action="?p=admin&sub=realms&id=<?php echo $_GET['id']; ?>" name="adminform" class="form label-inline">
+	<form method="POST" name="adminform" class="form label-inline">
 	<input type="hidden" name="edit_realm">
 		<table>
 			<thead>

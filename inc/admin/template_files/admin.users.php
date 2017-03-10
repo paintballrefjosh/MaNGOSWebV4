@@ -138,16 +138,16 @@ if(isset($_GET['id']))
 				<table>
 					<tr>
 						<td align="center" style="padding: 5px 5px 5px 5px;">
-						<a href="?p=admin&sub=users&id=<?php echo $_GET['id']; ?>&action=delete" onclick="return confirm('Are you sure? This is Un-reversable!');">
+						<a href="?p=admin&sub=users&id=<?php echo htmlspecialchars($_GET['id']); ?>&action=delete" onclick="return confirm('Are you sure? This is Un-reversable!');">
 							<b><font color="red"><?php echo $lang['delete_account']; ?></font></b></a> |
 						<?php
 							if($bann == 1) 
 							{
-								echo "<a href=\"?p=admin&sub=users&id=".$_GET['id']."&action=unban\"><b><font color=\"red\">Unban</font></b></a>";
+								echo "<a href=\"?p=admin&sub=users&id=".htmlspecialchars($_GET['id'])."&action=unban\"><b><font color=\"red\">Unban</font></b></a>";
 							}
 							elseif($bann == 0) 
 							{ 
-								echo "<a href=\"?p=admin&sub=users&id=".$_GET['id']."&action=ban\"><b><font color=\"red\">Ban Account</font></b></a>";
+								echo "<a href=\"?p=admin&sub=users&id=".htmlspecialchars($_GET['id'])."&action=ban\"><b><font color=\"red\">Ban Account</font></b></a>";
 							}
 						?>
 						</td>
@@ -161,7 +161,7 @@ if(isset($_GET['id']))
 						<th><center><b><?php echo $lang['edit_profile']; ?></center></b></th>
 					</thead>
 				</table>
-				<form method="POST" action="?p=admin&sub=users&id=<?php echo $_GET['id']; ?>" class="form label-inline">
+				<form method="POST" class="form label-inline">
 					<input type="hidden" name="action" value="editProfile">
 					
 					<div class="field">
@@ -223,7 +223,7 @@ if(isset($_GET['id']))
 						<th><center><b><?php echo $lang['change_pass']; ?></center></b></th>
 					</thead>
 				</table>
-				<form method="POST" action="?p=admin&sub=users&id=<?php echo $_GET['id']; ?>" class="form label-inline">
+				<form method="POST" class="form label-inline">
 					<input type="hidden" name="action" value="changePass">
 					
 					<!-- New Password -->
@@ -245,7 +245,7 @@ if(isset($_GET['id']))
 						<th><center><b><?php echo $lang['edit_webacct_details']; ?></center></b></th>
 					</thead>
 				</table>
-				<form method="POST" action="?p=admin&sub=users&id=<?php echo $_GET['id']; ?>" class="form label-inline">
+				<form method="POST" class="form label-inline">
 					<input type="hidden" name="action" value="editWeb">
 				
 					<!-- Account Level -->
@@ -453,7 +453,7 @@ else
 				{
 					if(isset($_GET['sortby']))
 					{
-						admin_paginate($totalrows, $limit, $page, '?p=admin&sub=users&sortby='.$_GET['sortby']);
+						admin_paginate($totalrows, $limit, $page, '?p=admin&sub=users&sortby='.htmlspecialchars($_GET['sortby']));
 					}
 					else
 					{

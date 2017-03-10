@@ -66,7 +66,7 @@ function changePass()
 		if($Account->setPassword($_GET['id'], $newpass) == TRUE)
 		{
 			output_message('success','<b>Password set successfully! Please wait while you are redirected...</b>
-			<meta http-equiv=refresh content="3;url=?p=admin&sub=users&id='.$_GET['id'].'">');
+			<meta http-equiv=refresh content="3;url=?p=admin&sub=users&id='.htmlspecialchars($_GET['id']).'">');
 		}
 		else
 		{
@@ -76,7 +76,7 @@ function changePass()
 	else
 	{
 		output_message('error','<b>'.$lang['change_pass_short'].'</b>
-		<meta http-equiv=refresh content="3;url=?p=admin&sub=users&id='.$_GET['id'].'">');
+		<meta http-equiv=refresh content="3;url=?p=admin&sub=users&id='.htmlspecialchars($_GET['id']).'">');
 	}
 }
 
@@ -115,7 +115,7 @@ function changeDetails()
 	if($success == 3)
 	{
 		output_message('success', 'Users details updated successfully! Redirecting... 
-			<meta http-equiv=refresh content="3;url=?p=admin&sub=users&id='.$_GET['id'].'">');
+			<meta http-equiv=refresh content="3;url=?p=admin&sub=users&id='.htmlspecialchars($_GET['id']).'">');
 		return TRUE;
 	}
 }
@@ -137,7 +137,7 @@ function editUser()
 		  WHERE `account_id`='".$_GET['id']."'
 		");
 		output_message('success','User Updated Successfully! Please wait while you are redirected...
-			<meta http-equiv=refresh content="3;url=?p=admin&sub=users&id='.$_GET['id'].'">');
+			<meta http-equiv=refresh content="3;url=?p=admin&sub=users&id='.htmlspecialchars($_GET['id']).'">');
 	}
 }
 
@@ -148,7 +148,7 @@ function unBan($unbanid)
 	if($Account->unbanAccount($unbanid) == TRUE)
 	{
 		output_message('success','Success. Account #'.$unbanid.' Successfully Un-Banned!
-			Please wait while you are redirected... <meta http-equiv=refresh content="3;url=?p=admin&sub=users&id='.$_GET['id'].'"');
+			Please wait while you are redirected... <meta http-equiv=refresh content="3;url=?p=admin&sub=users&id='.htmlspecialchars($_GET['id']).'"');
 	}	
 }
 
@@ -185,7 +185,7 @@ function showBanForm($banid)
 	?>
 		<div class="content">	
 			<div class="content-header">
-				<h4><a href="?p=admin">Main Menu</a> / <a href="?p=admin&sub=users">Manage Users</a> / <a href="?p=admin&sub=users&id=<?= $_GET['id'];?>"><?= $unme;?></a> / Ban</h4>
+				<h4><a href="?p=admin">Main Menu</a> / <a href="?p=admin&sub=users">Manage Users</a> / <a href="?p=admin&sub=users&id=<?= htmlspecialchars($_GET['id']);?>"><?= $unme;?></a> / Ban</h4>
 			</div> <!-- .content-header -->				
 		<div class=\"main-content\">
 	<?php
