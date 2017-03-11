@@ -353,7 +353,7 @@ class Account
                 $email_text .= 'Password: '.$password."\n";
                 $email_text .= 'This is your activation key: '.$tmp_act_key."\n";
                 $email_text .= 'CLICK HERE : '.$act_link."\n";
-                send_email($params['email'],$params['username'],'== '.(string)$Config->get('site_title').' account activation ==',$email_text);
+                send_email($params['email'], $params['username'], '== '.(string)$Config->get('site_title').' account activation ==', $email_text, false);
                 return 1;
             }
 			
@@ -495,8 +495,8 @@ class Account
 
     function isAvailableUsername($username)
 	{
-        $res = $this->DB->num_rows("SELECT COUNT(*) FROM `account` WHERE `username`='".$username."'");
-        if($res['COUNT(*)'] == 0) 
+        $res = $this->DB->count("SELECT id FROM `account` WHERE `username`='".$username."'");
+        if($res == 0) 
 		{
 			return TRUE; // username is available
 		}
@@ -512,8 +512,8 @@ class Account
 
     function isAvailableEmail($email)
 	{
-        $res = $this->DB->num_rows("SELECT COUNT(*) FROM `account` WHERE `email`='".$email."'");
-        if($res['COUNT(*)'] == 0) 
+        $res = $this->DB->count("SELECT id FROM `account` WHERE `email`='".$email."'");
+        if($res == 0) 
 		{
 			return TRUE; // email is available
 		}
@@ -581,8 +581,8 @@ class Account
 	function isBannedAccount($account_id)
 	{
 		global $DB;
-		$check = $DB->num_rows("SELECT COUNT(*) FROM `account_banned` WHERE `id`='".$account_id."' AND `active`=1");
-		if ($check['COUNT(*)'] > 0)
+		$check = $DB->count("SELECT id FROM `account_banned` WHERE `id`='".$account_id."' AND `active`=1");
+		if ($check > 0)
 		{
 			return TRUE; // Account is banned
 		}
@@ -599,8 +599,8 @@ class Account
 	function isBannedIp()
 	{
 		global $DB;
-		$check = $DB->num_rows("SELECT COUNT(*) FROM `ip_banned` WHERE `ip`='".$_SERVER['REMOTE_ADDR']."'");
-		if ($check['COUNT(*)'] > 0)
+		$check = $DB->count("SELECT ip FROM `ip_banned` WHERE `ip`='".$_SERVER['REMOTE_ADDR']."'");
+		if ($check > 0)
 		{
 			return TRUE; // IP is banned
 		}
@@ -934,8 +934,8 @@ class Account
     {
         global $user;
 
-        $result = $this->DB->num_rows("SELECT COUNT(*) FROM `mw_online` WHERE `user_id`='".$this->user['id']."'");
-        if($result['COUNT(*)'] > 0)
+        $result = $this->DB->count("SELECT id FROM `mw_online` WHERE `user_id`='".$this->user['id']."'");
+        if($result > 0)
         {
             $this->DB->query("UPDATE `mw_online` SET 
 				`user_ip`='".$this->user['ip']."',
@@ -969,8 +969,8 @@ class Account
     {
         global $user;
 
-        $result = $this->DB->num_rows("SELECT  COUNT(*) FROM `mw_online` WHERE `user_id`='0' AND `user_ip`='".$this->user['ip']."'");
-        if($result['COUNT(*)'] > 0)
+        $result = $this->DB->count("SELECT id FROM `mw_online` WHERE `user_id`='0' AND `user_ip`='".$this->user['ip']."'");
+        if($result > 0)
         {
             $this->DB->query("UPDATE `mw_online` SET 
 				`user_ip`='".$this->user['ip']."',

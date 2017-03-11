@@ -76,171 +76,144 @@ function Register()
 {
 	global $DB, $Config, $allow_reg, $err_array, $Account, $lang;
 	
-	// Check to see if we still are allowed to register
-	if($allow_reg == TRUE)
+	// Inizialize variable, we use this after. Use this to add extensions.
+	$notreturn = FALSE;
+
+	// Extensions
+	// Each extention you see down-under will check for specific user input,
+	// In this step we set "requirements" for what user may input.
+
+	// Ext 1 - Image verification
+	// We need to see if its enabled, and if the user put in the right code
+	if($Config->get('reg_use_recaptcha') == 1)
 	{
-		// Inizialize variable, we use this after. Use this to add extensions.
-		$notreturn = FALSE;
-
-		// Extensions
-		// Each extention you see down-under will check for specific user input,
-		// In this step we set "requirements" for what user may input.
-
-		// Ext 1 - Image verification
-		// We need to see if its enabled, and if the user put in the right code
-		if($Config->get('reg_use_recpatcha') == 1)
-		{
-			$response=json_decode(file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=".$Config->get('reg_recaptcha_private_key')."&response=".$_POST['g-recaptcha-response']."&remoteip=".$_SERVER['REMOTE_ADDR']), true);
-			
-			if($response['success'] != true)
-			{
-				$notreturn = TRUE;
-				$err_array[] = $lang['image_var_incorrect'];
-			}
-		}
-
-		// Ext 2 - secret questions
-		// Check if user questions are required, if so we need to check for symbols, and character lenght
-		if ($Config->get('reg_secret_questions') == 1)
-		{
-			if ($_POST['secretq1'] && $_POST['secretq2'] && $_POST['secreta1'] && $_POST['secreta2']) 
-			{
-				if(check_for_symbols($_POST['secreta1']) || check_for_symbols($_POST['secreta2']))
-				{
-					$notreturn = TRUE;
-					$err_array[] = $lang['secretq_error_symbols'];
-				}
-				if($_POST['secretq1'] == $_POST['secretq2']) 
-				{
-					$notreturn = TRUE;
-					$err_array[] = $lang['secretq_error_same'];
-				}
-				if($_POST['secreta1'] == $_POST['secreta2']) 
-				{
-					$notreturn = TRUE;
-					$err_array[] = $lang['secretq_error_same'];
-				}
-				if(strlen($_POST['secreta1']) < 4 || strlen($_POST['secreta2']) < 4) 
-				{
-					$notreturn = TRUE;
-					$err_array[] = $lang['secretq_error_short'];
-				}
-			}
-			else 
-			{
-				$notreturn = TRUE;
-				$err_array[] = $lang['secretq_error_empty'];
-			}
-		}
+		$response=json_decode(file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=".$Config->get('reg_recaptcha_private_key')."&response=".$_POST['g-recaptcha-response']."&remoteip=".$_SERVER['REMOTE_ADDR']), true);
 		
-		// Ext 3 - make sure the username isnt already in use
-		if($Account->isAvailableUsername($_POST['r_login']) == FALSE)
+		if($response['success'] != true)
 		{
 			$notreturn = TRUE;
-			$err_array[] = $lang['username_taken'];
+			$err_array[] = $lang['image_var_incorrect'];
 		}
+	}
 
-		// Ext 4 - make sure password is not username
-		if($_POST['r_login'] == $_POST['r_pass']) 
+	// Ext 2 - secret questions
+	// Check if user questions are required, if so we need to check for symbols, and character lenght
+	if ($Config->get('reg_secret_questions') == 1)
+	{
+		if ($_POST['secretq1'] && $_POST['secretq2'] && $_POST['secreta1'] && $_POST['secreta2']) 
+		{
+			if(check_for_symbols($_POST['secreta1']) || check_for_symbols($_POST['secreta2']))
+			{
+				$notreturn = TRUE;
+				$err_array[] = $lang['secretq_error_symbols'];
+			}
+			if($_POST['secretq1'] == $_POST['secretq2']) 
+			{
+				$notreturn = TRUE;
+				$err_array[] = $lang['secretq_error_same'];
+			}
+			if($_POST['secreta1'] == $_POST['secreta2']) 
+			{
+				$notreturn = TRUE;
+				$err_array[] = $lang['secretq_error_same'];
+			}
+			if(strlen($_POST['secreta1']) < 4 || strlen($_POST['secreta2']) < 4) 
+			{
+				$notreturn = TRUE;
+				$err_array[] = $lang['secretq_error_short'];
+			}
+		}
+		else 
 		{
 			$notreturn = TRUE;
-			$err_array[] = $lang['user_pass_same'];
+			$err_array[] = $lang['secretq_error_empty'];
 		}
+	}
+	
+	// Ext 3 - make sure the username isnt already in use
+	if($Account->isAvailableUsername($_POST['r_login']) == FALSE)
+	{
+		$notreturn = TRUE;
+		$err_array[] = $lang['username_taken'];
+	}
 
-		// Main add into the database
-		if ($notreturn == FALSE)
+	// Ext 4 - make sure password is not username
+	if($_POST['r_login'] == $_POST['r_pass']) 
+	{
+		$notreturn = TRUE;
+		$err_array[] = $lang['user_pass_same'];
+	}
+
+	// Main add into the database
+	if ($notreturn == FALSE)
+	{
+		if(!isset($_POST['secretq1']))
 		{
-			// @$Enter is the main input arrays into the SDL
-			$Enter = $Account->register(
-				array(
-					'username' => strtoupper($_POST['r_login']),
-					'sha_pass_hash' => $Account->sha_password($_POST['r_login'],$_POST['r_pass']),
-					'sha_pass_hash2' => $Account->sha_password($_POST['r_login'],$_POST['r_cpass']),
-					'email' => $_POST['r_email'],
-					'expansion' => $_POST['r_account_type'],
-					'password' => $_POST['r_pass']
-				), 
-				array(
-					'secretq1'=> strip_if_magic_quotes($_POST['secretq1']),
-					'secreta1' => strip_if_magic_quotes($_POST['secreta1']),
-					'secretq2' => strip_if_magic_quotes($_POST['secretq2']), 
-					'secreta2' => strip_if_magic_quotes($_POST['secreta2'])
-				)
-			);
-			
-			// lets catch the return on the register function
-			if($Enter == 1) # 1 = success
-			{
-				if($Config->get('reg_invite') == 1)
-				{
-					$Account->delete_key($_POST['r_key']);
-				}
-				$reg_succ = TRUE;
-			}
-			elseif($Enter == 0) # All params are emtpy
-			{
-				$reg_succ = FALSE;
-				$err_array[] = $lang['some_params_empty'];
-			}
-			elseif($Enter == 2) # empty username
-			{
-				$reg_succ = FALSE;
-				$err_array[] = $lang['empty_param_username'];
-			}
-			elseif($Enter == 3) # passwords dont match
-			{
-				$reg_succ = FALSE;
-				$err_array[] = $lang['passwords_dont_match'];
-			}
-			elseif($Enter == 4) # empty email
-			{
-				$reg_succ = FALSE;
-				$err_array[] = $lang['empty_param_email'];
-			}
-			elseif($Enter == 5) # IP Banned
-			{
-				$reg_succ = FALSE;
-				$err_array[] = $lang['your_ip_is_banned'];
-			}
-			else # Fetal Error
-			{
-				$reg_succ = FALSE;
-				$err_array[] = "Account Creation [FATAL ERROR]: User cannot be created, likely due to incorrect database configuration.  Contact the administrator.";
-			}
+			$_POST['secretq1'] = $_POST['secreta1'] = $_POST['secretq2'] = $_POST['secreta2'] = "";
 		}
-		else
+		// @$Enter is the main input arrays into the SDL
+		$Enter = $Account->register(
+			array(
+				'username' => strtoupper($_POST['r_login']),
+				'sha_pass_hash' => $Account->sha_password($_POST['r_login'],$_POST['r_pass']),
+				'sha_pass_hash2' => $Account->sha_password($_POST['r_login'],$_POST['r_cpass']),
+				'email' => $_POST['r_email'],
+				'expansion' => $_POST['r_account_type'],
+				'password' => $_POST['r_pass']
+			), 
+			array(
+				'secretq1'=> strip_if_magic_quotes($_POST['secretq1']),
+				'secreta1' => strip_if_magic_quotes($_POST['secreta1']),
+				'secretq2' => strip_if_magic_quotes($_POST['secretq2']), 
+				'secreta2' => strip_if_magic_quotes($_POST['secreta2'])
+			)
+		);
+		
+		// lets catch the return on the register function
+		if($Enter == 1) # 1 = success
+		{
+			if($Config->get('reg_invite') == 1)
+			{
+				$Account->delete_key($_GET['r_key']);
+			}
+			$reg_succ = TRUE;
+		}
+		elseif($Enter == 0) # All params are emtpy
 		{
 			$reg_succ = FALSE;
+			$err_array[] = $lang['some_params_empty'];
 		}
-		  
-		// If there were any errors, then they are outputed here
-		if($reg_succ == FALSE) 
+		elseif($Enter == 2) # empty username
 		{
-			if(!$err_array[0]) 
-			{
-				$err_array[0] = "Unknown Reason";
-			}
-			$output_error = $lang['register_failed'];
-			$output_error .= "<ul><li>";
-			$output_error .= implode("</li><li>", $err_array);
-			$output_error .= "</li></ul>";
-			output_message('error', $output_error.'Redirecting...<meta http-equiv=refresh content="8;url=?p=account&sub=register">');
+			$reg_succ = FALSE;
+			$err_array[] = $lang['empty_param_username'];
 		}
-		else # Registration was successful
+		elseif($Enter == 3) # passwords dont match
 		{
-			if((int)$Config->get('require_act_activation') == 1)
-			{
-				output_message('success', $lang['activation_email_sent']);
-			}
-			else
-			{
-				output_message('success', $lang['register_success'].'<meta http-equiv=refresh content="5;url=?p=account&sub=login">');
-			}
+			$reg_succ = FALSE;
+			$err_array[] = $lang['passwords_dont_match'];
+		}
+		elseif($Enter == 4) # empty email
+		{
+			$reg_succ = FALSE;
+			$err_array[] = $lang['empty_param_email'];
+		}
+		elseif($Enter == 5) # IP Banned
+		{
+			$reg_succ = FALSE;
+			$err_array[] = $lang['your_ip_is_banned'];
+		}
+		else # Fetal Error
+		{
+			$reg_succ = FALSE;
+			$err_array[] = "Account Creation [FATAL ERROR]: User cannot be created, likely due to incorrect database configuration.  Contact the administrator.";
 		}
 	}
 	else
 	{
-		return FALSE;
+		$reg_succ = FALSE;
 	}
+		
+	return $reg_succ; 
 }
 ?>
