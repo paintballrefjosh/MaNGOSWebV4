@@ -23,7 +23,7 @@ CREATE TABLE `mw_account_extend` (
   `total_donations` varchar(5) NOT NULL DEFAULT '0.00',
   `total_votes` smallint(5) NOT NULL DEFAULT '0',
   PRIMARY KEY (`account_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of mw_account_extend
@@ -37,7 +37,7 @@ CREATE TABLE `mw_account_groups` (
   `account_level` smallint(2) unsigned NOT NULL DEFAULT '1',
   `title` text,
   PRIMARY KEY (`account_level`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of mw_account_groups
@@ -57,7 +57,7 @@ CREATE TABLE `mw_account_keys` (
   `key` varchar(40) CHARACTER SET utf8 DEFAULT NULL,
   `assign_time` int(11) unsigned DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- ----------------------------
 -- Records of mw_account_keys
@@ -71,7 +71,7 @@ CREATE TABLE `mw_db_version` (
   `dbver` varchar(20) NOT NULL DEFAULT '',
   `dbdate` int(10) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`dbver`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Table structure for `mw_db_version`
@@ -82,7 +82,7 @@ CREATE TABLE `mw_db_version` (
   `dbdate` int(10) unsigned NOT NULL DEFAULT '0',
   `entry` int(5) unsigned NOT NULL DEFAULT '1',
   PRIMARY KEY (`entry`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of mw_db_version
@@ -99,7 +99,7 @@ CREATE TABLE `mw_donate_packages` (
   `cost` varchar(11) NOT NULL DEFAULT '1.00',
   `points` int(11) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of mw_donate_packages
@@ -122,7 +122,7 @@ CREATE TABLE `mw_donate_transactions` (
   `amount` varchar(10) DEFAULT NULL,
   `item_given` tinyint(1) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of mw_donate_transactions
@@ -137,7 +137,7 @@ CREATE TABLE `mw_faq` (
   `question` text NOT NULL,
   `answer` text NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of mw_faq
@@ -155,7 +155,7 @@ CREATE TABLE `mw_gallery` (
   `date` int(11) unsigned NOT NULL,
   `cat` varchar(255) NOT NULL,
   UNIQUE KEY `id` (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=cp1251 ROW_FORMAT=DYNAMIC;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of mw_gallery
@@ -176,7 +176,7 @@ CREATE TABLE `mw_menu_items` (
   `guest_only` int(3) NOT NULL DEFAULT '0',
   `id` int(3) unsigned NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of mw_menu_items
@@ -208,12 +208,12 @@ CREATE TABLE `mw_news` (
   `posted_by` text,
   `post_time` int(15) unsigned DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of mw_news
 -- ----------------------------
-INSERT INTO `mw_news` VALUES ('1', 'Welcome!', '<center><b><p>Thank you for installing MangosWeb v3!</p></b> <p>Please login with your Admin account username and password to configure the CMS further.</p></center>', 'Mistvale.com Dev', '1485753669');
+INSERT INTO `mw_news` VALUES ('', 'Welcome!', '<center><b><p>Thank you for installing MangosWeb v3!</p></b> <p>Please login with your Admin account username and password to configure the CMS further.</p></center>', 'Mistvale.com Dev', '1485753669');
 
 
 -- ----------------------------
@@ -228,7 +228,7 @@ CREATE TABLE `mw_online` (
   `logged` int(10) unsigned NOT NULL DEFAULT '0',
   `currenturl` varchar(255) NOT NULL DEFAULT './',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of mw_online
@@ -248,7 +248,7 @@ CREATE TABLE `mw_pms` (
   `sender_ip` varchar(15) DEFAULT '0.0.0.0',
   `showed` tinyint(1) DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of mw_pms
@@ -263,7 +263,7 @@ CREATE TABLE `mw_regkeys` (
   `key` varchar(255) NOT NULL DEFAULT '0',
   `used` smallint(3) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of mw_regkeys
@@ -277,7 +277,7 @@ CREATE TABLE `mw_secret_questions` (
   `id` int(3) unsigned NOT NULL AUTO_INCREMENT,
   `question` varchar(60) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of mw_secret_questions
@@ -302,7 +302,7 @@ CREATE TABLE `mw_shop_items` (
   `wp_cost` varchar(5) NOT NULL DEFAULT '0',
   `realms` int(100) unsigned NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of mw_shop_items
@@ -320,7 +320,7 @@ CREATE TABLE `mw_vote_sites` (
   `points` int(11) DEFAULT NULL,
   `reset_time` int(16) unsigned NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of mw_vote_sites
@@ -336,27 +336,13 @@ CREATE TABLE `mw_voting` (
   `site` int(10) unsigned NOT NULL DEFAULT '0',
   `time` int(10) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of mw_voting
 -- ----------------------------
 
 INSERT INTO `mw_account_extend` (`account_id`) SELECT account.id FROM account;
-
--- ----------------------------
--- Instead of rebuilding this file, we will just alter the tables for utf-8
--- ----------------------------
-ALTER TABLE `mw_account_groups` DEFAULT CHARACTER SET 'utf8' COLLATE 'utf8_unicode_ci';
-ALTER TABLE `mw_account_extend` DEFAULT CHARACTER SET 'utf8' COLLATE 'utf8_unicode_ci';
-ALTER TABLE `mw_donate_packages` DEFAULT CHARACTER SET 'utf8' COLLATE 'utf8_unicode_ci';
-ALTER TABLE `mw_donate_transactions` DEFAULT CHARACTER SET 'utf8' COLLATE 'utf8_unicode_ci';
-ALTER TABLE `mw_faq` DEFAULT CHARACTER SET 'utf8' COLLATE 'utf8_unicode_ci';
-ALTER TABLE `mw_donate_packages` DEFAULT CHARACTER SET 'utf8' COLLATE 'utf8_unicode_ci';
-ALTER TABLE `mw_menu_items` DEFAULT CHARACTER SET 'utf8' COLLATE 'utf8_unicode_ci';
-ALTER TABLE `mw_news` DEFAULT CHARACTER SET 'utf8' COLLATE 'utf8_unicode_ci';
-ALTER TABLE `mw_online` DEFAULT CHARACTER SET 'utf8' COLLATE 'utf8_unicode_ci';
-ALTER TABLE `mw_shop_items` DEFAULT CHARACTER SET 'utf8' COLLATE 'utf8_unicode_ci';
 
 --
 -- Add dbinfo to realmlist table
