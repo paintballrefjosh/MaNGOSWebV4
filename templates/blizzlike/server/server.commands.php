@@ -1,30 +1,14 @@
 <br>
-<?php builddiv_start(0, $lang['commands']); 
-if($maxpages > 1) 
-{ ?>
-	<div align="right" class="news-listing">
-		<b><?php echo $lang['page']; ?> :&nbsp; <?php for ($CurrPage = 1; $CurrPage <= $maxpages; $CurrPage++) 
-		{ ?>
-			<a href="index.php?p=server&sub=commands&sp=<?php echo $CurrPage; ?>"><?php echo $CurrPage; ?></a>&nbsp;
-	<?php 
-		}?>
-		</b><br/>
-	</div>
-	<br/>
 <?php
-} ?>
+builddiv_start(0, $lang['commands']); 
+?>
 
 <center>
-<?php 
-if($maxpages > 1) 
-{?>
-	<h5><?php echo $lang['page'].": ".htmlentities((isset($_GET['sp']) ? $_GET['sp'] : '')); ?></h5>
-<?php
-}?>
-
 <div class="module-container">
 <?php
+
 $postnum = 0;
+$hl = '';
 
 foreach($alltopics as $postanum => $topic)
 {
@@ -80,11 +64,7 @@ foreach($alltopics as $postanum => $topic)
     var position = <?php echo$postnum;?>;
     var localId = postId<?php echo$postnum;?>;
     var cookieState = getcookie("news"+localId);
-    var defaultOpen = "<?php echo($postnum>$defaultOpen?'0':'1');?>";
-    if ((cookieState == 1) || (position==1 && cookieState!='0') || (defaultOpen == 1 && cookieState!='0')) {
-    } else {
-        document.getElementById("news"+localId).className = "news-collapse"+"<?php echo $hl;?>";
-    }
+    document.getElementById("news"+localId).className = "news-collapse"+"<?php echo $hl;?>";
     </script>
 <?php 
 } ?>
