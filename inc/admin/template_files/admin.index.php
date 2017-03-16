@@ -70,8 +70,8 @@
 					<!-- ROW 3 -->
 						<tr>
 							<td height="80px" width="130" align="center">
-								<a href="?p=admin&sub=cache"><img src="inc/admin/images/icons/cache-icon.png" width="48" height="48" border="0" /></a><br />
-								<a href="?p=admin&sub=cache"><?php echo $lang['cache_settings']; ?></a>
+								<img src="inc/admin/images/icons/cache-icon.png" width="48" height="48" border="0" /><br />
+								<?php echo $lang['cache_settings']; ?>
 							</td>
 							<td height="80px" width="130" align="center">
 								<a href="?p=admin&sub=regkeys"><img src="inc/admin/images/icons/keys-icon.png" width="48" height="48" border="0" /></a><br />
@@ -119,7 +119,7 @@
 						<tr>
 							<td align='right'>
 							<?php
-								$Languages = explode(",", $Config->get('available_lang'));
+								$Languages = explode(",", $mwe_config['available_lang']);
 								echo "Language: | ";
 								foreach($Languages as $Lang)
 								{

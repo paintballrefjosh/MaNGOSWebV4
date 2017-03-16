@@ -24,16 +24,18 @@ function editFaq()
 		`answer`='".$_POST['answer']."'
 	  WHERE `id`='".$_GET['id']."'
 	");
-	$Core->clearCache();
+
 	output_message('success', $lang['faq_updated_success']);
+	redirect("?p=admin&amp;sub=faq", 0, 2);
 }
 
 function deleteFaq()
 {
 	global $DB, $Core;
 	$DB->query("DELETE FROM `mw_faq` WHERE `id`='".$_GET['id']."'");
-	$Core->clearCache();
+
 	output_message('success', 'Deleted Faq');
+	redirect("?p=admin&amp;sub=faq", 0, 2);
 }
 
 function addFaq()
@@ -47,7 +49,8 @@ function addFaq()
 		'".$_POST['answer']."'
 		)
 	");
-	$Core->clearCache();
+
 	output_message('success', $lang['faq_add_success']);
+	redirect("?p=admin&amp;sub=faq", 0, 2);
 }
 ?>

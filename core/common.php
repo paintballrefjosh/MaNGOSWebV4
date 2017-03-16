@@ -82,17 +82,12 @@ function customError($errno, $errstr)
 // Gets the realmlist from realm DB. Enabled is whether the realm
 // has been enabled for view by users in the ACP.
 
-function getRealmlist($enabled = 1)
+function getRealmlist()
 {
 	global $DB;
-	if($enabled == 1)
-	{
-		$realms = $DB->select("SELECT * FROM `realmlist` WHERE `site_enabled`=1 ORDER BY `id` ASC");
-	}
-	else
-	{
-		$realms = $DB->select("SELECT * FROM `realmlist` ORDER BY `id` ASC");
-	}
+    
+    $realms = $DB->select("SELECT * FROM `mw_realm` ORDER BY `realm_id` ASC");
+    
 	return $realms;
 }
 
@@ -101,8 +96,8 @@ function getRealmlist($enabled = 1)
 
 function get_realm_byid($id)
 {
-    global $DB;
-    $search_q = $DB->selectRow("SELECT * FROM `realmlist` WHERE `id`='".$id."'");
+    global $RDB;
+    $search_q = $RDB->selectRow("SELECT * FROM `realmlist` WHERE `id`='".$id."' LIMIT 0,1");
     return $search_q;
 }
 
@@ -209,12 +204,12 @@ function print_gold($gvar)
 // Send Mail
 function send_email($goingto, $toname, $sbj, $messg) 
 {
-	global $Config;
+	global $mwe_config;
 	define('DISPLAY_XPM4_ERRORS', true); // display XPM4 errors
-	$core_em = $Config->get('site_email');
+	$core_em = $mwe_config['site_email'];
 		
 	// If email type "0" (SMTP)
-	if($Config->get('email_type') == 0) 
+	if($mwe_config['email_type'] == 0) 
 	{ 
 		require_once 'core/mail/SMTP.php'; // path to 'SMTP.php' file from XPM4 package
 
@@ -236,7 +231,7 @@ function send_email($goingto, $toname, $sbj, $messg)
 		else output_message('error', print_r($_RESULT));
 		SMTP::Disconnect($c); // disconnect
 	}
-	elseif($Config->get('email_type') == 1) 	// If email type "1" (MIME)
+	elseif($mwe_config['email_type'] == 1) 	// If email type "1" (MIME)
 	{
 		require_once 'core/mail/MIME.php'; // path to 'MIME.php' file from XPM4 package
 
@@ -247,7 +242,7 @@ function send_email($goingto, $toname, $sbj, $messg)
 		// print result
 		echo $send ? output_message('success', 'Mail Sent!') : output_message('error', 'Error!');
 	}
-	elseif($Config->get('email_type') == 2)	// If email type "2" (MTA Relay)
+	elseif($mwe_config['email_type'] == 2)	// If email type "2" (MTA Relay)
 	{
 		require_once 'core/mail/MAIL.php'; // path to 'MAIL.php' file from XPM4 package
 
@@ -258,14 +253,14 @@ function send_email($goingto, $toname, $sbj, $messg)
 		$m->Html($messg); // set html message
 
 		// connect to MTA server 'smtp.hostname.net' port '25' with authentication: 'username'/'password'
-		if($Config->get('email_use_secure') == 1) 
+		if($mwe_config['email_use_secure'] == 1) 
 		{
-			$c = $m->Connect($Config->get('email_smtp_host'), $Config->get('email_smtp_port'), $Config->get('email_smtp_user'), $Config->get('email_smtp_pass'), $Config->get('email_smtp_secure')) 
+			$c = $m->Connect($mwe_config['email_smtp_host'], $mwe_config['email_smtp_port'], $mwe_config['email_smtp_user'], $mwe_config['email_smtp_pass'], $mwe_config['email_smtp_secure']) 
 				or die(print_r($m->Result));
 		}
 		else
 		{
-			$c = $m->Connect($Config->get('email_smtp_host'), $Config->get('email_smtp_port'), $Config->get('email_smtp_user'), $Config->get('email_smtp_pass')) 
+			$c = $m->Connect($mwe_config['email_smtp_host'], $mwe_config['email_smtp_port'], $mwe_config['email_smtp_user'], $mwe_config['email_smtp_pass']) 
 				or die(print_r($m->Result));
 		}
 
@@ -304,7 +299,7 @@ function redirect($linkto,$type=0,$wait_sec=0)
 	{
         if($type==0)
 		{
-            $GLOBALS['redirect'] = '<meta http-equiv=refresh content="'.$wait_sec.';url='.$linkto.'">';
+            echo '<meta http-equiv=refresh content="'.$wait_sec.';url='.$linkto.'">';
         }
 		else
 		{
@@ -486,7 +481,7 @@ function my_previewreverse($text)
 
 function mw_url($page, $subpage = NULL, $params = NULL, $encodeentities = TRUE) 
 {
-	global $Config;
+	global $mwe_config;
 	if($subpage != NULL)
 	{
 		$url = "?p=$page&sub=$subpage";
@@ -495,7 +490,7 @@ function mw_url($page, $subpage = NULL, $params = NULL, $encodeentities = TRUE)
 	{
 		if($page == 'home' || $page == 'main')
 		{
-			$url = $Config->get('site_base_href');
+			$url = $mwe_config['site_base_href'] . $mwe_config['site_href'];
 		}
 		else
 		{

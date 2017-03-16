@@ -17,9 +17,6 @@ if(INCLUDED !== TRUE)
 $pathway_info[] = array('title' => $lang['register'], 'link' => '');
 // ==================== //
 
-// Tell the cache system not to cache this page
-define('CACHE_FILE', FALSE);
-
 // Include the captcha class
 include('core/lib/class.captcha.php');
 
@@ -59,10 +56,10 @@ $err_array = array();
 //	************************************************************
 // If users are limited to how many accounts per IP, we find out how many this IP has.
 
-if($Config->get('max_act_per_ip') > 0)
+if($mwe_config['max_act_per_ip') > 0)
 {
-	$count_ip = $DB->count("SELECT COUNT(*) FROM mw_account_extend WHERE registration_ip='".$_SERVER['REMOTE_ADDR']."'");
-	if($count_ip >= (int)$Config->get('max_act_per_ip'))
+	$count_ip = $DB->count("SELECT account_id FROM mw_account_extend WHERE registration_ip='".$_SERVER['REMOTE_ADDR']."'");
+	if($count_ip >= (int)$mwe_config['max_act_per_ip'))
 	{
 		$allow_reg = FALSE;
 		$err_array[] = $lang['register_acct_limit'];
@@ -74,7 +71,7 @@ if($Config->get('max_act_per_ip') > 0)
 
 function Register()
 {
-	global $DB, $Config, $allow_reg, $err_array, $Account, $lang;
+	global $DB, $mwe_config, $allow_reg, $err_array, $Account, $lang;
 	
 	// Check to see if we still are allowed to register
 	if($allow_reg == TRUE)
@@ -88,9 +85,9 @@ function Register()
 
 		// Ext 1 - Image verification
 		// We need to see if its enabled, and if the user put in the right code
-		if($Config->get('reg_use_recpatcha') == 1)
+		if($mwe_config['reg_use_recpatcha'] == 1)
 		{
-			$response=json_decode(file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=".$Config->get('reg_recaptcha_private_key')."&response=".$_POST['g-recaptcha-response']."&remoteip=".$_SERVER['REMOTE_ADDR']), true);
+			$response=json_decode(file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=".$mwe_config['reg_recaptcha_private_key']."&response=".$_POST['g-recaptcha-response']."&remoteip=".$_SERVER['REMOTE_ADDR']), true);
 			
 			if($response['success'] != true)
 			{
@@ -101,7 +98,7 @@ function Register()
 
 		// Ext 2 - secret questions
 		// Check if user questions are required, if so we need to check for symbols, and character lenght
-		if ($Config->get('reg_secret_questions') == 1)
+		if ($mwe_config['reg_secret_questions'] == 1)
 		{
 			if ($_POST['secretq1'] && $_POST['secretq2'] && $_POST['secreta1'] && $_POST['secreta2']) 
 			{
@@ -171,7 +168,7 @@ function Register()
 			// lets catch the return on the register function
 			if($Enter == 1) # 1 = success
 			{
-				if($Config->get('reg_invite') == 1)
+				if($mwe_config['reg_invite'] == 1)
 				{
 					$Account->delete_key($_POST['r_key']);
 				}
@@ -228,7 +225,7 @@ function Register()
 		}
 		else # Registration was successful
 		{
-			if((int)$Config->get('require_act_activation') == 1)
+			if((int)$mwe_config['require_act_activation'] == 1)
 			{
 				output_message('success', $lang['activation_email_sent']);
 			}

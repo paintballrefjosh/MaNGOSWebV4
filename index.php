@@ -28,17 +28,42 @@ define('TIME_START', microtime(1));
 $_SERVER['REQUEST_TIME'] = time();
 
 /***************************************************************
- * Load the Core and Config Classes
+ * Load the Config
  ***************************************************************/
-include('core/class.config.php');
-$Config = new Config;
+include('config/config-protected.php');
+
+/***************************************************************
+ * Setup the Database class and Database connections
+ ***************************************************************/
+require ('core/class.database.php');
+$DB = new Database(
+	$dbconf['db_host'], 
+	$dbconf['db_port'], 
+	$dbconf['db_username'], 
+	$dbconf['db_password'], 
+	$dbconf['db_name']
+	);
+
+// Check the database status. 0 = cannot connect, 1 = success, 2 = DB doesnt exist
+if($DB->status() != 1)
+{
+	echo "Cannot connect to the MaNGOS Web database. Please make sure you have run the installer to properly set the DB info in the database.<br>";
+	die();
+}
+
+$mwe_config = array();
+$mwe_config = $DB->selectRow("SELECT * FROM mw_config LIMIT 1");
+
+/***************************************************************
+ * Load the Core class
+ ***************************************************************/
 include('core/core.php');
-$Core = new Core($Config);
+$Core = new Core($mwe_config);
 
 /***************************************************************
  * Show Site Notice if enabled in config, and user cookie not set
  ***************************************************************/
-if($Config->get('site_notice_enable') == 1 && !isset($_COOKIE['agreement_accepted']))
+if($mwe_config['site_notice_enable'] == 1 && !isset($_COOKIE['agreement_accepted']))
 {
 	include('modules/notice/notice.php');
 	exit();
@@ -47,7 +72,7 @@ if($Config->get('site_notice_enable') == 1 && !isset($_COOKIE['agreement_accepte
 /***************************************************************
  * See if the site is installed by checking config defualts
  ***************************************************************/
-if($Config->getDbInfo('db_username') == 'default')
+if($dbconf['db_username'] == 'default')
 {
 	header('location: install/');
 }
@@ -66,80 +91,56 @@ $Core->setGlobals();
 
 // Load language file
 include('lang/' . $GLOBALS["user_cur_lang"] . '/common.php');
-
-/***************************************************************
- * Setup the Database class and Database connections
- ***************************************************************/
-require ('core/class.database.php');
-$DB = new Database(
-	$Config->getDbInfo('db_host'), 
-	$Config->getDbInfo('db_port'), 
-	$Config->getDbInfo('db_username'), 
-	$Config->getDbInfo('db_password'), 
-	$Config->getDbInfo('db_name')
-	);
-
-// Check the database status. 0 = cannot connect, 1 = success, 2 = DB doesnt exist
-if($DB->status() != 1)
-{
-	echo "Cannot connect to the Realm database. Please make sure you have run the installer to properly set the DB info in the database.";
-	die();
-}
 	
 // Make an array from `dbinfo` column for the selected realm..
-$DB_info = $DB->selectRow("SELECT * FROM realmlist WHERE id='".$GLOBALS['cur_selected_realm']."'");
-$dbinfo = explode(';', $DB_info['dbinfo']);
+$realm_db = $DB->selectRow("SELECT * FROM mw_realm WHERE realm_id='".$GLOBALS['cur_selected_realm']."'");
 
-// DBinfo column: char_host;char_port;char_username;char_password;charDBname;
-// world_host;world_port;world_username;world_pass;worldDBname
-$Realm_DB_Info = array(
-	'char_db_host' => $dbinfo['0'], // char host
-	'char_db_port' => $dbinfo['1'], // char port
-	'char_db_username' => $dbinfo['2'], // char user
-	'char_db_password' => $dbinfo['3'], // char password
-	'char_db_name' => $dbinfo['4'], //char db name
-	'w_db_host' => $dbinfo['5'], // world host
-	'w_db_port' => $dbinfo['6'], // world port
-	'w_db_username' => $dbinfo['7'], // world user
-	'w_db_password' => $dbinfo['8'], // world password
-	'w_db_name' => $dbinfo['9'], // world db name
+// === Establish the Realm DB connection === //
+$RDB = new Database(
+	$mwe_config['db_logon_host'],
+	$mwe_config['db_logon_port'],
+	$mwe_config['db_logon_user'],
+	$mwe_config['db_logon_pass'],
+	$mwe_config['db_logon_name']
 	);
 
-// Free up memory.
-unset($dbinfo, $DB_info); 
+// Check the CDB status. 0 = cannot connect, 1 = success, 2 = DB doesnt exist
+if($RDB->status() != 1)
+{
+	echo "Cannot connect to the Realm database. Please make sure you have this realm setup successfully in the Admin Panel.  Delete your cookies to reset realm selection back to default.<br>";
+	//die();
+}
 
 // === Establish the Character DB connection === //
 $CDB = new Database(
-	$Realm_DB_Info['char_db_host'],
-	$Realm_DB_Info['char_db_port'],
-	$Realm_DB_Info['char_db_username'],
-	$Realm_DB_Info['char_db_password'],
-	$Realm_DB_Info['char_db_name']
+	$realm_db['db_char_host'],
+	$realm_db['db_char_port'],
+	$realm_db['db_char_user'],
+	$realm_db['db_char_pass'],
+	$realm_db['db_char_name']
 	);
 
 // Check the CDB status. 0 = cannot connect, 1 = success, 2 = DB doesnt exist
 if($CDB->status() != 1)
 {
-	echo "Cannot connect to the Character database. Please make sure you have this realm setup successfully in the Admin Panel. 
-	Delete your cookies to reset realm selection back to default. ";
-	die();
+	echo "Cannot connect to the Character database. Please make sure you have this realm setup successfully in the Admin Panel.  Delete your cookies to reset realm selection back to default.<br>";
+	//die();
 }
-	
+
 // === Establish the World DB connection === //	
 $WDB = new Database(
-	$Realm_DB_Info['w_db_host'],
-	$Realm_DB_Info['w_db_port'],
-	$Realm_DB_Info['w_db_username'],
-	$Realm_DB_Info['w_db_password'],
-	$Realm_DB_Info['w_db_name']
+	$realm_db['db_world_host'],
+	$realm_db['db_world_port'],
+	$realm_db['db_world_user'],
+	$realm_db['db_world_pass'],
+	$realm_db['db_world_name']
 	);
 
 // Check the CDB status. 0 = cannot connect, 1 = success, 2 = DB doesnt exist
 if($WDB->status() != 1)
 {
-	echo "Cannot connect to the World database. Please make sure you have this realm setup successfully in the Admin Panel. 
-	Delete your cookies to reset realm selection back to default";
-	die();
+	echo "Cannot connect to the World database. Please make sure you have this realm setup successfully in the Admin Panel.  Delete your cookies to reset realm selection back to default.<br>";
+	//die();
 }
 	
 // Free up memory
@@ -188,7 +189,7 @@ if($Template == FALSE)
 	else
 	{
 		// if empty page, then load default component(frontpage)
-		$ext = (isset($_GET['p']) ? $_GET['p'] : (string)$Config->get('default_component'));
+		$ext = (isset($_GET['p']) ? $_GET['p'] : (string)$mwe_config['default_component']);
 		
 		// If url looks like so: ?p=account/login (This is a avalid url)
 		if(strpos($ext, '/') !== FALSE) 
@@ -242,45 +243,9 @@ if($Template == FALSE)
 				include($Template['header']);
 			ob_end_flush();
 			
-			// === Start the loading of the template cache === //
-			
-			// Lets check to see if the page is flagged to cache or not. defined in scriptfile of each page
-			if(defined('CACHE_FILE'))
-			{
-				$CacheFile = CACHE_FILE;
-			}
-			else # Not defined
-			{
-				$CacheFile = FALSE;
-			}
-			
-			// Check if admin has enabled caching, and CACHE_FILE is enabled
-			if($Config->get('enable_cache') && $CacheFile == TRUE)
-			{
-				// If file is cached
-				if($Core->isCached($Template['number']."_".$ext.".".$sub."_".$GLOBALS['user_cur_lang']))
-				{
-					$Contents = $Core->getCache($Template['number']."_".$ext.".".$sub."_".$GLOBALS['user_cur_lang']);
-					echo $Contents;
-				}
-				// If not cached, then get contents of the page and cache them.
-				else
-				{
-					ob_start();
-						include($template_file);
-					$Contents = ob_get_flush();
-					$Core->writeCache($Template['number']."_".$ext.".".$sub."_".$GLOBALS['user_cur_lang'], $Contents);
-				}
-				unset($Contents);
-			}
-			else
-			{
-				ob_start();
-					include($template_file);
-				ob_end_flush();
-			}
-			
-			// === End cache system, Load the footer === //
+			ob_start();
+			include($template_file);
+			ob_end_flush();
 
 			// Set our time end, so we can see how fast the page loaded.
 			define('TIME_END', microtime(1));

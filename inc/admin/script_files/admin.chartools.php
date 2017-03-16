@@ -25,7 +25,7 @@ if(isset($_POST['action']))
 
 // Get the realm name
 $Realm = get_realm_byid($GLOBALS['cur_selected_realm']);
-$Realms = getRealmlist('0');
+$Realms = getRealmlist();
 
 // Include the SDL files
 include('core/SDL/class.character.php');

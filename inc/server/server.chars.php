@@ -14,13 +14,10 @@ if(INCLUDED !== TRUE) {
 }
 
 // build top of page navigation breadcrumbs
-$realm = $DB->selectRow("SELECT * FROM realmlist WHERE `id`='".$user['cur_selected_realm']."' LIMIT 1");
+$realm_info = get_realm_byid($user['cur_selected_realm']);
 $pathway_info[] = array('title' => $lang['Characters'], 'link' => '?p=server&sub=chars');
-$pathway_info[] = array('title' => $realm['name'], 'link' => '');
+$pathway_info[] = array('title' => $realm_info['name'], 'link' => '');
 
-
-// Tell the cache not to cache the file because theres more then 1 page
-define("CACHE_FILE", FALSE);
 
 if(isset($_GET['page']))
 {
@@ -42,33 +39,16 @@ $Zone = new Zone;
 $Character = new Character;
 
 $query = array();
-$realm_info_new = get_realm_byid($_COOKIE['cur_selected_realm']);
  
 $cc = 0;
 
 // arrays
 $query1 = array();
 
-//===== Filter ==========//
-if($_GET['char'] && preg_match("/[a-z]/",$_GET['char']))
-{
-   $filter = "WHERE `name` LIKE '".$_GET['char']."%'";
-}
-elseif($_GET['char'] == 1)
-{
-   $filter = "WHERE `name` REGEXP '^[^A-Za-z]'";
-}
-else
-{
-   $filter = '';
-}
-
 //Find total number of characters in database -- used to calculate total number of pages
-$cc2 =  $CDB->count("SELECT count(*) FROM `characters` $filter");
-// again count() was returning an array, hacked it to work below
-$cc2 = $cc2['count(*)'];
+$cc2 = (int)$CDB->count("SELECT guid FROM `characters`");
 
-$query1 = $CDB->select("SELECT * FROM `characters` $filter ORDER BY `name` LIMIT $limit_start, $items_per_pages");
+$query1 = $CDB->select("SELECT * FROM `characters` ORDER BY `name` LIMIT $limit_start, $items_per_pages");
 
 $cc1 = 0;
 $item_res = array();

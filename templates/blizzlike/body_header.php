@@ -12,11 +12,12 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
-<link rel="shortcut icon" href="<?php echo $Template['path']; ?>/images/favicon.ico"/>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<link rel="shortcut icon" href="<?php echo $Template['path']; ?>/images/favicon.ico" type="image/x-icon" />
+<link rel="icon" href="<?php echo $Template['path']; ?>/images/favicon.ico" type="image/x-icon"> /
 <script src="http://static.wowhead.com/widgets/power.js"></script>
-<link rel="alternate" href="<?php echo $Config->get('site_base_href')."rss.php"; ?>" type="application/rss+xml" title="<?php echo (string)$Config->get('site_title');?> RSS News Feed"/>
-<title><?php echo (string)$Config->get('site_title'); echo $title_str;?></title>
+<link rel="alternate" href="<?php echo $mwe_config['site_base_href']."rss.php"; ?>" type="application/rss+xml" title="<?php echo (string)$mwe_config['site_title'];?> RSS News Feed"/>
+<title><?php echo (string)$mwe_config['site_title']; echo $title_str;?></title>
 <style media="screen" title="currentStyle" type="text/css">
     @import url("<?php echo $Template['path']; ?>/css/newhp.css");
     @import url("<?php echo $Template['path']; ?>/css/newhp_basic.css");
@@ -27,9 +28,9 @@
 	@import url("<?php echo $Template['path']; ?>/css/topnav.css"); 
 </style>
 <script type="text/javascript"><!--
-    var SITE_HREF = '<?php echo $Config->get('site_href');?>';
+    var SITE_HREF = '<?php echo $mwe_config['site_base_href'];?>';
     var DOMAIN_PATH = '<?php echo $_SERVER["HTTP_HOST"];?>';
-    var SITE_PATH = '<?php echo $Config->get('site_href')?>';
+    var SITE_PATH = '<?php echo $mwe_config['site_href']?>';
 --></script>
 <script src="<?php echo $Template['path']; ?>/js/detection.js" type="text/javascript"></script>
 <script src="<?php echo $Template['path']; ?>/js/functions.js" type="text/javascript"></script>
@@ -49,10 +50,10 @@
   <!-- Top Navbar Start -->
   <script>
 	var global_nav_lang = '<?php echo ""; ?>';
-	var site_name = '<?php echo (string)$Config->get('site_title'); ?>';
-	var site_link = '<?php echo (string)$Config->get('site_base_href'); ?>';
-	var forum_link = '<?php echo $Config->get('site_forums'); ?>';
-	var armory_link = '<?php echo $Config->get('site_armory'); ?>';
+	var site_name = '<?php echo (string)$mwe_config['site_title']; ?>';
+	var site_link = '<?php echo (string)$mwe_config['site_base_href'] . $mwe_config['site_href']; ?>';
+	var forum_link = '<?php echo $mwe_config['site_forums']; ?>';
+	var armory_link = '<?php echo $mwe_config['site_armory']; ?>';
   </script>
   <div id="shared_topnav">
 	<script src="<?php echo $Template['path']; ?>/js/buildtopnav.js"></script>
@@ -101,7 +102,7 @@
 <?php
 $realms = array(); 
 $realms = getRealmlist();
-$languages = explode(",", $Config->get('available_lang'));
+$languages = explode(",", $mwe_config['available_lang']);
 ?>
     <div style="background: url(<?php echo $Template['path']; ?>/images/page-bg-top.jpg) repeat-x 0 0; height: 88px; position: relative; width: 100%; "></div>
     <center>
@@ -153,7 +154,7 @@ $languages = explode(",", $Config->get('available_lang'));
 							<div style="overflow: hidden; visibility: inherit; display: block; cursor: default; background-color: transparent; background-image: url(<?php echo $Template['path']; ?>/images/countrymenu-bg.gif); height: 19px; padding-left: 9px; padding-top: 2px;"><a class="menufillertop">Theme:</a><img src="<?php echo $Template['path']; ?>/images/pixel.gif" alt=""/></div>
 							<div id="contextdropdown" style="height: auto; visibility:hidden; display: none;">
 							<?php
-								$tmpl_list = explode(",", $Config->get('templates'));
+								$tmpl_list = explode(",", $mwe_config['templates']);
 								$tkey = 0;
 								foreach($tmpl_list as $templ) 
 								{ ?>
@@ -168,9 +169,12 @@ $languages = explode(",", $Config->get('available_lang'));
 							<div style="overflow: hidden; visibility: inherit; display: block; cursor: default; background-color: transparent; background-image: url(<?php echo $Template['path']; ?>/images/countrymenu-bg.gif); height: 19px; padding-left: 9px; padding-top: 2px;"><a class="menufillertop">Realm:</a><img src="<?php echo $Template['path']; ?>/images/pixel.gif" alt=""/></div>
 							<div id="realmdropdown" style="height: auto; visibility:hidden; display: none;">
 							<?php
-							foreach($realms as $realm) { ?>
+							foreach($realms as $realm)
+							{
+									$realm_ext = $RDB->selectRow("SELECT name FROM `realmlist` WHERE `id` = '".$realm['realm_id']."'");
+?>
 								<div OnMouseOver="this.style.backgroundColor='rgb(100, 100, 100)';" OnMouseOut="this.style.backgroundColor='rgb(29, 28, 27)';" style="cursor: pointer; background-color: rgb(29, 28, 27); color: rgb(244, 196, 0); font-family: arial,comic sans ms,technical; font-size: 12px; font-style: normal; text-align: left; background-image: url(<?php echo $Template['path']; ?>/images/bullet-trans-bg.gif); width: 136px; height: 15px; padding-left: 9px; padding-top: 0px; left: 1px; top: 1px;">
-									<a class="menuLink" style="display:block;" href="javascript:setcookie('cur_selected_realm', '<?php echo $realm['id'];?>'); window.location.reload();"><?php echo ($user['cur_selected_realm'] == $realm['id']?'&gt; '.$realm['name']:$realm['name']);?></a> 
+									<a class="menuLink" style="display:block;" href="javascript:setcookie('cur_selected_realm', '<?php echo $realm['realm_id'];?>'); window.location.reload();"><?php echo ($user['cur_selected_realm'] == $realm['realm_id']?'&gt; '.$realm_ext['name']:$realm_ext['name']);?></a> 
 								</div>
 							<?php } ?>
 							</div>
@@ -192,27 +196,9 @@ $languages = explode(",", $Config->get('available_lang'));
 							<div id="right-bg"></div>
                             <div id="leftmenu">
                               <div id="leftmenucontainer">
-                                <?php 
-									if($Config->get('enable_cache') == 1)
-									{
-										if($Core->isCached($Template['number']."_".$user['account_level']."_main_nav_links"))
-										{
-											$Contents = $Core->getCache($Template['number']."_".$user['account_level']."_main_nav_links");
-											echo $Contents;
-										}
-										else
-										{
-											ob_start();
-												build_main_menu(); // MAIN LINKS HERE!!!
-											$Contents = ob_get_flush();
-											$Core->writeCache($Template['number']."_".$user['account_level']."_main_nav_links", $Contents);
-										}
-									}
-									else
-									{
+<?php 
 										build_main_menu(); // MAIN LINKS HERE!!!
-									}
-                                ?>
+?>
                               </div>
                             </div>
                           </div>

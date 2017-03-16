@@ -21,7 +21,9 @@ if($user['account_level'] <= 2)
 	<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
 	<title>MangosWeb Enhanced Admin Panel</title>
 	<link rel="stylesheet" href="inc/admin/css/main.css" type="text/css"/>
-	
+	<link rel="shortcut icon" href="<?php echo $Template['path']; ?>/images/favicon.ico" type="image/x-icon" />
+	<link rel="icon" href="<?php echo $Template['path']; ?>/images/favicon.ico" type="image/x-icon"> /
+
 	<!--[if IE 8]>	
 		<link rel="stylesheet" href="inc/admin/css/ie8.css" type="text/css" media="screen" title="ie8" charset="utf-8" />
 	<![endif]-->
@@ -36,9 +38,9 @@ if($user['account_level'] <= 2)
 	<!-- Include the functions.js for cookie setting of realms etc etc -->
 	<script type="text/javascript">
 	<!--
-		var SITE_HREF = '<?php echo $Config->get('site_href');?>';
+		var SITE_HREF = '<?php echo $mwe_config['site_base_href'] . $mwe_config['site_href']; ?>';
 		var DOMAIN_PATH = '<?php echo $_SERVER["HTTP_HOST"];?>';
-		var SITE_PATH = '<?php echo $Config->get('site_href')?>';
+		var SITE_PATH = '<?php echo $mwe_config['site_base_href'] . $mwe_config['site_href']; ?>';
 	-->
 	</script>
 	<script src="inc/admin/js/functions.js" type="text/javascript"></script>
@@ -57,7 +59,7 @@ if($user['account_level'] <= 2)
 				<?php echo $lang['core_version']; ?>: <?php echo $Core->version; ?>
 				&nbsp;&nbsp;&nbsp; <font color='black'>|</font> &nbsp;&nbsp;&nbsp;
 				<?php echo $lang['database_version']; ?>: <?php 
-                    $db_act_ver = $DB->selectCell("SELECT `dbver` FROM `mw_db_version`");
+                    $db_act_ver = $DB->selectCell("SELECT `dbver` FROM `mw_db_version` ORDER BY `dbdate` DESC LIMIT 0,1");
 					if($db_act_ver < $Core->exp_dbversion) 
 					{ 
 						echo "<font color='red'>".$db_act_ver." (<a href='". mw_url('admin', 'updates', array('update' => 'db')) ."' /><small>Needs Updated</small></a>)</font>";

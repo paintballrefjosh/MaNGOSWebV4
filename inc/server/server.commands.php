@@ -27,19 +27,19 @@ else
 	$startpage = 1;
 }
 $userid = $user['id'];
-if($Config->get('emulator') == 'mangos') 
+if($mwe_config['emulator'] == 'mangos') 
 {
-	$userlevel = $DB->selectCell("SELECT `gmlevel` FROM `account` WHERE `id`='$userid'");
+	$userlevel = $RDB->selectCell("SELECT `gmlevel` FROM `account` WHERE `id`='$userid'");
 }
-elseif($Config->get('emulator') == 'trinity') 
+elseif($mwe_config['emulator'] == 'trinity') 
 {
-	$userlevel = $DB->selectCell("SELECT `gmlevel` FROM `account_access` WHERE `id`='$userid'");
+	$userlevel = $RDB->selectCell("SELECT `gmlevel` FROM `account_access` WHERE `id`='$userid'");
 	if($userlevel == FALSE)
 	{
 		$userlevel = 1;
 	}
 }
-$maxtopics  = $WDB->count("SELECT COUNT(*) FROM `command` WHERE `security` <= $userlevel");
+$maxtopics  = $WDB->count("SELECT name FROM `command` WHERE `security` <= $userlevel");
 
 $maxpages = round($maxtopics / $items_per_page);
 if(($maxpages * $items_per_page) < $maxtopics) 

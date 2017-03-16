@@ -32,7 +32,7 @@ function updateOrder()
 	{
 		$DB->query("UPDATE `mw_menu_items` SET `order`='$value' WHERE `id`='$key'");
 	}
-	$Core->clearCache();
+
 	output_message('success', $lang['link_order_updated']);
 }
 
@@ -47,21 +47,21 @@ function editLink()
 		`account_level`='".$_POST['account_level']."'
 	  WHERE `id`='".$_GET['linkid']."'
 	");
-	$Core->clearCache();
+
 	output_message('success', $lang['link_update_success']);
 }
 
 function deleteLink()
 {
-	global $DB, $Core;
+	global $DB;
 	$DB->query("DELETE FROM `mw_menu_items` WHERE `id`='".$_GET['linkid']."'");
-	$Core->clearCache();
+
 	output_message('success', 'Deleted Menu Item');
 }
 
 function addLink()
 {
-	global $DB, $Core, $lang;
+	global $DB, $lang;
 	$DB->query("INSERT INTO mw_menu_items(
 		`menu_id`,
 		`link_title`,
@@ -75,7 +75,7 @@ function addLink()
 		'".$_POST['guest_only']."', 
 		'".$_POST['account_level']."')
 	");
-	$Core->clearCache();
+
 	output_message('success', $lang['link_add_success']);
 }
 ?>

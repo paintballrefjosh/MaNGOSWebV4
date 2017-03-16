@@ -205,6 +205,8 @@ else
 					$x = 0;
 					foreach($Realms as $Rlm)
 					{
+						$Rlm_ext = $RDB->selectRow("SELECT * FROM `realmlist` WHERE `id` = '".$Rlm['realm_id']."'");
+						
 						if($x == 1)
 						{
 							$separator = " | ";
@@ -215,14 +217,14 @@ else
 							$x = 1;
 						}
 
-						echo $separator . "<a href=\"javascript:setcookie('cur_selected_realm', '". $Rlm['id'] ."'); window.location.reload();\">";
-						if($user['cur_selected_realm'] == $Rlm['id'])
+						echo $separator . "<a href=\"javascript:setcookie('cur_selected_realm', '". $Rlm['realm_id'] ."'); window.location.reload();\">";
+						if($user['cur_selected_realm'] == $Rlm['realm_id'])
 						{
-							echo "<b><font color=green>".$Rlm['name']."</font></b>"; 
+							echo "<b><font color=green>".$Rlm_ext['name']."</font></b>"; 
 						}
 						else
 						{
-							echo $Rlm['name'];
+							echo $Rlm_ext['name'];
 						}
 						echo "</a>";
 					}

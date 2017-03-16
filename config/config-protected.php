@@ -8,7 +8,7 @@
 /*			Original MangosWeb (C) 2007, Sasha, Nafe, TGM, Peec				*/
 /****************************************************************************/
 
-$db = array(
+$dbconf = array(
 'db_host'         => 'localhost',
 'db_port'         => '3306',
 'db_username'     => 'default',

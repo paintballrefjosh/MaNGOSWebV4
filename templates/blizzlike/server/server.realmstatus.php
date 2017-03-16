@@ -24,7 +24,7 @@
 		// === Here we replace a few words in the page description with images and links === //
 		
 		// Start by defining the realm status forum link from the config file
-		$realm_status_forum = '<a href="'.$Config->get('site_forums').'">' . $lang['realm_status_forum'] . '</a>';
+		$realm_status_forum = '<a href="'.$mwe_config['site_forums'].'">' . $lang['realm_status_forum'] . '</a>';
 		$desc = $PAGE_DESC;
 		
 		// Now we replace [up] with the $up image and description, [down] with the $down image and desc,
@@ -57,7 +57,7 @@ write_metalborder_header(); ?>
             </td>
         </tr>
 <?php 
-		foreach($Realm as $item) 
+		foreach($realm_list as $item) 
 		{
 			// If the satus is online, dispaly the online image, else, display offline image
 			if($item['status'] == 'Online')

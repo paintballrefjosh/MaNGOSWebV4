@@ -4,9 +4,9 @@ SET FOREIGN_KEY_CHECKS=0;
 -- ----------------------------
 DROP TABLE IF EXISTS `mw_account_extend`;
 CREATE TABLE `mw_account_extend` (
-  `account_id` int(10) unsigned NOT NULL,
-  `account_level` smallint(3) unsigned NOT NULL DEFAULT '1',
-  `theme` smallint(3) unsigned NOT NULL DEFAULT '0',
+  `account_id` int(10) UNSIGNED NOT NULL,
+  `account_level` smallint(3) UNSIGNED NOT NULL DEFAULT '1',
+  `theme` smallint(3) UNSIGNED NOT NULL DEFAULT '0',
   `last_visit` int(25) DEFAULT NULL,
   `registration_ip` varchar(15) NOT NULL DEFAULT '0.0.0.0',
   `activation_code` varchar(255) DEFAULT NULL,
@@ -23,7 +23,7 @@ CREATE TABLE `mw_account_extend` (
   `total_donations` varchar(5) NOT NULL DEFAULT '0.00',
   `total_votes` smallint(5) NOT NULL DEFAULT '0',
   PRIMARY KEY (`account_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of mw_account_extend
@@ -34,10 +34,10 @@ CREATE TABLE `mw_account_extend` (
 -- ----------------------------
 DROP TABLE IF EXISTS `mw_account_groups`;
 CREATE TABLE `mw_account_groups` (
-  `account_level` smallint(2) unsigned NOT NULL DEFAULT '1',
+  `account_level` smallint(2) UNSIGNED NOT NULL DEFAULT '1',
   `title` text,
   PRIMARY KEY (`account_level`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of mw_account_groups
@@ -53,11 +53,11 @@ INSERT INTO `mw_account_groups` VALUES ('5', 'Banned');
 -- ----------------------------
 DROP TABLE IF EXISTS `mw_account_keys`;
 CREATE TABLE `mw_account_keys` (
-  `id` int(11) unsigned NOT NULL,
+  `id` int(11) UNSIGNED NOT NULL,
   `key` varchar(40) CHARACTER SET utf8 DEFAULT NULL,
-  `assign_time` int(11) unsigned DEFAULT NULL,
+  `assign_time` int(11) UNSIGNED DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- ----------------------------
 -- Records of mw_account_keys
@@ -69,9 +69,9 @@ CREATE TABLE `mw_account_keys` (
 DROP TABLE IF EXISTS `mw_db_version`;
 CREATE TABLE `mw_db_version` (
   `dbver` varchar(20) NOT NULL DEFAULT '',
-  `dbdate` int(10) unsigned NOT NULL DEFAULT '0',
+  `dbdate` int(10) UNSIGNED NOT NULL DEFAULT '0',
   PRIMARY KEY (`dbver`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for `mw_db_version`
@@ -79,27 +79,27 @@ CREATE TABLE `mw_db_version` (
 DROP TABLE IF EXISTS `mw_db_version`;
 CREATE TABLE `mw_db_version` (
   `dbver` varchar(20) NOT NULL DEFAULT '',
-  `dbdate` int(10) unsigned NOT NULL DEFAULT '0',
-  `entry` int(5) unsigned NOT NULL DEFAULT '1',
+  `dbdate` int(10) UNSIGNED NOT NULL DEFAULT '0'
   PRIMARY KEY (`entry`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of mw_db_version
 -- ----------------------------
-INSERT INTO `mw_db_version` VALUES ('1.0a', '1292781212', '1');
+INSERT INTO `mw_db_version` VALUES ('1.0a', '1292781212');
+INSERT INTO `mw_db_version` VALUES ('4.0.9', UNIX_TIMESTAMP());
 
 -- ----------------------------
 -- Table structure for `mw_donate_packages`
 -- ----------------------------
 DROP TABLE IF EXISTS `mw_donate_packages`;
 CREATE TABLE `mw_donate_packages` (
-  `id` smallint(5) unsigned NOT NULL AUTO_INCREMENT,
+  `id` smallint(5) UNSIGNED NOT NULL AUTO_INCREMENT,
   `desc` varchar(255) DEFAULT NULL,
   `cost` varchar(11) NOT NULL DEFAULT '1.00',
   `points` int(11) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of mw_donate_packages
@@ -110,19 +110,19 @@ CREATE TABLE `mw_donate_packages` (
 -- ----------------------------
 DROP TABLE IF EXISTS `mw_donate_transactions`;
 CREATE TABLE `mw_donate_transactions` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
   `trans_id` varchar(255) DEFAULT NULL,
-  `account` int(8) unsigned DEFAULT NULL,
-  `item_number` int(11) unsigned DEFAULT NULL,
+  `account` int(8) UNSIGNED DEFAULT NULL,
+  `item_number` int(11) UNSIGNED DEFAULT NULL,
   `buyer_email` varchar(255) DEFAULT NULL,
   `payment_type` varchar(255) DEFAULT NULL,
   `payment_status` varchar(255) DEFAULT NULL,
   `pending_reason` varchar(255) DEFAULT NULL,
   `reason_code` varchar(255) DEFAULT NULL,
   `amount` varchar(10) DEFAULT NULL,
-  `item_given` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `item_given` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of mw_donate_transactions
@@ -133,11 +133,11 @@ CREATE TABLE `mw_donate_transactions` (
 -- ----------------------------
 DROP TABLE IF EXISTS `mw_faq`;
 CREATE TABLE `mw_faq` (
-  `id` smallint(3) unsigned NOT NULL AUTO_INCREMENT,
+  `id` smallint(3) UNSIGNED NOT NULL AUTO_INCREMENT,
   `question` text NOT NULL,
   `answer` text NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of mw_faq
@@ -148,11 +148,11 @@ CREATE TABLE `mw_faq` (
 -- ----------------------------
 DROP TABLE IF EXISTS `mw_gallery`;
 CREATE TABLE `mw_gallery` (
-  `id` int(3) unsigned NOT NULL AUTO_INCREMENT,
+  `id` int(3) UNSIGNED NOT NULL AUTO_INCREMENT,
   `img` text NOT NULL,
   `comment` text NOT NULL,
   `autor` text NOT NULL,
-  `date` int(11) unsigned NOT NULL,
+  `date` int(11) UNSIGNED NOT NULL,
   `cat` varchar(255) NOT NULL,
   UNIQUE KEY `id` (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=cp1251 ROW_FORMAT=DYNAMIC;
@@ -168,15 +168,15 @@ INSERT INTO `mw_gallery` VALUES ('2', 'Mangosweb_scr.jpg', 'Test Screenshot', 'M
 -- ----------------------------
 DROP TABLE IF EXISTS `mw_menu_items`;
 CREATE TABLE `mw_menu_items` (
-  `menu_id` int(3) unsigned NOT NULL DEFAULT '1',
+  `menu_id` int(3) UNSIGNED NOT NULL DEFAULT '1',
   `link_title` varchar(100) DEFAULT NULL,
   `link` varchar(255) DEFAULT NULL,
-  `order` int(3) unsigned NOT NULL DEFAULT '1',
+  `order` int(3) UNSIGNED NOT NULL DEFAULT '1',
   `account_level` int(3) NOT NULL DEFAULT '1',
   `guest_only` int(3) NOT NULL DEFAULT '0',
-  `id` int(3) unsigned NOT NULL AUTO_INCREMENT,
+  `id` int(3) UNSIGNED NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of mw_menu_items
@@ -202,18 +202,18 @@ INSERT INTO `mw_menu_items` VALUES ('8', 'FAQ', '?p=support&sub=faq', '1', '1', 
 -- ----------------------------
 DROP TABLE IF EXISTS `mw_news`;
 CREATE TABLE `mw_news` (
-  `id` smallint(3) unsigned NOT NULL AUTO_INCREMENT,
+  `id` smallint(3) UNSIGNED NOT NULL AUTO_INCREMENT,
   `title` text,
   `message` longtext,
-  `posted_by` text,
-  `post_time` int(15) unsigned DEFAULT NULL,
+  `posted_by` INT UNSIGNED NOT NULL DEFAULT 0,
+  `post_time` int(15) UNSIGNED DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of mw_news
 -- ----------------------------
-INSERT INTO `mw_news` VALUES ('1', 'Welcome!', '<center><b><p>Thank you for installing MangosWeb v3!</p></b> <p>Please login with your Admin account username and password to configure the CMS further.</p></center>', 'Mistvale.com Dev', '1485753669');
+INSERT INTO `mw_news` VALUES (NULL, 'Welcome!', '<b><p>Thank you for installing MaNGOS Web v4!</p></b> <p>Please login with your Admin account username and password to configure the CMS further.</p>', 0, UNIX_TIMESTAMP());
 
 
 -- ----------------------------
@@ -221,11 +221,11 @@ INSERT INTO `mw_news` VALUES ('1', 'Welcome!', '<center><b><p>Thank you for inst
 -- ----------------------------
 DROP TABLE IF EXISTS `mw_online`;
 CREATE TABLE `mw_online` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `user_id` int(10) unsigned NOT NULL DEFAULT '0',
+  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `user_id` int(10) UNSIGNED NOT NULL DEFAULT '0',
   `user_name` varchar(200) NOT NULL DEFAULT 'Guest',
   `user_ip` varchar(15) NOT NULL DEFAULT '0.0.0.0',
-  `logged` int(10) unsigned NOT NULL DEFAULT '0',
+  `logged` int(10) UNSIGNED NOT NULL DEFAULT '0',
   `currenturl` varchar(255) NOT NULL DEFAULT './',
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
@@ -239,12 +239,12 @@ CREATE TABLE `mw_online` (
 -- ----------------------------
 DROP TABLE IF EXISTS `mw_pms`;
 CREATE TABLE `mw_pms` (
-  `id` int(8) unsigned NOT NULL AUTO_INCREMENT,
-  `owner_id` int(8) unsigned NOT NULL DEFAULT '0',
+  `id` int(8) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `owner_id` int(8) UNSIGNED NOT NULL DEFAULT '0',
   `subject` varchar(255) NOT NULL,
   `message` text,
-  `sender_id` int(8) unsigned NOT NULL DEFAULT '0',
-  `posted` int(10) unsigned NOT NULL DEFAULT '0',
+  `sender_id` int(8) UNSIGNED NOT NULL DEFAULT '0',
+  `posted` int(10) UNSIGNED NOT NULL DEFAULT '0',
   `sender_ip` varchar(15) DEFAULT '0.0.0.0',
   `showed` tinyint(1) DEFAULT '0',
   PRIMARY KEY (`id`)
@@ -259,11 +259,11 @@ CREATE TABLE `mw_pms` (
 -- ----------------------------
 DROP TABLE IF EXISTS `mw_regkeys`;
 CREATE TABLE `mw_regkeys` (
-  `id` smallint(9) unsigned NOT NULL AUTO_INCREMENT,
+  `id` smallint(9) UNSIGNED NOT NULL AUTO_INCREMENT,
   `key` varchar(255) NOT NULL DEFAULT '0',
   `used` smallint(3) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of mw_regkeys
@@ -274,10 +274,10 @@ CREATE TABLE `mw_regkeys` (
 -- ----------------------------
 DROP TABLE IF EXISTS `mw_secret_questions`;
 CREATE TABLE `mw_secret_questions` (
-  `id` int(3) unsigned NOT NULL AUTO_INCREMENT,
+  `id` int(3) UNSIGNED NOT NULL AUTO_INCREMENT,
   `question` varchar(60) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of mw_secret_questions
@@ -293,16 +293,16 @@ INSERT INTO `mw_secret_questions` VALUES ('5', 'What is the name of your first p
 -- ----------------------------
 DROP TABLE IF EXISTS `mw_shop_items`;
 CREATE TABLE `mw_shop_items` (
-  `id` smallint(3) unsigned NOT NULL AUTO_INCREMENT,
+  `id` smallint(3) UNSIGNED NOT NULL AUTO_INCREMENT,
   `item_number` varchar(255) NOT NULL DEFAULT '0',
-  `itemset` int(10) unsigned NOT NULL DEFAULT '0',
+  `itemset` int(10) UNSIGNED NOT NULL DEFAULT '0',
   `gold` int(25) NOT NULL DEFAULT '0',
-  `quanity` int(25) unsigned NOT NULL DEFAULT '1',
+  `quanity` int(25) UNSIGNED NOT NULL DEFAULT '1',
   `desc` varchar(255) DEFAULT NULL,
   `wp_cost` varchar(5) NOT NULL DEFAULT '0',
-  `realms` int(100) unsigned NOT NULL DEFAULT '1',
+  `realms` int(100) UNSIGNED NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of mw_shop_items
@@ -313,14 +313,14 @@ CREATE TABLE `mw_shop_items` (
 -- ----------------------------
 DROP TABLE IF EXISTS `mw_vote_sites`;
 CREATE TABLE `mw_vote_sites` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
   `hostname` varchar(255) NOT NULL,
   `votelink` varchar(255) NOT NULL,
   `image_url` varchar(255) DEFAULT NULL,
   `points` int(11) DEFAULT NULL,
-  `reset_time` int(16) unsigned NOT NULL DEFAULT '1',
+  `reset_time` int(16) UNSIGNED NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of mw_vote_sites
@@ -331,43 +331,9 @@ CREATE TABLE `mw_vote_sites` (
 -- ----------------------------
 DROP TABLE IF EXISTS `mw_voting`;
 CREATE TABLE `mw_voting` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   `user_ip` varchar(30) NOT NULL,
-  `site` int(10) unsigned NOT NULL DEFAULT '0',
-  `time` int(10) unsigned NOT NULL DEFAULT '0',
+  `site` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `time` int(10) UNSIGNED NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of mw_voting
--- ----------------------------
-
-INSERT INTO `mw_account_extend` (`account_id`) SELECT account.id FROM account;
-
--- ----------------------------
--- Instead of rebuilding this file, we will just alter the tables for utf-8
--- ----------------------------
-ALTER TABLE `mw_account_groups` DEFAULT CHARACTER SET 'utf8' COLLATE 'utf8_unicode_ci';
-ALTER TABLE `mw_account_extend` DEFAULT CHARACTER SET 'utf8' COLLATE 'utf8_unicode_ci';
-ALTER TABLE `mw_donate_packages` DEFAULT CHARACTER SET 'utf8' COLLATE 'utf8_unicode_ci';
-ALTER TABLE `mw_donate_transactions` DEFAULT CHARACTER SET 'utf8' COLLATE 'utf8_unicode_ci';
-ALTER TABLE `mw_faq` DEFAULT CHARACTER SET 'utf8' COLLATE 'utf8_unicode_ci';
-ALTER TABLE `mw_donate_packages` DEFAULT CHARACTER SET 'utf8' COLLATE 'utf8_unicode_ci';
-ALTER TABLE `mw_menu_items` DEFAULT CHARACTER SET 'utf8' COLLATE 'utf8_unicode_ci';
-ALTER TABLE `mw_news` DEFAULT CHARACTER SET 'utf8' COLLATE 'utf8_unicode_ci';
-ALTER TABLE `mw_online` DEFAULT CHARACTER SET 'utf8' COLLATE 'utf8_unicode_ci';
-ALTER TABLE `mw_shop_items` DEFAULT CHARACTER SET 'utf8' COLLATE 'utf8_unicode_ci';
-
---
--- Add dbinfo to realmlist table
--- Very important that this is in the end, along with ADD ALTERS. Because if
--- file gets applied again, it gets an error here.
---
-ALTER TABLE `realmlist`
-ADD `site_enabled` int(3) NOT NULL default '0';
-
-ALTER TABLE `realmlist`
-ADD `ra_info` VARCHAR( 355 ) NOT NULL default 'type;port;username;password';
-
-ALTER TABLE `realmlist`
-ADD `dbinfo` VARCHAR( 355 ) NOT NULL default '127.0.0.1;3306;username;password;DBCharacter;127.0.0.1;3306;username;password;DBWorld' COMMENT 'Database info to THIS row';

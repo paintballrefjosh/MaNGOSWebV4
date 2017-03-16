@@ -30,7 +30,7 @@ $character_list = $Account->getCharacterList($user['id']);
 
 // Initiate the page description
 $Page_Desc = $lang['char_recustomize_desc'];
-$PAGE_DESC = str_replace('[COST]', '<font color="blue">'.$Config->get('module_charcustomize_pts').'</font>', $Page_Desc);
+$PAGE_DESC = str_replace('[COST]', '<font color="blue">'.$mwe_config['module_char_customize_pts'].'</font>', $Page_Desc);
 
 /* 
 	Buffer function for the SDL
@@ -40,24 +40,24 @@ $PAGE_DESC = str_replace('[COST]', '<font color="blue">'.$Config->get('module_ch
 */
 function reCustomize()
 {
-	global $Config, $DB, $lang, $user;
+	global $mwe_config, $DB, $lang, $user;
 	include('core/SDL/class.character.php');
 	$Character = new Character;
 	
-	if($Config->get('module_charcustomize') == 0)
+	if($mwe_config['module_char_customize'] == 0)
 	{
 		output_message('error', 'Nice try hacking, but not good enough.');
 		return FALSE;
 	}
 	
 	// Check to see the user has enough points
-	if($user['web_points'] >= $Config->get('module_charcustomize_pts'))
+	if($user['web_points'] >= $mwe_config['module_char_customize_pts'])
 	{
 		if($Character->setCustomize($_POST['id']) == TRUE)
 		{
 			$DB->query("UPDATE `mw_account_extend` SET 
-				`web_points`=(`web_points` - ".$Config->get('module_charcustomize_pts')."), 
-				`points_spent`=(`points_spent` + ".$Config->get('module_charcustomize_pts').")  
+				`web_points`=(`web_points` - ".$mwe_config['module_char_customize_pts']."), 
+				`points_spent`=(`points_spent` + ".$mwe_config['module_char_customize_pts'].")  
 			   WHERE `account_id` = ".$user['id']." LIMIT 1"
 			);
 			output_message('success', $lang['char_recustomize_success']);

@@ -27,7 +27,7 @@ p.nm, p.wm {
 </style>
 <?php
 builddiv_start(0, $lang['registration']);
-if ((int)$Config->get('allow_registration') == 0)
+if ((int)$mwe_config['reg_allow'] == 0)
 {
     output_message('error', 'Registration: Locked');
 }
@@ -63,7 +63,7 @@ else
 				<p id="t_email" style="display:none;" class="wm"></p>
 
 			<?php 
-				if ((int)$Config->get('reg_secret_questions') == 0)
+				if ((int)$mwe_config['reg_secret_questions'] == 0)
 				{ ?>
 
 					<label for="secretq1"><?php echo $lang['secretq']; ?> 1:</label>
@@ -92,7 +92,7 @@ else
 				} ?>
 
 			<?php 
-				if ($Config->get('reg_secret_questions') == 1)
+				if ($mwe_config['reg_secret_questions'] == 1)
 				{ ?>
 					<label for="secretq1"><?php echo $lang['secretq']; ?> 1:</label>
 					Q: <select id="secretq1" name="secretq1">
@@ -126,10 +126,10 @@ else
 				</select><br /><br />
 
 			<?php
-			if ((int)$Config->get('reg_use_recaptcha') == 1)
+			if ((int)$mwe_config['reg_use_recaptcha'] == 1)
 			{        
 			?>
-				<div class="g-recaptcha" data-sitekey="<?php echo $Config->get('reg_recaptcha_public_key');?>"></div>
+				<div class="g-recaptcha" data-sitekey="<?php echo $mwe_config['reg_recaptcha_public_key'];?>"></div>
 			<?php 	
 			}
 			?>
@@ -144,7 +144,7 @@ else
 	}
 	
 	// Else if step is empty (1), and require invite is disabled
-	elseif(empty($_POST['step']) && $Config->get('reg_invite') == 0 && $allow_reg == TRUE)
+	elseif(empty($_POST['step']) && $mwe_config['reg_require_invite'] == 0 && $allow_reg == TRUE)
 	{
 		build_CommBox_Header();
 ?>
@@ -167,7 +167,7 @@ else
 	}
 	
 	// Else if step is 1, and require invite is enabled
-	elseif(isset($_POST['step']) && $_POST['step'] == 1 && $Config->get('reg_invite') == 1)
+	elseif(isset($_POST['step']) && $_POST['step'] == 1 && $mwe_config['reg_require_invite'] == 1)
 	{
 		if($Account->isValidRegkey($_POST['r_key']) !== TRUE)
 		{
@@ -198,7 +198,7 @@ else
 	}
 	
 	// Else if step is empty, and require invite is enabled, user must enter the Invite Key
-	elseif(empty($_POST['step']) && $Config->get('reg_invite') == 1 && $allow_reg === TRUE)
+	elseif(empty($_POST['step']) && $mwe_config['reg_require_invite'] == 1 && $allow_reg === TRUE)
 	{
 		build_CommBox_Header();
 ?>

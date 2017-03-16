@@ -50,7 +50,7 @@ if(isset($_GET['id']))
 			<div class="field">
 				<label for="vote_link"><?php echo $lang['vote_link']; ?>: </label>
 				<input id="vote_link" name="votelink" size="20" type="text" class="medium" value="<?php echo $edit_info['votelink']; ?>"  />
-				<p class="field_help"><?php echo $lang['vote_link']; ?></p>
+				<p class="field_help"><?php echo $lang['vote_link_desc']; ?></p>
 			</div>
 			
 			<!-- Image Url -->

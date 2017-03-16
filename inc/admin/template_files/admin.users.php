@@ -36,7 +36,7 @@ if(isset($_GET['id']))
 		{
 			$profile = $Account->getProfile($_GET['id']);
 			$lastvisit = date("Y-m-d @ G:i", $profile['last_visit']);
-			$banned = $DB->selectRow("SELECT id, unbandate FROM account_banned WHERE id='".$_GET['id']."' AND `active`=1");
+			$banned = $RDB->selectRow("SELECT id, unbandate FROM account_banned WHERE id='".$_GET['id']."' AND `active`=1");
 			$acctstatus = "<font color=green>Active</font>";
 		
 			if($banned['id']) 
@@ -283,7 +283,7 @@ if(isset($_GET['id']))
 						<label for="theme"><?php echo $lang['theme']; ?>: </label>
 						<select name="theme" class='medium'>
 							<?php
-								$alltmpl = explode(",", $Config->get('templates'));
+								$alltmpl = explode(",", $mwe_config['templates']);
 								$key = 0;
 								foreach($alltmpl as $tmpls) 
 								{
@@ -333,7 +333,9 @@ if(isset($_GET['id']))
 					</tr>
 				</thead>
 			<?php
-				$ban_history = $DB->select("SELECT bandate, bannedby, banreason FROM account_banned WHERE id='".$_GET['id']."'");
+				$ban_history = $RDB->select("SELECT bandate, bannedby, banreason FROM account_banned WHERE id='".$_GET['id']."'");
+			if(!empty($ban_history))
+			{
 				foreach($ban_history as $row)
 				{
 			?>
@@ -344,6 +346,7 @@ if(isset($_GET['id']))
 				</tr>
 			<?php
 				}
+			}
 			?>
 			</table>
 			</div> <!-- Main Content -->
@@ -396,7 +399,7 @@ else
 				<?php
 				foreach($getusers as $row)
 				{
-					$isbanned =  $DB->num_rows("SELECT id FROM account_banned WHERE id='".$row['id']."' AND `active`=1");
+					$isbanned =  $RDB->count("SELECT id FROM account_banned WHERE id='".$row['id']."' AND `active`=1");
 				?>
 				<tr class="content">
 					<td><a href="?p=admin&amp;sub=users&amp;id=<?php echo $row['id']; ?>"><?php echo $row['username']; ?></a></td>
