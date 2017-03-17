@@ -30,9 +30,10 @@ function output_message($type, $text)
 		<div class="content">				
 			<div class="content-header">
 			<?php
+				
 				if(isset($_GET['step']))
 				{
-					$step = $_GET['step'];
+					$step = htmlspecialchars($_GET['step']);
 				}
 				else
 				{

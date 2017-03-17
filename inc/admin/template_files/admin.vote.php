@@ -33,7 +33,7 @@ if(isset($_GET['id']))
 					}
 				}
 			?>
-			<form method="POST" action="?p=admin&sub=vote&id=<?php echo $_GET['id']; ?>" class="form label-inline">
+			<form method="POST" class="form label-inline">
 			<input type="hidden" name="action" value="edit">
 			<?php
 				$edit_info = $DB->selectRow("SELECT * FROM `mw_vote_sites` WHERE `id`='".$_GET['id']."'");

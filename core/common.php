@@ -202,7 +202,7 @@ function print_gold($gvar)
 //===== MAIL FUNCTIONS =====//
 
 // Send Mail
-function send_email($goingto, $toname, $sbj, $messg) 
+function send_email($goingto, $toname, $sbj, $messg, $notice = true) 
 {
 	global $mwe_config;
 	define('DISPLAY_XPM4_ERRORS', true); // display XPM4 errors
@@ -227,7 +227,7 @@ function send_email($goingto, $toname, $sbj, $messg)
 		$c = SMTP::MXconnect($h[1]); // connect to SMTP server (direct) from MX hosts list
 		$s = SMTP::Send($c, array($t), $m, $f); // send mail
 		// print result
-		if ($s) output_message('success', 'Mail Sent!');
+		if($notice)if ($s) output_message('success', 'Mail Sent!');
 		else output_message('error', print_r($_RESULT));
 		SMTP::Disconnect($c); // disconnect
 	}
@@ -240,7 +240,7 @@ function send_email($goingto, $toname, $sbj, $messg)
 		// send mail
 		$send = mail($goingto, $sbj, $mess['content'], 'From: '.$core_em.''."\n".$mess['header']);
 		// print result
-		echo $send ? output_message('success', 'Mail Sent!') : output_message('error', 'Error!');
+		if($notice)echo $send ? output_message('success', 'Mail Sent!') : output_message('error', 'Error!');
 	}
 	elseif($mwe_config['email_type'] == 2)	// If email type "2" (MTA Relay)
 	{
@@ -265,7 +265,7 @@ function send_email($goingto, $toname, $sbj, $messg)
 		}
 
 		// send mail relay using the '$c' resource connection
-		echo $m->Send($c) ? output_message('success', 'Mail Sent!') : output_message('error', 'Error! Please check your config and make sure you inserted your MTA info correctly.');
+		if($notice)echo $m->Send($c) ? output_message('success', 'Mail Sent!') : output_message('error', 'Error! Please check your config and make sure you inserted your MTA info correctly.');
 
 		$m->Disconnect(); // disconnect from server
 		// print_r($m->History); // optional, for debugging

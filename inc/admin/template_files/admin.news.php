@@ -122,9 +122,9 @@
 			<h4><a href="?p=admin">Main Menu</a> / <a href="?p=admin&sub=news">News</a> / Edit News</h4>
 		</div> <!-- .content-header -->				
 		<div class="main-content">
-			<form method="POST" action="?p=admin&sub=news&action=edit&id=<?php echo $_GET['id']; ?>" class="form label-inline">
+			<form method="POST" class="form label-inline">
 			<input type="hidden" name="task" value="editnews">
-			<input type="hidden" name="id" value="<?php echo $_GET['id']; ?>">			
+			<input type="hidden" name="id" value="<?php echo htmlspecialchars($_GET['id']); ?>">			
 				<table>
 					<thead>
 						<tr>

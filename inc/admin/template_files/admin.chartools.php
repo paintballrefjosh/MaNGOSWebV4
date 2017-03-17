@@ -99,7 +99,7 @@ if(isset($_GET['id']))
 					<table>
 						<tr>
 							<td align="center" style="padding: 5px 5px 5px 5px;">
-							<a href="?p=admin&sub=chartools&id=<?php echo $_GET['id']; ?>&action=delete" onclick="return confirm('Are you sure? This is Un-reversable!');">
+							<a href="?p=admin&sub=chartools&id=<?php echo htmlspecialchars($_GET['id']); ?>&action=delete" onclick="return confirm('Are you sure? This is Un-reversable!');">
 								<b><font color="red"><?php echo $lang['delete_character']; ?></font></b></a> ||
 								<a href="?p=admin&sub=users&id=<?php echo $character['account']; ?>&action=ban"><b><font color="red">
 									<?php echo $lang['ban_char_account']; ?></font></b>
@@ -147,7 +147,7 @@ if(isset($_GET['id']))
 					
 					<!-- At Login Table -->
 					<table>
-						<form method="POST" action="?p=admin&sub=chartools&id=<?php echo $_GET['id']; ?>" class="form label-inline">
+						<form method="POST" class="form label-inline">
 							<input type="hidden" name="action" value="flag">
 							<thead>
 								<th colspan='2'><center><b><?php echo $lang['char_at_login']; ?></center></b></th>
@@ -277,7 +277,7 @@ else
 				{
 					if(isset($_GET['sort']))
 					{
-						admin_paginate($totalrows, $limit, $page, '?p=admin&sub=chartools&sort='.$_GET['sort']);
+						admin_paginate($totalrows, $limit, $page, '?p=admin&sub=chartools&sort='.htmlspecialchars($_GET['sort']));
 					}
 					else
 					{

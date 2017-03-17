@@ -100,26 +100,26 @@ function updateChar()
 			{
 				if($Character->setMoney($_GET['id'], $_POST['money'])  == TRUE)
 				{
-					output_message('success', $lang['char_update_success'].'<meta http-equiv=refresh content="3;url=?p=admin&sub=chartools&id='.$_GET['id'].'">');
+					output_message('success', $lang['char_update_success'].'<meta http-equiv=refresh content="3;url=?p=admin&sub=chartools&id='.htmlspecialchars($_GET['id']).'">');
 				}
 				else
 				{
-					output_message('error', $lang['char_adjust_money_fail'].'<meta http-equiv=refresh content="3;url=?p=admin&sub=chartools&id='.$_GET['id'].'">');
+					output_message('error', $lang['char_adjust_money_fail'].'<meta http-equiv=refresh content="3;url=?p=admin&sub=chartools&id='.htmlspecialchars($_GET['id']).'">');
 				}
 			}
 			else
 			{
-				output_message('error', $lang['char_adjust_xp_fail'].'<meta http-equiv=refresh content="3;url=?p=admin&sub=chartools&id='.$_GET['id'].'">');
+				output_message('error', $lang['char_adjust_xp_fail'].'<meta http-equiv=refresh content="3;url=?p=admin&sub=chartools&id='.htmlspecialchars($_GET['id']).'">');
 			}
 		}
 		else
 		{
-			output_message('error', $lang['char_set_name_fail'].'<meta http-equiv=refresh content="3;url=?p=admin&sub=chartools&id='.$_GET['id'].'">');
+			output_message('error', $lang['char_set_name_fail'].'<meta http-equiv=refresh content="3;url=?p=admin&sub=chartools&id='.htmlspecialchars($_GET['id']).'">');
 		}
 	}
 	else
 	{
-		output_message('warning', $lang['char_update_fail_online'].'<meta http-equiv=refresh content="3;url=?p=admin&sub=chartools&id='.$_GET['id'].'">');
+		output_message('warning', $lang['char_update_fail_online'].'<meta http-equiv=refresh content="3;url=?p=admin&sub=chartools&id='.htmlspecialchars($_GET['id']).'">');
 	}				
 }
 
@@ -128,11 +128,11 @@ function flagRename()
 	global $Character, $lang;
 	if($Character->setRename($_GET['id']) == TRUE)
 	{
-		output_message('success', $lang['char_rename_flag_set'].'<meta http-equiv=refresh content="3;url=?p=admin&sub=chartools&id='.$_GET['id'].'">');
+		output_message('success', $lang['char_rename_flag_set'].'<meta http-equiv=refresh content="3;url=?p=admin&sub=chartools&id='.htmlspecialchars($_GET['id']).'">');
 	}
 	else
 	{
-		output_message('warning', $lang['char_rename_flag_fail'].'<meta http-equiv=refresh content="3;url=?p=admin&sub=chartools&id='.$_GET['id'].'">');
+		output_message('warning', $lang['char_rename_flag_fail'].'<meta http-equiv=refresh content="3;url=?p=admin&sub=chartools&id='.htmlspecialchars($_GET['id']).'">');
 	}
 	
 }
@@ -142,11 +142,11 @@ function flagCustomize()
 	global $Character, $lang;
 	if($Character->setCustomize($_GET['id']) == TRUE)
 	{
-		output_message('success', $lang['char_recustomize_flag_set'].'<meta http-equiv=refresh content="3;url=?p=admin&sub=chartools&id='.$_GET['id'].'">');
+		output_message('success', $lang['char_recustomize_flag_set'].'<meta http-equiv=refresh content="3;url=?p=admin&sub=chartools&id='.htmlspecialchars($_GET['id']).'">');
 	}
 	else
 	{
-		output_message('warning', $lang['char_recustomize_flag_fail'].'<meta http-equiv=refresh content="3;url=?p=admin&sub=chartools&id='.$_GET['id'].'">');
+		output_message('warning', $lang['char_recustomize_flag_fail'].'<meta http-equiv=refresh content="3;url=?p=admin&sub=chartools&id='.htmlspecialchars($_GET['id']).'">');
 	}
 }
 
@@ -155,11 +155,11 @@ function flagTalentReset()
 	global $Character, $lang;
 	if($Character->setResetTalents($_GET['id']) == TRUE)
 	{
-		output_message('success', $lang['char_talent_flag_fail'].'<meta http-equiv=refresh content="3;url=?p=admin&sub=chartools&id='.$_GET['id'].'">');
+		output_message('success', $lang['char_talent_flag_fail'].'<meta http-equiv=refresh content="3;url=?p=admin&sub=chartools&id='.htmlspecialchars($_GET['id']).'">');
 	}
 	else
 	{
-		output_message('warning', $lang['char_talent_flag_fail'].'<meta http-equiv=refresh content="3;url=?p=admin&sub=chartools&id='.$_GET['id'].'">');
+		output_message('warning', $lang['char_talent_flag_fail'].'<meta http-equiv=refresh content="3;url=?p=admin&sub=chartools&id='.htmlspecialchars($_GET['id']).'">');
 	}
 }
 
@@ -169,12 +169,12 @@ function resetFlags()
 	if($Character->resetAtLogin($_GET['id']) == TRUE)
 	{
 		output_message('success', 'Character Flags Reset. Redirecting...
-			<meta http-equiv=refresh content="3;url=?p=admin&sub=chartools&id='.$_GET['id'].'">');
+			<meta http-equiv=refresh content="3;url=?p=admin&sub=chartools&id='.htmlspecialchars($_GET['id']).'">');
 	}
 	else
 	{
 		output_message('error', 'Unable to reset flags. Redirecting...
-			<meta http-equiv=refresh content="3;url=?p=admin&sub=chartools&id='.$_GET['id'].'">');
+			<meta http-equiv=refresh content="3;url=?p=admin&sub=chartools&id='.htmlspecialchars($_GET['id']).'">');
 	}
 }
 ?>

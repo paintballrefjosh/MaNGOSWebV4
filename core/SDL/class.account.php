@@ -358,7 +358,7 @@ class Account
                 $email_text .= 'Password: '.$password."\n";
                 $email_text .= 'This is your activation key: '.$tmp_act_key."\n";
                 $email_text .= 'CLICK HERE : '.$act_link."\n";
-                send_email($params['email'],$params['username'],'== '.(string)$mwe_config['site_title'].' account activation ==',$email_text);
+                send_email($params['email'], $params['username'], '== '.(string)$mwe_config['site_title'].' account activation ==', $email_text, false);
                 return 1;
             }
 			

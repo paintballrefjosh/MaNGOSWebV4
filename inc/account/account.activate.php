@@ -52,6 +52,7 @@ function CheckKey()
 						$DB->query("UPDATE account SET locked=0 WHERE id='".$_GET['id']."' LIMIT 1");
 						$DB->query("UPDATE mw_account_extend SET activation_code=NULL WHERE account_id='".$_GET['id']."' LIMIT 1");
 						output_message('success', '<b>Account successfully activated! You may now log into the server and play.</b>');
+						redirect("?p=account&sub=login", 0, 2);
 					}
 					else
 					{
