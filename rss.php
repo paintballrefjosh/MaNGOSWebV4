@@ -11,14 +11,14 @@
 // Use our own DATE format constant because the PHP one seems to be bugged in some PHP versions
 define('DATE_RFC822_FIXED', 'D, d M Y H:i:s O');
 
-include('core/class.config.php');
+include('config/config-protected.php');
 include('core/class.database.php');
 $DB = new Database(
-	$mwe_config['db_host'], 
-	$mwe_config['db_port'], 
-	$mwe_config['db_username'], 
-	$mwe_config['db_password'], 
-	$mwe_config['db_name']
+	$dbconf['db_host'], 
+	$dbconf['db_port'], 
+	$dbconf['db_username'], 
+	$dbconf['db_password'], 
+	$dbconf['db_name']
 	);
 
 // Get the last time someone added a post (used to determine wheter we should write a new xml or not)
