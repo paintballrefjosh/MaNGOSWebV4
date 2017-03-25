@@ -33,7 +33,7 @@ if(isset($_POST['action']))
 		
 		// If account login was successful
 		if($Login == 1)
-		{	
+		{
 			// Make sure account exists in mw_account_extend table, if not then insert one of type "member" aka registered user
 			$mw_account = $DB->selectCell("SELECT account_id FROM mw_account_extend WHERE account_id = '".$account_id."'");
 			if(!$mw_account)

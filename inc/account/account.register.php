@@ -56,10 +56,10 @@ $err_array = array();
 //	************************************************************
 // If users are limited to how many accounts per IP, we find out how many this IP has.
 
-if($mwe_config['max_act_per_ip') > 0)
+if($mwe_config['max_act_per_ip'] > 0)
 {
 	$count_ip = $DB->count("SELECT account_id FROM mw_account_extend WHERE registration_ip='".$_SERVER['REMOTE_ADDR']."'");
-	if($count_ip >= (int)$mwe_config['max_act_per_ip'))
+	if($count_ip >= (int)$mwe_config['max_act_per_ip'])
 	{
 		$allow_reg = FALSE;
 		$err_array[] = $lang['register_acct_limit'];

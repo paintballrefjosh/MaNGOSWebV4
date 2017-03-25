@@ -10,9 +10,9 @@
 
 class Core
 {
-	public $version = '4.0.9';
-	public $version_date = '2017-02-05, 22:16';
-	public $exp_dbversion = '4.0.9';
+	public $version = '4.1.0';
+	public $version_date = '2017-03-16, 23:23';
+	public $db_version = '4.1.0';
 	private $conf;
 
 	public function __construct(array $conf)
@@ -29,7 +29,7 @@ class Core
 //**************************************************************	
 	private function Initialize()
 	{
-		$this->copyright = 'Powered by MangosWeb version ' . $this->version . ' &copy; 2017, <a href="http://www.mistvale.com">Mistvale Dev Team</a>. All Rights Reserved.';
+		$this->copyright = 'Powered by MaNGOS Web Enhanced version ' . $this->version . ' &copy; 2017, <a href="http://www.mistvale.com">Mistvale Dev Team</a>. All Rights Reserved.';
 	
 		// Fill in the config with the proper directory info if the directory info is wrong
 		define('SITE_DIR', dirname( $_SERVER['PHP_SELF'] ).'/');

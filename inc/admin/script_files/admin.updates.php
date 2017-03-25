@@ -15,149 +15,78 @@ if(INCLUDED!==true) {
 //=======================//
 
 include('core/class.update.php');
-$Update = new Update;
+$Update = new Update($Core);
+$Check = $Update->check_for_updates();
 
 // Here we check for updates, and get the list of files for that update.
-function checkUpdates() 
+function checkCoreUpdates() 
 {
-	global $Update, $Core;
-	$Check = $Update->check_for_updates();
+	global $Update, $Core, $Check;
+
 	if($Check == 1)
 	{
-		echo "<center><b>Updates found! New verision: <font color='green'>".$Update->get_next_update()."</b></font></center>";
-		echo "<br /><u><b>Update Info:</b></u><br />";
-		echo $Update->print_update_info()."<br />";
-		echo "<br /><u><b>Update / Add File list:</b></u><br />";
-		echo $Update->print_updated_files_list();
-		echo "<br /><u><b>File Remove list:</b></u><br />";
-		echo $Update->print_delete_files_list();
-		echo "	<br />
-				<br />
-				To find out more about this update, click <a href='http://keyswow.com/forum/'>here</a>. Updates can sometimes take up to 30 seconds depending
-				on server load. Also note that these updates are <u>incremental</u> and you should re-check for updates after this update.";
-		echo "<form method='POST' action='?p=admin&sub=updates' class='form label-inline'>";
-		echo "<input type='hidden' name='action' value='update'>";
-		echo "<br /><br />
-				<div class='buttonrow-border'>								
-					<center><button><span>Update MangosWeb</span></button></center>			
-				</div>
-			";
+?>
+		<b>There are updates available!</b><br /><br />
+		<b>Local Version: </b><?= $Core->version; ?><br /><br />
+		<b>Latest Version: </b><?= $Update->latest_version; ?><br />
+		<ul>
+			<li>Download this version on <a target="_blank" href="https://github.com/paintballrefjosh/MaNGOSWebV4/releases/tag/<?= $Update->latest_version; ?>">GitHub</a>!</li>
+		</ul>
+<?php
 	}
 	elseif($Check == 2)
 	{
-		echo "<center>There are no new updates. Your version <font color='green'>". $Core->version ."</font> is up to date.</center>";
+?>
+		There are no core updates. Your version <font color="green" weight="bold"><?= $Core->version; ?></font> is up to date.
+<?php
 	}
 	else
 	{
-		echo "<center><div class='warning'>Cant Connect to update server. The server may be too busy, Try and refresh your page. If the problem persists,
-			Please check <a href='http://code.google.com/p/mwenhanced/'>here</a> for any news pretaining to this error</div>";
+?>
+		<div class='warning'>Cant Connect to update server. The server may be too busy, Try and refresh your page. If the problem persists,
+		please check <a href='https://github.com/paintballrefjosh/MaNGOSWebV4/'>here</a> for any news related to this error.</div>
+<?php
 	}
 }
 
-// Runs the Update class, and updates the CMS
-function runUpdate()
+function checkDatabaseUpdates()
 {
-	global $Update;
+	global $DB, $Core;
+	$db_act_ver = $DB->selectCell("SELECT `dbver` FROM `mw_db_version` ORDER BY `dbdate` DESC LIMIT 0,1");
 
-	if($Update->check_for_updates() == 1) 
+	if((string)$db_act_ver != (string)$Core->db_version) 
+	{ 
+?>
+		There is a database update required!<br /><br />
+		Local Version: <font color="red"><b><?= $db_act_ver; ?></b></font><br /><br />
+		Expected Version: <b><?= $Core->db_version; ?></b><br /><br />
+		<a href="?p=admin&amp;sub=updates&amp;update=db"><center><button><span>Update Database</span></button></center></a>
+		<br /><br />
+<?php
+	}
+	else
 	{
-		$Update->get_next_update();
-		echo "<br /><b><u>1. Building file list: </u></b><br />"; 
-		ob_flush();
-		flush();
-		
-		// If making new file directories fails, then end right now
-		// Directories must be made before attempting to add / edit files!
-		if($Update->makeDirs() != TRUE)
-		{
-			output_message('error', 'Could not create the required directories for update files!');
-			return FALSE;
-		}
-		
-		// Echo the update list of files
-		echo "<br /><font color='blue'><b>Added / Updated Files:</b></font><br />";
-		echo $Update->print_updated_files_list(); 
-		ob_flush();
-		flush();
-
-		echo "<br /><font color='blue'><b>Remove Files:</b></font><br />";
-		echo $Update->print_delete_files_list(); 
-		ob_flush();
-		flush();
-		
-		echo "<br /><br /><b><u>2. Checking for write permissions: </u></b><br />"; 
-		ob_flush();
-		flush();
-		
-		// Check if all files are writable by the server, and list
-		// the results from each file
-		if($Update->check_if_are_writable() == TRUE) 
-		{	
-			echo "<font color='green'><b>All files are writable!</b></font><br>"; 
-			ob_flush();
-			flush();
-			
-			echo "<br /><b><u>3. Starting to update files... </u></b><br />Updating...<br />"; 
-			ob_flush();
-			flush();
-			
-			// Update the files
-			$gogogo = $Update->update_files();
-			if($gogogo == TRUE) 
-			{
-				echo "<br /><br /><center><font color='green'><b>All the files where succesfuly updated.</b></font></center><br />";
-				echo "<form method='POST' action='?p=admin&sub=updates' class='form label-inline'>";
-				echo "
-					<div class='buttonrow-border'>								
-						<center><button><span>Return</span></button></center>			
-					</div>
-				";
-				ob_flush();
-				flush();
-			} 
-			else 
-			{
-				echo "<br /><font coloe='red'><b>Some errors ocured while updating the files. Please inform Wilson212 @ http://keyswow.com/forum/ 
-				... Along with a picture of your screen </b></font><br />"; 
-				ob_flush();
-				flush();
-			}
-		} 
-		else 
-		{
-			echo "<font color='red'>Some files are not writable! Listing un-writable files...</font><br />";
-			foreach ($Update->writable_files as $file => $value) 
-			{
-				if($value == 'no')
-				{
-					$e_val = "<font color='red'><i>Not Writable!</i></font>";
-				}
-				echo $file." = ".$e_val."<br />"; 
-				ob_flush();
-				flush();
-			} 
-		}
-	} 
-	else 
-	{
-		echo "<br>No update neccesary. <br>"; 
-		ob_flush();
-		flush();
+?>
+		There are no database updates. Your version <font color="green" weight="bold"><?= $Core->db_version; ?></font> is up to date.
+<?php
 	}
 }
 
 // This function runs the update sql on the DB
-function runDatabaseSql()
+function updateDatabase()
 {
-	global $Core, $DB;
-	if(file_exists('install/sql/updates/update_'. $Core->exp_dbversion .'.sql'))
+	global $Core, $DB, $Update;
+
+	if(file_exists("https://raw.githubusercontent.com/paintballrefjosh/MaNGOSWebV4/master/install/sql/updates/update_" . $Update->next_db_version . ".sql"))
 	{
-		$DB->runSQL('install/sql/updates/update_'. $Core->exp_dbversion .'.sql');
-		output_message('success', 'Database Successfully Updated');
+		// check for online copy if no local copy exists of the SQL script
+		$DB->runSQL("https://raw.githubusercontent.com/paintballrefjosh/MaNGOSWebV4/master/install/sql/updates/update_" . $Update->next_db_version . ".sql");
+		output_message("success", "Database Successfully Updated");
+		redirect("?p=admin&amp;sub=updates");
 	}
 	else
 	{
-		output_message('error' , 'Update SQL File not found!');
+		output_message("error" , "SQL update file not found!");
 	}
 }
 ?>

@@ -56,22 +56,26 @@ if($user['account_level'] <= 2)
 		<div class="pad">			
 			<h1 id="title"><center><img src="inc/admin/images/MangosWeb.png" /></center></h1>
 			<div id="subheader">
-				<?php echo $lang['core_version']; ?>: <?php echo $Core->version; ?>
-				&nbsp;&nbsp;&nbsp; <font color='black'>|</font> &nbsp;&nbsp;&nbsp;
+				<?php echo $lang['core_version']; ?>: <?= $Core->version; ?>
+				&nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp;
 				<?php echo $lang['database_version']; ?>: <?php 
-                    $db_act_ver = $DB->selectCell("SELECT `dbver` FROM `mw_db_version` ORDER BY `dbdate` DESC LIMIT 0,1");
-					if($db_act_ver < $Core->exp_dbversion) 
-					{ 
-						echo "<font color='red'>".$db_act_ver." (<a href='". mw_url('admin', 'updates', array('update' => 'db')) ."' /><small>Needs Updated</small></a>)</font>";
-					}
-					elseif($db_act_ver > $Core->exp_dbversion) 
-					{ 
-						echo "<font color='red'>".$db_act_ver." (<a href='". mw_url('admin', 'updates') ."' /><small>Database outdates the core!</small></a>)</font>";
-					}
-					else
-					{ 
-						echo $db_act_ver; 
-					} ?> 
+			$db_act_ver = $DB->selectCell("SELECT `dbver` FROM `mw_db_version` ORDER BY `dbdate` DESC LIMIT 0,1");
+			if($db_act_ver < $Core->db_version) 
+			{ 
+?>
+				<font color='red'><?= $db_act_ver; ?> (<a href="?p=admin&amp;sub=updates" /><small>Update Required</small></a>)</font>
+<?php
+			}
+			elseif($db_act_ver > $Core->db_version) 
+			{
+?>
+				 <font color='red'><?= $db_act_ver; ?> (<small>Database ahead of the core!</small>)</font>
+<?php
+			}
+			else
+			{ 
+				echo $db_act_ver; 
+			} ?> 
 			</div>
 		</div> <!-- .pad -->		
 	</div> <!-- #header -->

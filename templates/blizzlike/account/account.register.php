@@ -38,7 +38,7 @@ if ((int)$mwe_config['reg_allow'] == 0)
 }
 else
 {
-	if($mwe_config['reg_invite'] == 1 && (!isset($_GET['r_key']) || !$Account->isValidRegkey($_GET['r_key'])))
+	if($mwe_config['reg_require_invite'] == 1 && (!isset($_GET['r_key']) || !$Account->isValidRegkey($_GET['r_key'])))
 	{
 		// require invite / registration code to create an account
 		if(isset($_GET['r_key']) && !$Account->isValidRegkey($_GET['r_key']))
@@ -131,7 +131,7 @@ else
 			<input type="text" id="r_email" name="r_email" size="40" maxlength="50" <?php if(isset($_POST['r_email'])) echo 'value="'.htmlspecialchars($_POST['r_email']).'"';?> />
 			<p id="t_email" style="display:none;" class="wm"></p>
 <?php 
-			if ($mwe_config['reg_secret_questions'] == 1)
+			if ($mwe_config['reg_require_secret_questions'] == 1)
 			{
 ?>
 				<label for="secretq1"><?= $lang['secretq']; ?> 1:</label>
@@ -171,7 +171,7 @@ else
 				<option value="0"><?php echo $lang['classic'];?></option>
 			</select><br /><br />
 <?php
-			if ((int)$mwe_config['reg_use_recaptcha'] == 1)
+			if ((int)$mwe_config['reg_require_recaptcha'] == 1)
 			{
 ?>
 			<div class="g-recaptcha" data-sitekey="<?php echo $mwe_config['reg_recaptcha_public_key'];?>"></div>

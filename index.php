@@ -16,6 +16,17 @@ ini_set('log_errors', TRUE);
 ini_set('html_errors', FALSE);
 ini_set('display_errors', TRUE);
 
+if(file_exists("install/index.php"))
+{
+	// Check if the install/ directorcy exists, redirect if so
+	header("location: install/");
+}
+elseif(file_exists("update/index.php"))
+{
+	// Check if the update/ directorcy exists, redirect if so
+	header("location: update/");
+}
+
 /***************************************************************
  * Define INCLUDED so we can see if pages are included by this one
  ***************************************************************/
@@ -35,7 +46,7 @@ include('config/config-protected.php');
 /***************************************************************
  * Setup the Database class and Database connections
  ***************************************************************/
-require ('core/class.database.php');
+require('core/class.database.php');
 $DB = new Database(
 	$dbconf['db_host'], 
 	$dbconf['db_port'], 
@@ -47,11 +58,10 @@ $DB = new Database(
 // Check the database status. 0 = cannot connect, 1 = success, 2 = DB doesnt exist
 if($DB->status() != 1)
 {
-	echo "Cannot connect to the MaNGOS Web database. Please make sure you have run the installer to properly set the DB info in the database.<br>";
+	echo "Cannot connect to the MaNGOS Web database. Please make sure you have edited the config/config-protected.php file with the correct values.<br>";
 	die();
 }
 
-$mwe_config = array();
 $mwe_config = $DB->selectRow("SELECT * FROM mw_config LIMIT 1");
 
 /***************************************************************
@@ -67,14 +77,6 @@ if($mwe_config['site_notice_enable'] == 1 && !isset($_COOKIE['agreement_accepted
 {
 	include('modules/notice/notice.php');
 	exit();
-}
-
-/***************************************************************
- * See if the site is installed by checking config defualts
- ***************************************************************/
-if($dbconf['db_username'] == 'default')
-{
-	header('location: install/');
 }
 
 /***************************************************************

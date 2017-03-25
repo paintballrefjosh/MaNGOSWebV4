@@ -19,7 +19,7 @@ function output_message($type, $text)
 
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
-	<title>MangosWeb Enhanced v3 Installer</title>
+	<title>MaNGOS Web Enhanced V4 Installer</title>
 	<link rel="stylesheet" href="css/main.css" type="text/css"/>
 </head>
 <body>
@@ -48,8 +48,8 @@ function output_message($type, $text)
 					<form method="POST" action="index.php?step=2" class="form label-inline">
 					<div class="main-content">		
 						<p>
-							Welcome to the MangosWeb v3 Installer!. Before we start the installation proccess, we need to make sure your
-							web server is compatible with MangosWeb. Please click the start at the bottom to begin.
+							Welcome to the MaNGOS Web V4 Installer!. Before we start the installation proccess, we need to make sure your
+							web server is compatible with MaNGOS Web. Please click the start at the bottom to begin.
 						</p>
 						<div class="buttonrow-border">								
 							<center><button><span>Start</span></button></center>			
@@ -108,7 +108,7 @@ function output_message($type, $text)
 								}
 								else
 								{
-									echo "<center><font color='red'> Sorry, You Cannot Go To Step 3. </font></center>";
+									echo "<center><font color='red'> Sorry, You cannot Go To Step 3. </font></center>";
 								}
 							?>
 						</div>
@@ -118,44 +118,44 @@ function output_message($type, $text)
 			<?php
 				}
 				elseif($step == 3)
-				{ ?>
+				{
+			?>
 					<!-- STEP 3 -->
 					<form method="POST" action="index.php?step=4" class="form label-inline">
 					<div class="main-content">		
 						
 						<div class="field">
-							<label for="db user">Database Host: </label>
+							<label for="db user">Realm Database Host: </label>
 							<input id="Site Title" name="db_host" size="20" type="text" class="medium" value="localhost" />
-							<p class="field_help">Enter you database host.</p>
+							<p class="field_help">Enter the realm database host.</p>
 						</div>
 						
 						<div class="field">
-							<label for="db user">Database port: </label>
+							<label for="db user">Realm Database port: </label>
 							<input id="Site Title" name="db_port" size="20" type="text" class="medium" value="3306" />
-							<p class="field_help">Enter the port number of your database.</p>
+							<p class="field_help">Enter the realm port number of the database.</p>
 						</div>
 						
 						<div class="field">
-							<label for="db user">Database Username: </label>
-							<input id="Site Title" name="db_username" size="20" type="text" class="medium" value="root" />
-							<p class="field_help">Enter you database username.</p>
+							<label for="db user">Realm Database Username: </label>
+							<input id="Site Title" name="db_username" size="20" type="text" class="medium" value="mangos" />
+							<p class="field_help">Enter the realm database username.</p>
 						</div>
 						
 						<div class="field">
-							<label for="db user">Database Password: </label>
-							<input id="Site Title" name="db_password" size="20" type="password" class="medium" value="ascent"/>
-							<p class="field_help">Enter you database Password.</p>
+							<label for="db user">Realm Database Password: </label>
+							<input id="Site Title" name="db_password" size="20" type="password" class="medium" value="mangos" />
+							<p class="field_help">Enter the realm database Password.</p>
 						</div>
 						
 						<div class="field">
-							<label for="db user">Realm Database: </label>
+							<label for="db user">Realm Database Name: </label>
 							<input id="Site Title" name="db_name" size="20" type="text" class="medium" value="realmd" />
-							<p class="field_help">Enter your Realm database.</p>
+							<p class="field_help">Enter the realm database name.</p>
 						</div>
 						
 						<div class="buttonrow-border">								
 							<center><button><span>Install Database</span></button></center><br />
-							<center><button name="skip" class="btn-sec"><span>Skip Database Install</span></button></center>							
 						</div>
 						<div class="clear"></div>
 					</div> <!-- .main-content -->
@@ -164,102 +164,42 @@ function output_message($type, $text)
 				}
 				elseif($step == 4)
 				{
-					// Check if everything is given
-					if (!$_POST['db_host'] | !$_POST['db_port'] | !$_POST['db_username'] | !$_POST['db_password'] | !$_POST['db_name']) 
-					{
-						echo '<div class="error">One or more fields are blank. Please <a href="javascript: history.go(-1)">Go Back</a> and correct it.</div>';
-						die();
-					}
-					// Check if provided info is correct
-					$link = @mysqli_connect($_POST['db_host'], $_POST['db_username'], $_POST['db_password'], $_POST['db_name'], $_POST['db_port']) 
-						or die('<div class="error">Couldn\'t connect to MySQL Database. Please <a href="javascript: history.go(-1)">Go Back</a> and re-enter MySQL Database Information.<br /><br />MySql error log:<br />
+					// Check database connection
+					include("../config/config-protected.php");
+					$link = @mysqli_connect($dbconf['db_host'], $dbconf['db_username'], $dbconf['db_password'], $dbconf['db_name'], $dbconf['db_port']) 
+						or die('<div class="error">Couldn\'t connect to MySQL Database. Please edit config/config-protected.php with the correct info.<br /><br />MySql error log:<br />
 							'.mysqli_connect_error().'</div');
-					mysqli_select_db($link, $_POST['db_name']) 
-						or die('<div class="error">Counld Not select Realm database! Please go back and re-submit realm DB information.</div>');
 					
-					output_message('success', 'Successfully Connected to Realm DB.');
+					output_message('success', 'Successfully Connected to the MaNGOS Web DB.');
 					
+					$realm_link = @mysqli_connect($_POST['db_host'], $_POST['db_username'], $_POST['db_password'], $_POST['db_name'], $_POST['db_port']) 
+						or die('<div class="error">Couldn\'t connect to MySQL Database. Please edit config/config-protected.php with the correct info.<br /><br />MySql error log:<br />
+							'.mysqli_connect_error().'</div');
+
+					output_message('success', 'Successfully Connected to the Realm DB.');
+					
+
 					// Check if "account" table exsists, so we make (almost) sure mangos is actually installed (which is necesarry for this whole thing to work)
-					@mysqli_query($link, "SELECT * FROM `account` LIMIT 1") or die('<div class="error">Error!<br /><br />Account table not found! Cannot Continue with the installation without an Account
-						table!<br /><br />MySql error log:<br />'.mysqli_error().'</div>');
-					
-					// Everthing should be fine, so first insert info into protected config file
-					$conffile = "../config/config-protected.php";
-					$build = '';
-					$build .= "<?php\n";
-					$build .= "\$db = array(\n";
-					$build .= "'db_host'         => '".$_POST['db_host']."',\n";
-					$build .= "'db_port'         => '".$_POST['db_port']."',\n";
-					$build .= "'db_username'     => '".$_POST['db_username']."',\n";
-					$build .= "'db_password'     => '".$_POST['db_password']."',\n";
-					$build .= "'db_name'         => '".$_POST['db_name']."',\n";
-					$build .= "'db_encoding'     => 'utf8',\n";
-					$build .= ");\n";
-					$build .= "?>";
-					
-					if (is_writeable($conffile))
-					{
-						$openconf = fopen($conffile, 'wb');
-						fwrite($openconf, $build);
-						fclose($openconf);
-					}
-					else 
-					{ 
-						output_message('error', 'Couldn\'t open config-protected.php for editing, it must be writable by webserver! <br />Go back, and try again.');
-						die();
-					}
-								
+					@mysqli_query($realm_link, "SELECT * FROM `account` LIMIT 1") or die('<div class="error">Error!<br /><br />Account table not found! Cannot continue with the installation without an Account
+						table!  Ensure your MaNGOS database is installed properly. <br /><br />MySql error log:<br />'.mysqli_error().'</div>');
+												
 					// Preparing for sql injection... (prashing, etc...)
 					$checker = @mysqli_query($link, "SELECT * FROM `account_extend` LIMIT 1");
-					if(!isset($_POST['skip']))
+
+					if(!file_exists("sql/full_install.sql"))
 					{
-						// Dealing with the full install sql file
-						$sqlopen = @fopen("sql/full_install.sql", "r");
-						if ($sqlopen) 
-						{
-							while (!feof($sqlopen)) 
-							{
-								$queries[] = fgets($sqlopen);
-							}
-							fclose($sqlopen);
-						}
-						else 
-						{
-							output_message('error', 'Couldn\'t open file full_install.sql. Check if it\'s presented in wwwroot/sql/ and if it\'s readable by webserver!');
-							$errmsg = error_get_last();
-							echo "<br /><br />PHP error log:<br />".$errmsg['message'];
-							exit();
-						}
-						foreach ($queries as $key => $aquery) 
-						{
-							if (trim($aquery) == "" || strpos ($aquery, "--") === 0 || strpos ($aquery, "#") === 0) 
-							{
-								unset($queries[$key]);
-							}
-						}
-						unset($key, $aquery);
-
-						foreach ($queries as $key => $aquery) 
-						{
-							$aquery = rtrim($aquery);
-							$compare = rtrim($aquery, ";");
-							if ($compare != $aquery) 
-							{
-								$queries[$key] = $compare . "|br3ak|";
-							}
-						}
-						unset($key, $aquery);
-
-						$queries = implode($queries);
-						$queries = explode("|br3ak|", $queries);
-
-						// Sql injection
-						foreach ($queries as $query) 
-						{
-							mysqli_query($link, $query);
-						}
+						output_message('error', "Couldn't open file full_install.sql. Check if it's presented in sql/ and if it's readable by webserver!");
+						$errmsg = error_get_last();
+						die("<br /><br />PHP error log:<br />".$errmsg['message']);
 					}
-					$get_name = mysqli_query($link, "SELECT `name` FROM `realmlist` WHERE `id`=1 LIMIT 1") or die('<div class="error">'.mysqli_error().'</div>');
+
+					$sql = file_get_contents("sql/full_install.sql");
+					if(!mysqli_multi_query($link, $sql))
+					{
+						die('<div class="error">Error!<br /><br />Could not run the sql/full_install.sql file.<br /><br />MySql error log:<br />'.mysqli_error().'</div>');
+					}
+
+					$get_name = mysqli_query($realm_link, "SELECT `name` FROM `realmlist` WHERE `id`=1 LIMIT 1") or die('<div class="error">'.mysqli_error().'</div>');
 					$DB_name = mysqli_fetch_assoc($get_name);
 				?>
 				<!-- STEP 4 -->
@@ -271,8 +211,8 @@ function output_message($type, $text)
 						<input type="hidden" name="db_password" value="<?php echo $_POST['db_password']; ?>">					
 					<div class="main-content">
 						<div>
-							In order for MangosWeb Enhanced to function properly, we need at least 1 realm to have its information stored in the DB correctly.
-							Please fill out the information for the realm "<u><b><?php echo $DB_name; ?></b></u>"
+							In order for MaNGOS Web to function properly, we need at least 1 realm to have its information stored in the DB correctly.
+							Please fill out the information for the realm "<u><b><?php echo $DB_name['name']; ?></b></u>"
 						</div>
 						<table>
 							<thead>
@@ -284,33 +224,33 @@ function output_message($type, $text)
 						<!-- Character DB Info -->
 						
 						<div class="field">
-							<label for="db user">Database Host: </label>
+							<label for="db user">Character Database Host: </label>
 							<input id="Site Title" name="char_db_host" size="20" type="text" class="medium" value="localhost" />
-							<p class="field_help">Enter you database host.</p>
+							<p class="field_help">Enter the character database host.</p>
 						</div>
 						
 						<div class="field">
-							<label for="db user">Database port: </label>
+							<label for="db user">Character Database port: </label>
 							<input id="Site Title" name="char_db_port" size="20" type="text" class="medium" value="3306" />
 							<p class="field_help">Enter the port number of your database.</p>
 						</div>
 						
 						<div class="field">
-							<label for="db user">Database Username: </label>
-							<input id="Site Title" name="char_db_username" size="20" type="text" class="medium" value="root" />
-							<p class="field_help">Enter you database username.</p>
+							<label for="db user">Character Database Username: </label>
+							<input id="Site Title" name="char_db_username" size="20" type="text" class="medium" value="mangos" />
+							<p class="field_help">Enter the character database username.</p>
 						</div>
 						
 						<div class="field">
-							<label for="db user">Database Password: </label>
-							<input id="Site Title" name="char_db_password" size="20" type="password" class="medium" value="ascent"/>
-							<p class="field_help">Enter you database Password.</p>
+							<label for="db user">Character Database Password: </label>
+							<input id="Site Title" name="char_db_password" size="20" type="password" class="medium" value="mangos"/>
+							<p class="field_help">Enter the character database Password.</p>
 						</div>
 						
 						<div class="field">
-							<label for="db user">Character Database: </label>
+							<label for="db user">Character Database Name: </label>
 							<input id="Site Title" name="char_db_name" size="20" type="text" class="medium" value="characters" />
-							<p class="field_help">Enter your Character DB name, for your realm id #1.</p>
+							<p class="field_help">Enter the Character DB name.</p>
 						</div>
 						
 						<table>
@@ -323,33 +263,33 @@ function output_message($type, $text)
 						<!-- WORLD DB Info -->
 						
 						<div class="field">
-							<label for="db user">Database Host: </label>
+							<label for="db user">World Database Host: </label>
 							<input id="Site Title" name="w_db_host" size="20" type="text" class="medium" value="localhost" />
-							<p class="field_help">Enter you database host.</p>
+							<p class="field_help">Enter the world database host.</p>
 						</div>
 						
 						<div class="field">
-							<label for="db user">Database port: </label>
+							<label for="db user">World Database port: </label>
 							<input id="Site Title" name="w_db_port" size="20" type="text" class="medium" value="3306" />
-							<p class="field_help">Enter the port number of your database.</p>
+							<p class="field_help">Enter the port number of the world database.</p>
 						</div>
 						
 						<div class="field">
-							<label for="db user">Database Username: </label>
-							<input id="Site Title" name="w_db_username" size="20" type="text" class="medium" value="root" />
-							<p class="field_help">Enter you database username.</p>
+							<label for="db user">World Database Username: </label>
+							<input id="Site Title" name="w_db_username" size="20" type="text" class="medium" value="mangos" />
+							<p class="field_help">Enter the World database username.</p>
 						</div>
 						
 						<div class="field">
-							<label for="db user">Database Password: </label>
-							<input id="Site Title" name="w_db_password" size="20" type="password" class="medium" value="ascent"/>
-							<p class="field_help">Enter you database Password.</p>
+							<label for="db user">World Database Password: </label>
+							<input id="Site Title" name="w_db_password" size="20" type="password" class="medium" value="mangos"/>
+							<p class="field_help">Enter the world database Password.</p>
 						</div>
 						
 						<div class="field">
-							<label for="db user">World Database: </label>
+							<label for="db user">World Database Name: </label>
 							<input id="Site Title" name="w_db_name" size="20" type="text" class="medium" value="world" />
-							<p class="field_help">Enter your World DB name, for your realm id #1.</p>
+							<p class="field_help">Enter the World DB name.</p>
 						</div>
 						
 						<div class="buttonrow-border">								
@@ -367,20 +307,33 @@ function output_message($type, $text)
 				{
 					$char_link = @mysqli_connect($_POST['char_db_host'], $_POST['char_db_username'], $_POST['char_db_password'], $_POST['char_db_name'], $_POST['char_db_port']) 
 						or die('<div class="error">Couldn\'t connect to the character MySQL Database. Please <a href="javascript: history.go(-1)">Go Back</a> and re-enter MySQL Database Information.</div>');
-					@mysqli_select_db($char_link, $_POST['char_db_name']) or die('<div class="error">Couldn\'t select Characters db, most likely the given name is wrong. Please <a href="javascript: history.go(-1)">Go Back</a> and correct it.</div>');
 					
 					$world_link = @mysqli_connect($_POST['w_db_host'], $_POST['w_db_username'], $_POST['w_db_password'], $_POST['w_db_name'], $_POST['w_db_port']) 
 						or die('<div class="error">Couldn\'t connect to the world MySQL Database. Please <a href="javascript: history.go(-1)">Go Back</a> and re-enter MySQL Database Information.</div>');
-					@mysqli_select_db($world_link, $_POST['w_db_name']) or die('<div class="error">Couldn\'t select World db, most likely the given name is wrong. Please <a href="javascript: history.go(-1)">Go Back</a> and correct it.</div>');
 					
 					$realm_link = @mysqli_connect($_POST['db_host'], $_POST['db_username'], $_POST['db_password'], $_POST['db_name'], $_POST['db_port']);
-					@mysqli_select_db($realm_link, $_POST['db_name']) or die('Unable to select Realm Database!');
 					
-					// Extra sql query with db settings
-					$dbinfo = $_POST['char_db_host'].";".$_POST['char_db_port'].";".$_POST['char_db_username'].";".$_POST['char_db_password'].";".$_POST['char_db_name'].";".$_POST['w_db_host'].";".$_POST['w_db_port'].";".$_POST['w_db_username'].";".$_POST['w_db_password'].";".$_POST['w_db_name'].";";
-					mysqli_query($realm_link, "UPDATE `realmlist` SET `dbinfo` = '".$dbinfo."', `site_enabled`=1 WHERE `id` = 1 LIMIT 1") or die('<div class="error">'.mysqli_error($realm_link).'</div>');
+					include("../config/config-protected.php");
+					$link = @mysqli_connect($dbconf['db_host'], $dbconf['db_username'], $dbconf['db_password'], $dbconf['db_name'], $dbconf['db_port']);
+
+					$sql = "INSERT INTO `mw_realm` SET
+						realm_id = 1,
+						site_enabled = 1,
+						db_world_host = '".$_POST['w_db_host']."',
+						db_world_port = '".$_POST['w_db_port']."',
+						db_world_name = '".$_POST['w_db_name']."',
+						db_world_user = '".$_POST['w_db_username']."',
+						db_world_pass = '".$_POST['w_db_password']."',
+						db_char_host = '".$_POST['char_db_host']."',
+						db_char_port = '".$_POST['char_db_port']."',
+						db_char_name = '".$_POST['char_db_name']."',
+						db_char_user = '".$_POST['char_db_username']."',
+						db_char_pass = '".$_POST['char_db_password']."'
+						";
+
+					mysqli_query($link, $sql) or die('<div class="error">'.mysqli_error($link).'</div>');
 					
-					output_message('success', 'Successfully Connected to Character and World DB\'s');
+					output_message('success', 'Successfully saved Character and World DB info.');
 				?>
 					<form method="POST" action="index.php?step=6" class="form label-inline">
 					<input type="hidden" name="db_host" value="<?php echo $_POST['db_host']; ?>">
@@ -436,17 +389,28 @@ function output_message($type, $text)
 						return SHA1($user.':'.$pass);
 					}
 					$realm_link = mysqli_connect($_POST['db_host'], $_POST['db_username'], $_POST['db_password'], $_POST['db_name'], $_POST['db_port']);
-					mysqli_select_db($realm_link, $_POST['db_name']);
-					
-					$accountid = mysqli_query($realm_link, "SELECT `id` FROM `account` WHERE `username` LIKE '".$_POST['account']."'");
+
+					include("../config/config-protected.php");
+					$link = mysqli_connect($dbconf['db_host'], $dbconf['db_username'], $dbconf['db_password'], $dbconf['db_name'], $dbconf['db_port']);
+
+					$sql = "UPDATE `mw_config` SET 
+						`db_logon_host` = '".$_POST['db_host']."',
+						`db_logon_port` = '".$_POST['db_port']."',
+						`db_logon_name` = '".$_POST['db_name']."',
+						`db_logon_user` = '".$_POST['db_username']."',
+						`db_logon_pass` = '".$_POST['db_password']."'
+						";
+					mysqli_query($link, $sql);
+
+					$accountid = mysqli_query($realm_link, "SELECT `id` FROM `account` WHERE `username` = '".$_POST['account']."'");
 					$checkacc = mysqli_num_rows($accountid);
 					if ($checkacc == 1) 
 					{
 						// Account exsist
-						$accountid = mysqli_fetch_assoc($accountid);
-						mysqli_query($realm_link, "UPDATE `mw_account_extend` SET `account_level` = '4' WHERE `account_id` = ".$accountid['id']." LIMIT 1 ;");
+						$row = mysqli_fetch_assoc($accountid);
+						mysqli_query($link, "INSERT INTO `mw_account_extend` (`account_id`, `account_level`) VALUES ('".$row['id']."', '4')");
 						$return = 1;
-						}
+					}
 					else 
 					{
 						// No such account, creating one, in this case pwd is needed, so checking whether it's provided...
@@ -454,7 +418,7 @@ function output_message($type, $text)
 						mysqli_query($realm_link, "INSERT INTO `account` (`username`, `sha_pass_hash`) VALUES ('".$_POST['account']."', '".$password."' );");
 						$accountid = mysqli_query("SELECT `id` FROM `account` WHERE `username` LIKE '".$_POST['account']."'");
 						$acct = mysqli_fetch_assoc($accountid);
-						mysqli_query($realm_link, "INSERT INTO `mw_account_extend` (`account_id`, `account_level`) VALUES ('".$acct['id']."', '4')");
+						mysqli_query($link, "INSERT INTO `mw_account_extend` (`account_id`, `account_level`) VALUES ('".$acct['id']."', '4')");
 						$return = 2;
 					}
 				?>
@@ -462,9 +426,9 @@ function output_message($type, $text)
 					<p>
 						<?php if($return > 0)
 						{ ?>
-							Congradulations! MangosWeb v3 is installed and ready for use! Please log in and visit the admin panel to further configure the site!
-							Also, remember to <u><b>EDIT the install file! (install/index.php)</b></u>. Set the FALSE to TRUE on line 3 to prevent users from 
-							hacking your site.<br /><br /><a href="../index.php">Click Here</a> To go to your MangosWeb home page.
+							Congradulations! MaNGOS Web v4 is installed and ready for use! Please delete the install/ directory from your webserver. 
+							Once deleted you can log in and visit the admin panel to further configure the site!
+							<br /><br /><a href="../index.php">Click Here</a> To go to your MaNGOS Web home page.</a>
 						<?php
 						} ?>
 					</p>
