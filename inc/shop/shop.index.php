@@ -17,8 +17,6 @@ if(INCLUDED !== TRUE)
 $pathway_info[] = array('title' => 'Shop', 'link' => '');
 // ==================== //
 
-define("CACHE_FILE", FALSE);
-
 // Lets check to see the user is logged in
 if($Account->isLoggedIn() == FALSE)
 {

@@ -22,32 +22,14 @@
                                                       </div>
                                                     </div>
                                                   </td>
-												<?php 
-													if((empty($_GET['p']) || $_GET['p'] == "frontpage") && !isset($_GET['module']))
-													{
-														echo "<td valign=\"top\">";
-														if($Config->get('enable_cache') == 1)
-														{	
-															if($Core->isCached($Template['number']."_bodyright_".$GLOBALS['user_cur_lang']))
-															{
-																$Contents = $Core->getCache($Template['number']."_bodyright_".$GLOBALS['user_cur_lang']);
-																echo $Contents;
-															}
-															else
-															{
-																ob_start();
-																	include($Template['script_path'].'/body_right.php');
-																$Contents = ob_get_flush();
-																$Core->writeCache($Template['number']."_bodyright_".$GLOBALS['user_cur_lang'], $Contents);
-															}											
-														}
-														else
-														{
-															include($Template['script_path'].'/body_right.php');
-														}
-														echo "</td>";
-													} 
-												?>
+<?php 
+                        if((empty($_GET['p']) || $_GET['p'] == "frontpage") && !isset($_GET['module']))
+                        {
+                            echo "<td valign=\"top\">";
+                            include($Template['script_path'].'/body_right.php');
+                            echo "</td>";
+                        } 
+?>
                                                 </tr>
                                               </table>                      
                                             </div>

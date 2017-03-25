@@ -17,12 +17,7 @@ if(INCLUDED !== TRUE)
 $pathway_info[] = array('title' => $lang['donate'], 'link' => '');
 // ==================== //
 
-// We define not to cache the page
-define("CACHE_FILE", FALSE);
-
-//	************************************************************
 // Users must be logged in
-
 if($Account->isLoggedIn() == FALSE)
 {
 	redirect('?p=account&sub=login',1);

@@ -155,9 +155,9 @@ else # We start the page
 								<b>".$package['points']." ".$lang['web_points']."</b>
 							</td>
 							<td class='serverStatus1' style='text-align: center;'><font size='-1'>";
-								$Paypal->addVar('business', $Config->get('paypal_email'));	// Payment Email
-								$Paypal->addVar('notify_url', $Config->get('site_base_href').'ipn.php');
-								$Paypal->addVar('return', $Config->get('site_base_href').'?p=donate');
+								$Paypal->addVar('business', $mwe_config['paypal_email']);	// Payment Email
+								$Paypal->addVar('notify_url', $mwe_config['site_base_href'].$mwe_config['site_href'].'ipn.php');
+								$Paypal->addVar('return', $mwe_config['site_base_href'].$mwe_config['site_href'].'?p=donate');
 								$Paypal->addVar('cmd', '_donations');
 								$Paypal->addVar('amount', $package['cost']);
 								$Paypal->addVar('item_name', $package['points'].' '.$lang['web_points'].' --- Account: '.$user['username'].'(#'.$user['id'].')');

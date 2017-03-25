@@ -14,14 +14,7 @@ if(INCLUDED!==true) {
 }
 //=======================//
 
-// For the search bar
-if(isset($_POST['action']))
-{
-	if($_POST['action'] == 'sort')
-	{
-		redirect('?p=admin&sub=users&sortby='.$_POST['sortby'],1);
-	}
-}
+
 
 //====== Pagination Code ======/
 $limit = 50; // Sets how many results shown per page	
@@ -36,22 +29,36 @@ else
 $limitvalue = $page * $limit - ($limit);	// Ex: (2 * 25) - 25 = 25 <- data starts at 25
 
 //===== Filter ==========// 
-if($_GET['sortby'] && preg_match("/[a-z]/", $_GET['sortby']))
+if(!isset($_GET['sortdir']))
 {
-	$filter = "WHERE `username` LIKE '" . $_GET['sortby'] . "%'";
-}
-elseif($_GET['sortby'] == 1)
-{
-	$filter = "WHERE `username` REGEXP '^[^A-Za-z]'";
+	$sortdir = "asc";
 }
 else
 {
-	$filter = '';
+	$sortdir = $_GET['sortdir'];
 }
-	
+
+if(isset($_GET['sortby']))
+{
+	$orderby = "ORDER BY ".$_GET['sortby']." ".$_GET['sortdir'];
+}
+else
+{
+	$orderby = "ORDER BY username ASC";
+}
+
+if($sortdir == "asc")
+{
+	$sortdir = "desc";
+}
+else
+{
+	$sortdir = "asc";
+}
+
 // Get all users
-$getusers = $DB->select("SELECT * FROM account $filter ORDER BY `username` ASC LIMIT $limitvalue, $limit;");
-$totalrows = $DB->num_rows("SELECT id FROM `account` $filter");
+$getusers = $RDB->select("SELECT * FROM account $orderby LIMIT $limitvalue, $limit;");
+$totalrows = $RDB->count("SELECT id FROM `account` $orderby");
 
 //===== Start of functions =====/
 
@@ -82,7 +89,7 @@ function changePass()
 
 function changeDetails()
 {
-	global $lang, $Account;
+	global $Account;
 	$success = 0;
 	
 	if($Account->setEmail($_GET['id'], $_POST['email']) == TRUE)
@@ -144,7 +151,7 @@ function editUser()
 // Unban user
 function unBan($unbanid) 
 {
-	global $DB, $Account;
+	global $Account;
 	if($Account->unbanAccount($unbanid) == TRUE)
 	{
 		output_message('success','Success. Account #'.$unbanid.' Successfully Un-Banned!
@@ -155,9 +162,9 @@ function unBan($unbanid)
 // Delete user's account
 function deleteUser($did)
 {
-	global $DB;
+	global $RDB;
 
-        $DB->query("DELETE FROM `account` WHERE `id`='$did'");
+        $RDB->query("DELETE FROM `account` WHERE `id`='$did'");
 
         output_message('success', 'Success. Account successfully deleted.<meta http-equiv=refresh content="3;url=?p=admin&sub=users">');
 }
@@ -165,7 +172,7 @@ function deleteUser($did)
 // Ban user
 function banUser($bannid, $banreason, $banduration, $banip) 
 {
-	global $DB, $user, $Account;
+	global $user, $Account;
 	if(!$banreason) 
 	{
 		$banreason = "Not Specified";
@@ -180,8 +187,8 @@ function banUser($bannid, $banreason, $banduration, $banip)
 // Show ban form is used to input a Ban reason, before acutally banning
 function showBanForm($banid) 
 {
-	global $DB;
-	$unme = $DB->selectCell("SELECT username FROM account WHERE id='".$banid."'");
+	global $RDB;
+	$unme = $RDB->selectCell("SELECT username FROM account WHERE id='".$banid."'");
 	?>
 		<div class="content">	
 			<div class="content-header">

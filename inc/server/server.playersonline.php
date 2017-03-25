@@ -22,12 +22,9 @@ if(isset($_GET['changerealm_to']))
 }
 
 // build top of page navigation breadcrumbs
-$realm = $DB->selectRow("SELECT * FROM realmlist WHERE `id`='".$user['cur_selected_realm']."' LIMIT 1");
+$realm = get_realm_byid($user['cur_selected_realm']);
 $pathway_info[] = array('title' => $lang['online_players'], 'link' => '?p=server&sub=playersonline');
 $pathway_info[] = array('title' => $realm['name'], 'link' => '');
-
-// Tell the cache not to cache the file because we want live feeds
-define("CACHE_FILE", FALSE);
 
 include('core/SDL/class.zone.php');
 include('core/SDL/class.character.php');

@@ -17,9 +17,6 @@ if(INCLUDED !== TRUE)
 $pathway_info[] = array('title' => $lang['vote_system'], 'link' => '');
 // ==================== //
 
-// We define not to cache the page, because of the buttons disabling after the user votes.
-define("CACHE_FILE", FALSE);
-
 // Setup the page description
 $PAGE_DESC = $lang['vote_desc']."<br />";
 
@@ -30,7 +27,7 @@ if($Account->isLoggedIn() == FALSE)
 }
 
 // If the vote system is disabled, redirect
-if($Config->get("module_vote_system") == 0)
+if($mwe_config["module_vote_system"] == 0)
 {
     redirect('?p=account',1);
 }
@@ -120,7 +117,7 @@ function initUser()
 
 function vote($site)
 {
-	global $Config, $DB, $user;
+	global $mwe_config, $DB, $user;
 	$tab_sites = $DB->selectRow("SELECT * FROM mw_vote_sites WHERE `id`='$site'");
 	
 	// First we check to see the users hasnt clicked vote twice
@@ -135,7 +132,7 @@ function vote($site)
 	{
 		if($tab_sites != FALSE)
 		{
-			if($Config->get('module_vote_onlinecheck') == 1)
+			if($mwe_config['module_vote_onlinecheck'] == 1)
 			{
 				$fp = @fsockopen($tab_sites['hostname'], 80, $errno, $errstr, 3);
 			}
@@ -145,7 +142,7 @@ function vote($site)
 			}
 			if($fp)
 			{
-				if($Config->get('module_vote_onlinecheck') == 1)
+				if($mwe_config['module_vote_onlinecheck'] == 1)
 				{
 					fclose($fp);
 				}

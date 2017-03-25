@@ -42,7 +42,7 @@
 		<td colspan="3">
 			<table cellspacing = "0" cellpadding = "0" border = "0" width = "100%">
 				<tr>
-					  <td background = "images/bottom.gif" width = "100%" >
+					  <td background = "<?php echo $Template['path']; ?>/images/bottom.gif" width = "100%" >
 						<img src ="<?php echo $Template['path']; ?>/images/pixel.gif" height = "18" width = "200">
 					  </td>
 				</tr>
@@ -125,7 +125,7 @@ else
 													<table border='0' cellspacing='0' cellpadding='0'>
 														<tr>
 															<td>
-																<input type='text' name='email' size='30' value='<?php echo $profile['email'];?>' <?php if(!(int)$Config->get('allow_user_emailchange')) echo 'disabled="disabled"';?>>
+																<input type='text' name='email' size='30' value='<?php echo $profile['email'];?>' <?php if(!(int)$mwe_config['allow_user_email_change']) echo 'disabled="disabled"';?>>
 															</td>
 															<td valign="top"></td>
 														</tr>
@@ -133,7 +133,7 @@ else
 												</td>
 											</tr>
 								<?php 
-									if((int)$Config->get('allow_user_passchange')) 
+									if((int)$mwe_config['allow_user_pass_change']) 
 									{
 								?>
 										<tr>
@@ -198,7 +198,7 @@ else
 					</table>
 					</form>
 			<?php	
-				if((int)$Config->get('reg_secret_questions'))
+				if((int)$mwe_config['reg_require_secret_questions'])
 				{
 			?>
 					<br />

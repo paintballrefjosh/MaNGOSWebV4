@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html>
 	<head>
-		<title><?php echo (string)$Config->get('site_title'); ?> Terms of Service</title>
+		<title><?php echo (string)$mwe_config['site_title']; ?> Terms of Service</title>
 		<meta name="ROBOTS" content="NOINDEX, NOFOLLOW, NOSNIPPET, NOARCHIVE" />
 		<meta http-equiv="Pragma" content="no-cache" />
 		<meta http-equiv="Expires" content="-1" />

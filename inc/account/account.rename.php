@@ -28,7 +28,7 @@ if($Account->isLoggedIn() == FALSE)
 
 // Initiate the page description
 $Page_Desc = $lang['char_rename_desc'];
-$PAGE_DESC = str_replace('[COST]', '<font color="blue">'.$Config->get('module_charrename_pts').'</font>', $Page_Desc);
+$PAGE_DESC = str_replace('[COST]', '<font color="blue">'.$mwe_config['module_char_rename_pts'].'</font>', $Page_Desc);
 
 // Load the accounts character list
 $character_list = $Account->getCharacterList($user['id']);
@@ -42,7 +42,7 @@ $character_list = $Account->getCharacterList($user['id']);
 */
 function changeName()
 {
-	global $Config, $DB, $lang, $user;
+	global $mwe_config, $DB, $lang, $user;
 	include('core/SDL/class.character.php');
 	$Character = new Character;
 	
@@ -52,13 +52,13 @@ function changeName()
 		return FALSE;
 	}
 	
-	if($Config->get('module_charrename') == 0)
+	if($mwe_config['module_char_rename'] == 0)
 	{
 		output_message('error', 'Nice try hacking, but not good enough.');
 		return FALSE;
 	}
 	
-	if($user['web_points'] >= $Config->get('module_charrename_pts'))
+	if($user['web_points'] >= $mwe_config['module_char_rename_pts'])
 	{	
 		if($Character->checkNameExists($_POST['newname']) == FALSE)
 		{
@@ -67,8 +67,8 @@ function changeName()
 				if($Character->setName($_POST['id'], $_POST['newname']) == TRUE)
 				{
 					$DB->query("UPDATE `mw_account_extend` SET 
-						`web_points`=(`web_points` - ".$Config->get('module_charrename_pts')."), 
-						`points_spent`=(`points_spent` + ".$Config->get('module_charrename_pts').")  
+						`web_points`=(`web_points` - ".$mwe_config['module_char_rename_pts']."), 
+						`points_spent`=(`points_spent` + ".$mwe_config['module_char_rename_pts'].")  
 					   WHERE `account_id` = ".$user['id']." LIMIT 1"
 					);
 					output_message('success', $lang['char_rename_success'].' Redirecting...<meta http-equiv=refresh content="3;url=?p=account&sub=rename">');

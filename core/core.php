@@ -10,12 +10,12 @@
 
 class Core
 {
-	public $version = '4.0.6';
-	public $version_date = '2017-02-05, 22:16';
-	public $exp_dbversion = '2.0';
+	public $version = '4.1.0';
+	public $version_date = '2017-03-16, 23:23';
+	public $db_version = '4.1.0';
 	private $conf;
 
-	public function __construct(Config $conf)
+	public function __construct(array $conf)
 	{
 		$this->conf = $conf;
 		$this->Initialize();
@@ -29,8 +29,7 @@ class Core
 //**************************************************************	
 	private function Initialize()
 	{
-		$this->Cache_Refresh_Time = (int)$this->conf->get('cache_expire_time');
-		$this->copyright = 'Powered by MangosWeb version ' . $this->version . ' &copy; 2017, <a href="http://www.mistvale.com">Mistvale Dev Team</a>. All Rights Reserved.';
+		$this->copyright = 'Powered by MaNGOS Web Enhanced version ' . $this->version . ' &copy; 2017, <a href="http://www.mistvale.com">Mistvale Dev Team</a>. All Rights Reserved.';
 	
 		// Fill in the config with the proper directory info if the directory info is wrong
 		define('SITE_DIR', dirname( $_SERVER['PHP_SELF'] ).'/');
@@ -42,16 +41,9 @@ class Core
 		}
 		else
 		{
-			define('SITE_BASE_HREF', $this->conf->get('site_base_href') . SITE_HREF);
+			define('SITE_BASE_HREF', $this->conf['site_base_href'] . SITE_HREF);
 		}
 
-		// If the site href doesnt match whats in the config, we need to set it
-		if($this->conf->get('site_base_href') != SITE_BASE_HREF)
-		{
-			$this->conf->set('site_base_href', SITE_BASE_HREF);
-			$this->conf->set('site_href', SITE_HREF);
-			$this->conf->Save();
-		}	
 		return TRUE;
 	}
 	
@@ -72,8 +64,6 @@ class Core
 		$GLOBALS['debug_messages'] = array();
 		$GLOBALS['cur_selected_realm'] = '';
 		
-		// === Load the languages and set users language === //
-		$languages = explode(",", $this->conf->get('available_lang'));
 		
 		// Check if a language cookie is set
 		if(isset($_COOKIE['Language'])) 
@@ -91,7 +81,7 @@ class Core
 		}
 		else
 		{
-			$GLOBALS['user_cur_lang'] = (string)$this->conf->get('default_lang');
+			$GLOBALS['user_cur_lang'] = $this->conf['default_lang'];
 			setcookie("Language", $GLOBALS['user_cur_lang'], time() + (3600 * 24 * 365));
 		}
 		
@@ -102,8 +92,8 @@ class Core
 		}
 		else
 		{
-			$GLOBALS['cur_selected_realm'] = (int)$this->conf->get('default_realm_id');
-			setcookie("cur_selected_realm", (int)$this->conf->get('default_realm_id'), time() + (3600 * 24 * 365));
+			$GLOBALS['cur_selected_realm'] = (int)$this->conf['default_realm_id'];
+			setcookie("cur_selected_realm", (int)$this->conf['default_realm_id'], time() + (3600 * 24 * 365));
 		}
 	}
 
@@ -127,105 +117,6 @@ class Core
 		}
 		$ret = array('allow_url_fopen' => $allow_url_fopen, 'allow_fsockopen' => $fsock);
 		return $ret;
-	}
-
-	
-//**************************************************************
-//	
-// Checks is the file ID is cached, and is current on time.
-//
-//**************************************************************	
-	public function isCached($id)
-	{
-		// Check if the cache file exists. If not, return false
-		if(file_exists('core/cache/'.$id.'.cache'))
-		{
-			// If the cache file is expired
-			if($this->getNextUpdate('core/cache/'.$id.'.cache') < 0)
-			{
-				unlink('core/cache/'.$id.'.cache'); #remove file
-				return FALSE;
-			}
-			// Otherwise return true, the cache file exists
-			else
-			{
-				return TRUE;
-			}
-		}
-		else
-		{
-			return FALSE;
-		}		
-	}
-
-//**************************************************************
-//	
-//	Loads the html code from the cached file, and returns it in
-//	a string
-//
-//**************************************************************	
-	public function getCache($id)
-	{
-		// Check if file exists incase isCache wasnt checked first. Else return false
-		if(file_exists('core/cache/'.$id.'.cache'))
-		{
-			return file_get_contents('core/cache/'.$id.'.cache'); #return contents
-		}
-		else
-		{
-			return false;
-		}		
-	}
-
-//**************************************************************	
-//
-//	Writes to a cache file ($id)
-//
-//**************************************************************	
-	public function writeCache($id, $content)
-	{
-		// Write the cache file
-		file_put_contents('core/cache/'.$id.'.cache', $content);
-	}
-
-//**************************************************************	
-//
-// Clean out all cache files. For individual delete, use deleteCache 
-//
-//**************************************************************	
-	public function clearCache()
-	{
-		// get a list of all files and directories
-		$files = scandir('core/cache/');
-		foreach($files as $file)
-		{
-			// We only want to delete the the cache files, not subfolders
-			if(is_file('core/cache/'.$file) && $file != 'index.html')
-			{
-				unlink('core/cache/'.$file); #Remove file
-			}
-		}
-		return TRUE;
-	}
-
-//**************************************************************	
-//
-// Deletes a cache file with the name of $id
-//
-//**************************************************************	
-	public function deleteCache($id)
-	{
-		unlink('core/cache/'.$id); #Remove file
-	}
-	
-//**************************************************************	
-//
-//	Return the next cache update time on a file.
-//
-//**************************************************************	
-	public function getNextUpdate($filename)
-	{
-		return (fileatime($filename) + $this->Cache_Refresh_Time) - time();
 	}
 }
 ?>

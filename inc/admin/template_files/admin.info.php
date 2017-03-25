@@ -25,7 +25,7 @@
 		</tr>
 		<tr>
 			<td width="50%" align="right" valign="middle" class="form-text">Core Expected Database Version:</td>
-			<td width="50%" align="left" valign="middle" class="form-text"><?php echo $Core->exp_dbversion; ?></td>
+			<td width="50%" align="left" valign="middle" class="form-text"><?php echo $Core->db_version; ?></td>
 		</tr>
 		<tr>
 			<td width="50%" align="right" valign="middle" class="form-text">MangosWeb Database Version:</td>

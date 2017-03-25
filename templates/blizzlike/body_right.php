@@ -40,7 +40,7 @@
 
 <?php 
 // If the fronpage vote banner is enabled
-if($Config->get('fp_vote_banner') == 1) 
+if($mwe_config['fp_vote_banner'] == 1) 
 { 
 ?>
 	<div id="box3">
@@ -64,7 +64,7 @@ if($Config->get('fp_vote_banner') == 1)
 
 <!-- Screenshot of the Momment -->
 <?php
-if ($Config->get('module_fp_ssotd') == 1) 
+if ($mwe_config['module_fp_ssotd'] == 1) 
 {
 	$screen_otd = $DB->selectCell("SELECT `img` FROM `mw_gallery` WHERE cat ='screenshot' ORDER BY RAND() LIMIT 1");
 ?>
@@ -94,7 +94,7 @@ if ($Config->get('module_fp_ssotd') == 1)
 
 <!-- Newcomers section -->
 <?php 
-if ($Config->get('fp_newbie_guide') == 1)
+if ($mwe_config['fp_newbie_guide'] == 1)
 { ?>
 	<div id="rightbox">
 		<div class="newcommer">
