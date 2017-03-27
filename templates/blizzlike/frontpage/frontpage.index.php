@@ -55,7 +55,7 @@
 				}
 				else
 				{
-					$posted_by = $DB->selectRow("SELECT username FROM account WHERE id = '".$topic['posted_by']."'");
+					$posted_by = $RDB->selectRow("SELECT username FROM account WHERE id = '".$topic['posted_by']."'");
 				}
 ?>                                                              
 				<script type="text/javascript">
