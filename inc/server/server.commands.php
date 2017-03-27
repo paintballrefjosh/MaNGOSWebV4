@@ -16,14 +16,14 @@ if(INCLUDED!==true) {
 
 $pathway_info[] = array('title' => $lang['commands'], 'link' => '');
 
-if($Config->get('emulator') == 'mangos') 
+if($mwe_config['emulator'] == 'mangos') 
 {
 	$userlevel = $DB->selectCell("SELECT `gmlevel` FROM `account` WHERE `id` = ".$user['id']);
 	$alltopics  = $WDB->select("SELECT * FROM `command` WHERE `security` <= $userlevel ORDER BY `name` ASC");
 }
-elseif($Config->get('emulator') == 'trinity') 
+elseif($mwe_config['emulator'] == 'trinity') 
 {
-	$userlevel = $DB->selectCell("SELECT `gmlevel` FROM `account_access` WHERE `id` = ".$user['id']);
+	$userlevel = $RDB->selectCell("SELECT `gmlevel` FROM `account_access` WHERE `id` = ".$user['id']);
 	if($userlevel == FALSE)
 	{
 		$userlevel = 0;
@@ -36,5 +36,4 @@ elseif($Config->get('emulator') == 'trinity')
 	$permissions = join(",", $permissions);
 	$alltopics  = $WDB->select("SELECT * FROM `command` WHERE `permission` IN ($permissions) ORDER BY `name` ASC");
 }
-
 ?>

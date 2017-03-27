@@ -1,7 +1,7 @@
 <br>
 <?php 
 builddiv_start(0, $lang['account']);
-$isbanned =  $DB->num_rows("SELECT id FROM account_banned WHERE id='".$user['id']."' AND active='1'");
+$isbanned =  $RDB->count("SELECT id FROM account_banned WHERE id='".$user['id']."' AND active='1'");
 ?>
 <table width = "550" align='center'>
 	<tr>
@@ -39,7 +39,7 @@ $isbanned =  $DB->num_rows("SELECT id FROM account_banned WHERE id='".$user['id'
 								</tr>
 								<tr>
 									<?php 
-										if($Config->get('emulator') == 'arcemu')
+										if($mwe_config['emulator'] == 'arcemu')
 										{
 											echo "<td align='right' valign = 'top' width='25%'><b>Last IP:</b></td>";
 										}

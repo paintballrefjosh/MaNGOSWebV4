@@ -14,7 +14,6 @@ You can view a live copy of the latest version used for testing by visiting **ww
  - Tons of character tools including name change, re-customization, level adjuster and more
  - New updates? No Problem! Update the CMS right from the ACP with the new Remote Updater
  - Module system
- - Website cache system for faster page loading
  - Unlimited amount of realms supported
  - Users can manage there accounts with ease
  - Password recovery system using the secret question system

@@ -2,7 +2,7 @@
 <?php builddiv_start(1, $lang['who_is_online']);
 
 // Check to see the admin has the online list enabled.
-if($Config->get('module_onlinelist') == 1)
+if($mwe_config['module_onlinelist'] == 1)
 {
 ?>
 	<table border="0" width="100%">

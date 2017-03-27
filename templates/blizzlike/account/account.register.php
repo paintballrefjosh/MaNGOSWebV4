@@ -32,13 +32,13 @@ p.nm, p.wm {
 </style>
 <?php
 builddiv_start(0, $lang['registration']);
-if ((int)$Config->get('allow_registration') == 0)
+if ((int)$mwe_config['reg_allow'] == 0)
 {
     output_message('error', 'Registration: Locked');
 }
 else
 {
-	if($Config->get('reg_invite') == 1 && (!isset($_GET['r_key']) || !$Account->isValidRegkey($_GET['r_key'])))
+	if($mwe_config['reg_require_invite'] == 1 && (!isset($_GET['r_key']) || !$Account->isValidRegkey($_GET['r_key'])))
 	{
 		// require invite / registration code to create an account
 		if(isset($_GET['r_key']) && !$Account->isValidRegkey($_GET['r_key']))
@@ -77,6 +77,7 @@ else
 <?php
 		build_CommBox_Footer();
 	}
+
 	if(isset($_GET['accept']))
 	{
 		if(isset($_POST['r_login']))
@@ -86,7 +87,7 @@ else
 
 		if(isset($reg_result) && $reg_result)
 		{
-			if((int)$Config->get('require_act_activation') == 1)
+			if((int)$mwe_config['require_act_activation'] == 1)
 			{
 				output_message('success', $lang['activation_email_sent']);
 			}
@@ -130,7 +131,7 @@ else
 			<input type="text" id="r_email" name="r_email" size="40" maxlength="50" <?php if(isset($_POST['r_email'])) echo 'value="'.htmlspecialchars($_POST['r_email']).'"';?> />
 			<p id="t_email" style="display:none;" class="wm"></p>
 <?php 
-			if ($Config->get('reg_secret_questions') == 1)
+			if ($mwe_config['reg_require_secret_questions'] == 1)
 			{
 ?>
 				<label for="secretq1"><?= $lang['secretq']; ?> 1:</label>
@@ -170,10 +171,10 @@ else
 				<option value="0"><?php echo $lang['classic'];?></option>
 			</select><br /><br />
 <?php
-			if ((int)$Config->get('reg_use_recaptcha') == 1)
+			if ((int)$mwe_config['reg_require_recaptcha'] == 1)
 			{
 ?>
-			<div class="g-recaptcha" data-sitekey="<?php echo $Config->get('reg_recaptcha_public_key');?>"></div>
+			<div class="g-recaptcha" data-sitekey="<?php echo $mwe_config['reg_recaptcha_public_key'];?>"></div>
 <?php 	
 			}
 ?>

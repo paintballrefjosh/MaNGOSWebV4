@@ -3,7 +3,7 @@
 builddiv_start(0, $lang['char_rename']);
 
 // First check to see if the admin has the module enabled.
-if($Config->get('module_charrename') == 1)
+if($mwe_config['module_char_rename'] == 1)
 {
 ?>
 <table width = "550" align='center'>
@@ -32,7 +32,7 @@ if($Config->get('module_charrename') == 1)
 											output_message('error', $lang['account_has_no_characters']);
 										}
 									}
-									if($Config->get('module_charrename') == 0)
+									if($mwe_config['module_char_rename'] == 0)
 									{
 										output_message('error', 'Module disabled by admin');
 										echo "<br />";

@@ -16,27 +16,11 @@ if(isset($_POST['edit_realm']))
 
 if(isset($_GET['id'])) 
 {
-	$rlm = $DB->selectRow("SELECT * FROM `realmlist` WHERE `id`='".$_GET['id']."'");
+	$rlm = $RDB->selectRow("SELECT * FROM `realmlist` WHERE `id`='".$_GET['id']."'");
+	$rlm_ext = $DB->selectRow("SELECT * FROM mw_realm WHERE realm_id = '".$_GET['id']."'");
+
 	$db_info = explode( ';', $rlm['dbinfo'] ) ;
 	$ra_info = explode( ';', $rlm['ra_info'] ) ;
-	
-	// DBinfo column: char_host;char_port;char_username;char_password;charDBname;world_host;world_port;world_username;world_pass;worldDBname
-	$rlm_info = array( 
-		'char_db_host' => $db_info['0'],
-		'char_db_port' => $db_info['1'], //port
-		'char_db_username' => $db_info['2'], //world user
-		'char_db_password' => $db_info['3'], //world password
-		'char_db_name' => $db_info['4'], //world db name
-		'w_db_host' => $db_info['5'], // world host
-		'w_db_port' => $db_info['6'], // world port
-		'w_db_username' => $db_info['7'], // world user
-		'w_db_password' => $db_info['8'], // world password
-		'w_db_name' => $db_info['9'], // world db name
-		'ra_type' => $ra_info['0'],
-		'ra_port' => $ra_info['1'],
-		'ra_user' => $ra_info['2'],
-		'ra_pass' => $ra_info['3'],
-		) ;
 ?>
 
 <!-- EDITING A REALM -->
@@ -149,35 +133,35 @@ if(isset($_GET['id']))
 		<!-- Char DB Host -->
 		<div class="field">
 			<label for="dbh"><?php echo $lang['char_db_host']; ?>: </label>
-			<input id="dbh" name="char_db_host" size="20" type="text" class="medium" value="<?php echo $rlm_info['char_db_host']; ?>" />
+			<input id="dbh" name="db_char_host" size="20" type="text" class="medium" value="<?php echo $rlm_ext['db_char_host']; ?>" />
 			<p class="field_help"><?php echo $lang['char_db_host_desc']; ?></p>
 		</div>
 		
 		<!-- Char DB Port -->
 		<div class="field">
 			<label for="dbh"><?php echo $lang['char_db_port']; ?>: </label>
-			<input id="dbh" name="char_db_port" size="20" type="text" class="medium" value="<?php echo $rlm_info['char_db_port']; ?>" />
+			<input id="dbh" name="db_char_port" size="20" type="text" class="medium" value="<?php echo $rlm_ext['db_char_port']; ?>" />
 			<p class="field_help"><?php echo $lang['char_db_port']; ?>.</p>
 		</div>
 		
 		<!-- Char DB Username -->
 		<div class="field">
 			<label for="dbh"><?php echo $lang['char_db_user']; ?>: </label>
-			<input id="dbh" name="char_db_user" size="20" type="text" class="medium" value="<?php echo $rlm_info['char_db_username']; ?>" />
+			<input id="dbh" name="db_char_user" size="20" type="text" class="medium" value="<?php echo $rlm_ext['db_char_user']; ?>" />
 			<p class="field_help"><?php echo $lang['char_db_user_desc']; ?></p>
 		</div>
 	
 		<!-- Char DB Password -->
 		<div class="field">
 			<label for="dbh"><?php echo $lang['char_db_pass']; ?>: </label>
-			<input id="dbh" name="char_db_pass" size="20" type="password" class="medium" value="<?php echo $rlm_info['char_db_password']; ?>" />
+			<input id="dbh" name="db_char_pass" size="20" type="password" class="medium" value="<?php echo $rlm_ext['db_char_pass']; ?>" />
 			<p class="field_help"><?php echo $lang['char_db_pass_desc']; ?></p>
 		</div>
 		
 		<!-- Char DB Name -->
 		<div class="field">
 			<label for="dbh"><?php echo $lang['char_db_name']; ?>: </label>
-			<input id="dbh" name="char_db_name" size="20" type="text" class="medium" value="<?php echo $rlm_info['char_db_name']; ?>" />
+			<input id="dbh" name="db_char_name" size="20" type="text" class="medium" value="<?php echo $rlm_ext['db_char_name']; ?>" />
 			<p class="field_help"><?php echo $lang['char_db_name_desc']; ?></p>
 		</div>
 		
@@ -194,35 +178,35 @@ if(isset($_GET['id']))
 		<!-- World DB Host -->
 		<div class="field">
 			<label for="dbh"><?php echo $lang['world_db_host']; ?>: </label>
-			<input id="dbh" name="w_db_host" size="20" type="text" class="medium" value="<?php echo $rlm_info['w_db_host']; ?>" />
+			<input id="dbh" name="db_world_host" size="20" type="text" class="medium" value="<?php echo $rlm_ext['db_world_host']; ?>" />
 			<p class="field_help"><?php echo $lang['world_db_host_desc']; ?></p>
 		</div>
 		
 		<!-- World DB Port -->
 		<div class="field">
 			<label for="dbh"><?php echo $lang['world_db_port']; ?>: </label>
-			<input id="dbh" name="w_db_port" size="20" type="text" class="medium" value="<?php echo $rlm_info['w_db_port']; ?>" />
+			<input id="dbh" name="db_world_port" size="20" type="text" class="medium" value="<?php echo $rlm_ext['db_world_port']; ?>" />
 			<p class="field_help"><?php echo $lang['world_db_port_desc']; ?></p>
 		</div>
 		
 		<!-- World DB Username -->
 		<div class="field">
 			<label for="dbh"><?php echo $lang['world_db_user']; ?>: </label>
-			<input id="dbh" name="w_db_user" size="20" type="text" class="medium" value="<?php echo $rlm_info['w_db_username']; ?>" />
+			<input id="dbh" name="db_world_user" size="20" type="text" class="medium" value="<?php echo $rlm_ext['db_world_user']; ?>" />
 			<p class="field_help"><?php echo $lang['world_db_user_desc']; ?></p>
 		</div>
 	
 		<!-- World DB Password -->
 		<div class="field">
 			<label for="dbh"><?php echo $lang['world_db_pass']; ?>: </label>
-			<input id="dbh" name="w_db_pass" size="20" type="password" class="medium" value="<?php echo $rlm_info['w_db_password']; ?>" />
+			<input id="dbh" name="db_world_pass" size="20" type="password" class="medium" value="<?php echo $rlm_ext['db_world_pass']; ?>" />
 			<p class="field_help"><?php echo $lang['world_db_pass_desc']; ?></p>
 		</div>
 		
 		<!-- World DB Name -->
 		<div class="field">
 			<label for="dbh"><?php echo $lang['world_db_name']; ?>: </label>
-			<input id="dbh" name="w_db_name" size="20" type="text" class="medium" value="<?php echo $rlm_info['w_db_name']; ?>" />
+			<input id="dbh" name="db_world_name" size="20" type="text" class="medium" value="<?php echo $rlm_ext['db_world_name']; ?>" />
 			<p class="field_help"><?php echo $lang['world_db_name_desc']; ?></p>
 		</div>
 		
@@ -240,7 +224,7 @@ if(isset($_GET['id']))
 			<label for="ra_type"><?php echo $lang['type']; ?>: </label>
 			<select id="type" class="small" name="ra_type">
 			<?php
-				if($rlm_info['ra_type'] == 0) 
+				if($rlm_ext['ra_type'] == 0) 
 				{
 					echo "<option value=\"0\">Telnet</option><option value=\"1\">SOAP</option>"; 
 				}
@@ -255,21 +239,21 @@ if(isset($_GET['id']))
 		<!-- Ra Port -->
 		<div class="field">
 			<label for="ra_port"><?php echo $lang['remote_access_port']; ?>: </label>
-			<input id="ra_port" name="ra_port" size="20" type="text" class="xsmall" value="<?php echo $rlm_info['ra_port']; ?>" />
+			<input id="ra_port" name="ra_port" size="20" type="text" class="xsmall" value="<?php echo $rlm_ext['ra_port']; ?>" />
 			<p class="field_help"><?php echo $lang['remote_access_port_desc']; ?>.</p>
 		</div>
 		
 		<!-- Ra Username -->
 		<div class="field">
 			<label for="ra_user"><?php echo $lang['remote_access_user']; ?>: </label>
-			<input id="ra_user" name="ra_user" size="20" type="text" class="medium" value="<?php echo $rlm_info['ra_user']; ?>" />
+			<input id="ra_user" name="ra_user" size="20" type="text" class="medium" value="<?php echo $rlm_ext['ra_user']; ?>" />
 			<p class="field_help"><?php echo $lang['remote_access_user_desc']; ?>.</p>
 		</div>
 		
 		<!-- Ra Password -->
 		<div class="field">
 			<label for="dbh"><?php echo $lang['remote_access_pass']; ?>: </label>
-			<input id="dbh" name="ra_pass" size="20" type="text" class="medium" value="<?php echo $rlm_info['ra_pass']; ?>" />
+			<input id="dbh" name="ra_pass" size="20" type="text" class="medium" value="<?php echo $rlm_ext['ra_pass']; ?>" />
 			<p class="field_help"><?php echo $lang['remote_access_pass_desc']; ?>.</p>
 		</div>
 		
@@ -293,14 +277,23 @@ else
 	<div class="main-content">
 		<table>
 			<thead>
-				<th width="5%"><center><b>Id</b></center></th>
-				<th width="30%"><center><b><?php echo $lang['name']; ?></b></center></th>
-				<th width="20%"><center><b><?php echo $lang['address']; ?></b></center></th>
-				<th width="10%"><center><b><?php echo $lang['port']; ?></b></center></th>
-				<th width="15%"><center><b><?php echo $lang['type']; ?></b></center></th>
-				<th width="20%"><center><b><?php echo $lang['timezone']; ?></b></center></th>
+				<th><center><b>Id</b></center></th>
+				<th><center><b><?php echo $lang['name']; ?></b></center></th>
+				<th><center><b><?php echo $lang['address']; ?></b></center></th>
+				<th><center><b><?php echo $lang['port']; ?></b></center></th>
+				<th><center><b><?php echo $lang['type']; ?></b></center></th>
+				<th><center><b><?php echo $lang['timezone']; ?></b></center></th>
+				<th><center><b>Enabled</b></center></th>
 			</thead>
-			<?php foreach($getrealms as $row) { ?>
+<?php
+			foreach($getrealms as $row)
+			{
+				$enabled = $DB->selectCell("SELECT `site_enabled` FROM `mw_realm` WHERE `realm_id` = '".$row['id']."'");
+				if($enabled == 1)
+					$enabled = "Yes";
+				else
+					$enabled = "No";
+?>
 			<tr>
 				<td align="center"><?php echo $row['id']; ?></td>
 				<td align="center"><a href="?p=admin&sub=realms&id=<?php echo $row['id']; ?>"><?php echo $row['name']; ?></a></td>
@@ -308,8 +301,11 @@ else
 				<td align="center"><?php echo $row['port']; ?></td>
 				<td align="center"><?php echo $realm_type_def[$row['icon']]; ?></td>
 				<td align="center"><?php echo $realm_timezone_def[$row['timezone']]; ?></td>
+				<td align="center"><?= $enabled; ?></td>
 			</tr>
-			<?php } ?>
+<?php
+			}
+?>
 		</table>
 	</div>
 </div> <!-- .content -->	

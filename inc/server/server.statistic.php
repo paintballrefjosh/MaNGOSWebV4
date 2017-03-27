@@ -13,7 +13,7 @@ if(INCLUDED!==true) {
 }
 
 // build top of page navigation breadcrumbs
-$realm = $DB->selectRow("SELECT * FROM realmlist WHERE `id`='".$user['cur_selected_realm']."' LIMIT 1");
+$realm = $RDB->selectRow("SELECT * FROM realmlist WHERE `id`='".$user['cur_selected_realm']."' LIMIT 1");
 $pathway_info[] = array('title' => 'Server Statistics', 'link' => '?p=server&sub=statistic');
 $pathway_info[] = array('title' => $realm['name'], 'link' => '');
 

@@ -17,24 +17,6 @@ if(INCLUDED !== TRUE)
 $pathway_info[] = array('title' => $lang['login'], 'link' => '');
 // ==================== //
 
-/*
-	When posting to this page, It MUST be in this format:
-	name='action' value='value'
-	
-	Values:
-	'login' = logs the user in
-		POST Values:
-		login = username;
-		pass = password;
-	'logout' = logs the user out
-	'profile' = redirects user to account screen
-*/
-
-
-// Tell the cache system not to cache this page
-define('CACHE_FILE', FALSE);
-
-
 // Lets check to see if the user has posted something
 if(isset($_POST['action']))
 {
@@ -43,7 +25,7 @@ if(isset($_POST['action']))
 	{
 		$login = $_POST['login'];
 		$pass = $Account->sha_password($login, $_POST['pass']);
-		$account_id = $DB->selectCell("SELECT `id` FROM `account` WHERE `username` LIKE '".$_POST['login']."' LIMIT 1");
+		$account_id = $RDB->selectCell("SELECT `id` FROM `account` WHERE `username` = '".$_POST['login']."' LIMIT 1");
 		
 		// initiate the login array, and send it in
 		$params = array('username' => $login, 'sha_pass_hash' => $pass);
@@ -51,7 +33,7 @@ if(isset($_POST['action']))
 		
 		// If account login was successful
 		if($Login == 1)
-		{	
+		{
 			// Make sure account exists in mw_account_extend table, if not then insert one of type "member" aka registered user
 			$mw_account = $DB->selectCell("SELECT account_id FROM mw_account_extend WHERE account_id = '".$account_id."'");
 			if(!$mw_account)

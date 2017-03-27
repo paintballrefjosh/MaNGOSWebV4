@@ -15,7 +15,7 @@
 			<td class="rankingHeader" align='left' colspan='6'>Pages: <?php echo  $pages_str; ?></td>
 		</tr>
 		<tr> 
-			<td class="rankingHeader" align="center" colspan='6' nowrap="nowrap">Realm: <?php echo $realm_info_new['name']; ?></td>          
+			<td class="rankingHeader" align="center" colspan='6' nowrap="nowrap">Realm: <?php echo $realm_info['name']; ?></td>          
 		</tr>
 		<tr>
 			<td class="rankingHeader" align="center" nowrap="nowrap">#</td>
@@ -45,7 +45,7 @@
 			</tr>
 	<?php 
 		} 
-		unset($item_res, $item, $realm_info_new);
+		unset($item_res, $item, $realm);
 	?>
     </tbody>
     </table>

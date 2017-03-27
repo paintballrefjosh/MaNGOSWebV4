@@ -3,7 +3,7 @@
 builddiv_start();
 
 // First check to see if the admin has the module enabled.
-if($Config->get('module_charcustomize') == 1)
+if($mwe_config['module_char_customize'] == 1)
 {
 ?>
 <table width = "550" align='center'>
@@ -32,7 +32,7 @@ if($Config->get('module_charcustomize') == 1)
 											output_message('error', $lang['account_has_no_characters']);
 										}
 									}
-									if($Config->get('module_charcustomize') == 0)
+									if($mwe_config['module_char_customize'] == 0)
 									{
 										output_message('error', $lang['disabled']);
 										echo "<br />";
