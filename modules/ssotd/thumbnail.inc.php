@@ -470,7 +470,7 @@ class Thumbnail {
 	            break;
 	        case 'JPG':
 	            if($name != null) {
-	                ImageIpeg($this->newImage,$name,$quality);
+	                ImageJpeg($this->newImage,$name,$quality);
 	            }
 	            else {
 	               header('Content-type: image/jpeg');
