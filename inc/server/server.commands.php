@@ -16,9 +16,16 @@ if(INCLUDED!==true) {
 
 $pathway_info[] = array('title' => $lang['commands'], 'link' => '');
 
+//	************************************************************
+// Redirect users who arent logged in ;)
+if($Account->isLoggedIn() == FALSE)
+{
+	redirect('?p=account&sub=login',1);
+}
+
 if($mwe_config['emulator'] == 'mangos') 
 {
-	$userlevel = $DB->selectCell("SELECT `gmlevel` FROM `account` WHERE `id` = ".$user['id']);
+	$userlevel = $RDB->selectCell("SELECT `gmlevel` FROM `account` WHERE `id` = ".$user['id']);
 	$alltopics  = $WDB->select("SELECT * FROM `command` WHERE `security` <= $userlevel ORDER BY `name` ASC");
 }
 elseif($mwe_config['emulator'] == 'trinity') 
