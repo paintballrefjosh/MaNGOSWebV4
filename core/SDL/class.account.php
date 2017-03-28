@@ -352,13 +352,13 @@ class Account
                 }
 				
 				// Send the activation email
-                $act_link = (string)$mwe_config['site_base_href'].'?p=account&sub=activate&id='.$u_id.'&key='.$tmp_act_key;
-                $email_text  = '== Account activation =='."\n\n";
-                $email_text .= 'Username: '.$params['username']."\n";
-                $email_text .= 'Password: '.$password."\n";
-                $email_text .= 'This is your activation key: '.$tmp_act_key."\n";
-                $email_text .= 'CLICK HERE : '.$act_link."\n";
-                send_email($params['email'], $params['username'], '== '.(string)$mwe_config['site_title'].' account activation ==', $email_text, false);
+                $act_link = (string)$mwe_config['site_base_href'] . $mwe_config['site_href'] . "?p=account&amp;sub=activate&amp;id=$u_id&amp;key=$tmp_act_key";
+                $email_text  = $mwe_config['site_title'] . " Account activation<br /><br />";
+                $email_text .= 'Username: '.$params['username']."<br />";
+                $email_text .= 'Password: '.$password."<br />";
+                $email_text .= 'This is your activation key: '.$tmp_act_key."<br />";
+                $email_text .= 'CLICK HERE : '.$act_link."<br />";
+                send_email($params['email'], $mwe_config['site_title'].' - Account Activation', $email_text, false);
                 return 1;
             }
 			

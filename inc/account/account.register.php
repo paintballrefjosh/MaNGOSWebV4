@@ -84,7 +84,7 @@ function Register()
 	// We need to see if its enabled, and if the user put in the right code
 	if($mwe_config['reg_require_recaptcha'] == 1)
 	{
-		$response=json_decode(file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=".$Config->get('reg_recaptcha_private_key')."&response=".$_POST['g-recaptcha-response']."&remoteip=".$_SERVER['REMOTE_ADDR']), true);
+		$response=json_decode(file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=".$mwe_config['reg_recaptcha_private_key']."&response=".$_POST['g-recaptcha-response']."&remoteip=".$_SERVER['REMOTE_ADDR']), true);
 		
 		if($response['success'] != true)
 		{
@@ -96,7 +96,7 @@ function Register()
 
 	// Ext 2 - secret questions
 	// Check if user questions are required, if so we need to check for symbols, and character lenght
-	if($mwe_config['reg_secret_questions'] == 1)
+	if($mwe_config['reg_require_secret_questions'] == 1)
 	{
 		if ($_POST['secretq1'] && $_POST['secretq2'] && $_POST['secreta1'] && $_POST['secreta2']) 
 		{
@@ -170,7 +170,7 @@ function Register()
 		// lets catch the return on the register function
 		if($Enter == 1) # 1 = success
 		{
-			if($Config->get('reg_invite') == 1)
+			if($mwe_config['reg_require_invite'] == 1)
 			{
 				$Account->delete_key($_GET['r_key']);
 			}

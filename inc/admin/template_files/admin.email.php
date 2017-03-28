@@ -61,7 +61,7 @@
 	<?php 
 		if(isset($_POST['send_email'])) 
 		{
-			send_email($_POST['reciever'],'wilson212',$_POST['subject'],$_POST['message']);
+			send_email($_POST['reciever'], $_POST['subject'], $_POST['message']);
 		}
 	?>			
 		<form method="POST" action="?p=admin&sub=email" class="form label-inline">

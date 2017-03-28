@@ -34,8 +34,8 @@
 								<a href="?p=admin&sub=siteconfig"><?php echo $lang['site_config']; ?></a>
 							</td>
 							<td height="80px" width="130px" align="center">
-								<a href="?p=admin&sub=dbconfig"><img src="inc/admin/images/icons/db_settings.png" border="0" /></a><br />
-								<a href="?p=admin&sub=dbconfig"><?php echo $lang['database_config']; ?></a>
+								<img src="inc/admin/images/icons/db_settings.png" border="0" /><br />
+								<strike><?php echo $lang['database_config']; ?></strike>
 							</td>
 							<td height="80px" width="130px" align="center">
 								<a href="?p=admin&sub=realms"><img src="inc/admin/images/icons/realm-icon.png" border="0" /></a><br />
@@ -71,7 +71,7 @@
 						<tr>
 							<td height="80px" width="130" align="center">
 								<img src="inc/admin/images/icons/cache-icon.png" width="48" height="48" border="0" /><br />
-								<?php echo $lang['cache_settings']; ?>
+								<strike><?php echo $lang['cache_settings']; ?></strike>
 							</td>
 							<td height="80px" width="130" align="center">
 								<a href="?p=admin&sub=regkeys"><img src="inc/admin/images/icons/keys-icon.png" width="48" height="48" border="0" /></a><br />
