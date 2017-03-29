@@ -86,7 +86,7 @@ function getRealmlist()
 {
 	global $DB;
     
-    $realms = $DB->select("SELECT * FROM `mw_realm` ORDER BY `realm_id` ASC");
+    $realms = $DB->select("SELECT * FROM `mw_realm` WHERE `site_enabled` = 1 ORDER BY `realm_id` ASC");
     
 	return $realms;
 }
