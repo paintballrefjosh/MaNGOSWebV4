@@ -1045,14 +1045,10 @@ class Account
 
 	function removeAccountKeyForUser($id) 
 	{
-		$count = $this->DB->selectRow("SELECT * FROM mw_account_keys where id ='$id'");
-		if($count == FALSE) 
+		$count = $this->DB->count("SELECT `id` FROM `mw_account_keys` where `id` ='$id'");
+		if($count == 1) 
 		{
-			//do nothing
-		}
-		else 
-		{
-			$this->DB->query("DELETE FROM mw_account_keys WHERE id ='$id'");
+			$this->DB->query("DELETE FROM `mw_account_keys` WHERE `id` ='$id'");
 		}
 	}
 }
