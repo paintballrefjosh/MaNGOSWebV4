@@ -22,8 +22,8 @@ class MangosTemplate
 
 	public function Init()
 	{
-		global $user, $Config, $DB;
-		$template_list = explode(",", $Config->get('templates'));
+		global $user, $mwe_config, $DB;
+		$template_list = explode(",", $mwe_config['templates']);
 		if ( $user['id'] == -1 ) // If user is a guest and not logged in 
 		{
 			if(isset($_GET['theme']))

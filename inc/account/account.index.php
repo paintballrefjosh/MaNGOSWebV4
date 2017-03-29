@@ -17,15 +17,13 @@ if(INCLUDED !== TRUE)
 $pathway_info[] = array('title' => $lang['account'], 'link' => '');
 // ==================== //
 
-define("CACHE_FILE", FALSE);
-
 // Lets check to see if the user is logged in
 if($Account->isLoggedIn() == FALSE)
 {
     redirect('?p=account&sub=login',1);
 }
 
-if($Config->get('emulator') == 'arcemu')
+if($mwe_config['emulator'] == 'arcemu')
 {
 	$regiseter_ip = $user['lastip'];
 	$joindate = '?';

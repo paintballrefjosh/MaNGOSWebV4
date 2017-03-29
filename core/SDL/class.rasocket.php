@@ -27,9 +27,9 @@ class RA
     */
     public function __construct()
     {
-		global $Config;
+		global $mwe_config;
         $this->handle = FALSE;
-		if($Config->get('enable_debugging') == 1)
+		if($mwe_config['enable_debugging'] == 1)
 		{
 			$this->debug = TRUE;
 		}
@@ -61,7 +61,7 @@ class RA
     */
     public function auth($user, $pass)
     {
-		global $Config;
+		global $mwe_config;
 		
         $user = strtoupper($user);
         fwrite($this->handle, $user."\n");
@@ -78,7 +78,7 @@ class RA
 			$this->debugLog[] = 'Authorization return: '.$return;
 		}
 
-		if($Config->get('emulator') == 'mangos')
+		if($mwe_config['emulator'] == 'mangos')
 		{
 			if(strpos($return, "+") === FALSE)
 			{
@@ -211,7 +211,6 @@ class RA
     */
     public function executeCommand($type, $shost, $remote, $command)
     {
-		global $Config;
 		if($type == 0)
 		{
 			if(!$this->connect($shost, $remote[1]))
@@ -341,8 +340,8 @@ class RA
 // Setups the Soap Handle	
 	private function soapHandle($shost, $remote)
 	{
-		global $Config;
-		if($Config->get('emulator') == 'mangos')
+		global $mwe_config;
+		if($mwe_config['emulator'] == 'mangos')
 		{
 			$client = new SoapClient(NULL,
 			array(
@@ -379,10 +378,10 @@ class RA
 	*/
 	function send($command, $realm)
 	{
-		global $user, $Config, $DB;
+		global $RDB;
 		
 		// Get the remote access information from the realm database
-		$get_remote = $DB->selectRow("SELECT * FROM `realmlist` WHERE id='".$realm."'");
+		$get_remote = $RDB->selectRow("SELECT * FROM `realmlist` WHERE id='".$realm."'");
 		$remote = explode(';', $get_remote['ra_info']);
 		$shost = $get_remote['address'];
 		

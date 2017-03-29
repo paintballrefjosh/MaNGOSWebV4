@@ -14,16 +14,13 @@ if(INCLUDED!==true) {
 }
 //=======================//
 
-$realm = $DB->selectRow("SELECT * FROM realmlist WHERE `id`='".$user['cur_selected_realm']."' LIMIT 1");
+$realm = get_realm_byid($user['cur_selected_realm']);
 
 // ==================== //
 $pathway_info[] = array('title' => 'Top Kills', 'link' => '?p=server&sub=topkills');
 $pathway_info[] = array('title' => $realm['name'], 'link' => '');
 // ==================== //
 
-
-// Define not to cache because of there being multi realms
-define("CACHE_FILE", FALSE);
 
 // some config //
 $limit = 50; // Only top 50 in stats

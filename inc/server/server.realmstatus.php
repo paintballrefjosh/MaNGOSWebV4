@@ -16,9 +16,6 @@ if(INCLUDED !== true) {
 $pathway_info[] = array('title' => $lang['realmstatus'], 'link' => '');
 // ==================== //
 
-// Define we want this page to be cached
-define("CACHE_FILE", FALSE);
-
 // Start a page desc
 $PAGE_DESC = $lang['realm_status_desc'];
 
@@ -99,50 +96,32 @@ function print_time($time_array)
 	to the databases, check the port status, and
 	get the server uptime, population, and time.
 */
+$realm_list = array();
 
-foreach($Realm as $i => $result)
+foreach($Realm as $row)
 {
-	// turn the dbinfo column into an array
-	$dbinfo = explode(';', $result['dbinfo']);
+	$realm_data = $RDB->selectRow("SELECT * FROM `realmlist` WHERE `id` = '".$row['realm_id']."'");
 
-	// DBinfo column: char_host;char_port;char_username;char_password;charDBname;world_host;world_port;world_username;world_pass;worldDBname
-	$Realm_DB_Info = array(
-		'char_db_host' => $dbinfo['0'], // char host
-		'char_db_port' => $dbinfo['1'], // char port
-		'char_db_username' => $dbinfo['2'], // char user
-		'char_db_password' => $dbinfo['3'], // char password
-		'char_db_name' => $dbinfo['4'], //char db name
-		'w_db_host' => $dbinfo['5'], // world host
-		'w_db_port' => $dbinfo['6'], // world port
-		'w_db_username' => $dbinfo['7'], // world user
-		'w_db_password' => $dbinfo['8'], // world password
-		'w_db_name' => $dbinfo['9'], // world db name
-		);
-
-	// Free up memory.
-	unset($dbinfo, $DB_info); 
-
+	$row = array_merge($row, $realm_data);
+	
 	// Establish the Character DB connection
 	$CDB_EXTRA = new Database(
-		$Realm_DB_Info['char_db_host'],
-		$Realm_DB_Info['char_db_port'],
-		$Realm_DB_Info['char_db_username'],
-		$Realm_DB_Info['char_db_password'],
-		$Realm_DB_Info['char_db_name']
+		$row['db_char_host'],
+		$row['db_char_port'],
+		$row['db_char_user'],
+		$row['db_char_pass'],
+		$row['db_char_name']
 	);
 
 	// Establish the World DB connection	
 	$WDB_EXTRA = new Database(
-		$Realm_DB_Info['w_db_host'],
-		$Realm_DB_Info['w_db_port'],
-		$Realm_DB_Info['w_db_username'],
-		$Realm_DB_Info['w_db_password'],
-		$Realm_DB_Info['w_db_name']
+		$row['db_world_host'],
+		$row['db_world_port'],
+		$row['db_world_user'],
+		$row['db_world_pass'],
+		$row['db_world_name']
 	);
-	
-	// Free up memory
-	unset($Realm_DB_Info);
-	
+
 	// $res_color is a template thing for blizzlike templates,
 	// makes each row an offset color from the previous
     if($res_color == 1)
@@ -155,20 +134,20 @@ foreach($Realm as $i => $result)
 	}
 	
 	// Define the realm type, and realm number
-    $realm_type = $realm_type_def[$result['icon']];
-	$realm_num = $result['id'];
+    $realm_type = $realm_type_def[$row['icon']];
+	$realm_num = $row['realm_id'];
 	
 	// Check the realm status using the check_port_status function
-    if(check_port_status($result['address'], $result['port'], 2) == TRUE)
+    if(check_port_status($row['address'], $row['port'], 2) == TRUE)
     {
 		// res image is the up arrow pretty much
         $res_img = 'Online';
 		
 		// Get the server population
-        $population = $CDB_EXTRA->count("SELECT COUNT(*) FROM `characters` WHERE online=1");
+        $population = (int)$CDB_EXTRA->count("SELECT guid FROM `characters` WHERE online=1");
 		
 		// Get the server uptime
-		$start_time = $DB->selectCell("SELECT `starttime` FROM `uptime` WHERE `realmid`='".$realm_num."' ORDER BY `starttime` DESC LIMIT 1");
+		$start_time = $RDB->selectCell("SELECT `starttime` FROM `uptime` WHERE `realmid`='".$realm_num."' ORDER BY `starttime` DESC LIMIT 1");
         $uptime = (time() - $start_time);
     }
     else
@@ -190,16 +169,16 @@ foreach($Realm as $i => $result)
 	}
 	
 	// Setup this realm in the array
-    $Realm[$i]['res_color'] = $res_color;
-    $Realm[$i]['status'] = $res_img;
-    $Realm[$i]['name'] = $result['name'];
-    $Realm[$i]['type'] = $realm_type;
-//    $Realm[$i]['population'] = $population; // This was returning an array, resolved with below fix using COUNT(*) as the array key
-    $Realm[$i]['population'] = $population['COUNT(*)'];
-    $Realm[$i]['uptime'] = $uptime;
+    $realm_list[$i]['res_color'] = $res_color;
+    $realm_list[$i]['status'] = $res_img;
+    $realm_list[$i]['name'] = $row['name'];
+    $realm_list[$i]['type'] = $realm_type;
+    $realm_list[$i]['population'] = $population;
+    $realm_list[$i]['uptime'] = $uptime;
 	
 	// Unset the realms DB Connections
     unset($WDB_EXTRA);
     unset($CDB_EXTRA);
+	$i++;
 }
 ?>

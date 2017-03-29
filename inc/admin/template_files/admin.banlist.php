@@ -29,7 +29,7 @@
 			</tr>
 		</thead>
 		<?php
-		$ban_list = $DB->select("SELECT account.id, username, bandate, bannedby, banreason FROM account_banned JOIN account ON account.id = account_banned.id WHERE active='1' ORDER BY bandate DESC");
+		$ban_list = $RDB->select("SELECT account.id, username, bandate, bannedby, banreason FROM account_banned JOIN account ON account.id = account_banned.id WHERE active='1' ORDER BY bandate DESC");
 		if($ban_list)
 		{
 			foreach($ban_list as $row)
@@ -63,7 +63,7 @@
 			</tr>
 		</thead>
 		<?php
-		$ban_list = $DB->select("SELECT ip, bandate, bannedby, banreason FROM ip_banned ORDER BY bandate DESC");
+		$ban_list = $RDB->select("SELECT ip, bandate, bannedby, banreason FROM ip_banned ORDER BY bandate DESC");
 		if($ban_list)
 		{
 			foreach($ban_list as $row)

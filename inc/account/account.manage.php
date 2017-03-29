@@ -17,9 +17,6 @@ if(INCLUDED !== TRUE)
 $pathway_info[] = array('title' => $lang['account_manage'], 'link' => '');
 // ==================== //
 
-// Tell the cache system not to cache this page
-define('CACHE_FILE', FALSE);
-
 // check if the user is logged in. if not, redirect
 if($Account->isLoggedIn() == FALSE)
 {
@@ -42,9 +39,9 @@ $secret_questions = $Account->getSecretQuestions();
 
 function changeEmail()
 {
-	global $lang, $user, $Account, $DB, $Config;
+	global $lang, $user, $Account, $RDB, $mwe_config;
 
-	if(!$Config->get('allow_user_emailchange'))
+	if(!$mwe_config['allow_user_email_change'])
 		return TRUE;
 	
 	$newemail = trim($_POST['email']);
@@ -53,7 +50,7 @@ function changeEmail()
 	if($Account->isValidEmail($newemail))
 	{
 		//Next we see if the email is used already
-		$email = $DB->selectCell("SELECT `email` FROM `account` WHERE `id`='".$user['id']."'");
+		$email = $RDB->selectCell("SELECT `email` FROM `account` WHERE `id`='".$user['id']."'");
 		if($newemail != $email)
 		{
 			if($Account->isAvailableEmail($newemail) == FALSE)
@@ -84,7 +81,7 @@ function changeEmail()
 
 function changePass()
 {
-	global $lang, $user, $Account, $Config;
+	global $lang, $user, $Account;
 	$newpass = trim($_POST['new_pass']);
 	if(strlen($newpass) > 3)
 	{
@@ -108,7 +105,7 @@ function changePass()
 
 function changeSQ()
 {
-	global $user, $lang, $DB, $Account;
+	global $user, $lang, $Account;
 	$change = $Account->setSecretQuestions($user['id'], $_POST['secretq1'], $_POST['secreta1'], $_POST['secretq2'], $_POST['secreta2']);
 	if($change == 1)
 	{
@@ -146,7 +143,7 @@ function resetSQ()
 
 function changeDetails()
 {
-	global $DB, $lang, $user, $Account;
+	global $lang, $user, $Account;
 	
 	$success = 0;
 	

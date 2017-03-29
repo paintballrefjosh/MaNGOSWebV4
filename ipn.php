@@ -15,14 +15,14 @@ include('core/lib/class.paypal.php');
 // =====================================//
 
 // Initiate the classes, and establish a DB conection
-$Config = new Config;
+//$Config = new Config;
 $Paypal = new Paypal;
 $DB = new Database(
-	$Config->getDbInfo('db_host'), 
-	$Config->getDbInfo('db_port'), 
-	$Config->getDbInfo('db_username'), 
-	$Config->getDbInfo('db_password'), 
-	$Config->getDbInfo('db_name')
+	$mwe_config['db_logon_host'], 
+	$mwe_config['db_logon_port'], 
+	$mwe_config['db_logon_username'], 
+	$mwe_config['db_logon_password'], 
+	$mwe_config['db_logon_name']
 );
 
 // Set test mode features (TRUE or FALSE)

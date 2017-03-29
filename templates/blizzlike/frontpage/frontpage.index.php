@@ -6,7 +6,7 @@
 	<div id="module-container">
 		<?php 
 		// Load the banner display type. 1 = internal flash, 2 = external flash (wow.com), 3 is banner
-		$banner = (int)$Config->get('flash_display_type');
+		$banner = (int)$mwe_config['flash_display_type'];
 		if ($banner == 1)
 		{ ?>
 			<div id="flashcontainer">
@@ -49,9 +49,15 @@
 					$hl='alt';
 				}
 				
-				$posted_by = $DB->selectRow("SELECT username FROM account WHERE id = '".$topic['posted_by']."'");
-
-		?>                                                              
+				if($topic['posted_by'] == 0)
+				{
+					$posted_by['username'] = "Mistvale.com Dev Team";
+				}
+				else
+				{
+					$posted_by = $RDB->selectRow("SELECT username FROM account WHERE id = '".$topic['posted_by']."'");
+				}
+?>                                                              
 				<script type="text/javascript">
 					var postId<?php echo $postnum; ?>="<?php echo $topic['id'];?>";
 				</script>
@@ -110,7 +116,7 @@
 				var position = <?php echo $postnum;?>;
 				var localId = postId<?php echo $postnum;?>;
 				var cookieState = getcookie("news"+localId);
-				var defaultOpen = "<?php echo $Config->get('module_news_open');?>";
+				var defaultOpen = "<?php echo $mwe_config['module_news_open'];?>";
 				if ((cookieState == 1) || (position==1 && cookieState!='0') || (defaultOpen == 1 && cookieState!='0')) {
 				} else {
 					document.getElementById("news"+localId).className = "news-collapse"+"<?php echo $hl;?>";       
@@ -124,7 +130,7 @@
 	</div>
 	<div class="news-archive-link" <?php if ($banner==1) echo 'style="position: relative;"';?>>
 		<div class="news-archive-button">
-			<a href="<?php echo $Config->get('site_forums'); ?>"><span><?php echo $lang['view_news_archives'];?></span></a>
+			<a href="<?php echo $mwe_config['site_forums']; ?>"><span><?php echo $lang['view_news_archives'];?></span></a>
 		</div>
 	</div>
 	<div>
@@ -171,14 +177,14 @@
 					<tr>
 						<td width="50%">
 							<div align="center" style="position:relative; top:1px; left:0px;">
-								<a href="<?php echo $Config->get('site_forums'); ?>">
+								<a href="<?php echo $mwe_config['site_forums']; ?>">
 									<img src="<?php echo $Template['path']; ?>/images/box-support.gif" width="226" height="93" />
 								</a>
 							</div>
 						</td>
 						<td width="50%">
 							<div align="center">
-								<a href="<?php echo $Config->get('site_forums'); ?>">
+								<a href="<?php echo $mwe_config['site_forums']; ?>">
 									<img src="<?php echo $Template['path']; ?>/images/box-jobs.gif" width="226" height="93" />
 								</a>
 							</div>
