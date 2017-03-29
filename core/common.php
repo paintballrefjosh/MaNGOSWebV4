@@ -86,7 +86,7 @@ function getRealmlist()
 {
 	global $DB;
     
-    $realms = $DB->select("SELECT * FROM `mw_realm` ORDER BY `realm_id` ASC");
+    $realms = $DB->select("SELECT * FROM `mw_realm` WHERE `site_enabled` = 1 ORDER BY `realm_id` ASC");
     
 	return $realms;
 }
@@ -202,74 +202,56 @@ function print_gold($gvar)
 //===== MAIL FUNCTIONS =====//
 
 // Send Mail
-function send_email($goingto, $toname, $sbj, $messg, $notice = true) 
+function send_email($email_to, $email_subject, $email_message, $notice = true) 
 {
 	global $mwe_config;
-	define('DISPLAY_XPM4_ERRORS', true); // display XPM4 errors
-	$core_em = $mwe_config['site_email'];
-		
-	// If email type "0" (SMTP)
-	if($mwe_config['email_type'] == 0) 
-	{ 
-		require_once 'core/mail/SMTP.php'; // path to 'SMTP.php' file from XPM4 package
 
-		$f = ''.$core_em.''; // from mail address
-		$t = ''.$goingto.''; // to mail address
+    if($mwe_config['email_use_secure'] == 1)
+    {
+        $smtp_encryption = $mwe_config['email_smtp_secure'];
+    }
+    else
+    {
+        $smtp_encryption = false;
+    }
 
-		// standard mail message RFC2822
-		$m = 'From: '.$f."\r\n".
-			'To: '.$t."\r\n".
-			'Subject: '.$sbj."\r\n".
-			'Content-Type: text/plain'."\r\n\r\n".
-			''.$messg.'';
+    require("core/mail/PHPMailerAutoload.php");
 
-		$h = explode('@', $t); // get client hostname
-		$c = SMTP::MXconnect($h[1]); // connect to SMTP server (direct) from MX hosts list
-		$s = SMTP::Send($c, array($t), $m, $f); // send mail
-		// print result
-		if($notice)if ($s) output_message('success', 'Mail Sent!');
-		else output_message('error', print_r($_RESULT));
-		SMTP::Disconnect($c); // disconnect
-	}
-	elseif($mwe_config['email_type'] == 1) 	// If email type "1" (MIME)
-	{
-		require_once 'core/mail/MIME.php'; // path to 'MIME.php' file from XPM4 package
+    $mail = new PHPMailer;
 
-		// compose message in MIME format
-		$mess = MIME::compose($messg);
-		// send mail
-		$send = mail($goingto, $sbj, $mess['content'], 'From: '.$core_em.''."\n".$mess['header']);
-		// print result
-		if($notice)echo $send ? output_message('success', 'Mail Sent!') : output_message('error', 'Error!');
-	}
-	elseif($mwe_config['email_type'] == 2)	// If email type "2" (MTA Relay)
-	{
-		require_once 'core/mail/MAIL.php'; // path to 'MAIL.php' file from XPM4 package
+    $mail->SMTPDebug = 0;
+    $mail->Debugoutput = 'html';
+    $mail->isSMTP();                                        // Set mailer to use SMTP
+    $mail->Host = $mwe_config['email_smtp_host'];           // Specify main and backup SMTP servers
+    $mail->SMTPAuth = true;                                 // Enable SMTP authentication
+    $mail->Username = $mwe_config['email_smtp_user'];       // SMTP username
+    $mail->Password = $mwe_config['email_smtp_pass'];       // SMTP password
+    $mail->SMTPSecure = $smtp_encryption;                   // 'tls', 'ssl' or false
+    $mail->Port = $mwe_config['email_smtp_port'];           // TCP port to connect to
+    $mail->SMTPOptions = array(
+        'ssl' => array(
+            'verify_peer' => false,
+            'verify_peer_name' => false,
+            'allow_self_signed' => true
+        )
+    );
+    
+    $mail->setFrom($mwe_config['site_email'], $mwe_config['site_title']);
+    $mail->addAddress($email_to);     // Add a recipient
 
-		$m = new MAIL; // initialize MAIL class
-		$m->From($core_em); // set from address
-		$m->AddTo($goingto); // add to address
-		$m->Subject($sbj); // set subject 
-		$m->Html($messg); // set html message
+    $mail->isHTML(true);                                  // Set email format to HTML
 
-		// connect to MTA server 'smtp.hostname.net' port '25' with authentication: 'username'/'password'
-		if($mwe_config['email_use_secure'] == 1) 
-		{
-			$c = $m->Connect($mwe_config['email_smtp_host'], $mwe_config['email_smtp_port'], $mwe_config['email_smtp_user'], $mwe_config['email_smtp_pass'], $mwe_config['email_smtp_secure']) 
-				or die(print_r($m->Result));
-		}
-		else
-		{
-			$c = $m->Connect($mwe_config['email_smtp_host'], $mwe_config['email_smtp_port'], $mwe_config['email_smtp_user'], $mwe_config['email_smtp_pass']) 
-				or die(print_r($m->Result));
-		}
+    $mail->Subject = $email_subject;
+    $mail->Body    = $email_message;
 
-		// send mail relay using the '$c' resource connection
-		if($notice)echo $m->Send($c) ? output_message('success', 'Mail Sent!') : output_message('error', 'Error! Please check your config and make sure you inserted your MTA info correctly.');
-
-		$m->Disconnect(); // disconnect from server
-		// print_r($m->History); // optional, for debugging
-	}
+    if(!$mail->send())
+    {
+        output_message("error", '<b>Error!</b> Message could not be sent.<br />Mailer Error: ' . $mail->ErrorInfo);
+    }
+    elseif($notice)
+    {
+        output_message("success", "Your message has been sent successfully.");
+    }
 }
 
 //	************************************************************	

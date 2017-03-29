@@ -59,7 +59,7 @@ class Update
 				// check if local list file exists, this is only used when the update/ directory exists
 				$this->update_list = file("update_list.txt");
 			}
-			elseif(file_exists("https://raw.githubusercontent.com/paintballrefjosh/MaNGOSWebV4/master/update/update_list.txt"))
+			else
 			{
 				// check if GitHub list file exists
 				$this->update_list = file("https://raw.githubusercontent.com/paintballrefjosh/MaNGOSWebV4/master/update/update_list.txt");
