@@ -109,7 +109,7 @@ if(isset($_GET['id']))
 			<label for="Site Emu"><?php echo $lang['site_enabled']; ?>: </label>
 			<select id="site_enabled" class="medium" name="site_enabled">
 			<?php
-				if($rlm['site_enabled'] == 1) 
+				if($rlm_ext['site_enabled'] == 1) 
 				{
 					echo "<option value=\"1\" selected='selected'>Enabled</option><option value=\"0\">Disabled</option>"; 
 				}

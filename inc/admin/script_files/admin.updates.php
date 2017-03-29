@@ -77,10 +77,13 @@ function updateDatabase()
 {
 	global $Core, $DB, $Update;
 
-	if(file_exists("https://raw.githubusercontent.com/paintballrefjosh/MaNGOSWebV4/master/install/sql/updates/update_" . $Update->next_db_version . ".sql"))
+	$update_file = "https://raw.githubusercontent.com/paintballrefjosh/MaNGOSWebV4/master/update/scripts/update_" . $Update->next_db_version . ".sql";
+	$update_file_headers = @get_headers($update_file);
+	
+	if(stripos($update_file_headers[0], "200 OK") >= 0)
 	{
 		// check for online copy if no local copy exists of the SQL script
-		$DB->runSQL("https://raw.githubusercontent.com/paintballrefjosh/MaNGOSWebV4/master/install/sql/updates/update_" . $Update->next_db_version . ".sql");
+		$DB->runSQL($update_file);
 		output_message("success", "Database Successfully Updated");
 		redirect("?p=admin&amp;sub=updates");
 	}

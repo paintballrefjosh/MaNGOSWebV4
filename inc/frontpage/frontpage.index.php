@@ -34,87 +34,69 @@ $servers = array();
 $multirealms = getRealmlist();
 foreach($multirealms as $realmnow_arr)
 {
-	if($mwe_config['fp_serverinfo'] == 1)
+	if($mwe_config['fp_server_info'] == 1)
 	{
-		$data = $RDB->selectRow("SELECT * FROM realmlist WHERE id ='".$realmnow_arr['id']."' LIMIT 1");
-		$realm_data_explode = explode(';', $data['dbinfo']);
-
-		//DBinfo column:  char_host;char_port;char_username;char_password;charDBname;world_host;world_port;world_username;world_pass;worldDBname
-		$mangosALL = array(
-			'db_host' => $realm_data_explode['0'],  	// DB Host
-			'db_port' => $realm_data_explode['1'], 		// DB port
-			'db_username' => $realm_data_explode['2'], 	// DB username
-			'db_password' => $realm_data_explode['3'], 	// DB password
-			'db_name' => $realm_data_explode['4'], 		// Character db name
-		);
-		unset($realm_data_explode);
+		$data = $RDB->selectRow("SELECT * FROM realmlist WHERE id ='".$realmnow_arr['realm_id']."' LIMIT 1");
 
 		$CHDB_EXTRA = new Database(
-			$mangosALL['db_host'],
-			$mangosALL['db_port'],
-			$mangosALL['db_username'],
-			$mangosALL['db_password'],
-			$mangosALL['db_name']
+			$realmnow_arr['db_char_host'],
+			$realmnow_arr['db_char_port'],
+			$realmnow_arr['db_char_user'],
+			$realmnow_arr['db_char_pass'],
+			$realmnow_arr['db_char_name']
 		);
-		unset($mangosALL); // Free up memory.
 
 		$server = array();
 		$server['name'] = $data['name'];
-		if((int)$mwe_config['fp_realmstatus'] == 1)
+		if((int)$mwe_config['fp_realm_status'] == 1)
 		{
 			$checkaddress = $data['address'];
 			$server['realm_status'] = (check_port_status($checkaddress, $data['port'], 0.5) === true) ? true : false;
 		}
-		$changerealmtoparam = array("changerealm_to" => $realmnow_arr['id']);
-		if($mwe_config['fp_playersonline'] == 1)
+		$changerealmtoparam = array("changerealm_to" => $realmnow_arr['realm_id']);
+		if($mwe_config['fp_players_online'] == 1)
 		{
-			$server['playersonline'] = $CHDB_EXTRA->count("SELECT COUNT(*) FROM `characters` WHERE online=1");
-			$server['playersonline'] = $server['playersonline']['COUNT(*)'];
+			$server['playersonline'] = $CHDB_EXTRA->count("SELECT `guid` FROM `characters` WHERE online=1");
 			$server['onlineurl'] = mw_url('server', 'playersonline', $changerealmtoparam);
 		}
-		if($mwe_config['fp_serverip'] == 1)
+		if($mwe_config['fp_server_ip'] == 1)
 		{
 			$server['server_ip'] = $data['address'];
 		}
-		if($mwe_config['fp_servertype'] == 1)
+		if($mwe_config['fp_server_type'] == 1)
 		{
 			$server['type'] = $realm_type_def[$data['icon']];
 		}
-		if($mwe_config['fp_serverlang'] == 1)
+		if($mwe_config['fp_server_lang'] == 1)
 		{
 			$server['language'] = $realm_timezone_def[$data['timezone']];
 		}
-		if($mwe_config['fp_serverpop'] == 1)
+		if($mwe_config['fp_server_pop'] == 1)
 		{
-			$server['population'] = $CHDB_EXTRA->count("SELECT COUNT(*) FROM `characters` WHERE online=1");
-			$server['population'] = $server['population']['COUNT(*)'];
+			$server['population'] = $CHDB_EXTRA->count("SELECT `guid` FROM `characters` WHERE online=1");
 		}
-		if($mwe_config['fp_serveract'] == 1)
+		if($mwe_config['fp_server_act'] == 1)
 		{
-			$server['accounts'] = $DB->count("SELECT COUNT(*) FROM `account`");
-			$server['accounts'] = $server['accounts']['COUNT(*)'];
+			$server['accounts'] = $RDB->count("SELECT `id` FROM `account`");
 		}
-		if($mwe_config['fp_serveractive_act'] == 1)
+		if($mwe_config['fp_server_active_act'] == 1)
 		{
-			$server['active_accounts'] = $DB->count("SELECT COUNT(*) FROM `account` WHERE `last_login` > ". date("Y-m-d", strtotime("-2 week")));
-			$server['active_accounts'] = $server['active_accounts']['COUNT(*)'];
+			$server['active_accounts'] = $RDB->count("SELECT `id` FROM `account` WHERE `last_login` > ". date("Y-m-d", strtotime("-2 week")));
 		}
-		if($mwe_config['fp_serverchars'] == 1)
+		if($mwe_config['fp_server_chars'] == 1)
 		{
-			$server['characters'] = $CHDB_EXTRA->count("SELECT COUNT(*) FROM `characters`");
-			$server['characters'] = $server['characters']['COUNT(*)'];
+			$server['characters'] = $CHDB_EXTRA->count("SELECT `guid` FROM `characters`");
 		}
 		unset($CHDB_EXTRA, $data); // Free up memory.
 
-		$server['moreinfo'] = $mwe_config['fp_server_moreinfo'] && 0; // 0 is suppossed to signify that PATH TO SERVER CONFIG IS NOT NULL
+		$server['moreinfo'] = $mwe_config['fp_server_more_info'];
 		$servers[] = $server;
 	}
 }
 
 unset($multirealms);
-if($mwe_config['module_onlinelist'] == 1)
+if($mwe_config['module_online_list'] == 1)
 {
-	$usersonhomepage = $DB->count("SELECT COUNT(*) FROM `mw_online`");
-	$usersonhomepage = $usersonhomepage['COUNT(*)'];
+	$usersonhomepage = $DB->count("SELECT `id` FROM `mw_online`");
 }
 

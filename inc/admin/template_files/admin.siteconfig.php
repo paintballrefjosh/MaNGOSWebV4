@@ -584,7 +584,7 @@
 			<br />
 			
 			<div class="field">
-				<label for="email_type">Email Relay Type: </label>
+				<label for="email_type">Mail Relay: </label>
 				<select id="type" class="small" name="email_type">
 					<?php 
 						if($mwe_config['email_type'] == 0)
@@ -594,27 +594,26 @@
 						elseif($mwe_config['email_type'] == 2)
 							{ $e_et = ''; $e_et2 = 'selected="selected"'; $e_et3 = ''; }
 					?>
-					<option value="2" <?php echo $e_et2; ?>>MTA</option>
-					<option value="1" <?php echo $e_et; ?>>MIME</option>
+
 					<option value="0" <?php echo $e_et3; ?>>SMTP</option>
 				</select>																											
-				<p class="field_help">Learn More <u><a href="http://keyswow.com/forum/">Here</a></u></p>
+				<p class="field_help">&nbps;</p>
 			</div>
 			
 			<div class="field">
-				<label for="email_smtp_host">MTA - SMTP Host: </label>
+				<label for="email_smtp_host">SMTP Host: </label>
 				<input id="email_smtp_host" name="email_smtp_host" size="10" type="text" class="medium" value="<?php echo $mwe_config['email_smtp_host']; ?>" />
-				<p class="field_help">MTA Email type only - SMTP host such as "smtp.gmail.com"</p>
+				<p class="field_help">SMTP host. e.g. "smtp.gmail.com"</p>
 			</div>
 			
 			<div class="field">
-				<label for="email_smtp_port">MTA - SMTP Port: </label>
+				<label for="email_smtp_port">SMTP Port: </label>
 				<input id="email_smtp_port" name="email_smtp_port" size="10" type="text" class="xsmall" value="<?php echo $mwe_config['email_smtp_port']; ?>" />
-				<p class="field_help">MTA Email type only - SMTP port .</p>
+				<p class="field_help">SMTP port.</p>
 			</div>
 			
 			<div class="field">
-				<label for="email_use_secure">MTA - Use Secure: </label>
+				<label for="email_use_secure">Enable Encryption: </label>
 				<select id="type" class="xsmall" name="email_use_secure">
 					<?php 
 						if($mwe_config['email_use_secure'] == 1)
@@ -623,11 +622,11 @@
 					<option value="1" <?php echo $e_eus; ?>>Yes</option>
 					<option value="0" <?php echo $e_eus2; ?>>No</option>
 				</select>																											
-				<p class="field_help">MTA Email type only - Use secure port.</p>
+				<p class="field_help">Enable SNMP encryption.</p>
 			</div>
 			
 			<div class="field">
-				<label for="email_smtp_secure">MTA - Secure Type: </label>
+				<label for="email_smtp_secure">Encryption Method: </label>
 				<select id="type" class="xsmall" name="email_smtp_secure">
 					<?php 
 						if($mwe_config['email_smtp_secure'] == 'ssl')
@@ -636,19 +635,19 @@
 					<option value="ssl" <?php echo $e_est; ?>>SSL</option>
 					<option value="tls" <?php echo $e_est2; ?>>TLS</option>
 				</select>																											
-				<p class="field_help">MTA Email type only - Secure Type</p>
+				<p class="field_help">SMTP Encryption Method.</p>
 			</div>
 			
 			<div class="field">
-				<label for="email_smtp_user">MTA - SMTP User: </label>
+				<label for="email_smtp_user">SMTP Username: </label>
 				<input id="email_smtp_user" name="email_smtp_user" size="10" type="text" class="medium" value="<?php echo $mwe_config['email_smtp_user']; ?>" />
-				<p class="field_help">MTA Email type only - SMTP Username .</p>
+				<p class="field_help">SMTP Username.</p>
 			</div>
 			
 			<div class="field">
-				<label for="email_smtp_pass">MTA - SMTP Pass: </label>
+				<label for="email_smtp_pass">SMTP Password: </label>
 				<input id="email_smtp_pass" name="email_smtp_pass" size="10" type="password" class="medium" value="<?php echo $mwe_config['email_smtp_pass']; ?>" />
-				<p class="field_help">MTA Email type only - SMTP Password.</p>
+				<p class="field_help">SMTP Password.</p>
 			</div>
 			<br />
 			
