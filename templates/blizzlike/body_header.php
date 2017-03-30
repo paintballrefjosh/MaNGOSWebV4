@@ -114,7 +114,7 @@ $languages = explode(",", $mwe_config['available_lang']);
 							<div id="loginbox">
 								<div class="loginboxleft"></div>
 								<div class="loginboxbg">
-									<form action="<?php echo mw_url('account', 'login'); ?>" method="post">
+									<form action="?p=account&amp;sub=login&amp;exec=login" method="POST">
 									<?php 
 									$accountid = $user['id'];
 									if($user['id'] > 0)
@@ -122,8 +122,8 @@ $languages = explode(",", $mwe_config['available_lang']);
 									?>
 										<?php echo $user['username']." | "; ?>
 										<a href="<?php echo mw_url('account'); ?>"> <?php echo $user['web_points']; ?> <?php echo $lang['web_points'];?></a>&nbsp;&nbsp;
-										<input type="image" src="<?php echo $Template['path']; ?>/images/buttons/button-profile.gif" name="action" value="profile"/>
-										<input type="image" src="<?php echo $Template['path']; ?>/images/buttons/button-logout.gif" name="action" value="logout"/>
+										<a href="?p=account&amp;sub=login&amp;exec=profile"><img src="<?php echo $Template['path']; ?>/images/buttons/button-profile.gif" /></a>
+										<a href="?p=account&amp;sub=login&amp;exec=logout"><img src="<?php echo $Template['path']; ?>/images/buttons/button-logout.gif" /></a>
 								<?php 
 									}
 									else
@@ -131,7 +131,6 @@ $languages = explode(",", $mwe_config['available_lang']);
 								?>
 										Login: <input name="login" size="14" type="text"/>
 										Password: <input name="pass" size="14" type="password"/>
-										<input type="hidden" name="action" value="login">
 										<div style="padding-top: 5px;"><input type="image" src="<?php echo $Template['path']; ?>/images/buttons/button-login.gif" value="Login"/></div>
 								<?php 
 									} 

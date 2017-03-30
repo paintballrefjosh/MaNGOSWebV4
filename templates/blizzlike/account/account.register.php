@@ -87,7 +87,7 @@ else
 
 		if(isset($reg_result) && $reg_result)
 		{
-			if((int)$mwe_config['require_act_activation'] == 1)
+			if((int)$mwe_config['reg_require_activation'] == 1)
 			{
 				output_message('success', $lang['activation_email_sent']);
 			}

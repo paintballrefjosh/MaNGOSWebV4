@@ -32,8 +32,7 @@ if($Account->isLoggedIn() == FALSE)
     <table align="center" width="100%">
 		<tr>
 			<td align="center" width="100%">
-				<form method="post" action="<?php echo mw_url('account', 'login'); ?>">
-				<input type="hidden" name="action" value="login">
+				<form method="post" action="?p=account&amp;sub=login&amp;exec=login">
 					<div style="border:background:none;margin:1px;padding:6px 9px 6px 9px;text-align:center;width:70%;">
 						<b><?php echo $lang['username'] ?></b> <input type="text" size="26" style="font-size:11px;" name="login">
 					</div>
