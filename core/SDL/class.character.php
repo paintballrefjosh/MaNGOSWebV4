@@ -34,7 +34,9 @@ class Character
                 10 => 'Bloodelf',
                 11 => 'Dranei',
 				22 => 'Worgen',
-				24 => 'Pandaren'
+				24 => 'Pandaren',
+				25 => 'Pandaren',
+				26 => 'Pandaren'
             ),
             'class' => array(
                 1 => 'Warrior',

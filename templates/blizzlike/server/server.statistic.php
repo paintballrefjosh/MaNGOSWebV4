@@ -55,6 +55,18 @@ else
         <td align="right"><?php echo $data[10]; ?> (<?php echo $pc_be; ?>%)</td>
         <td align="right"><img onmouseover="ddrivetip('<?php echo $lang['Bloodelf'];?>')" onmouseout="hideddrivetip()" src="<?php echo $Template['path']; ?>/images/icons/race/10-0.gif" alt="" /></td>
     </tr>
+    <tr>
+        <td align="left"><img onmouseover="ddrivetip('<?php echo $lang['Worgen']; ?>')" onmouseout="hideddrivetip()" src="<?php echo $Template['path']; ?>/images/icons/race/22-0.gif" alt="" /></td>
+        <td align="left"><?php echo $data[22]; ?> (<?php echo $pc_worgen; ?>%)</td>
+        <td align="right"><?php echo $data[9]; ?> (<?php echo $pc_goblin; ?>%)</td>
+        <td align="right"><img onmouseover="ddrivetip('<?php echo $lang['Goblin'];?>')" onmouseout="hideddrivetip()" src="<?php echo $Template['path']; ?>/images/icons/race/9-0.gif" alt="" /></td>
+    </tr>
+    <tr>
+        <td align="left"><img onmouseover="ddrivetip('<?php echo $lang['Pandaren']; ?>')" onmouseout="hideddrivetip()" src="<?php echo $Template['path']; ?>/images/icons/race/25-0.gif" alt="" /></td>
+        <td align="left"><?php echo $data[25]; ?> (<?php echo $pc_pandaren_ally; ?>%)</td>
+        <td align="right"><?php echo $data[26]; ?> (<?php echo $pc_pandaren_horde; ?>%)</td>
+        <td align="right"><img onmouseover="ddrivetip('<?php echo $lang['Pandaren'];?>')" onmouseout="hideddrivetip()" src="<?php echo $Template['path']; ?>/images/icons/race/26-0.gif" alt="" /></td>
+    </tr>
 	<tr>
 		<td colspan="2" align="left" style="padding-left: 20px;"></td>
 		<td colspan="2" align="right" style="padding-right: 20px;"></td>

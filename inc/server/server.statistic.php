@@ -27,7 +27,7 @@ foreach($rc as $row)
 }
 
 // Loop thru classes, add 0 if its not defined in array.
-for($i = 1; $i <= 11; $i++)
+for($i = 1; $i <= 26; $i++)
 {
     if(!isset($data[$i]))
     {
@@ -40,8 +40,8 @@ for($i = 1; $i <= 11; $i++)
 //Check if 0 entries to avoid PHP warnings if 0 chars in database.
 if ($num_chars > 0)
 {
-    $num_ally = $data[1]+$data[3]+$data[4]+$data[7]+$data[11];
-    $num_horde = $data[2]+$data[5]+$data[6]+$data[8]+$data[10];
+    $num_ally = $data[1]+$data[3]+$data[4]+$data[7]+$data[11]+$data[22]+$data[25];
+    $num_horde = $data[2]+$data[5]+$data[6]+$data[8]+$data[10]+$data[9]+$data[26];
     $pc_ally =  round($num_ally/$num_chars*100,2);
     $pc_horde =  round($num_horde/$num_chars*100,2);
     $pc_human = round($data[1]/$num_chars*100,2);
@@ -54,6 +54,10 @@ if ($num_chars > 0)
     $pc_troll = round($data[8]/$num_chars*100,2);
     $pc_be = round($data[10]/$num_chars*100,2);
     $pc_dranei = round($data[11]/$num_chars*100,2);
+    $pc_goblin = round($data[9]/$num_chars*100,2);
+    $pc_worgen = round($data[22]/$num_chars*100,2);
+    $pc_pandaren_ally = round($data[25]/$num_chars*100,2);
+    $pc_pandaren_horde = round($data[26]/$num_chars*100,2);
 }
 ?>
 
