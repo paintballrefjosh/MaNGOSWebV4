@@ -13,9 +13,9 @@
     2006-2009 Modified by killdozer.
 */
 
-require_once("pomm_conf.php");
-require_once("func.php");
-require_once("map_english.php");
+require_once(realpath(dirname(__FILE__)."/map_english.php"));
+require_once(realpath(dirname(__FILE__)."/func.php"));
+require_once(realpath(dirname(__FILE__)."/pomm_conf.php"));
 
 ?>
 <HTML><HEAD><title><Online Playermap</title>
@@ -204,7 +204,7 @@ body {
 -->
 </style>
 </HEAD>
-<script TYPE="text/javascript" src="libs/js/JsHttpRequest/Js.js"></script>
+<script TYPE="text/javascript" src="inc/pomm/libs/js/JsHttpRequest/Js.js"></script>
 <SCRIPT TYPE="text/javascript">
 
 var current_map = 0;
@@ -859,7 +859,7 @@ function load_data()
       show(req.responseJS.online);
     }
   }
-  req.open('GET', 'pomm_play.php', true);
+  req.open('GET', '?p=server&amp;sub=playermap', true);
   req.send({ });
 }
 

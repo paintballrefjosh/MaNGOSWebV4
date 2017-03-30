@@ -15,9 +15,9 @@
 	fixed 3.3.3a support by roelverheggen3006
 */
 
-require_once("pomm_conf.php");
-require_once("func.php");
-require_once("map_english.php");
+require_once(realpath(dirname(__FILE__)."/pomm_conf.php"));
+require_once(realpath(dirname(__FILE__)."/func.php"));
+require_once(realpath(dirname(__FILE__)."/map_english.php"));
 
 $_RESULT = NULL;
 
@@ -28,34 +28,18 @@ $Alliance_races = 0x44D;
 $outland_inst   = array(540,542,543,544,545,546,547,548,550,552,553,554,555,556,557,558,559,562,564,565);
 $northrend_inst = array(533,574,575,576,578,599,600,601,602,603,604,608,615,616,617,619,624);
 
-require_once "libs/js/JsHttpRequest/Php.php";
+require_once(realpath(dirname(__FILE__)."libs/js/JsHttpRequest/Php.php"));
 $JsHttpRequest = new Subsys_JsHttpRequest_Php("utf-8");
-
-$realm_db = new DBLayer($hostr, $userr, $passwordr, $dbr);
-if(!$realm_db->isValid())
-{
-    $_RESULT['status']['online'] = 2;
-    exit();
-}
-$realm_db->query("SET NAMES $database_encoding");
 
 $gm_online = 0;
 $gm_accounts = array();
-$query = $realm_db->query("SELECT GROUP_CONCAT(`id` SEPARATOR ' ') FROM `account` WHERE `gmlevel`>'0'");
-if($query)
-    if($result = $realm_db->fetch_row($query))
-        $gm_accounts = explode(' ', $result[0]);
+if($result = $RDB->selectRow("SELECT GROUP_CONCAT(`id` SEPARATOR ' ') FROM `account` WHERE `gmlevel`>'0'"))
+    $gm_accounts = explode(' ', $result[0]);
 $groups = array();
-$characters_db = new DBLayer($host, $user, $password, $db);
-if(!$characters_db->isValid())
-{
-    $_RESULT['status']['online'] = 2;
-    exit();
-}
-$characters_db->query("SET NAMES $database_encoding");
-$query = $characters_db->query("SELECT `leaderGuid`,`memberGuid` FROM `group_member` WHERE `memberGuid` IN(SELECT `guid` FROM `characters` WHERE `online`='1')");
+
+$query = $CDB->select("SELECT `leaderGuid`,`memberGuid` FROM `group_member` WHERE `memberGuid` IN(SELECT `guid` FROM `characters` WHERE `online`='1')");
 if($query)
-    while($result = $characters_db->fetch_assoc($query))
+    foreach($query as $result)
         $groups[$result['memberGuid']] = $result['leaderGuid'];
 
 $Count = array();
@@ -64,8 +48,8 @@ for($i = 0; $i < $maps_count; $i++) {
     }
 $arr = array();
 $i=$maps_count;
-$query = $characters_db->query("SELECT `account`,`name`,`class`,`race`, `level`, `gender`, `position_x`,`position_y`,`map`,`zone`,`extra_flags` FROM `characters` WHERE `online`='1' ORDER BY `name`");
-while($result = $characters_db->fetch_assoc($query))
+$query = $CDB->select("SELECT `account`,`name`,`class`,`race`, `level`, `gender`, `position_x`,`position_y`,`map`,`zone`,`extra_flags` FROM `characters` WHERE `online`='1' ORDER BY `name`");
+foreach($query as $result)
 {
     if($result['map'] == 530 && $result['position_y'] > -1000 || in_array($result['map'], $outland_inst))
         $Extention = 1;
@@ -135,8 +119,8 @@ else
 }
 
 if($show_status) {
-    $query = $realm_db->query("SELECT UNIX_TIMESTAMP(),`starttime`,`maxplayers` FROM `uptime` WHERE `starttime`=(SELECT MAX(`starttime`) FROM `uptime`)");
-    if($result = $realm_db->fetch_row($query)) {
+    $result = $RDB->selectRow("SELECT UNIX_TIMESTAMP(),`starttime`,`maxplayers` FROM `uptime` WHERE `starttime`=(SELECT MAX(`starttime`) FROM `uptime`)");
+    if($result) {
         $status['online'] = test_realm() ? 1 : 0;
         $status['uptime'] = $result[0] - $result[1];
         $status['maxplayers'] = $result[2];
