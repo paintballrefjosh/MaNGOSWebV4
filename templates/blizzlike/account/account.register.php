@@ -166,7 +166,9 @@ else
 ?>
 			<label for="r_account_type"><?php echo $lang['select_expansion']; ?>:</label>
 			<select id="r_account_type" name="r_account_type">
-				<option selected="selected" value="2"><?php echo $lang['wrath'];?></option>
+				<option selected="selected" value="4"><?php echo $lang['mists'];?></option>
+				<option value="3"><?php echo $lang['cata'];?></option>
+				<option value="2"><?php echo $lang['wrath'];?></option>
 				<option value="1"><?php echo $lang['burning_crusade'];?></option>
 				<option value="0"><?php echo $lang['classic'];?></option>
 			</select><br /><br />

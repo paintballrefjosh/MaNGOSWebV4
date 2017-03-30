@@ -192,21 +192,12 @@ if(isset($_GET['id']))
 					
 					<div class="field">
 						<label for="Exp"><?php echo $lang['expansion']; ?>: </label>
-						<select name="expansion" class='small'>
-							<?php
-								if($profile['expansion'] == 2)
-								{
-									echo "<option value='2' selected='selected'>WotLK</option><option value='1'>TBC</option><option value='0'>Classic</option>";
-								}
-								elseif($profile['expansion'] == 1)
-								{
-									echo "<option value='2'>WotLK</option><option value='1' selected='selected'>TBC</option><option value='0'>Classic</option>";
-								}
-								else
-								{
-									echo "<option value='2'>WotLK</option><option value='1'>TBC</option><option value='0' selected='selected'>Classic</option>";
-								}
-							?>
+						<select name="expansion" class='medium'>
+							<option value='4' <?php if($profile['expansion'] == 4) echo 'selected="selected"'; ?>>Mists of Pandaria</option>";
+							<option value='3' <?php if($profile['expansion'] == 3) echo 'selected="selected"'; ?>>Cataclysm</option>";
+							<option value='2' <?php if($profile['expansion'] == 2) echo 'selected="selected"'; ?>>Wrath of the Lich King</option>";
+							<option value='1' <?php if($profile['expansion'] == 1) echo 'selected="selected"'; ?>>The Burning Crusade</option>";
+							<option value='0' <?php if($profile['expansion'] == 0) echo 'selected="selected"'; ?>>Classic</option>";
 						</select>
 					</div>
 					

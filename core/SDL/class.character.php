@@ -32,7 +32,9 @@ class Character
                 8 => 'Troll',
                 9 => 'Goblin',
                 10 => 'Bloodelf',
-                11 => 'Dranei'
+                11 => 'Dranei',
+				22 => 'Worgen',
+				24 => 'Pandaren'
             ),
             'class' => array(
                 1 => 'Warrior',
@@ -44,6 +46,7 @@ class Character
                 7 => 'Shaman',
                 8 => 'Mage',
                 9 => 'Warlock',
+				10 => 'Monk',
                 11 => 'Druid'
             ),
             'gender' => array(
