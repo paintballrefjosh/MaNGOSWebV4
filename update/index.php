@@ -67,7 +67,7 @@ else
 <?php
 
 	}
-	elseif(stripos($sql_headers[0], "200 OK") >= 0)
+/*	elseif(stripos($sql_headers[0], "200 OK") >= 0)
 	{
 		// check for online copy if no local copy exists of the SQL script
 		$DB->runSQL($sql_file);
@@ -78,7 +78,7 @@ else
 	
 <?php
 
-	}
+	}*/
 	else
 	{
 		die("SQL update file not found!<br /><br />Current DB Version: $db_act_ver <br />Expected DB Version: $Core->db_version <br />Next DB Version: $Update->next_db_version");
