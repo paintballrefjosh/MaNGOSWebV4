@@ -204,7 +204,7 @@ body {
 -->
 </style>
 </HEAD>
-<script TYPE="text/javascript" src="inc/pomm/libs/js/JsHttpRequest/Js.js"></script>
+<script TYPE="text/javascript" src="<?= $dir."libs/js/JsHttpRequest/Js.js"; ?>"></script>
 <SCRIPT TYPE="text/javascript">
 
 var current_map = 0;
@@ -859,7 +859,7 @@ function load_data()
       show(req.responseJS.online);
     }
   }
-  req.open('GET', '?p=server&amp;sub=playermap', true);
+  req.open('GET', '<?= $dir; ?>pomm_play.php', true);
   req.send({ });
 }
 

@@ -13,9 +13,45 @@
     2006-2009 Modified by killdozer.
 */
 
+if(!isset($DB))
+{
+    $dir = "";
+    require_once("../../config/config-protected.php");
+    require_once("../../core/class.database.php");
+    $DB = new Database(
+        $dbconf['db_host'], 
+        $dbconf['db_port'], 
+        $dbconf['db_username'], 
+        $dbconf['db_password'], 
+        $dbconf['db_name']
+        );
 
-//require_once("inc/pomm/func.php");
-//require("../../config/config-protected.php");
+    $mwe_config = $DB->selectRow("SELECT * FROM mw_config LIMIT 1");
+
+    $realm_db = $DB->selectRow("SELECT * FROM mw_realm WHERE realm_id='".$_COOKIE['cur_selected_realm']."'");
+
+    // === Establish the Realm DB connection === //
+    $RDB = new Database(
+        $mwe_config['db_logon_host'],
+        $mwe_config['db_logon_port'],
+        $mwe_config['db_logon_user'],
+        $mwe_config['db_logon_pass'],
+        $mwe_config['db_logon_name']
+        );
+
+    // === Establish the Character DB connection === //
+    $CDB = new Database(
+        $realm_db['db_char_host'],
+        $realm_db['db_char_port'],
+        $realm_db['db_char_user'],
+        $realm_db['db_char_pass'],
+        $realm_db['db_char_name']
+        );
+}
+else
+{
+    $dir = "inc/pomm/";
+}
 
 // GM online options
 $map_gm_show_online_only_gmoff     = 1; // show GM point only if in '.gm off' [1/0]
@@ -77,8 +113,8 @@ $show_time = $map_show_time;
 // points located on these maps(do not modify it)
 $maps_for_points = "0,1,530,571,609";
 
-$img_base = "inc/pomm/img/map/";
-$img_base2 = "inc/pomm/img/c_icons/";
+$img_base = $dir."img/map/";
+$img_base2 = $dir."img/c_icons/";
 
 $PLAYER_FLAGS       = CHAR_DATA_OFFSET_FLAGS;
 

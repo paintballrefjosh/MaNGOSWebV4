@@ -28,7 +28,7 @@ $Alliance_races = 0x44D;
 $outland_inst   = array(540,542,543,544,545,546,547,548,550,552,553,554,555,556,557,558,559,562,564,565);
 $northrend_inst = array(533,574,575,576,578,599,600,601,602,603,604,608,615,616,617,619,624);
 
-require_once(realpath(dirname(__FILE__)."libs/js/JsHttpRequest/Php.php"));
+require_once(realpath(dirname(__FILE__)."/libs/js/JsHttpRequest/Php.php"));
 $JsHttpRequest = new Subsys_JsHttpRequest_Php("utf-8");
 
 $gm_online = 0;
@@ -37,7 +37,8 @@ if($result = $RDB->selectRow("SELECT GROUP_CONCAT(`id` SEPARATOR ' ') FROM `acco
     $gm_accounts = explode(' ', $result[0]);
 $groups = array();
 
-$query = $CDB->select("SELECT `leaderGuid`,`memberGuid` FROM `group_member` WHERE `memberGuid` IN(SELECT `guid` FROM `characters` WHERE `online`='1')");
+$query = $CDB->select("SELECT `groups`.`leaderGuid`, `group_member`.`memberGuid` FROM `group_member` JOIN `groups` ON (`group_member`.`groupId` = `groups`.`groupId`)
+WHERE `group_member`.`memberGuid` IN(SELECT `guid` FROM `characters` WHERE `online`='1')");
 if($query)
     foreach($query as $result)
         $groups[$result['memberGuid']] = $result['leaderGuid'];
@@ -106,8 +107,6 @@ foreach($query as $result)
     $arr[$i]['leaderGuid'] = isset($groups[$char_data]) ? $groups[$char_data] : 0;
     $i++;
 }
-$characters_db->close();
-unset($characters_db);
 
 if(!count($arr) && !test_realm())
     $res['online'] = NULL;
@@ -131,9 +130,6 @@ if($show_status) {
     }
 else
     $status = NULL;
-
-$realm_db->close();
-unset($realm_db);
 
 $res['status'] = $status;
 
