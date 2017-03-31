@@ -269,7 +269,7 @@ if(isset($servers))
 					?>
 							<li>
 								<div>
-									<a href="<?php echo mw_url('server', 'info'); ?>"><?php echo $lang['more_info']; ?></a>
+									<a href="<?php echo $server['moreinfourl']; ?>"><?php echo $lang['more_info']; ?></a>
 								</div>
 							</li>
 
