@@ -26,7 +26,7 @@ function addNews($subj,$message,$un)
 	else
 	{
 		$post_time = time();
-		$sql =  "INSERT INTO mw_news(title, message, posted_by, post_time) VALUES('".$subj."','".$message."','".$un."','".$post_time."')";
+		$sql =  "INSERT INTO mw_news(title, message, posted_by, post_time) VALUES('".$DB->real_escape_string($subj)."','".$DB->real_escape_string($message)."','".$un."','".$post_time."')";
         $tabs = $DB->query($sql);
 
 		output_message('success', $lang['news_add_success']);
@@ -41,7 +41,7 @@ function editNews($idz,$mess)
 	}
 	else
 	{
-		$DB->query("UPDATE `mw_news` SET `message`='$mess' WHERE `id`='$idz'");
+		$DB->query("UPDATE `mw_news` SET `message`='".$DB->real_escape_string($mess)."' WHERE `id`='$idz'");
 
 		output_message('success', $lang['news_edit_success']);
 	}
