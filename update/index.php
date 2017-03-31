@@ -47,11 +47,11 @@ if(file_exists("scripts/update_" . $Update->next_db_version . ".php"))
 	// check to see if there is a local PHP script to handle the SQL update
 	include("scripts/update_" . $Update->next_db_version . ".php");
 }
-elseif(stripos($php_headers[0], "200 OK") >= 0)
+/*elseif(stripos($php_headers[0], "200 OK") >= 0) // disabling this feature due to default php settings not allowing remote files to be included
 {
 	// check for online copy if no local copy exists of the PHP script
 	include($php_file);
-}
+}*/
 else
 {
 	// no script required for this DB update, proceed
@@ -73,7 +73,7 @@ else
 		$DB->runSQL($sql_file);
 ?>
 
-		Database successfully updated using file: <?= $$sql_file; ?> !!<br /><br />
+		Database successfully updated using file: <?= $sql_file; ?> !!<br /><br />
 		<a href="index.php">Go back</a> to check for additional updates.<br />
 	
 <?php
