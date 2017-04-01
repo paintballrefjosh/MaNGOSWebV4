@@ -40,6 +40,9 @@ function updateRealm()
 	if(empty($_POST['db_char_port']))
 		$_POST['db_char_port'] = 0;
 	
+	if(empty($_POST['ra_port']))
+		$_POST['ra_port'] = 0;
+	
 	if($realm > 0)
 	{
 		$DB->query("UPDATE `mw_realm` SET 
@@ -53,6 +56,10 @@ function updateRealm()
 			`db_char_port` = '".$_POST['db_char_port']."',
 			`db_char_user` = '".$_POST['db_char_user']."',
 			`db_char_pass` = '".$_POST['db_char_pass']."',
+			`ra_type` = '".$_POST['ra_type']."',
+			`ra_port` = '".$_POST['ra_port']."',
+			`ra_user` = '".$_POST['ra_user']."',
+			`ra_pass` = '".$_POST['ra_pass']."',
 			`site_enabled` = '".$_POST['site_enabled']."'
 		WHERE `realm_id` = ".$_GET['id']."
 		");
@@ -70,6 +77,10 @@ function updateRealm()
 			`db_char_port` = '".$_POST['db_char_port']."',
 			`db_char_user` = '".$_POST['db_char_user']."',
 			`db_char_pass` = '".$_POST['db_char_pass']."',
+			`ra_type` = '".$_POST['ra_type']."',
+			`ra_port` = '".$_POST['ra_port']."',
+			`ra_user` = '".$_POST['ra_user']."',
+			`ra_pass` = '".$_POST['ra_pass']."',
 			`site_enabled` = '".$_POST['site_enabled']."',
 			`realm_id` = ".$_GET['id'].";
 		");

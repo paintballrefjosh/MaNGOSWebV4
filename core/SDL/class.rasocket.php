@@ -209,16 +209,16 @@ class RA
       Returns 2 if it's not authenticated
       @param $command the command to enter on console
     */
-    public function executeCommand($type, $shost, $remote, $command)
+    public function executeCommand($type, $host, $port, $user, $pass, $command)
     {
 		if($type == 0)
 		{
-			if(!$this->connect($shost, $remote[1]))
+			if(!$this->connect($host, $port))
 			{
 				return 0;
 			}
 			
-			if(!$this->auth($remote[2], $remote[3]))
+			if(!$this->auth($user, $pass))
 			{
 				return 2;
 			}
@@ -272,7 +272,7 @@ class RA
 		}
 		else # type is SOAP
 		{
-			$client = $this->soapHandle($shost, $remote);
+			$client = $this->soapHandle($host, $port, $user, $pass);
 			// If multiple commands
 			if(is_array($command))
 			{
@@ -338,29 +338,29 @@ class RA
 
 //	************************************************************
 // Setups the Soap Handle	
-	private function soapHandle($shost, $remote)
+	private function soapHandle($host, $port, $user, $pass)
 	{
 		global $mwe_config;
 		if($mwe_config['emulator'] == 'mangos')
 		{
 			$client = new SoapClient(NULL,
 			array(
-			"location" => "http://".$shost.":".$remote[1]."/",
+			"location" => "http://".$host.":".$port."/",
 			"uri" => "urn:MaNGOS",
 			"style" => SOAP_RPC,
-			"login" => $remote[2],
-			"password" => $remote[3]
+			"login" => $user,
+			"password" => $pass
 			));
 		}
 		else
 		{
 			$client = new SoapClient(NULL,
 			array(
-			"location" => "http://".$shost.":".$remote[1]."/",
+			"location" => "http://".$host.":".$port."/",
 			"uri" => "urn:TC",
 			"style" => SOAP_RPC,
-			"login" => $remote[2],
-			"password" => $remote[3]
+			"login" => $user,
+			"password" => $pass
 			));
 		}
 		return $client;
@@ -378,17 +378,15 @@ class RA
 	*/
 	function send($command, $realm)
 	{
-		global $RDB;
+		global $RDB, $DB;
 		
 		// Get the remote access information from the realm database
-		$get_remote = $RDB->selectRow("SELECT * FROM `realmlist` WHERE id='".$realm."'");
-		$remote = explode(';', $get_remote['ra_info']);
-		$shost = $get_remote['address'];
-		
+		$remote = $DB->selectRow("SELECT ra_type, ra_port, ra_user, ra_pass FROM `mw_realm` WHERE `realm_id`='".$realm."'");
+		$host = $RDB->selectCell("SELECT `address` FROM `realmlist` WHERE `id` = '$realm'");
 		// Make sure the remote access type is either 1 or 0
-		if($remote[0] == 0 || $remote[0] == 1)
+		if((int)$remote['ra_type'] == 0 || (int)$remote['ra_type'] == 1)
 		{
-			$result = $this->executeCommand($remote[0], $shost, $remote, $command);
+			$result = $this->executeCommand($remote['ra_type'], $host, $remote['ra_port'], $remote['ra_user'], $remote['ra_pass'], $command);
 			if($result != 1)
 			{
 				if($result == 0)
