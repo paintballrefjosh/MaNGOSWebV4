@@ -17,16 +17,14 @@ if(isset($_POST['edit_realm']))
 if(isset($_GET['id'])) 
 {
 	$rlm = $RDB->selectRow("SELECT * FROM `realmlist` WHERE `id`='".$_GET['id']."'");
-	$rlm_ext = $DB->selectRow("SELECT * FROM mw_realm WHERE realm_id = '".$_GET['id']."'");
+	$rlm_ext = $DB->selectRow("SELECT * FROM `mw_realm` WHERE `realm_id` = '".$_GET['id']."'");
 
-	$db_info = explode( ';', $rlm['dbinfo'] ) ;
-	$ra_info = explode( ';', $rlm['ra_info'] ) ;
 ?>
 
 <!-- EDITING A REALM -->
 <div class="content">	
 	<div class="content-header">
-		<h4><a href="?p=admin">Main Menu</a> / <a href="?p=admin&sub=realms">Manage Realms</a> / Edit</h4>
+		<h4><a href="?p=admin">Main Menu</a> / <a href="?p=admin&amp;sub=realms">Manage Realms</a> / Edit</h4>
 	</div> <!-- .content-header -->	
 	<div class="main-content">
 	
@@ -253,7 +251,7 @@ if(isset($_GET['id']))
 		<!-- Ra Password -->
 		<div class="field">
 			<label for="dbh"><?php echo $lang['remote_access_pass']; ?>: </label>
-			<input id="dbh" name="ra_pass" size="20" type="text" class="medium" value="<?php echo $rlm_ext['ra_pass']; ?>" />
+			<input id="dbh" name="ra_pass" size="20" type="password" class="medium" value="<?php echo $rlm_ext['ra_pass']; ?>" />
 			<p class="field_help"><?php echo $lang['remote_access_pass_desc']; ?>.</p>
 		</div>
 		
