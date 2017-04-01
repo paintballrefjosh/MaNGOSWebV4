@@ -140,7 +140,7 @@ class Database
     {
         $sql = mysqli_query($this->mysql, $query) or die("Couldnt Run Query: ".$query."<br />Error: ".mysqli_error($this->mysql)."");
 		$this->_statistics['count']++;
-		return (int)mysqli_fetch_assoc($sql);
+		return mysqli_num_rows($sql);
     }
 
 //	************************************************************	
