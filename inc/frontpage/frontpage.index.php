@@ -89,7 +89,12 @@ foreach($multirealms as $realmnow_arr)
 		}
 		unset($CHDB_EXTRA, $data); // Free up memory.
 
-		$server['moreinfo'] = $mwe_config['fp_server_more_info'];
+		if($mwe_config['fp_server_more_info'])
+		{
+			$server['moreinfo'] = $mwe_config['fp_server_more_info'];
+			$server['moreinfourl'] = mw_url('server', 'statistic', $changerealmtoparam);
+		}
+
 		$servers[] = $server;
 	}
 }
