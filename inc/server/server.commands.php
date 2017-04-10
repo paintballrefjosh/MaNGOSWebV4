@@ -35,12 +35,19 @@ elseif($mwe_config['emulator'] == 'trinity')
 	{
 		$userlevel = 0;
 	}
-	
-	$permissions = $RDB->select("SELECT `rbac_linked_permissions`.`linkedId` FROM `rbac_linked_permissions` 
-		LEFT JOIN `rbac_default_permissions` ON (`rbac_linked_permissions`.`id` = `rbac_default_permissions`.`permissionId`)
-		WHERE `rbac_default_permissions`.`secId` =  <= $userlevel"
-	);
-	$permissions = join(",", $permissions);
-	$alltopics  = $WDB->select("SELECT * FROM `command` WHERE `permission` IN ($permissions) ORDER BY `name` ASC");
+	$sql = "SELECT `rbac_linked_permissions`.`linkedId` FROM `rbac_linked_permissions` 
+		LEFT JOIN `rbac_default_permissions` ON (`rbac_linked_permissions`.`id` BETWEEN `rbac_default_permissions`.`permissionId` + 4 AND 199)
+		WHERE `rbac_default_permissions`.`secId` <= $userlevel";
+	$permissions = $RDB->select($sql);
+
+	$permission_id = "";
+	foreach($permissions as $row)
+	{
+		$permission_id .= $row['linkedId'].",";
+	}
+	$permission_id = substr($permission_id, 0, -1);
+
+	$sql = "SELECT * FROM `command` WHERE `permission` IN ($permission_id) ORDER BY `name` ASC";
+	$alltopics  = $WDB->select($sql);
 }
 ?>

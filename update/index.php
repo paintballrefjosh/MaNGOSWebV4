@@ -35,17 +35,23 @@ if($DB->selectRow("SHOW DATABASES LIKE '" . $dbconf['db_name'] . "'"))
 }
 
 $Update->check_for_updates();
+
+$sql_file = "https://raw.githubusercontent.com/paintballrefjosh/MaNGOSWebV4/master/update/scripts/update_" . $Update->next_db_version . ".sql";
+$php_file = "https://raw.githubusercontent.com/paintballrefjosh/MaNGOSWebV4/master/update/scripts/update_" . $Update->next_db_version . ".php";
+$sql_headers = @get_headers($sql_file);
+$php_headers = @get_headers($php_file);
+
 //die($db_act_ver . "---".$Core->db_version."---".$Update->next_db_version);
 if(file_exists("scripts/update_" . $Update->next_db_version . ".php"))
 {
 	// check to see if there is a local PHP script to handle the SQL update
 	include("scripts/update_" . $Update->next_db_version . ".php");
 }
-elseif(file_exists("https://raw.githubusercontent.com/paintballrefjosh/MaNGOSWebV4/master/update/scripts/update_" . $Update->next_db_version . ".php"))
+/*elseif(stripos($php_headers[0], "200 OK") >= 0) // disabling this feature due to default php settings not allowing remote files to be included
 {
 	// check for online copy if no local copy exists of the PHP script
-	include("https://raw.githubusercontent.com/paintballrefjosh/MaNGOSWebV4/master/update/scripts/update_" . $Update->next_db_version . ".php");
-}
+	include($php_file);
+}*/
 else
 {
 	// no script required for this DB update, proceed
@@ -53,14 +59,28 @@ else
 	{
 		// check to see if there is a local SQL script and run
 		$DB->runSQL("scripts/update_" . $Update->next_db_version . ".sql");
+?>
+
+		Database successfully updated using file: "scripts/update_<?= $Update->next_db_version; ?>.sql !!<br /><br />
+		<a href="index.php">Go back</a> to check for additional updates.<br />
+	
+<?php
+
 	}
-	elseif(file_exists("https://raw.githubusercontent.com/paintballrefjosh/MaNGOSWebV4/master/update/scripts/update_" . $Update->next_db_version . ".sql"))
+/*	elseif(stripos($sql_headers[0], "200 OK") >= 0)
 	{
 		// check for online copy if no local copy exists of the SQL script
-		$DB->runSQL("https://raw.githubusercontent.com/paintballrefjosh/MaNGOSWebV4/master/update/scripts/update_" . $Update->next_db_version . ".sql");
-	}
+		$DB->runSQL($sql_file);
+?>
+
+		Database successfully updated using file: <?= $sql_file; ?> !!<br /><br />
+		<a href="index.php">Go back</a> to check for additional updates.<br />
+	
+<?php
+
+	}*/
 	else
 	{
-		die("SQL update file not found!");
+		die("SQL update file not found!<br /><br />Current DB Version: $db_act_ver <br />Expected DB Version: $Core->db_version <br />Next DB Version: $Update->next_db_version");
 	}
 }

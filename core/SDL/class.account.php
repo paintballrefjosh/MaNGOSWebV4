@@ -83,7 +83,7 @@ class Account
             }
 			
 			// Make sure the activation code is NULL in the DB
-            if($res['activation_code'] != NULL)
+            if($res['locked'] == 1)
 			{
                 $this->setgroup();
                 return false;
@@ -169,8 +169,8 @@ class Account
 			return 4;
         }
 		
-		// If the activation code is not NULL, the account is not activated, return 5
-        if($res2['activation_code'] != NULL)
+		// If the account is locked or "inactive" then return 5, do not allow login
+        if($res['locked'] == 1)
 		{
             $success = 0;
 			return 5;

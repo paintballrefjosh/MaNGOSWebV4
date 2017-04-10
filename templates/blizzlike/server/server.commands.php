@@ -14,6 +14,7 @@ foreach($alltopics as $postanum => $topic)
 {
     $postnum++;
     if($hl=='alt')$hl=''; else $hl='alt';
+	$topic_permission = $RDB->selectCell("SELECT `name` FROM `rbac_permissions` WHERE id IN (SELECT `id` FROM `rbac_linked_permissions` WHERE linkedId = ".$topic['permission'].")");
 ?>
     <script type="text/javascript">
         var postId<?php echo $postnum;?>="<?php echo $postnum;?>";
@@ -50,7 +51,7 @@ foreach($alltopics as $postanum => $topic)
 							<li>
 								<div class="letter-box0"></div>
 								<div class="blog-post">
-									<playerlevel><?php echo "Level : ".$topic['security']."<br/>";?></playerlevel>
+									<playerlevel><?= $topic_permission; ?><br/></playerlevel>
 									<description><?php echo str_replace("\r",'<br/>',$topic['help']);?></description>
 								</div>
 							</li>
