@@ -20,8 +20,8 @@ function editFaq()
 {
 	global $DB, $Core, $lang;
 	$DB->query("UPDATE `mw_faq` SET
-		`question`='".$_POST['question']."',
-		`answer`='".$_POST['answer']."'
+		`question`='".$DB->real_escape_string($_POST['question'])."',
+		`answer`='".$DB->real_escape_string($_POST['answer'])."'
 	  WHERE `id`='".$_GET['id']."'
 	");
 
@@ -45,8 +45,8 @@ function addFaq()
 		`question`,
 		`answer`)
 	  VALUES(
-		'".$_POST['question']."',  
-		'".$_POST['answer']."'
+		'".$DB->real_escape_string($_POST['question'])."',  
+		'".$DB->real_escape_string($_POST['answer'])."'
 		)
 	");
 
