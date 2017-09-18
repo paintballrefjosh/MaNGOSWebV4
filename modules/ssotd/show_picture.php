@@ -13,12 +13,12 @@ include_once('thumbnail.inc.php');
 
 // Bind gallery pathing so we wont get any hacks.
 if ($_GET['gallery'] == 'screen'){
-	$path = "../../images/screenshots/";
-	$thum_p = "../../modules/ssotd/cache/screenshots/";
+	$path = "screenshots/";
+	$thum_p = "screenshots/thumbs/";
 }
 if ($_GET['gallery'] == 'wallp'){
-	$path = "../../images/wallpapers/";
-	$thum_p = "../../modules/ssotd/cache/wallpapers/";
+	$path = "wallpapers/";
+	$thum_p = "wallpapers/thumbs/";
 }
 
 // Prevent stupid hackers. So they cant do:
@@ -33,33 +33,32 @@ if (file_exists($path.$_GET['filename']) == false){
 }
 
 // Check if the required paths is not included.
-if (empty($path) || empty($_GET['filename'])){
-
-}else{
-
-// Does this thumbnail exists, we dont want to overload the CPU with our gallery.
-if (file_exists($thum_p.$_GET['filename'])){
-	
-	// Well if the image that we have.. is newer and same name we must create a new tempalte.
-	if(file_exists($path.$_GET['filename']) && filemtime($thum_p.$_GET['filename']) < filemtime($path.$_GET['filename'])){
-		unlink($thum_p.$_GET['filename']);
+if (!empty($path) && !empty($_GET['filename']))
+{
+	// if width variable is set, create thumb, otherwise just display the full size image
+	if(isset($_GET['width']))
+	{
+		// Does this thumbnail exists, we dont want to overload the CPU with our gallery.
+		if (file_exists($thum_p.$_GET['filename']))
+		{
+			$thumb = new Thumbnail($thum_p.$_GET['filename']);
+			$thumb->show();
+		}
+		else
+		{
+			// thumbnail doesn't exist, create one
+			$thumb = new Thumbnail($path.$_GET['filename']);
+			$thumb->resize($_GET['width'],$_GET['height']);
+			$thumb->save($thum_p.$_GET['filename']);
+			$thumb->show();
+		}
+	}
+	else
+	{
+		// display full sized image
 		$thumb = new Thumbnail($path.$_GET['filename']);
-		$thumb->resize($_GET['width'],$_GET['height']);
-		$thumb->save($thum_p.$_GET['filename']);
-		$thumb->show();
-	// Ok we just show our thumbnail.
-	}else{
-		$thumb = new Thumbnail($thum_p.$_GET['filename']);
 		$thumb->show();
 	}
-// We gotta create a thumbnail because our thumbnail does not exist.
-}else{
-	$thumb = new Thumbnail($path.$_GET['filename']);
-	$thumb->resize($_GET['width'],$_GET['height']);
-	$thumb->save($thum_p.$_GET['filename']);
-	$thumb->show();
-}
-
 }
 exit;
 ?>

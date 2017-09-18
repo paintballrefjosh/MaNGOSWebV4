@@ -60,10 +60,7 @@ if($mwe_config['fp_vote_banner'] == 1)
 	<hr>
 <?php 
 } 
-?>
 
-<!-- Screenshot of the Momment -->
-<?php
 if ($mwe_config['module_fp_ssotd'] == 1) 
 {
 	$screen_otd = $DB->selectCell("SELECT `img` FROM `mw_gallery` WHERE cat ='screenshot' ORDER BY RAND() LIMIT 1");
@@ -75,7 +72,10 @@ if ($mwe_config['module_fp_ssotd'] == 1)
 
 	if ($screen_otd)
 	{ ?>
-		<a href="images/screenshots/<?php echo $screen_otd; ?>" target="_blank"><img src="modules/ssotd/show_picture.php?filename=<?php echo $screen_otd; ?>&amp;gallery=screen&amp;width=282" width="282" alt="" style="border: 1px solid #333333"/></a>
+		<img 
+			src="modules/ssotd/show_picture.php?filename=<?php echo $screen_otd; ?>&amp;gallery=screen&amp;width=282" width="282" alt="" style="border: 1px solid #333333"
+			onclick="javascript:document.getElementById('ssotd_modal').style.display='block'"
+		/>
 		<select onchange="window.location = options[this.selectedIndex].value" style="width: 284px;">
 			<option value=""><?php echo $lang['screenshot_galleries']; ?> -&gt;</option>
 			<option value="<?php echo mw_url('media', 'screen'); ?>"><?php echo $lang['screenshot_gallery']; ?></option>
@@ -87,13 +87,23 @@ if ($mwe_config['module_fp_ssotd'] == 1)
 	{
 		echo "No Screenshots in database";
 	}
-	unset($screen_otd); // Free up memory.
-	echo "</div></div>";
-} ?>
-<!-- END SSOTD Module! -->
+?>
 
-<!-- Newcomers section -->
-<?php 
+	</div>
+	</div>
+
+	<div id="ssotd_modal" class="w3-modal" style="z-index: 100;" onclick="this.style.display='none'">
+		<div class="w3-modal-content w3-animate-zoom">
+			<img src="modules/ssotd/show_picture.php?filename=<?php echo $screen_otd; ?>&amp;gallery=screen" style="width:100%">
+		</div>
+  	</div>
+
+<?php
+
+	unset($screen_otd); // Free up memory.
+
+}
+ 
 if ($mwe_config['fp_newbie_guide'] == 1)
 { ?>
 	<div id="rightbox">

@@ -15,7 +15,6 @@
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
 <link rel="shortcut icon" href="<?php echo $Template['path']; ?>/images/favicon.ico" type="image/x-icon" />
 <link rel="icon" href="<?php echo $Template['path']; ?>/images/favicon.ico" type="image/x-icon"> /
-<script src="http://static.wowhead.com/widgets/power.js"></script>
 <link rel="alternate" href="<?php echo $mwe_config['site_base_href']."rss.php"; ?>" type="application/rss+xml" title="<?php echo (string)$mwe_config['site_title'];?> RSS News Feed"/>
 <title><?php echo (string)$mwe_config['site_title']; echo $title_str;?></title>
 <style media="screen" title="currentStyle" type="text/css">
@@ -27,23 +26,15 @@
     @import url("<?php echo $Template['path']; ?>/css/additional_optimisation.css");
 	@import url("<?php echo $Template['path']; ?>/css/topnav.css"); 
 </style>
+<link rel="stylesheet" href="templates/blizzlike/css/w3-modal.css">
 <script type="text/javascript"><!--
     var SITE_HREF = '<?php echo $mwe_config['site_base_href'];?>';
     var DOMAIN_PATH = '<?php echo $_SERVER["HTTP_HOST"];?>';
     var SITE_PATH = '<?php echo $mwe_config['site_href']?>';
 --></script>
-<script src="<?php echo $Template['path']; ?>/js/detection.js" type="text/javascript"></script>
 <script src="<?php echo $Template['path']; ?>/js/functions.js" type="text/javascript"></script>
 <script type="text/javascript" src="<?php echo $Template['script_path']; ?>/js/global.js"></script>
-<script type="text/javascript" src="<?php echo $Template['script_path']; ?>/js/compressed/behaviour.js"></script>
 <script type="text/javascript" src="<?php echo $Template['script_path']; ?>/js/core.js"></script>
-<script type="text/javascript"><!--
-    if (is_ie)
-        document.write('<link rel="stylesheet" type="text/css" href="<?php echo $Template['path']; ?>/css/additional_win_ie.css" media="screen, projection" />');
-    function loadPage(list) {
-        location.href=list.options[list.selectedIndex].value
-    }
---></script>
 <script src='https://www.google.com/recaptcha/api.js'></script>
 </head>
 <body>

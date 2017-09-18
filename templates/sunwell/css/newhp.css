@@ -21,7 +21,7 @@
 
 /*theme-bg*/
 #left-bg { background: url('../images/leftbg.png') no-repeat; position: absolute; top: -101px; left: -289px; height: 1026px; width: 478px; }
-#right-bg { background: url('../images/rightbg.jpg') no-repeat; position: absolute; top: -15px; left: 930px; height: 551px; width: 323px; }
+#right-bg { background: url('../images/right-bg.jpg') no-repeat; position: absolute; top: -86px; left: 930px; height: 551px; width: 323px; z-index: -1210; }
 /*theme-bg*/
 
 

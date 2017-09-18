@@ -8,7 +8,6 @@ MangosWeb Enhanced by: Wilson212 at: http://code.google.com/p/mwenhanced/
 #wow-logo2 { background: url('') no-repeat; position:relative; top:-3px; left:-24px; }
 .buttonmargin{ margin:5px 0px 5px 32px; }
 #leftmenu { margin-top: 39px; position: relative; right: -11px; }
-#right-bg { background: url('../images/page_rightbg.png') no-repeat; position: absolute; top: -103px; right: -1071px; height: 621px; width: 296px; z-index: -20; }
 
 
 
@@ -28,7 +27,7 @@ MangosWeb Enhanced by: Wilson212 at: http://code.google.com/p/mwenhanced/
 
 /*theme-bg*/
 #left-bg { background: url('../images/leftbg.png') no-repeat; position: absolute; top: -101px; left: -289px; height: 1026px; width: 478px; }
-#right-bg { background: url('../images/rightbg.jpg') no-repeat; position: absolute; top: -15px; left: 930px; height: 551px; width: 323px; }
+#right-bg { background: url('../images/right-bg.jpg') no-repeat; position: absolute; top: -103px; right: -1071px; height: 621px; width: 296px; z-index: -20; }
 /*theme-bg*/
 
 

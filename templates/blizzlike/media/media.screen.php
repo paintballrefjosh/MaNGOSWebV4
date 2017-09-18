@@ -64,8 +64,7 @@ $gal_count = $DB->selectCell("SELECT COUNT(*) FROM `mw_gallery` WHERE `cat`='scr
 <?php }
 if ($gal_count) {
 ?>
-<center>
-<b>Page: 1</b>
+<center><b>Page: 1</b></center>
 <table border=0>
 <tr>
 <?php
@@ -74,7 +73,7 @@ foreach($sql as $tablerows){
 ?>
 
 <TR>
-<TD ROWSPAN=3 align="center">
+<TD ROWSPAN=3 align="left">
 
 <table style="margin: 7px;" border="0" cellpadding="0" cellspacing="0">
 <tbody>
@@ -86,8 +85,9 @@ foreach($sql as $tablerows){
 <tr>
 <td background="<?= $Template['path']; ?>/images/gallery/_l.gif"><img src="<?= $Template['path']; ?>/images/gallery/_.gif" height="1" width="1"></td>
 <td>
-<a href="modules/ssotd/show_picture.php?filename=<?php echo $tablerows['img'];?>&amp;gallery=screen" target="_blank"><img style="width: 235px; height: 175px;" alt="<?php echo  $tablerows['comment'];?>"
-src="modules/ssotd/show_picture.php?filename=<?php echo $tablerows['img'];?>&amp;gallery=screen&amp;width=235&amp;height=175" border="0"></a>
+<img 
+src="modules/ssotd/show_picture.php?filename=<?= $tablerows['img'];?>&amp;gallery=screen&amp;width=235" border="0"
+onclick="javascript:document.getElementById('ssotd_modal_<?= $tablerows['id']; ?>').style.display='block'">
 </td>
 <td background="<?= $Template['path']; ?>/images/gallery/_r.gif"><img src="<?= $Template['path']; ?>/images/gallery/_.gif" height="1" width="1"></td>
 </tr>
@@ -98,6 +98,12 @@ src="modules/ssotd/show_picture.php?filename=<?php echo $tablerows['img'];?>&amp
 </tr>
 </tbody>
 </table>
+
+<div id="ssotd_modal_<?= $tablerows['id']; ?>" class="w3-modal" style="z-index: 100;" onclick="this.style.display='none'">
+    <div class="w3-modal-content w3-animate-zoom">
+        <img src="modules/ssotd/show_picture.php?filename=<?= $tablerows['img']; ?>&amp;gallery=screen" style="width:100%">
+    </div>
+</div>
 
 </TD>
 <td><?php echo  $lang['comment'].": ".$tablerows['comment'];?></td>
@@ -120,5 +126,5 @@ else {
 ?>
 </tr>
 </table>
-</center>
+
 <?php builddiv_end() ?>

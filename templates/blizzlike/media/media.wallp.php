@@ -16,47 +16,36 @@ if(INCLUDED !== TRUE)
 
 builddiv_start(1, $lang['wallpaper_gallery']);
 
-if (isset($_POST['doadd']))
+if(isset($_GET['act']) && $_GET['act'] == "add")
 {
-    $img=isset($_FILES["filename"]["name"]) ? $_FILES["filename"]["name"] : '';
-    $comment=isset($_POST['message']) ? $_POST['message'] : '';
-    $autor=$user['character_name'];
-    $date=date("Y-m-d");
-
-    if($_FILES["filename"]["size"] > (1024*$screensize*1024) )
+    if($user['id'] <= "0")
     {
-        echo $lang['Filesizes'];
-        echo " ";
-        echo $screensize;
-        echo Mb;
-        exit;
-    }
-
-    if(!in_array($_FILES["filename"]["type"], array("image/jpeg", "image/pjpeg", "image/jpg")))
-    {
-        echo $lang['Filetype'];
-        echo ("<br/>");
-        exit;
-    }
-
-    if($DB->selectCell("SELECT count(*) FROM `mw_gallery` WHERE img=? AND `cat`='wallpaper'", $img))
-    {
-        echo $lang['ErrorFilename'];
-        exit;
-    }
-
-    if(copy($_FILES["filename"]["tmp_name"], "images/wallpapers/".$_FILES["filename"]["name"]))
-    {
-        $comment = "wallpaper";
-        $DB->query("INSERT INTO `mw_gallery` (`img`,`comment`,`autor`,`date`,`cat`) VALUES(?,?,'$autor','$date','wallpaper')",$img,$comment);
+    ?>
+            <center><div style="background-color:#FF0033;border:groove 4px;margin:4px;padding:6px 9px 6px 9px;"><strong>
+    <?php 
+            echo $lang['access_denied'];
     }
     else
     {
-        echo $lang['Uploaderror'];
+
+?>
+	
+    <center><font color="red"><b><?php echo $lang['Filesize'];?> 4 MB</b></font></center><br/>
+    <form method="post" action="?p=media&amp;sub=wallp" enctype="multipart/form-data">
+    <?php echo  $lang['file'];?>:<br/>
+    <input type="file" name="filename" /><br/>
+    <div id="filedgrag">Drag &amp; Drop Files Here</div>
+    <center><input type="submit" value="<?php echo $lang['UWallp']; ?>" name="doadd"><br/></center>
+    <form>
+    
+<?php
+
     }
 }
+else
+{
 
-$gal_count = $DB->selectCell("SELECT count(*) FROM `mw_gallery` WHERE `cat`='wallpaper'");
+$gal_count = $DB->count("SELECT `id` FROM `mw_gallery` WHERE `cat`='wallpaper'");
 
 ?>
 
@@ -64,14 +53,14 @@ $gal_count = $DB->selectCell("SELECT count(*) FROM `mw_gallery` WHERE `cat`='wal
 
 <?php
 
-if($user['id']>=1)
+if($user['id'] >= 1)
 {
 
 ?>
 
     <tr>
-        <td ><img src="<?= $Template['path']; ?>/images/icons/image_add.gif">&nbsp;<a href="?p=media&amp;sub=addgalwallp"><?php echo $lang['Addimage'];?></a></td>
-        <td align=right><?php echo $lang['Totalingallery'].":";?> <?php echo $gal_count; ?></td>
+        <td ><img src="<?= $Template['path']; ?>/images/icons/image_add.gif">&nbsp;<a href="?p=media&amp;sub=wallp&amp;act=add"><?php echo $lang['Addimage'];?></a></td>
+        <td align=right><?= $lang['Totalingallery'].":";?> <?= $gal_count; ?></td>
     </tr>
 </table>
 
@@ -102,8 +91,7 @@ if($gal_count)
 
 ?>
 
-<center>
-<b>Page: 1</b>
+<center><b>Page: 1</b></center>
 <table border="0">
 <tr>
 
@@ -128,8 +116,9 @@ foreach($sql as $tablerows)
 <tr>
 <td background="<?= $Template['path']; ?>/images/gallery/_l.gif"><img src="<?php echo $Template['path']; ?>/images/gallery/_.gif" height="1" width="1"></td>
 <td>
-<a href="modules/ssotd/show_picture.php?filename=<?php echo  $tablerows['img'];?>&amp;gallery=wallp" target="_blank"><img style="width: 235px; height: 175px;" alt="<?php echo  $tablerows['comment'];?>"
-src="modules/ssotd/show_picture.php?filename=<?php echo  $tablerows['img'];?>&amp;gallery=wallp&amp;width=235&amp;height=175" border="0"></a>
+<img 
+src="modules/ssotd/show_picture.php?filename=<?= $tablerows['img'];?>&amp;gallery=wallp&amp;width=235" border="0"
+onclick="javascript:document.getElementById('ssotd_modal_<?= $tablerows['id']; ?>').style.display='block'">
 </td>
 <td background="<?= $Template['path']; ?>/images/gallery/_r.gif"><img src="<?php echo $Template['path']; ?>/images/gallery/_.gif" height="1" width="1"></td>
 </tr>
@@ -140,6 +129,12 @@ src="modules/ssotd/show_picture.php?filename=<?php echo  $tablerows['img'];?>&am
 </tr>
 </tbody>
 </table>
+
+<div id="ssotd_modal_<?= $tablerows['id']; ?>" class="w3-modal" style="z-index: 100;" onclick="this.style.display='none'">
+    <div class="w3-modal-content w3-animate-zoom">
+        <img src="modules/ssotd/show_picture.php?filename=<?= $tablerows['img']; ?>&amp;gallery=wallp" style="width:100%">
+    </div>
+</div>
 
 </TD>
 <td><?php echo  $lang['comment'].": ".$tablerows['comment'];?></td>
@@ -157,11 +152,19 @@ src="modules/ssotd/show_picture.php?filename=<?php echo  $tablerows['img'];?>&am
     }
     unset($sql);
 }
-else {
+else
+{
 	echo "No Wallpapers in gallery. Upload a wallpaper.";
 }
+
 ?>
 </tr>
 </table>
-</center>
-<?php builddiv_end() ?>
+
+<?php
+
+builddiv_end();
+
+}
+
+?>
