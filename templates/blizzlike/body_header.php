@@ -15,7 +15,7 @@
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
 <link rel="shortcut icon" href="<?php echo $Template['path']; ?>/images/favicon.ico" type="image/x-icon" />
 <link rel="icon" href="<?php echo $Template['path']; ?>/images/favicon.ico" type="image/x-icon"> /
-<script src="http://static.wowhead.com/widgets/power.js"></script>
+<script src="https://wow.zamimg.com/widgets/power.js"></script>
 <link rel="alternate" href="<?php echo $mwe_config['site_base_href']."rss.php"; ?>" type="application/rss+xml" title="<?php echo (string)$mwe_config['site_title'];?> RSS News Feed"/>
 <title><?php echo (string)$mwe_config['site_title']; echo $title_str;?></title>
 <style media="screen" title="currentStyle" type="text/css">
