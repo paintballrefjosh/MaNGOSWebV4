@@ -129,7 +129,7 @@ function Register()
 	}
 	
 	// Ext 3 - make sure the username isnt already in use
-	$zrlogin  = str_replace("'", "", $_POST['r_login']);
+	$zrlogin  = $DB->real_escape_string($_POST['r_login']);
 	if($Account->isAvailableUsername($zrlogin) == FALSE)
 	{
 		$notreturn = TRUE;
