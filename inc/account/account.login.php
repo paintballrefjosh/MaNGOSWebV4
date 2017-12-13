@@ -21,7 +21,7 @@ $pathway_info[] = array('title' => $lang['login'], 'link' => '');
 if(isset($_GET['exec']) && $_GET['exec'] == "login")
 {
 
-	$login = $_POST['login'];
+	$login = str_replace("'", "", $_POST['login']);
 	$pass = $Account->sha_password($login, $_POST['pass']);
 	$account_id = $RDB->selectCell("SELECT `id` FROM `account` WHERE `username` = '".$_POST['login']."' LIMIT 1");
 	
