@@ -129,14 +129,15 @@ function Register()
 	}
 	
 	// Ext 3 - make sure the username isnt already in use
-	if($Account->isAvailableUsername($_POST['r_login']) == FALSE)
+	$zrlogin  = $DB->real_escape_string($_POST['r_login']);
+	if($Account->isAvailableUsername($zrlogin) == FALSE)
 	{
 		$notreturn = TRUE;
 		$err_array[] = $lang['username_taken'];
 	}
 
 	// Ext 4 - make sure password is not username
-	if($_POST['r_login'] == $_POST['r_pass']) 
+	if($zrlogin == $_POST['r_pass']) 
 	{
 		$notreturn = TRUE;
 		$err_array[] = $lang['user_pass_same'];
@@ -152,9 +153,9 @@ function Register()
 		// @$Enter is the main input arrays into the SDL
 		$Enter = $Account->register(
 			array(
-				'username' => strtoupper($_POST['r_login']),
-				'sha_pass_hash' => $Account->sha_password($_POST['r_login'],$_POST['r_pass']),
-				'sha_pass_hash2' => $Account->sha_password($_POST['r_login'],$_POST['r_cpass']),
+				'username' => strtoupper($zrlogin),
+				'sha_pass_hash' => $Account->sha_password($zrlogin,$_POST['r_pass']),
+				'sha_pass_hash2' => $Account->sha_password($zrlogin,$_POST['r_cpass']),
 				'email' => $_POST['r_email'],
 				'expansion' => $_POST['r_account_type'],
 				'password' => $_POST['r_pass']
