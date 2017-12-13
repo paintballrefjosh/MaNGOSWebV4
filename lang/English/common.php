@@ -70,13 +70,9 @@ $lang = array(
 	'expansion_set' => 'Expansion set!',
 	'faq' => 'FAQ',
 	'faq_desc' => 'Here is a list of Frequently Asked questions on our server. If you have any questions that you cant find here, then trying searching and asking in the forums.',
-<<<<<<< HEAD
-	'fp_vote_desc' => 'Please vote daily to earn our server reputaion help us grow in population!',
 	'file' => 'File',
 	'Filesize' => 'The size of the file should not exceed',
-=======
 	'fp_vote_desc' => 'Please vote daily to earn our server reputation help us grow in population!',
->>>>>>> master
 	'gender' => 'Gender',
 	'general_info' => 'General Information',
 	'Gnome' => 'Gnome',
