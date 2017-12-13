@@ -10,8 +10,8 @@
 
 class Core
 {
-	public $version = '4.1.3';
-	public $version_date = '2017-09-18, 10:21';
+	public $version = '4.1.4';
+	public $version_date = '2017-12-13, 11:22';
 	public $db_version = '4.1.0';
 	private $conf;
 
