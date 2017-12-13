@@ -41,7 +41,7 @@ function editLink()
 	global $DB, $Core, $lang;
 	$DB->query("UPDATE `mw_menu_items` SET
 		`menu_id`='".$_POST['menu_id']."',
-		`link_title`='".$_POST['link_title']."',
+		`link_title`='".$DB->real_escape_string($_POST['link_title'])."',
 		`link`='".$_POST['link']."',
 		`guest_only`='".$_POST['guest_only']."',
 		`account_level`='".$_POST['account_level']."'
@@ -70,7 +70,7 @@ function addLink()
 		`account_level`)
 	  VALUES(
 		'".$_POST['menu_id']."', 
-		'".$_POST['link_title']."', 
+		'".$DB->real_escape_string($_POST['link_title'])."', 
 		'".$_POST['link']."', 
 		'".$_POST['guest_only']."', 
 		'".$_POST['account_level']."')

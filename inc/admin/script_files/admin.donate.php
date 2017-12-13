@@ -20,7 +20,7 @@ function editPkg()
 {
 	global $DB, $lang;
 	$DB->query("UPDATE `mw_donate_packages` SET
-		`desc`='".$_POST['desc']."',
+		`desc`='".$DB->real_escape_string($_POST['desc'])."',
 		`cost`='".$_POST['cost']."',
 		`points`='".$_POST['points']."'
 	  WHERE `id`='".$_GET['id']."'
@@ -43,7 +43,7 @@ function addPkg()
 		`cost`,
 		`points`)
 	  VALUES(
-		'".$_POST['desc']."', 
+		'".$DB->real_escape_string($_POST['desc'])."', 
 		'".$_POST['cost']."', 
 		'".$_POST['points']."'
 		)
