@@ -33,10 +33,16 @@ class Character
                 9 => 'Goblin',
                 10 => 'Bloodelf',
                 11 => 'Dranei',
+<<<<<<< HEAD
 				22 => 'Worgen',
 				24 => 'Pandaren',
 				25 => 'Pandaren',
 				26 => 'Pandaren'
+=======
+		22 => 'Worgen',
+		24 => 'Pandaren',
+		26 => 'Pandaren'
+>>>>>>> master
             ),
             'class' => array(
                 1 => 'Warrior',
@@ -44,11 +50,15 @@ class Character
                 3 => 'Hunter',
                 4 => 'Rogue',
                 5 => 'Priest',
-				6 => 'Death_Knight',
+		6 => 'Death_Knight',
                 7 => 'Shaman',
                 8 => 'Mage',
                 9 => 'Warlock',
+<<<<<<< HEAD
 				10 => 'Monk',
+=======
+		10 => 'Monk',
+>>>>>>> master
                 11 => 'Druid'
             ),
             'gender' => array(
